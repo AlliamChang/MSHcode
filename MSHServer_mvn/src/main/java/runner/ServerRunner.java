@@ -7,7 +7,7 @@ public class ServerRunner {
 	}
 	
 	public static void main(String[] args){
-		new ServerRunner();
+//		new ServerRunner();
 		System.out.println("It's on");
 	}
 }
