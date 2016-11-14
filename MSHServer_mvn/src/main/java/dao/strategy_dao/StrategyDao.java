@@ -1,5 +1,8 @@
 package dao.strategy_dao;
 
+import po.strategyPO.*;
+import tools.ResultMessage;
+
 public interface StrategyDao {
 	public void init();
 	
