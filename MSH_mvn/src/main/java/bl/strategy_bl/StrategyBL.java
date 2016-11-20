@@ -10,7 +10,7 @@ import vo.RankVO;
 import vo.VipPlaceDiscountVO;
 import blservice.strategy_blservice.StrategyBLService;
 
-public class StrategyBL implements StrategyBLService{
+public class StrategyBL implements StrategyBLService {
 
 	public BirthDiscountVO getBirthDiscount() {
 		// TODO Auto-generated method stub
@@ -82,5 +82,4 @@ public class StrategyBL implements StrategyBLService{
 		return null;
 	}
 
-	
 }

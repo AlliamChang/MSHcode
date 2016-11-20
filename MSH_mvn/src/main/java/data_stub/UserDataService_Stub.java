@@ -8,7 +8,7 @@ import tools.ResultMessage;
 import tools.UserType;
 import dataservice.user_dataservice.UserDataService;
 
-public class UserDataService_Stub implements UserDataService{
+public class UserDataService_Stub implements UserDataService {
 
 	public ArrayList<UserPO> getAll() {
 		// TODO Auto-generated method stub

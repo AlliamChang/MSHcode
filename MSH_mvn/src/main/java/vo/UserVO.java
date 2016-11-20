@@ -9,8 +9,9 @@ public class UserVO {
 	int level, credit;
 	UserType type;
 	ArrayList<String> creditChange;
-	
-	public UserVO(String name, String password, UserType type, int level, int credit){
+
+	public UserVO(String name, String password, UserType type, int level,
+			int credit) {
 		this.name = name;
 		this.password = password;
 		this.type = type;
@@ -66,6 +67,5 @@ public class UserVO {
 	public void setCreditChange(ArrayList<String> creditChange) {
 		this.creditChange = creditChange;
 	}
-	
-	
+
 }

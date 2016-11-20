@@ -10,7 +10,7 @@ import dataservice.order_dataservice.OrderDataService;
 import po.orderPO.OrderPO;
 import tools.ResultMessage;
 
-public class OrderData_Stub implements OrderDataService{
+public class OrderData_Stub implements OrderDataService {
 
 	public ResultMessage add(OrderPO order) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -30,12 +30,13 @@ public class OrderData_Stub implements OrderDataService{
 
 	public void update(OrderPO order) throws RemoteException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public OrderPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new OrderPO(id, null, null, null, 0, null, null, 0, null, null, null, id, null);
+		return new OrderPO(id, null, null, null, 0, null, null, 0, null, null,
+				null, id, null);
 	}
-	
+
 }

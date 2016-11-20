@@ -1,4 +1,5 @@
 package bl_stub;
+
 import java.util.ArrayList;
 
 import tools.ResultMessage;
@@ -6,8 +7,7 @@ import vo.HotelVO;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.strategy_blservice.StrategyBLService;
 
-
-public class HotelBLService_Stub implements HotelBLService{
+public class HotelBLService_Stub implements HotelBLService {
 
 	public ResultMessage add(String hotel_id) {
 		// TODO Auto-generated method stub
@@ -48,5 +48,5 @@ public class HotelBLService_Stub implements HotelBLService{
 		// TODO Auto-generated method stub
 		return 0.0;
 	}
-	
+
 }

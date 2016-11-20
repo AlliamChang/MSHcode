@@ -7,7 +7,7 @@ import tools.UserType;
 import vo.UserVO;
 import blservice.user_blservice.UserBLService;
 
-public class UserBLService_Stub implements UserBLService{
+public class UserBLService_Stub implements UserBLService {
 
 	public ArrayList<UserVO> getAll() {
 		// TODO Auto-generated method stub
@@ -36,6 +36,5 @@ public class UserBLService_Stub implements UserBLService{
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
-	
-	
+
 }

@@ -5,7 +5,6 @@ import java.rmi.RemoteException;
 import po.hotelPO.*;
 import dataservice.hotel_dataservice.Hotel_dataService;
 
-
 public class hotel_dataService_Stub implements Hotel_dataService {
 
 	public HotelPO find(String id) throws RemoteException {

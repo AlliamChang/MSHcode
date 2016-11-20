@@ -8,14 +8,14 @@ import vo.HotelVO;
 import vo.OrderVO;
 import vo.UserVO;
 
-public class Order_Stub implements OrderBLService{
-	
+public class Order_Stub implements OrderBLService {
+
 	private ResultMessage result;
-	
-	public Order_Stub(){
-		
+
+	public Order_Stub() {
+
 	}
-	
+
 	public OrderVO createOrder(UserVO user, HotelVO hotel, OrderVO order) {
 		// TODO Auto-generated method stub
 		return null;
@@ -55,5 +55,5 @@ public class Order_Stub implements OrderBLService{
 		// TODO Auto-generated method stub
 		return result.SUCCESS;
 	}
-	
+
 }

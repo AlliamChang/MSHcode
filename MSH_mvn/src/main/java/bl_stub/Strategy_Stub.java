@@ -4,82 +4,82 @@ import vo.*;
 import tools.*;
 import blservice.strategy_blservice.*;
 
-public class Strategy_Stub implements StrategyBLService{
+public class Strategy_Stub implements StrategyBLService {
 	double discount;
 	String birthday;
-	int room;//��������
+	int room;// ��������
 	String date;
 	String place;
 	int rank;
 	int credit;
-	String type;//�ͻ�����
+	String type;// �ͻ�����
 	ResultMessage result;
-	
-	public Strategy_Stub(double dis,String birth,int rm,String dt,String pl,
-	                  int rk,int cre,String tp){
-        discount=dis;
-        birthday=birth;
-        room=rm;
-        date=dt;
-        place=pl;
-        rank=rk;
-        credit=cre;
-        type=tp;
-    }
-	
-	public BirthDiscountVO getBirthDiscount(){
+
+	public Strategy_Stub(double dis, String birth, int rm, String dt,
+			String pl, int rk, int cre, String tp) {
+		discount = dis;
+		birthday = birth;
+		room = rm;
+		date = dt;
+		place = pl;
+		rank = rk;
+		credit = cre;
+		type = tp;
+	}
+
+	public BirthDiscountVO getBirthDiscount() {
 		return null;
 	}
-	
-	public PluralDiscountVO getPluralDiscount(){
+
+	public PluralDiscountVO getPluralDiscount() {
 		return null;
 	}
-	
-	public DateDiscountVO getDateDiscount(){
+
+	public DateDiscountVO getDateDiscount() {
 		return null;
 	}
-	
-	public CoDiscountVO getCoDiscount(){
+
+	public CoDiscountVO getCoDiscount() {
 		return null;
 	}
-	
-	public VipPlaceDiscountVO getVipPlaceDiscount(){
+
+	public VipPlaceDiscountVO getVipPlaceDiscount() {
 		return null;
 	}
-	
-	public RankDiscountVO getRankDiscount(){
+
+	public RankDiscountVO getRankDiscount() {
 		return null;
 	}
-	
-	public RankVO getRank(){
+
+	public RankVO getRank() {
 		return null;
 	}
-	
-	public ResultMessage setBirthDiscount(int cost){
+
+	public ResultMessage setBirthDiscount(int cost) {
 		return null;
 	}
-	
-	public ResultMessage setPluralDiscount(int cost){
+
+	public ResultMessage setPluralDiscount(int cost) {
 		return null;
 	}
-	
-	public ResultMessage setDateDiscount(){
+
+	public ResultMessage setDateDiscount() {
 		return null;
 	}
-	
-	public ResultMessage setCoDiscount(){
+
+	public ResultMessage setCoDiscount() {
 		return null;
 	}
-	
-	public ResultMessage setVipPlaceDiscount(){
+
+	public ResultMessage setVipPlaceDiscount() {
 		return null;
 	}
-	
-	public ResultMessage setRankDiscount(){
+
+	public ResultMessage setRankDiscount() {
 		return null;
 	}
-	
-	public ResultMessage setRank(){
+
+	public ResultMessage setRank() {
 		return null;
 	}
 
