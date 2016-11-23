@@ -1,19 +1,23 @@
 package runner;
 
-import javafx.application.Application;
+import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.paint.Color;
 import ui.*;
+import ui.hotelStuff.OrderListPane;
+import ui.utility.MainPane;
 public class Runner extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-
+		primaryStage.setScene(new Scene(MainPane.getInstance(),800,600));
+		primaryStage.setResizable(false);
+		primaryStage.show();
 	}
 	
 	public static void main(String []args){
+		new OrderListPane(1000,"七天酒店",null);
 		launch(args);
 	}
 
