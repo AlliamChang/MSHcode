@@ -34,7 +34,7 @@ public class Strategy_Driver {
 		if (result7 == result7.SUCCESS)
 			System.out.println("succeed");
 
-		CoDiscountVO result8 = ss.getCoDiscount();
+/*		CoDiscountVO result8 = ss.getCoDiscount();
 		if (result8 == null)
 			System.out.println("succeed");
 
@@ -44,7 +44,7 @@ public class Strategy_Driver {
 
 		DateDiscountVO result10 = ss.getDateDiscount();
 		if (result10 == null)
-			System.out.println("succeed");
+			System.out.println("succeed");*/
 
 		VipPlaceDiscountVO result11 = ss.getVipPlaceDiscount();
 		if (result11 == null)
@@ -58,9 +58,9 @@ public class Strategy_Driver {
 		if (result13 == null)
 			System.out.println("succeed");
 
-		PluralDiscountVO result14 = ss.getPluralDiscount();
+/*		PluralDiscountVO result14 = ss.getPluralDiscount();
 		if (result14 == null)
-			System.out.println("succeed");
+			System.out.println("succeed");*/
 
 	}
 

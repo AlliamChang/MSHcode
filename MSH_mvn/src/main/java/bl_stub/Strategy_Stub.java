@@ -83,4 +83,24 @@ public class Strategy_Stub implements StrategyBLService {
 		return null;
 	}
 
+	public StrategyVO getStrategyType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StrategyVO getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StrategyVO getStartTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StrategyVO getEndTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

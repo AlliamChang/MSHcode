@@ -7,6 +7,7 @@ import vo.DateDiscountVO;
 import vo.PluralDiscountVO;
 import vo.RankDiscountVO;
 import vo.RankVO;
+import vo.StrategyVO;
 import vo.VipPlaceDiscountVO;
 import blservice.strategy_blservice.StrategyBLService;
 
@@ -78,6 +79,26 @@ public class StrategyBL implements StrategyBLService{
 	}
 
 	public ResultMessage setRank() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StrategyVO getStrategyType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StrategyVO getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StrategyVO getStartTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public StrategyVO getEndTime() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -10,9 +10,7 @@ public class Runner extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-		primary.setScene(new Scene(parent.createparent(),800,600,Color.BLACK));
-		 primary.setResizable(false);
-		primary.show();
+
 	}
 	
 	public static void main(String []args){
