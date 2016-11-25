@@ -4,12 +4,12 @@ import java.util.List;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import ui.hotelStuff.OrderListPane;
 
 public class MyNavigationBar extends VBox {
 	
@@ -57,6 +57,9 @@ public class MyNavigationBar extends VBox {
 		this.init();
 	}
 	
+	/**
+	 * 初始化导航栏
+	 */
 	private void init(){
 		this.setPrefSize(MAX_WIDTH, MAX_HEIGHT);
 		this.setStyle(BACKGROUND_STYLE);
@@ -86,7 +89,7 @@ public class MyNavigationBar extends VBox {
 		Text[] list = new Text[info.size()];
 		for(int i = 0; i < list.length; i ++){
 			list[i] = new Text(info.get(i));
-			list[i].setWrappingWidth(MAX_WIDTH - 10);
+			list[i].setWrappingWidth(MAX_WIDTH - 20);
 			list[i].setTextAlignment(TextAlignment.CENTER);
 			infoBox.getChildren().add(list[i]);
 		}
