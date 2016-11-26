@@ -14,11 +14,11 @@ public class Order_Driver {
 	public void drive(OrderBLService orderService) {
 		String[] booker = { "֣����", "֣���" };
 		String[] phone = { "12345678910", "10987654321" };
-		Date day = new Date();
+		Date day = new Date("2016/11/25",false);
 		OrderState state = OrderState.UNEXECUTED;
 		ResultMessage result = null;
 
-		OrderVO order = new OrderVO("Aven", "hotel", "big", 1, booker, phone,
+		OrderVO order = new OrderVO(1000000001,"Aven", "hotel", "big", 1, booker, phone,
 				1, day, state);
 		if (result.SUCCESS == orderService.execute(order))
 			System.out.println("success");
@@ -41,7 +41,7 @@ public class Order_Driver {
 			System.out.println(list.get(i).getId());
 		}
 
-		list = orderService.getHotelOrder(hotel);
+		list = orderService.getTodayHotelOrder(10000,"七天");
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).getId());
 		}

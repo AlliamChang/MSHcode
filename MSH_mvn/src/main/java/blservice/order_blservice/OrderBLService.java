@@ -12,7 +12,9 @@ public interface OrderBLService {
 
 	public OrderVO createOrder(UserVO user, HotelVO hotel, OrderVO order);
 
-	public List<OrderVO> getHotelOrder(HotelVO hotel);
+	public List<OrderVO> getTodayHotelOrder(long id,String hotel);
+	
+	public List<OrderVO> getAllHotelOrder(long id,String hotel);
 
 	public List<OrderVO> getUserOrder(UserVO user);
 
