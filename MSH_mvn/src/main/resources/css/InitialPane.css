@@ -1,0 +1,41 @@
+.search-box .text-field {
+	-fx-background-color: white;
+	-fx-background-insets: 1.1;
+	-fx-background-radius: 16.5;
+	-fx-padding: -9 5 -11 0;
+	-fx-border-image-source: url("/image/search-box.png");
+	-fx-border-image-slice: 12 22 12 22 fill;
+	-fx-border-image-width: 15 30 15 30;
+	-fx-border-image-repeat: stretch;
+	-fx-font-size: 15px;
+	-fx-prompt-text-fill: grey;
+}
+
+.search-box .text-field:focused {
+	-fx-background-color: -fx-focus-color, white;
+	-fx-background-insets: -1.5, 1;
+	-fx-background-radius: 16;
+}
+
+.search-box .button {
+	-fx-background-color: null;
+	-fx-background-image: url("/image/search-clear.png");
+}
+
+.search-box .button:hover {
+	-fx-background-image: url("/image/search-clear-over.png");
+}
+
+#searchButton {
+	-fx-padding: 4 20 4 20;
+	-fx-font-family: "YouYuan";
+	-fx-font-size: 19;
+	-fx-font-weight: 900;
+	-fx-background-color: linear-gradient(#FFFFFF, #666666);
+	-fx-background-radius: 20;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, 1);
+}
+
+#searchButton: hover {
+	-fx-background-color: linear-gradient(#666666, #FFFFFF);
+}
