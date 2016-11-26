@@ -101,7 +101,12 @@ public class StartPane {
 		gpane.add(idLabel, 2, 1);
 		gpane.add(nameLabel, 3, 1);
 		gpane.add(startTimeLabel, 4, 1);
-		gpane.add(child, columnIndex, rowIndex);
+		gpane.add(endTimeLabel, 5, 1);
+		gpane.add(uoi.numberText, 1, 2);
+		gpane.add(uoi.idText, 2, 2);
+		gpane.add(uoi.nameText, 3, 2);
+		gpane.add(startTimeText, 4, 2);
+		gpane.add(endTimeText, 5, 2);
 	}
 
 }
