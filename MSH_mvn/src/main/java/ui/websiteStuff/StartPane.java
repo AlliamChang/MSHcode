@@ -13,7 +13,7 @@ import java.util.*;
 import tools.*;
 import vo.*;
 
-public class StartPane {
+public class StartPane extends GridPane{
 	
 	private static final double MINWIDTH = 655,MINHEIGHT = 610;
 	private static final String BORDER_STYLE = "-fx-border-color:black;";
@@ -57,6 +57,7 @@ public class StartPane {
 		this.endTime=endTime;
 		this.start();
 		this.init(scul);
+		this.ShowInfo();
 	}
 	
 	private void init(Image scul){
@@ -105,8 +106,8 @@ public class StartPane {
 		gpane.add(uoi.numberText, 1, 2);
 		gpane.add(uoi.idText, 2, 2);
 		gpane.add(uoi.nameText, 3, 2);
-		gpane.add(startTimeText, 4, 2);
-		gpane.add(endTimeText, 5, 2);
+		gpane.add(uoi.startTimeText, 4, 2);
+		gpane.add(uoi.endTimeText, 5, 2);
 	}
 
 }
