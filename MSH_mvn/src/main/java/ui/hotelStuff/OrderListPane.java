@@ -5,6 +5,7 @@ import java.util.Arrays;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -24,7 +25,6 @@ import ui.utility.MyNavigationBar;
 
 public class OrderListPane extends TabPane{
 	 
-	private static final double MINWIDTH = 655,MINHEIGHT = 610;
 	private static final String BORDER_STYLE = "-fx-border-color:black;";
 	private static final String BACKGROUND_STYLE = "-fx-background-color:white;",
 			FONT_STYLE = "-fx-font-size:15;";
@@ -48,12 +48,13 @@ public class OrderListPane extends TabPane{
 	
 	private void init(Image scul){
 		navi = new MyNavigationBar(scul,Arrays.asList("ID:"+id,"酒店名："+hotel));
-		MainPane.getInstance().getChildren().addAll(navi,this);
+		MainPane.getInstance().setNavigationBar(navi);
+		MainPane.getInstance().setRightPane(this);
 		
 	}
 	
 	private void initTab(){
-		this.setMinSize(MINWIDTH, MINHEIGHT);
+		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		this.setSide(Side.TOP);
 		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		this.setStyle(BORDER_STYLE + BACKGROUND_STYLE + FONT_STYLE);
@@ -72,18 +73,22 @@ public class OrderListPane extends TabPane{
 		
 		Label preCheckinLabel = new Label("预计入住时间：");
 		GridPane.setHalignment(preCheckinLabel, HPos.RIGHT);
+		GridPane.setValignment(preCheckinLabel, VPos.BOTTOM);
 		this.allOrderPane.add(preCheckinLabel, 0, 0);
 		
 		MyDatePicker preCinPick = new MyDatePicker();
 		GridPane.setHalignment(preCinPick, HPos.CENTER);
+		GridPane.setValignment(preCinPick, VPos.BOTTOM);
 		this.allOrderPane.add(preCinPick, 1, 0);
 		
 		Label preCheckoutLabel = new Label("预计退房时间：");
 		GridPane.setHalignment(preCheckoutLabel, HPos.RIGHT);
+		GridPane.setValignment(preCheckoutLabel, VPos.BOTTOM);
 		this.allOrderPane.add(preCheckoutLabel, 2, 0);
 		
 		MyDatePicker preCoutPick = new MyDatePicker();
 		GridPane.setHalignment(preCoutPick, HPos.CENTER);
+		GridPane.setValignment(preCoutPick, VPos.BOTTOM);
 		this.allOrderPane.add(preCoutPick, 3, 0);
 		
 		Label orderIdLabel = new Label("订单号：");
@@ -114,6 +119,31 @@ public class OrderListPane extends TabPane{
 		Button search = new Button("查询");
 		GridPane.setHalignment(search, HPos.CENTER);
 		search.setMinWidth(100);
+		search.setOnAction(event -> {
+			RadioButton temp = (RadioButton)pickState.getSelectedToggle();
+			if(temp != null)
+				this.allOrderTable.filter(orderIdField.getText(),null,
+						preCinPick.getEditor().getText(),preCoutPick.getEditor().getText(),
+						temp.getText());
+			else
+				this.allOrderTable.filter(orderIdField.getText(),null,
+						preCinPick.getEditor().getText(),preCoutPick.getEditor().getText(),
+						null);
+			
+		});
+		
+		Button clear = new Button("清空");
+		GridPane.setHalignment(clear, HPos.CENTER);
+		GridPane.setValignment(clear, VPos.BOTTOM);
+		clear.setMinWidth(100);
+		clear.setOnAction(event -> {
+			this.allOrderTable.clear();
+			preCinPick.getEditor().setText("");
+			preCoutPick.getEditor().setText("");
+			orderIdField.setText("");
+			pickState.selectToggle(null);
+		});
+		this.allOrderPane.add(clear, 4, 0);
 		
 		this.allOrderPane.add(pickButton, 2,1,2,1);
 		this.allOrderPane.add(search, 4, 1);

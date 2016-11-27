@@ -63,7 +63,7 @@ public class Order_Stub implements OrderBLService {
 		// TODO Auto-generated method stub
 		return Arrays.asList(
 				new OrderVO(1000000001, "aven", "七天", "大床房", 1, new String[]{"刘钦"},
-						new String[]{"12345678910"},1,
+						new String[]{"12345678910"},3,
 						new Date("2016/11/22",false), OrderState.UNEXECUTED));
 	}
 
@@ -71,11 +71,11 @@ public class Order_Stub implements OrderBLService {
 		// TODO Auto-generated method stub
 		return Arrays.asList(
 				new OrderVO(1000000001, "aven", "七天", "大床房", 1, new String[]{"刘钦"},
-						new String[]{"12345678910"},1,
+						new String[]{"12345678910"},3,
 						new Date("2016/11/22",false), OrderState.UNEXECUTED),
 				new OrderVO(1000000002, "aven", "七天", "大床房", 1, new String[]{"丁二玉"},
-						new String[]{"12345678910"},1, 
-						new Date("2016/11/23",false), OrderState.EXECUTED),
+						new String[]{"12345678910"},2, 
+						new Date("2016/11/03",false), OrderState.EXECUTED),
 				new OrderVO(1000000013, "aven", "七天", "大床房", 1, new String[]{"张田田"},
 						new String[]{"12345678910"},1, 
 						new Date("2016/11/20",false), OrderState.ABNORMITY));

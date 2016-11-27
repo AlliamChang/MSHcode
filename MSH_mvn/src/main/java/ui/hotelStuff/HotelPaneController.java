@@ -35,10 +35,7 @@ public class HotelPaneController {
 	 * @param scul
 	 */
 	public void createOrderListPane(long id,String hotel,Image scul){
-		if(MainPane.getInstance().getChildren().size() > 0 ){
-			for(int i = 0; i < MainPane.getInstance().getChildren().size(); i ++)
-				MainPane.getInstance().getChildren().remove(i);
-		}
+		
 		this.id = id;
 		this.hotel = hotel;
 		

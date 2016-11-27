@@ -84,9 +84,23 @@ public class OrderVO {
 	public StringProperty preCheckInProperty(){
 		return preCheckIn;
 	}
+	public String getPreCheckOut(){
+		return preCheckin.plus(days);
+	}
 	public String getFirstBooker(){
 		return firstBooker;
 	}
+	public StringProperty orderStateProperty(){
+		if(state == OrderState.ABNORMITY)
+			return new SimpleStringProperty("异常订单");
+		else if(state == OrderState.CANCELED)
+			return new SimpleStringProperty("已撤销");
+		else if(state == OrderState.EXECUTED)
+			return new SimpleStringProperty("已执行");
+		else
+			return new SimpleStringProperty("未执行");
+	}
+	
 	
 	public String getUserID() {
 		return userID;
