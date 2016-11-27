@@ -5,19 +5,46 @@ import java.util.ArrayList;
 import tools.UserType;
 
 public class UserVO {
-	String name, password;
-	int level, credit;
-	UserType type;
-	ArrayList<String> creditChange;
+	private String name, account, password, gender, number;
+	private int level, credit;
+	private UserType type;
+	private ArrayList<String> creditChange;
 
-	public UserVO(String name, String password, UserType type, int level,
+	public UserVO(String account, String password, String name, String gender, String number, UserType type, int level,
 			int credit) {
-		this.name = name;
+		this.account = account;
 		this.password = password;
+		this.name = name;
+		this.gender = gender;
+		this.number = number;
 		this.type = type;
 		this.level = level;
 		this.credit = credit;
 		creditChange = new ArrayList<String>();
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getName() {
