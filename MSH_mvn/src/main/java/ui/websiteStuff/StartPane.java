@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.text.*;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import ui.webAdmin.InitialPane;
+
 import java.util.*;
 import tools.*;
 import vo.*;
@@ -35,6 +37,7 @@ public class StartPane extends GridPane{
 	private Text startTimeText;
 	private Text endTimeText;
 	private GridPane gpane;
+	private static StartPane startPane;
 	
 	private OrderVO order;
 	private String stuffName;
@@ -45,20 +48,14 @@ public class StartPane extends GridPane{
 	private String startTime;
 	private String endTime;
 	
-	public StartPane(String stuffName,long stuffId,long orderNumber,String userName,
-			long userId,String startTime,String endTime,Image scul){
+	public StartPane(){
+		super();
 		
-		this.stuffName=stuffName;
-		this.stuffId=stuffId;
-		this.orderNumber=orderNumber;
-		this.userId = userId;
-		this.userName = userName;
-		this.startTime=startTime;
-		this.endTime=endTime;
-		this.start();
-		this.init(scul);
+			
 		this.ShowInfo();
 	}
+	
+	
 	
 	private void init(Image scul){
 		navi = new MyNavigationBar(scul,Arrays.asList("ID:"+stuffId,stuffName));
@@ -67,6 +64,9 @@ public class StartPane extends GridPane{
 	}
 	
 	private void start(){
+		this.setMinSize(MINWIDTH, MINHEIGHT);
+		this.setStyle(BORDER_STYLE + BACKGROUND_STYLE + FONT_STYLE);
+		
 		this.startLabel=new Label("未执行订单列表");
 		startLabel.setStyle(BORDER_STYLE+BACKGROUND_STYLE+STARTFONT_STYLE);
 		startLabel.setTranslateX(200);
@@ -91,12 +91,12 @@ public class StartPane extends GridPane{
 	}
 	
 	private void ShowInfo(){
-		uoi=new UndoneOrderInfo();
-		uoi.setNumber(orderNumber);
-		uoi.setId(userId);
-		uoi.setName(userName);
-		uoi.setStartTime(startTime);
-		uoi.setEndTime(endTime);
+		uoi=new UndoneOrderInfo(orderNumber,userId,userName,startTime,endTime);
+		uoi.setNumber();
+		uoi.setId();
+		uoi.setName();
+		uoi.setStartTime();
+		uoi.setEndTime();
 		
 		gpane.add(numberLabel, 1, 1);
 		gpane.add(idLabel, 2, 1);
@@ -108,6 +108,14 @@ public class StartPane extends GridPane{
 		gpane.add(uoi.nameText, 3, 2);
 		gpane.add(uoi.startTimeText, 4, 2);
 		gpane.add(uoi.endTimeText, 5, 2);
+	}
+	
+	
+	public static StartPane getInstance(){
+		if(startPane==null){
+			startPane=new StartPane();
+		}
+		return startPane;
 	}
 
 }
