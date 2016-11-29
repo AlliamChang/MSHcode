@@ -3,6 +3,7 @@ package ui.websiteStuff;
 import javafx.scene.text.*;
 
 public class UndoneOrderInfo {
+	//处理text显示的内容
 	private static final Font FONT=new Font("方正幼圆",15);
 	
 	
