@@ -1,83 +1,40 @@
 package ui.websiteStuff;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.text.Text;
-import vo.OrderVO;
-
-import java.util.*;
+import javafx.scene.text.*;
 
 public class UndoneOrderInfo {
-	private static final String FONT_STYLE="-fx-font-size:15;";
+	//处理text显示的内容
+	private static final Font FONT=new Font("方正幼圆",15);
 	
-	public Text numberText;
-	public Text idText;
-	public Text nameText;
-	public Text startTimeText;
-	public Text endTimeText;
-	private Label startLabel;
-	private Label numberLabel;
-	private Label idLabel;
-	private Label nameLabel;
-	private Label startTimeLabel;
-	private Label endTimeLabel;
-	private ScrollPane sp;
-	private OrderVO order;
 	
-	private long orderNumber;
-	private long userId;
-	private String userName;
-	private String startTime;
-	private String endTime;
-	
-	public UndoneOrderInfo(long orderNumber,long userId,
-			String userName,String startTime,String endTime){
-		
-		this.orderNumber=orderNumber;
-		this.userId = userId;
-		this.userName = userName;
-		this.startTime=startTime;
-		this.endTime=endTime;
-		
-		
-		numberText=new Text();
-		numberText.setStyle(FONT_STYLE);
-		
-		idText=new Text();
-		idText.setStyle(FONT_STYLE);
-		
-		nameText=new Text();
-		nameText.setStyle(FONT_STYLE);
-		
-		startTimeText=new Text();
-		startTimeText.setStyle(FONT_STYLE);
-		
-		endTimeText=new Text();
-		endTimeText.setStyle(FONT_STYLE);
-	}
-	
-	private void start(){
-		
-	}
-	
-	public void setNumber(){
+	public static Text setNumber(long orderNumber,Text numberText){
 		numberText.setText(String.valueOf(orderNumber));
+		numberText.setFont(FONT);
+		return numberText;
 	}
 	
-	public void setId(){
+	public static Text setId(long userId,Text idText){
 		idText.setText(String.valueOf(userId));
+		idText.setFont(FONT);
+		return idText;
 	}
 	
-	public void setName(){
+	public static Text setName(String userName,Text nameText){
 		nameText.setText(userName);
+		nameText.setFont(FONT);
+		return nameText;
 	}
 	
-	public void setStartTime(){
+	public static Text setStartTime(String startTime,Text startTimeText){
 		startTimeText.setText(startTime);
+		startTimeText.setFont(FONT);
+		return startTimeText;
 	}
 	
-	public void setEndTime(){
+	public static Text setEndTime(String endTime,Text endTimeText){
 		endTimeText.setText(endTime);
+		endTimeText.setFont(FONT);
+		return endTimeText;
 	}
 	
 	

@@ -6,7 +6,7 @@ import tools.UserType;
 
 public class UserVO {
 	private String name, account, password, gender, number;
-	private int level, credit;
+	private int level, credit, ID;
 	private UserType type;
 	private ArrayList<String> creditChange;
 
@@ -23,6 +23,14 @@ public class UserVO {
 		creditChange = new ArrayList<String>();
 	}
 
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+	
 	public String getNumber() {
 		return number;
 	}

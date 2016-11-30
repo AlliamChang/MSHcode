@@ -1,6 +1,7 @@
 package ui.hotelStuff;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -19,6 +20,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import ui.hotelStuff.subgroup.OrderTable;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
@@ -29,29 +31,17 @@ public class OrderListPane extends TabPane{
 	private static final String BACKGROUND_STYLE = "-fx-background-color:white;",
 			FONT_STYLE = "-fx-font-size:15;";
 	
-	private MyNavigationBar navi;
 	private Tab todayOrderTab;
 	private Tab allOrderTab;
 	private GridPane allOrderPane;
 	private OrderTable todayOrderTable,allOrderTable;
 	
-	private long id;
-	private String hotel;
 	
-	public OrderListPane(long id,String hotel,Image scul){
+	public OrderListPane(){
 		super();
-		this.id = id;
-		this.hotel = hotel;
 		this.initTab();
-		this.init(scul);
 	}
 	
-	private void init(Image scul){
-		navi = new MyNavigationBar(scul,Arrays.asList("ID:"+id,"酒店名："+hotel));
-		MainPane.getInstance().setNavigationBar(navi);
-		MainPane.getInstance().setRightPane(this);
-		
-	}
 	
 	private void initTab(){
 		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
@@ -87,6 +77,7 @@ public class OrderListPane extends TabPane{
 		this.allOrderPane.add(preCheckoutLabel, 2, 0);
 		
 		MyDatePicker preCoutPick = new MyDatePicker();
+		preCoutPick.setBeforeDisable(preCinPick);
 		GridPane.setHalignment(preCoutPick, HPos.CENTER);
 		GridPane.setValignment(preCoutPick, VPos.BOTTOM);
 		this.allOrderPane.add(preCoutPick, 3, 0);

@@ -2,7 +2,6 @@ package ui.webAdmin;
 
 import tools.UserType;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -11,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class AddUserPane extends AnchorPane{
 	private GridPane grid;

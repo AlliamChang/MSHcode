@@ -3,7 +3,6 @@ package ui.webAdmin;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
-import javafx.event.*;
 import javafx.beans.value.*;
 
 public class SearchBox extends Region {
@@ -17,7 +16,7 @@ public class SearchBox extends Region {
 		setPrefSize(350, 30);
 		setMaxSize(Control.USE_PREF_SIZE, Control.USE_PREF_SIZE);
 		textBox = new TextField();
-		textBox.setPromptText("输入账号");
+		textBox.setPromptText("输入账号或ID");
 		clearButton = new Button();
 		clearButton.setId("clearButton");
 		clearButton.setVisible(false);
