@@ -2,7 +2,6 @@ package ui.webAdmin;
 
 import tools.UserType;
 import vo.UserVO;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
