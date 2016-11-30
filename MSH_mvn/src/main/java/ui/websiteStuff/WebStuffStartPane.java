@@ -38,15 +38,15 @@ public class WebStuffStartPane extends GridPane{
 	private static WebStuffStartPane startPane;
 	
 	private OrderVO order;
-	private String stuffName;
-	private long stuffId;
+	private List<String> stuffName;
+	private List<String> stuffId;
 	private long orderNumber;
 	private long userId;
 	private String userName;
 	private String startTime;
 	private String endTime;
 	
-	public WebStuffStartPane(String stuffName,long stuffId,long orderNumber,long userId,
+	public WebStuffStartPane(List<String> stuffName,List<String> stuffId,long orderNumber,long userId,
 			String userName,String startTime,String endTime,Image scul){
 		super();
 		
@@ -62,7 +62,7 @@ public class WebStuffStartPane extends GridPane{
 	}
 	
 	private void init(Image scul){
-		navi = new MyNavigationBar(scul,Arrays.asList("ID:"+stuffId,stuffName));
+		navi = new MyNavigationBar(scul,stuffName,stuffId);
 		MainPane.getInstance().setNavigationBar(navi);
 		MainPane.getInstance().setRightPane(this);
 		

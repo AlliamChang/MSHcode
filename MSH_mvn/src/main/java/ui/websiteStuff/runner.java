@@ -1,6 +1,7 @@
 package ui.websiteStuff;
 
 import javafx.application.*;
+import java.util.*;
 import javafx.scene.*;
 import javafx.stage.*;
 import ui.utility.MainPane;
@@ -13,7 +14,12 @@ public class runner extends Application{
 	}
 	
 	public static void main(String[] args){
-		new WebStuffStartPane("1",1,1,1,"1","1","1",null);
+		List<String> stuffName=new ArrayList();
+		stuffName.add("zhr");
+		stuffName.add("100");
+		List<String> stuffId=new ArrayList();
+		stuffId.add("开始");
+		new WebStuffStartPane(stuffName,stuffId,1,1,"1","1","1",null);
 		launch(args);
 	}
 
