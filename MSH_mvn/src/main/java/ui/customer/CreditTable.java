@@ -13,7 +13,7 @@ import javafx.util.StringConverter;
 
 public class CreditTable extends TableView{
 	private final ObservableList<CreditVO> data;
-	
+	private int width=150;
 	public CreditTable(List<CreditVO> list){
 		super();
 		data = FXCollections.observableArrayList();
@@ -26,19 +26,19 @@ public class CreditTable extends TableView{
 	public void init(){
 		
 	TableColumn time=new TableColumn("时间");
-	time.setMinWidth(150);
+	time.setMinWidth(width);
 	time.setCellValueFactory(new PropertyValueFactory("date"));
 	
 	
 	TableColumn credit_change=new TableColumn("信用值变化");
 	credit_change.setCellValueFactory(new PropertyValueFactory("change"));
-	credit_change.setMinWidth(150);
+	credit_change.setMinWidth(width);
 	
 	TableColumn change_reason=new TableColumn("原因");
 	change_reason.setCellValueFactory(new PropertyValueFactory("reason"));
-	change_reason.setMinWidth(150);
+	change_reason.setMinWidth(width);
 	this.setItems(data);
-	this.setHeight(400);
+	
 	this.getColumns().addAll(time,credit_change,change_reason);
 }
 	

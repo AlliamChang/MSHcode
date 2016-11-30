@@ -10,7 +10,9 @@ import ui.hotelStuff.OrderListPane;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CreditVO;
+import vo.OrderVO;
 import bl_stub.HotelBLService_Stub;
+import bl_stub.Order_Stub;
 import bl_stub.UserBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
 
@@ -19,6 +21,7 @@ public class CustomerPaneController {
 	private String user_name;
 	private HotelBLService HotelBL;
 	private UserBLService_Stub UserBL;
+	private Order_Stub OrderBL;
 	private final List<String> naviInfo = Arrays.asList("个人信息","我的订单","搜索");
 	private CustomerPaneController(){
 		HotelBL=new HotelBLService_Stub();
@@ -76,5 +79,11 @@ public class CustomerPaneController {
 		UserBL=new UserBLService_Stub();
 		List <CreditVO>credit_list=UserBL.getCredit();
 		return credit_list;
+	}
+	
+	public List<OrderVO> getOrder(){
+		OrderBL=new Order_Stub();
+		List<OrderVO> order_list=OrderBL.getUserOrder(null);
+		return order_list;
 	}
 }
