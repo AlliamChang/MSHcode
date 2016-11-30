@@ -29,7 +29,8 @@ public class MainPane extends HBox{
 	
 	public void setRightPane(Parent rightPane){
 		if(mainPane.getChildren().size() >= 2){
-			mainPane.getChildren().set(1, rightPane);
+			mainPane.getChildren().remove(1);
+			mainPane.getChildren().add(rightPane);
 		}else{
 			mainPane.getChildren().add(rightPane);
 		}

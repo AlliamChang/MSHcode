@@ -1,4 +1,4 @@
-package ui.hotelStuff;
+package ui.hotelStuff.subgroup;
 
 import java.util.List;
 

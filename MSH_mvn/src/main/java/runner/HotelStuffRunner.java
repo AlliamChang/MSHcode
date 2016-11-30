@@ -17,7 +17,7 @@ public class HotelStuffRunner extends Application{
 	}
 
 	public static void main(String[] args){
-		HotelPaneController.getInstance().createOrderListPane(1000, "七天", null);
+		HotelPaneController.getInstance().hotelStuffLogin(1000, "七天", null);
 		launch(args);
 	}
 }
