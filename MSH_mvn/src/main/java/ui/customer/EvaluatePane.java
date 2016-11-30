@@ -13,10 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class EvaluatePane {
+public class EvaluatePane extends Pane{
 	private GridPane pane;
 	private static final String user_name="angel"; 
 	private static final int column_index=1;
@@ -38,7 +39,7 @@ public class EvaluatePane {
 	}
 	
 	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
+		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),Arrays.asList("个人信息","我的订单","搜索"));
 		MainPane.getInstance().getChildren().clear();
 		MainPane.getInstance().getChildren().addAll(navi,pane);
 	}

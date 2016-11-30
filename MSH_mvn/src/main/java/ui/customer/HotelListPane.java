@@ -12,13 +12,14 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
 
-public class HotelListPane {
+public class HotelListPane extends Pane{
 	private MyNavigationBar navi;
 	private Image scul;
 	private GridPane pane;
@@ -40,7 +41,7 @@ public class HotelListPane {
 	}
 	
 	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
+		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),Arrays.asList("个人信息","我的订单","搜索"));
 		MainPane.getInstance().getChildren().clear();
 		MainPane.getInstance().getChildren().addAll(navi,pane);
 	}

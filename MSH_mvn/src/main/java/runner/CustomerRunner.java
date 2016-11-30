@@ -17,14 +17,10 @@ public class CustomerRunner extends Application{
 	}
 	
 	public static void main(String[] args){
+		CustomerPaneController.getInstance().CustomerLogin("angel", null);
+		//MainPane.getInstance().setRightPane(new PersonInfoPane());
 		//new PersonInfoPane();
-		new EvaluatePane();
-		//new CreditRecordPane(null);
-		//new MyOrderPane();
-		//new ReservePane();
-		//new HotelSearchPane();
-		//new HotelConcreteInfoPane();
-		//new HotelListPane();
+		//MainPane.getInstance().getChildren().add(new PersonInfoPane());
 		launch(args);
 	}
 

@@ -1,9 +1,11 @@
 package ui.customer;
 
 import java.util.Arrays;
+import java.util.List;
 
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import vo.OrderVO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
@@ -11,27 +13,26 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class MyOrderPane {
+public class MyOrderPane extends Pane{
 	private TableView table=new TableView();
 	private static final String user_name="angel";
+	private List<OrderVO> list;
 	private GridPane pane;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
-	private Image scul;
-	private MyNavigationBar navi;
+	
+	
 	
 	public MyOrderPane(){
+		super();
 		initPane();
-		init();
+		
 	}
 	
-	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
-		MainPane.getInstance().getChildren().clear();
-		MainPane.getInstance().getChildren().addAll(navi,pane);
-	}
+	
 	
 	private void initPane(){
 		pane=new GridPane();
@@ -49,6 +50,7 @@ public class MyOrderPane {
 		TableColumn isEvaluated=new TableColumn("有无评价");
 		table.getColumns().addAll(start_time,check_out_time,room_type,number,total,state,isEvaluated);
 		pane.getChildren().add(table);
+		this.getChildren().add(pane);
 	}
 
 
