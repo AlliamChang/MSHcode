@@ -7,9 +7,13 @@ public class CustomerPaneController {
 		
 	}
 	
-	public CustomerPaneController createController(){
+	private CustomerPaneController createController(){
 		if(controller==null)
 			controller= new CustomerPaneController();
 		return controller;
+	}
+	
+	public static void setMainPane(){
+		
 	}
 }

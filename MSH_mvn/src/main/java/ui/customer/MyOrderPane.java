@@ -38,9 +38,8 @@ public class MyOrderPane {
 		pane.setPadding(new Insets(10, 10, 10, 20));
 		pane.setHgap(20);
 		pane.setVgap(20);
-		
-		
 		pane.setAlignment(Pos.CENTER_RIGHT);
+		
 		TableColumn start_time=new TableColumn("开始时间");
 		TableColumn check_out_time=new TableColumn("退房时间");
 		TableColumn room_type=new TableColumn("房间类型");

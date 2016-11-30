@@ -14,13 +14,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 public class CreditRecordPane {
-	private final TableView table=new TableView();
+	private  TableView table;
 	private List<String>list;
 	private MyNavigationBar navi;
 	private GridPane pane;
 	private static final String user_name="angel";
 	private Image scul;
-
+	private int width=150;
 	public CreditRecordPane(List<String> list){
 		this.list=list;
 		initPane();
@@ -34,6 +34,7 @@ public class CreditRecordPane {
 	}
 	
 	private void initPane(){
+		table=new TableView();
 		pane=new GridPane();
 		pane.setPadding(new Insets(10, 10, 10, 20));
 		pane.setHgap(20);
@@ -42,13 +43,13 @@ public class CreditRecordPane {
 		//pane.setGridLinesVisible(true);
 		
 		TableColumn time=new TableColumn("时间");
-		time.setMinWidth(150);
+		time.setMinWidth(width);
 		
 		TableColumn credit_change=new TableColumn("信用值变化");
-		credit_change.setMinWidth(150);
+		credit_change.setMinWidth(width);
 		
 		TableColumn change_reason=new TableColumn("原因");
-		change_reason.setMinWidth(150);
+		change_reason.setMinWidth(width);
 		
 		table.getColumns().addAll(time,credit_change,change_reason);
 		pane.add(table,4,5);

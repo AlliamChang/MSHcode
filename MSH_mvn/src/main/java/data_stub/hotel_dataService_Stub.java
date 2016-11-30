@@ -1,7 +1,8 @@
 package data_stub;
 
-import java.rmi.RemoteException;
 
+import java.rmi.RemoteException;
+import java.util.List;
 import po.hotelPO.*;
 import dataservice.hotel_dataservice.Hotel_dataService;
 
@@ -10,7 +11,12 @@ public class hotel_dataService_Stub implements Hotel_dataService {
 	public HotelPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println("find Succeed");
-		return new HotelPO();
+		List<Room>room = null;
+		Room big=new Room("大床房",600,10);
+		Room family=new Room("家庭套间",820,5);
+		room.add(big);
+		room.add(family);
+		return new HotelPO(id, "渡口客栈","南京市中山北路20号", "鼓楼区", "南京", 456, 4.6, 4, room);
 	}
 
 	public void add(HotelPO po) throws RemoteException {

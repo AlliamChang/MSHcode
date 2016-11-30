@@ -8,8 +8,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -23,6 +25,8 @@ public class EvaluatePane {
 	private String check_out_time="2016/10/07";
 	private String room_type="大床房";
 	private int number=1;
+	private int score;
+	private String content;
 	private String price="¥560";
 	private MyNavigationBar navi;
 	private Image scul;
@@ -103,16 +107,22 @@ public class EvaluatePane {
 		content.setFont(f);
 		pane.add(content, column_index, row_index+5);
 		
-		TextField evaluate=new TextField();
+		TextArea evaluate=new TextArea();
 		evaluate.setFont(f);
 		pane.add(evaluate,column_index+1,row_index+5,4,1);
 		
-		Button upload=new Button("提交");
+		Button upload=new Button("确定");
 		upload.setFont(f);
+		upload.setOnMouseClicked((MouseEvent me)->{
+			
+		});
 		pane.add(upload, column_index+5, row_index+7);
 		
-		Button cancel=CancelButton.get();
+		Button cancel=new Button("取消");
 		cancel.setFont(f);
+		cancel.setOnMouseClicked((MouseEvent me)->{
+			
+		});
 		pane.add(cancel,column_index+5,row_index+8);
 	}
 }

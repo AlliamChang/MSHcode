@@ -18,11 +18,13 @@ public class CustomerRunner extends Application{
 	
 	public static void main(String[] args){
 		//new PersonInfoPane();
-		//new EvaluatePane();
+		new EvaluatePane();
 		//new CreditRecordPane(null);
 		//new MyOrderPane();
 		//new ReservePane();
-		new HotelSearchPane();
+		//new HotelSearchPane();
+		//new HotelConcreteInfoPane();
+		//new HotelListPane();
 		launch(args);
 	}
 

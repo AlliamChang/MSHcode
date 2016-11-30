@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -58,9 +59,7 @@ public class PersonInfoPane {
 		
 		ImageView iv1 = new ImageView(scul);
 		this.grid.add(iv1,column,row);
-		
-		Button changescul=ChangeButton.get();
-		this.grid.add(changescul, column+2, row);
+				
 		
 		
 		Text uncontent=new Text(this.user_name);
@@ -75,8 +74,7 @@ public class PersonInfoPane {
 		namecontent.setFont(f);
 		this.grid.add(namecontent,column+1, row+1);
 		
-		Button changename=ChangeButton.get();
-		this.grid.add(changename,column+2,row+1);
+		
 		
 		Label sextual=new Label("性别:");
 		sextual.setFont(f);
@@ -86,8 +84,7 @@ public class PersonInfoPane {
 		sextualcontent.setFont(f);
 		this.grid.add(sextualcontent,column+1,row+2);
 		
-		Button changesex=ChangeButton.get();
-		this.grid.add(changesex, column+2, row+2);
+		
 		
 	    Label phone=new Label("联系方式:");
 	    phone.setFont(f);
@@ -97,8 +94,6 @@ public class PersonInfoPane {
 	    phonecontent.setFont(f);
 	    this.grid.add(phonecontent, column+1, row+3);
 	    
-	    Button changephone=ChangeButton.get();
-	    this.grid.add(changephone,column+2,row+3);
 	    
 	    
 	    Label credit=new Label("信用值:");
@@ -109,8 +104,12 @@ public class PersonInfoPane {
 	    creditcontent.setFont(f);
 	    this.grid.add(creditcontent, column+1, row+4);
 	    
-	    Button browsecredit=BrowseButton.get();
+	    Button browsecredit=new Button("查看");
 	    this.grid.add(browsecredit, column+2, row+4);
+	    
+	    browsecredit.setOnMouseClicked((MouseEvent me)->{
+	    	
+	    });
 	    
 	    Label member=new Label("会员类型:");
 	    member.setFont(f);
@@ -136,8 +135,32 @@ public class PersonInfoPane {
 	    birthcontent.setFont(f);
 	    this.grid.add(birthcontent,column+1, row+7);
 	    
-	    Button changebirth=ChangeButton.get();
-	    this.grid.add(changebirth, column+2, row+7);
+	    Button change=new Button("修改");
+	    change.setOnMouseClicked((MouseEvent me)->{
+	    	this.grid.getChildren().removeAll(birthcontent,namecontent,sextualcontent,phonecontent);
+	    	TextField birth_content=new TextField();
+	    	birth_content.setPrefWidth(140);
+	    	birth_content.setFont(f);
+	    	this.grid.add(birth_content, column+1, row+7);
+	    	
+	    	TextField name_content=new TextField();
+	    	name_content.setFont(f);
+	    	name_content.setPrefWidth(140);
+	    	this.grid.add(name_content,column+1, row+1);
+	    	
+	    	TextField sextual_content=new TextField();
+	    	sextual_content.setFont(f);
+	    	sextual_content.setPrefWidth(100);
+	    	this.grid.add(sextual_content, column+1, row+2);
+	    	
+	    	TextField phone_content=new TextField();
+	    	phone_content.setFont(f);
+	    	phone_content.setPrefWidth(140);
+	    	this.grid.add(phone_content,column+1,row+3);
+	    	
+	    	
+	    });
+	    this.grid.add(change, column+2, row+7);
 	    
 	}
 }

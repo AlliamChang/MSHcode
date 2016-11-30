@@ -137,7 +137,7 @@ public class ReservePane {
 		child.setMinWidth(95);
 		pane.add(child, column_index+2, row_index+9);
 		
-		Button cancel=CancelButton.get();
+		Button cancel=new Button("取消");
 		cancel.setFont(f);
 		pane.add(cancel,column_index+5,row_index+11);
 		
