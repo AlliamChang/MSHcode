@@ -1,5 +1,6 @@
 package ui.webAdmin;
 
+import ui.utility.MainPane;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -13,8 +14,10 @@ public class InitialPane extends GridPane{
 	private SearchBox searchBox;
 	private Button searchButton;
 	
-	private InitialPane(){
+	public InitialPane(){
 		super();
+		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setStyle("-fx-border-color: black");
 		searchButton = new Button("查询");
 		searchButton.setId("searchButton");
 		searchBox = new SearchBox(searchButton);
@@ -35,14 +38,8 @@ public class InitialPane extends GridPane{
 		add(searchBox, 0, 1);
 		add(searchButton, 1, 1);
 		
-		searchButton.setOnAction(event -> {
-			System.out.println("Duang!");
+		searchButton.setOnAction(e -> {
+			WebAdminController.getInstance().search(searchBox.getContent());
 		});
-	}
-	
-	private static InitialPane INSTANCE;
-	
-	public static InitialPane getInstance(){
-		return INSTANCE != null ? INSTANCE : (INSTANCE = new InitialPane());
 	}
 }

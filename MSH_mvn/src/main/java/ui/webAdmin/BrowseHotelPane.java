@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import ui.utility.MainPane;
 import vo.HotelVO;
 import vo.RoomVO;
 import javafx.geometry.Insets;
@@ -40,6 +41,8 @@ public class BrowseHotelPane extends VBox{
 	
 	public BrowseHotelPane(){
 		super();
+		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setStyle("-fx-border-color: black");
 		setPadding(new Insets(20, 20, 20, 20));
 		setSpacing(20);
 		nameLabel = new Label("名称：");
@@ -95,19 +98,27 @@ public class BrowseHotelPane extends VBox{
 		stuff.setPrefWidth(80);
 		TableColumn<HotelVO, String> stuffNumber = new TableColumn<HotelVO, String>("工作人员电话");
 		stuffNumber.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("number"));
-		stuffNumber.setPrefWidth(230);
-		TableColumn<HotelVO, Button> operation = new TableColumn<HotelVO, Button>("");
-		operation.setCellFactory(new Callback<TableColumn<HotelVO, Button>, TableCell<HotelVO, Button> >(){
+		stuffNumber.setPrefWidth(130);
+		stuffNumber.setSortable(false);
+		TableColumn<HotelVO, HBox> operation = new TableColumn<HotelVO, HBox>("");
+		operation.setPrefWidth(183);
+		operation.setSortable(false);
+		operation.setCellFactory(new Callback<TableColumn<HotelVO, HBox>, TableCell<HotelVO, HBox> >(){
 
 			@Override
-			public TableCell<HotelVO, Button> call(TableColumn<HotelVO, Button> col) {
-				return new TableCell<HotelVO, Button>(){
+			public TableCell<HotelVO, HBox> call(TableColumn<HotelVO, HBox> col) {
+				return new TableCell<HotelVO, HBox>(){
 					
 					@Override
-					protected void updateItem(Button item, boolean empty){
+					protected void updateItem(HBox item, boolean empty){
 						if (!empty){
-							item = new Button("删除酒店");
-							item.setOnAction(e -> {
+							item = new HBox();
+							item.setSpacing(5);
+							Button modefyButton = new Button("修改工作人员");
+							Button delButton = new Button("删除酒店");
+							modefyButton.setPadding(new Insets(2, 5, 2, 5));
+							delButton.setPadding(new Insets(2, 5, 2, 5));
+							delButton.setOnAction(e -> {
 								Alert alert = new Alert(AlertType.CONFIRMATION);
 								alert.initModality(Modality.APPLICATION_MODAL);
 								alert.getDialogPane().setHeaderText(null);
@@ -117,6 +128,7 @@ public class BrowseHotelPane extends VBox{
 										table.getItems().remove(this.getTableRow().getIndex());
 									});
 							});
+							item.getChildren().addAll(modefyButton, delButton);
 						} else
 							item = null;
 						setGraphic(item);

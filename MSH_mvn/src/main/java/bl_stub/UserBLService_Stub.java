@@ -24,7 +24,7 @@ public class UserBLService_Stub implements UserBLService {
 
 	public UserVO get(String name) {
 		// TODO Auto-generated method stub
-		return new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER, 2, 100);
+		return "123".equals(name) ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER, 2, 100) : null;
 	}
 
 	public ResultMessage add(UserVO userVO) {
@@ -37,7 +37,7 @@ public class UserBLService_Stub implements UserBLService {
 		return ResultMessage.SUCCESS;
 	}
 
-	public ResultMessage delete(String name) {
+	public ResultMessage delete(int id) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
@@ -48,6 +48,12 @@ public class UserBLService_Stub implements UserBLService {
 		return Arrays.asList(new CreditVO(new Date("2016/09/01",false),ChangeReason.OFFLINE_RECHARGE,500,100),
 			new CreditVO(new Date("2016/09/28",false),ChangeReason.OFFLINE_RECHARGE,500,1500),
 			new CreditVO(new Date("2016/10/22",false),ChangeReason.ABNORMAL_ORDER,1500,1200));
+	}
+
+	@Override
+	public ArrayList<UserVO> getAllMarketers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

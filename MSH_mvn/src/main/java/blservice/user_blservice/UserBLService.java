@@ -10,6 +10,8 @@ import vo.UserVO;
 public interface UserBLService {
 
 	public ArrayList<UserVO> getAll();
+	
+	public ArrayList<UserVO> getAllMarketers();
 
 	public UserVO get(String name);
 
@@ -17,7 +19,7 @@ public interface UserBLService {
 
 	public ResultMessage modify(UserVO userVO);
 
-	public ResultMessage delete(String name);
+	public ResultMessage delete(int id);
 	
 	public List<CreditVO> getCredit();
 }
