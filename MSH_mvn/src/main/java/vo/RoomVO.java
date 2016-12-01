@@ -15,6 +15,14 @@ public class RoomVO {
 	private int maxCustomer;
 	private final DecimalFormat df = new DecimalFormat("#.00");
 	
+	/**
+	 * 
+	 * @param roomStyle
+	 * @param bedStyle
+	 * @param price
+	 * @param num
+	 * @param maxCustomer
+	 */
 	public RoomVO(String roomStyle,BedStyle bedStyle,double price,int num,int maxCustomer){
 		this.roomStyle = roomStyle;
 		this.bedStyle = bedStyle;
