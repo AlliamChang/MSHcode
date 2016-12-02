@@ -66,11 +66,8 @@ public class OrderVO {
 	//测试
 	private StringProperty preCheckIn;
 	private String firstBooker;
-	private StringProperty room_type;
-	private StringProperty num;
-	private StringProperty total;
 	private StringProperty evaluate;
-
+	private StringProperty operation;
 	public OrderVO(long i,String u, String h, String rs, int rn, String[] b,
 			String[] bp, int d, Date p, OrderState s,boolean isEva) {
 		id = i;
@@ -109,21 +106,16 @@ public class OrderVO {
 			return new SimpleStringProperty("未执行");
 	}
 	
-	public StringProperty room_typeProperty(){
-		room_type=new SimpleStringProperty(roomStyle);
-		return room_type;
+	public StringProperty operationProperty(){
+		if(state==OrderState.EXECUTED){
+			if(isEvaluated==false){
+				return new SimpleStringProperty("评价");
+			}
+		}else if(state==OrderState.UNEXECUTED){
+			return new SimpleStringProperty("撤销");
+		} 
+			return new SimpleStringProperty("空");
 	}
-	
-	public StringProperty numProperty(){
-		num=new SimpleStringProperty(roomNum+"");
-		return num;
-	}
-	
-	public StringProperty totalProperty(){
-		total=new SimpleStringProperty(price+"");
-		return total;
-	}
-	
 	public StringProperty evaluateProperty(){
 		if(isEvaluated==true)
 			evaluate=new SimpleStringProperty("有");

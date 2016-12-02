@@ -11,6 +11,7 @@ import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CreditVO;
 import vo.OrderVO;
+import vo.RoomVO;
 import bl_stub.HotelBLService_Stub;
 import bl_stub.Order_Stub;
 import bl_stub.UserBLService_Stub;
@@ -85,5 +86,11 @@ public class CustomerPaneController {
 		OrderBL=new Order_Stub();
 		List<OrderVO> order_list=OrderBL.getUserOrder(null);
 		return order_list;
+	}
+	
+	public List<RoomVO> getRoom(){
+		HotelBL=new HotelBLService_Stub();
+		List<RoomVO> room_list=HotelBL.getRoom();
+		return room_list;
 	}
 }

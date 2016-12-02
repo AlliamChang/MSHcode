@@ -1,9 +1,11 @@
 package blservice.hotel_blservice;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import blservice.strategy_blservice.StrategyBLService;
 import vo.HotelVO;
+import vo.RoomVO;
 import tools.ResultMessage;
 
 public interface HotelBLService {
@@ -22,4 +24,6 @@ public interface HotelBLService {
 	public ResultMessage inputRoom(String type, double price);
 
 	public double CalRoomPrice(StrategyBLService strategy);
+	
+	public List<RoomVO> getRoom();
 }

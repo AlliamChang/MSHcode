@@ -1,6 +1,7 @@
 package ui.customer;
 
 import java.util.Arrays;
+import java.util.List;
 
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
@@ -19,30 +20,27 @@ import javafx.scene.text.FontWeight;
 
 public class EvaluatePane extends Pane{
 	private GridPane pane;
+	private List<String> order_info=MyOrderTable.getList();
 	private static final String user_name="angel"; 
 	private static final int column_index=1;
 	private static final int row_index=8;
-	private String begin_time="2016/10/01";
-	private String check_out_time="2016/10/07";
-	private String room_type="大床房";
-	private int number=1;
+	private String begin_time=order_info.get(0);
+	private String check_out_time=order_info.get(1);
+	private String room_type=order_info.get(2);
+	private String number=order_info.get(3);
 	private int score;
 	private String content;
-	private String price="¥560";
+	private String price=order_info.get(4);
 	private MyNavigationBar navi;
 	private Image scul;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
 	
 	public EvaluatePane(){
+		super();
 		this.initPane();
-		this.init();
 	}
 	
-	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),Arrays.asList("个人信息","我的订单","搜索"));
-		MainPane.getInstance().getChildren().clear();
-		MainPane.getInstance().getChildren().addAll(navi,pane);
-	}
+	
 	
 	private void initPane(){
 		pane=new GridPane();
@@ -125,5 +123,7 @@ public class EvaluatePane extends Pane{
 			
 		});
 		pane.add(cancel,column_index+5,row_index+8);
+		
+		this.getChildren().add(pane);
 	}
 }
