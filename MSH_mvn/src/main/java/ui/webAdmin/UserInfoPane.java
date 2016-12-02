@@ -28,7 +28,7 @@ public class UserInfoPane extends AnchorPane{
 	private Button modifyButton, deleteButton;
 	public UserInfoPane(UserVO user){
 		super();
-		setStyle("-fx-font-size: 17px; -fx-border-color: black");
+		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
 		typeLabel = new Label("账户类型：" + typeCheck(user.getType()));
@@ -36,7 +36,7 @@ public class UserInfoPane extends AnchorPane{
 		genderLabel = new Label("性别：" + user.getGender());
 		phoneNumberLabel = new Label("联系电话：" + user.getNumber());
 		detailBox = new VBox();
-		detailBox.setSpacing(15);
+		detailBox.setSpacing(20);
 		detailBox.getChildren().addAll(typeLabel, nameLabel, genderLabel, phoneNumberLabel);
 
 		if (user.getType() == UserType.CUSTOMER){

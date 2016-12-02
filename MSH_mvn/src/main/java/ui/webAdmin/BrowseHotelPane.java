@@ -140,9 +140,9 @@ public class BrowseHotelPane extends VBox{
 		
 		table.getColumns().setAll(name, stuff, stuffNumber, operation); 
 		
-		table.getItems().add(new HotelVO("1","123","456","456", "456",null));
-		table.getItems().add(new HotelVO("2","dfdf","aaa","vvv", "c",null));
-		table.getItems().add(new HotelVO("4","d2fdf","a1aa","v3vv", "c",null));
+		table.getItems().add(new HotelVO("1","123","456","456", "456"));
+		table.getItems().add(new HotelVO("2","dfdf","aaa","vvv", "c"));
+		table.getItems().add(new HotelVO("4","d2fdf","a1aa","v3vv", "c"));
 		
 		
 		getChildren().addAll(v, table);

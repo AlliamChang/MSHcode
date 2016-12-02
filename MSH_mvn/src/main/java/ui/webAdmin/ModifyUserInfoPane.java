@@ -21,7 +21,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 	private Button confirmButton, cancelButton;
 	
 	public ModifyUserInfoPane(UserVO user, Parent lastPane){
-		setStyle("-fx-font-size: 17px; -fx-border-color: black");
+		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
 		typeLabel = new Label("账户类型：" + UserInfoPane.typeCheck(user.getType()));
