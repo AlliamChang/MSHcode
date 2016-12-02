@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.scene.image.Image;
 import tools.ChangeReason;
 import tools.Date;
 import tools.ResultMessage;
@@ -14,7 +15,7 @@ import blservice.user_blservice.UserBLService;
 
 public class UserBLService_Stub implements UserBLService {
 
-	public ArrayList<UserVO> getAll() {
+	public List<UserVO> getAll() {
 		// TODO Auto-generated method stub
 		UserVO testVO = new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER, 2, 100);
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
@@ -37,13 +38,13 @@ public class UserBLService_Stub implements UserBLService {
 		return ResultMessage.SUCCESS;
 	}
 
-	public ResultMessage delete(int id) {
+	public ResultMessage delete(int ID) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
-	public List<CreditVO> getCredit() {
+	public List<CreditVO> getCredit(int ID) {
 		// TODO Auto-generated method stub
 		return Arrays.asList(new CreditVO(new Date("2016/09/01",false),ChangeReason.OFFLINE_RECHARGE,500,100),
 			new CreditVO(new Date("2016/09/28",false),ChangeReason.OFFLINE_RECHARGE,500,1500),
@@ -51,9 +52,19 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	@Override
-	public ArrayList<UserVO> getAllMarketers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<UserVO> getAllMarketers() {
+		return Arrays.asList(new UserVO("marketer1", "123", "郑晓峰", "男", "15050582962", UserType.MARKETER, 0, 0){{setID(1);}},
+				new UserVO("marketer2", "123", "郑皓铭", "男", "15011112962", UserType.MARKETER, 0, 0){{setID(2);}});
 	}
 
+	@Override
+	public Image getImage(int ID) {
+		return new Image(getClass().getResource("/image/用户.png").toExternalForm());
+	}
+
+	@Override
+	public ResultMessage modefyPassword(int ID, String password) {
+		// TODO Auto-generated method stub
+		return ResultMessage.SUCCESS;
+	}
 }

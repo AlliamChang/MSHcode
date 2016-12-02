@@ -1,5 +1,8 @@
 package ui.webAdmin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tools.ChangeReason;
 import tools.Date;
 import tools.UserType;
@@ -48,13 +51,10 @@ public class UserInfoPane extends AnchorPane{
 			creditChangeBox.setPadding(new Insets(10, 10, 10, 10));
 			creditChangeBox.setSpacing(10);
 			creditChangeBox.setPrefWidth(472);
-			creditChangeBox.getChildren().addAll(new Record(
-					new CreditVO(new Date("2016/12/1", false), ChangeReason.NORMAL_EXE, 1000, 1200)));
+			creditChangeBox.getChildren().addAll(Record.makeRecords((WebAdminController.getInstance().getCredit(user))));
 			detailBox.getChildren().addAll(levelLabel, creditLabel, creditChangeLabel, sp);
 		}
-		String imagePath = (user.getType() != UserType.CUSTOMER ? 
-				"/image/" + typeCheck(user.getType()) : "/image/用户") + ".png";
-		ImageView userImage = new ImageView(new Image(getClass().getResource(imagePath).toExternalForm()));
+		ImageView userImage = new ImageView(WebAdminController.getInstance().getImage(user));
 		userImage.setFitWidth(200); userImage.setFitHeight(200);
 		accountLabel = new Label(user.getAccount());
 		accountLabel.setPrefWidth(200);
@@ -74,9 +74,7 @@ public class UserInfoPane extends AnchorPane{
 		hBox.setSpacing(30);
 		modifyButton = new Button("修改");
 		
-		modifyButton.setOnAction(e -> {
-			WebAdminController.getInstance().setModifyUserInfo(user);
-		});
+		modifyButton.setOnAction(e -> WebAdminController.getInstance().setModifyUserInfo(user, UserInfoPane.this));
 		
 		deleteButton = new Button("删除");
 		modifyButton.setPrefSize(80, 30);
@@ -86,9 +84,8 @@ public class UserInfoPane extends AnchorPane{
 			alert.setHeaderText(null);
 			alert.setContentText("确认删除该用户？");
 			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response -> {
-				WebAdminController.getInstance().deleteUser(user);
-			});
+			alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response
+				-> WebAdminController.getInstance().deleteUser(user));
 		});
 		hBox.getChildren().add(modifyButton);
 		hBox.getChildren().add(deleteButton);
@@ -138,5 +135,12 @@ class Record extends GridPane{
 		hBox.getChildren().add(change);
 		add(hBox, 1, 0, 1, 2);
 		GridPane.setHgrow(hBox, Priority.ALWAYS);
+	}
+	
+	static List<Record> makeRecords(List<CreditVO> list){
+		ArrayList<Record> ret = new ArrayList<Record>();
+		for (CreditVO item: list)
+			ret.add(new Record(item));
+		return ret;
 	}
 }

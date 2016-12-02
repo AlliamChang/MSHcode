@@ -1,13 +1,18 @@
 package ui.webAdmin;
 
+import java.util.List;
 import java.util.Arrays;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import vo.CreditVO;
 import vo.UserVO;
 import bl_stub.*;
 import blservice.hotel_blservice.HotelBLService;
@@ -71,10 +76,13 @@ public class WebAdminController {
 		MainPane.getInstance().setRightPane(new BrowseHotelPane());
 	}
 	
-	public void setModifyUserInfo(UserVO user){
-		MainPane.getInstance().setRightPane(new ModifyUserInfoPane(user));
+	public void setModifyUserInfo(UserVO user, Parent lastPane){
+		MainPane.getInstance().setRightPane(new ModifyUserInfoPane(user, lastPane));
 	}
 	
+	public void go(Parent pane){
+		MainPane.getInstance().setRightPane(pane);
+	}
 	public void notFound(){
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -105,5 +113,17 @@ public class WebAdminController {
 	public void modifyUser(UserVO user){
 		userBLService.modify(user);
 		setUserInfoPane(user);
+	}
+	
+	public List<CreditVO> getCredit(UserVO user){
+		return userBLService.getCredit(user.getID());
+	}
+	
+	public Image getImage(UserVO user){
+		return userBLService.getImage(user.getID());
+	}
+	
+	public ObservableList<UserVO> getAllMarketers(){
+		return FXCollections.observableArrayList(userBLService.getAllMarketers());
 	}
 }

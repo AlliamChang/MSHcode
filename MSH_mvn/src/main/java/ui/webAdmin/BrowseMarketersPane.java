@@ -29,16 +29,14 @@ public class BrowseMarketersPane extends VBox{
 		
 		table = new TableView<UserVO>();
 		
-		table.setItems(FXCollections.observableArrayList(
-				new UserVO("NJU_ZXF", "123456", "郑晓峰", "男", "15050582962", UserType.MARKETER, 0, 1000){{setID(1);}}
-				));
+		table.setItems(WebAdminController.getInstance().getAllMarketers());
 		
 		table.setMaxWidth(600);
 		table.setMinHeight(450);
 		TableColumn<UserVO, String> IDCol = new TableColumn<UserVO, String>("ID");
 		IDCol.setCellValueFactory(new PropertyValueFactory<UserVO, String>("ID"){
 			public ObservableValue<String> call(CellDataFeatures<UserVO, String> user){
-				return new ReadOnlyObjectWrapper(String.format("%08d", user.getValue().getID()));
+				return new ReadOnlyObjectWrapper<String>(String.format("%08d", user.getValue().getID()));
 			}
 		});
 		IDCol.setMinWidth(80);
@@ -67,6 +65,9 @@ public class BrowseMarketersPane extends VBox{
 							Button delButton = new Button("删除");
 							modefyButton.setPadding(new Insets(2, 5, 2, 5));
 							delButton.setPadding(new Insets(2, 5, 2, 5));
+							modefyButton.setOnAction(e ->
+								WebAdminController.getInstance()
+								.setModifyUserInfo(table.getItems().get(getTableRow().getIndex()), BrowseMarketersPane.this));
 							delButton.setOnAction(e -> {
 								Alert alert = new Alert(AlertType.CONFIRMATION);
 								alert.initModality(Modality.APPLICATION_MODAL);
@@ -74,7 +75,7 @@ public class BrowseMarketersPane extends VBox{
 								alert.getDialogPane().setContentText("确认删除？");
 								alert.showAndWait().filter(response -> response == ButtonType.OK)
 									.ifPresent(response -> {
-										table.getItems().remove(this.getTableRow().getIndex());
+										table.getItems().remove(getTableRow().getIndex());
 									});
 							});
 							item.getChildren().addAll(modefyButton, delButton);

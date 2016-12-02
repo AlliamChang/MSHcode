@@ -3,15 +3,16 @@ package blservice.user_blservice;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.image.Image;
 import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
 
 public interface UserBLService {
 
-	public ArrayList<UserVO> getAll();
+	public List<UserVO> getAll();
 	
-	public ArrayList<UserVO> getAllMarketers();
+	public List<UserVO> getAllMarketers();
 
 	public UserVO get(String name);
 
@@ -19,7 +20,11 @@ public interface UserBLService {
 
 	public ResultMessage modify(UserVO userVO);
 
-	public ResultMessage delete(int id);
+	public ResultMessage delete(int ID);
 	
-	public List<CreditVO> getCredit();
+	public List<CreditVO> getCredit(int ID);
+	
+	public Image getImage(int ID);
+	
+	public ResultMessage modefyPassword(int ID, String password);
 }

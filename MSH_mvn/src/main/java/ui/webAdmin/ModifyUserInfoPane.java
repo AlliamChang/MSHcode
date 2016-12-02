@@ -3,9 +3,9 @@ package ui.webAdmin;
 import tools.UserType;
 import ui.utility.MainPane;
 import vo.UserVO;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
@@ -20,7 +20,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 	private HBox buttonBox;
 	private Button confirmButton, cancelButton;
 	
-	public ModifyUserInfoPane(UserVO user){
+	public ModifyUserInfoPane(UserVO user, Parent lastPane){
 		setStyle("-fx-font-size: 17px; -fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
@@ -61,9 +61,8 @@ public class ModifyUserInfoPane extends AnchorPane{
 		AnchorPane.setTopAnchor(grid, 120.0);
 		AnchorPane.setLeftAnchor(grid, 70.0);
 		
-		String imagePath = (user.getType() != UserType.CUSTOMER ? 
-				"/image/" + UserInfoPane.typeCheck(user.getType()) : "/image/用户") + ".png";
-		userImage = new ImageView(new Image(getClass().getResource(imagePath).toExternalForm()));
+
+		userImage = new ImageView(WebAdminController.getInstance().getImage(user));
 		userImage.setFitWidth(200); userImage.setFitHeight(200);
 		accountLabel = new Label(user.getAccount());
 		accountLabel.setPrefWidth(200);
@@ -114,7 +113,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 		});
 		
 		cancelButton.setOnAction(e -> {
-			WebAdminController.getInstance().setUserInfoPane(user);
+			WebAdminController.getInstance().go(lastPane);;
 		});
 	}
 }
