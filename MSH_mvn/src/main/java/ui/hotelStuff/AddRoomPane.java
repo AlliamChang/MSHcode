@@ -180,6 +180,7 @@ public class AddRoomPane extends VBox{
 					});
 		});
 		save.setStyle("-fx-font-size:20");
+		
 		this.setAlignment(Pos.CENTER);
 		
 		
