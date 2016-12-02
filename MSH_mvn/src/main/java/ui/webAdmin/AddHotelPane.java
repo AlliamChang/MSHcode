@@ -103,8 +103,8 @@ public class AddHotelPane extends AnchorPane{
 		hBox.setSpacing(30);
 		confirm = new Button("确定");
 		cancel = new Button("取消");
-		confirm.setPadding(new Insets(7, 25, 7, 25));
-		cancel.setPadding(new Insets(7, 25, 7, 25));
+		confirm.setPrefSize(80, 30);
+		cancel.setPrefSize(80, 30);
 		hBox.getChildren().add(confirm);
 		hBox.getChildren().add(cancel);
 		
@@ -116,14 +116,18 @@ public class AddHotelPane extends AnchorPane{
 		AnchorPane.setLeftAnchor(grid, 160.0);
 		AnchorPane.setTopAnchor(grid, 170.0);
 		
-		confirm.setOnAction(event -> {
-			Alert alert = new Alert(AlertType.INFORMATION, "");
+		confirm.setOnAction(e -> {
+			AlertType type = AlertType.INFORMATION;
+			String s = "添加成功！";
+			if (textField.getText().replace(" ", "").length() == 0 || stuffNameLabel.getText().equals("无")){
+				type = AlertType.ERROR;
+				s = "请补全酒店信息！";
+			}
+			Alert alert = new Alert(type, "");
 			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.getDialogPane().setContentText("添加成功！");
+			alert.getDialogPane().setContentText(s);
 			alert.getDialogPane().setHeaderText(null);
-			alert.showAndWait()
-				.filter(response -> response == ButtonType.OK)
-				.ifPresent(response -> System.out.println("Duang"));
+			alert.showAndWait();
 		});
 		
 		cancel.setOnAction(event -> {

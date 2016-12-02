@@ -3,6 +3,7 @@ package ui.customer;
 import java.util.Arrays;
 
 import javafx.collections.FXCollections;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -11,31 +12,29 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
 
-public class HotelSearchPane {
-	private MyNavigationBar navi;
+public class HotelSearchPane extends Pane{
 	private static final String user_name="angel"; 
-	private Image scul;
 	private GridPane pane;
-	private int column_index=9;
-	private int row_index=10;
+	private int row=10;
+	private int column=0;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	public HotelSearchPane(){
+		super();
 		initPane();
-		init();
 	}
 	
-	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
-		MainPane.getInstance().getChildren().clear();
-		MainPane.getInstance().getChildren().addAll(navi,pane);
-	}
+	
 	
 	private void initPane(){
 		pane=new GridPane();
@@ -45,54 +44,76 @@ public class HotelSearchPane {
 		pane.setAlignment(Pos.TOP_LEFT);
 		//pane.setGridLinesVisible(true);
 		
-		/*Label title=new Label("酒店预订系统");
+		Label title=new Label("酒店预订系统");
 		title.setFont(Font.font("Tahoma", FontWeight.MEDIUM, 32));
-		pane.add(title,column_index,row_index);*/
+		pane.add(title,column+1,row-3,3,2);
+		pane.setHalignment(title, HPos.CENTER);
 		
-		Label City=new Label("城市");
+		 ColumnConstraints colInfo = new ColumnConstraints();
+	        colInfo.setPercentWidth(20);
+	        
+	        for(int i = 0; i < 100/colInfo.getPercentWidth(); i ++){
+	        	this.pane.getColumnConstraints().add(colInfo);
+	        }
+	        
+		Label City=new Label("城市:");
 		City.setFont(f);
-		pane.add(City,column_index,row_index);
+		pane.add(City,column,row);
+		pane.setHalignment(City, HPos.RIGHT);
 		
 		ChoiceBox city=new ChoiceBox(FXCollections.observableArrayList("南京","北京","上海"));
 		city.getSelectionModel().selectFirst();
-		pane.add(city,column_index+1,row_index);
+		pane.add(city,column+1,row);
 		
-		Label trade_area=new Label("商圈");
+		Label trade_area=new Label("商圈:");
 		trade_area.setFont(f);
-		pane.add(trade_area,column_index,row_index+1);
+		pane.add(trade_area,column+2,row);
+		pane.setHalignment(trade_area, HPos.RIGHT);
 		
 		ChoiceBox TradeArea=new ChoiceBox(FXCollections.observableArrayList("栖霞区","鼓楼区","江宁区"));
 		TradeArea.getSelectionModel().selectFirst();
-		pane.add(TradeArea,column_index+1,row_index+1);
+		pane.add(TradeArea,column+3,row);
 		
-		Label key=new Label("关键词");
+		Label key=new Label("关键词:");
 		key.setFont(f);
-		pane.add(key,column_index,row_index+2);
+		pane.add(key,column,row+1);
+		pane.setHalignment(key, HPos.RIGHT);
 		
 		TextField keyword=new TextField();
 		keyword.setFont(f);
-		keyword.setMaxWidth(100);
-		pane.add(keyword, column_index+1, row_index+2);
+		keyword.setMinWidth(200);
+		pane.add(keyword, column+1, row+1,3,1);
 		
 		Button search=new Button("搜索");
 		search.setFont(f);
-		pane.add(search,column_index+2,row_index+2);
+		search.setOnMouseClicked((MouseEvent me)->{
+			VBox room=new VBox();
+			HotelRoomTable table=new HotelRoomTable(CustomerPaneController.getInstance().getRoom());
+			room.getChildren().add(table);
+			HotelListPane next=new HotelListPane(room);
+			MainPane.getInstance().setRightPane(next);
+			System.out.println(1);
+		});
+		pane.add(search,column+4,row+1);
 		
-		Label enter_time=new Label("入住时间");
+		Label enter_time=new Label("入住时间:");
 		enter_time.setFont(f);
-		pane.add(enter_time, column_index, row_index+3);
+		pane.add(enter_time, column, row+2);
+		pane.setHalignment(enter_time, HPos.RIGHT);
 		
 		DatePicker enter=new MyDatePicker();
-		enter.setMaxWidth(130);
-		pane.add(enter, column_index+1, row_index+3);
+		enter.setMaxWidth(140);
+		pane.add(enter, column+1, row+2);
 		
-		Label out_time=new Label("退房时间");
+		Label out_time=new Label("退房时间:");
 		out_time.setFont(f);
-		pane.add(out_time,column_index,row_index+4);
+		pane.add(out_time,column+2,row+2);
+		pane.setHalignment(out_time, HPos.RIGHT);
 		
 		DatePicker out=new MyDatePicker();
-		out.setMaxWidth(130);
-		pane.add(out,column_index+1,row_index+4);
+		out.setMaxWidth(140);
+		pane.add(out,column+3,row+2);
 		
+		this.getChildren().add(pane);
 	}
 }

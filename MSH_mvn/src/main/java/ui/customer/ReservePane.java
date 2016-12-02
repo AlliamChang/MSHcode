@@ -17,10 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class ReservePane {
+public class ReservePane extends Pane {
 	private GridPane pane;
 	private List<String>room_type;
 	private static final String user_name="angel"; 
@@ -36,7 +37,7 @@ public class ReservePane {
 	}
 	
 	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
+		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),Arrays.asList("个人信息","我的订单","搜索"));
 		MainPane.getInstance().getChildren().clear();
 		MainPane.getInstance().getChildren().addAll(navi,pane);
 	}

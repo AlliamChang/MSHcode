@@ -12,11 +12,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class HotelConcreteInfoPane {
+public class HotelConcreteInfoPane extends Pane{
 	private Label hotel_name=new Label("酒店名称:");
 	private Label address=new Label("地址:");
 	private Label trade_area=new Label("商圈:");
@@ -38,7 +39,7 @@ public class HotelConcreteInfoPane {
 	}
 	
 	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
+		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),Arrays.asList("个人信息","我的订单","搜索"));
 		MainPane.getInstance().getChildren().clear();
 		MainPane.getInstance().getChildren().addAll(navi,pane);
 	}

@@ -1,5 +1,6 @@
 package ui.utility;
 
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 
@@ -15,7 +16,7 @@ public class MainPane extends HBox{
 	public static MainPane getInstance(){
 		if(mainPane == null){
 			mainPane = new MainPane();
-			mainPane.setStyle("-fx-background-color:whitesmoke;");
+			mainPane.setStyle("-fx-background-color:white;");
 		}
 		return mainPane;
 	}

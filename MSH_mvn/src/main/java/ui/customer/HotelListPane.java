@@ -11,16 +11,17 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
 
-public class HotelListPane {
-	private MyNavigationBar navi;
-	private Image scul;
+public class HotelListPane extends Pane{
 	private GridPane pane;
 	private Label City=new Label("城市");
 	private Label trade_area=new Label("商圈");
@@ -30,19 +31,16 @@ public class HotelListPane {
 	private Label score_range=new Label("评分区间");
 	private Label star=new Label("星级");
 	private Label HotelName=new Label("酒店名称");
-	private int column=1;
-	private int row=1;
+	private int column=0;
+	private int row=0;
 	private static final String user_name="angel"; 
+	private VBox hotel_list=new VBox();
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
-	public HotelListPane(){
+	public HotelListPane(VBox b){
+		super();
+		this.setList(b);
 		initPane();
-		init();
-	}
-	
-	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
-		MainPane.getInstance().getChildren().clear();
-		MainPane.getInstance().getChildren().addAll(navi,pane);
+		
 	}
 	
 	private void initPane(){
@@ -51,70 +49,80 @@ public class HotelListPane {
 		pane.setHgap(20);
 		pane.setVgap(20);
 		pane.setAlignment(Pos.TOP_LEFT);
-		pane.setGridLinesVisible(true);
+		//pane.setGridLinesVisible(true);
 		
-		Label condition=new Label("筛选条件");
-		condition.setFont(f);
+		 ColumnConstraints col0 = new ColumnConstraints(100);
+		 ColumnConstraints col1 = new ColumnConstraints(100);
+		 ColumnConstraints col2 = new ColumnConstraints(130);
+		 ColumnConstraints col3 = new ColumnConstraints(130);
+		 ColumnConstraints col4 = new ColumnConstraints(100);
+		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
+		/*ColumnConstraints colInfo=new ColumnConstraints();
+	       colInfo.setPercentWidth(20);
+	      for(int i=0;i<100/(int)(colInfo.getPercentWidth());i++){
+	    	  this.pane.getColumnConstraints().add(colInfo);
+	      }*/
+	     // System.out.println((int)(100/colInfo.getPercentWidth()));
 		
 		City.setFont(f);
-		pane.add(City, column, row-1);
+		pane.add(City, column, row);
 		
 		ChoiceBox city=new ChoiceBox(FXCollections.observableArrayList("南京","北京","上海"));
 		city.getSelectionModel().selectFirst();
-		pane.add(city,column,row);
+		pane.add(city,column,row+1);
 		
 		trade_area.setFont(f);
-		pane.add(trade_area,column+1,row-1);
+		pane.add(trade_area,column+1,row);
 		
 		ChoiceBox TradeArea=new ChoiceBox(FXCollections.observableArrayList("栖霞区","鼓楼区","江宁区"));
 		TradeArea.getSelectionModel().selectFirst();
-		pane.add(TradeArea, column+1, row);
+		pane.add(TradeArea, column+1, row+1);
 		
 		enter_time.setFont(f);
-		pane.add(enter_time,column+2,row-1);
+		pane.add(enter_time,column+2,row);
 		
 		DatePicker enter=new MyDatePicker();
 		enter.setMaxWidth(130);
-		pane.add(enter,column+2,row);
+		pane.add(enter,column+2,row+1);
 		
 		out_time.setFont(f);
-		pane.add(out_time, column+3, row-1);
+		pane.add(out_time, column+3, row);
 		
 		DatePicker out=new MyDatePicker();
 		out.setMaxWidth(130);
-		pane.add(out,column+3,row);
+		pane.add(out,column+3,row+1);
 		
 		price_range.setFont(f);
-		pane.add(price_range,column,row+1);
+		pane.add(price_range,column,row+3);
 		
 		ChoiceBox price=new ChoiceBox(FXCollections.observableArrayList("200-499","500-999","1000以上"));
 		price.getSelectionModel().selectFirst();
-		pane.add(price, column, row+2);
+		pane.add(price, column, row+4);
 		
 		score_range.setFont(f);
-		pane.add(score_range,column+1,row+1);
+		pane.add(score_range,column+1,row+3);
 		
 		ChoiceBox score=new ChoiceBox(FXCollections.observableArrayList("4.1-5.0","3.1-4.0","0.1-3.0"));
 		score.getSelectionModel().selectFirst();
-		pane.add(score, column+1, row+2);
+		pane.add(score, column+1, row+4);
 		
 		star.setFont(f);
-		pane.add(star,column+2,row+1);
+		pane.add(star,column+2,row+3);
 		
 		ChoiceBox star_level=new ChoiceBox(FXCollections.observableArrayList("5","4","3","2","1"));
 		star_level.getSelectionModel().selectFirst();
-		pane.add(star_level,column+2,row+2);
+		pane.add(star_level,column+2,row+4);
 		
 		HotelName.setFont(f);
-		pane.add(HotelName,column+3,row+1);
+		pane.add(HotelName,column+3,row+3);
 		
 		ChoiceBox hotel_name=new ChoiceBox(FXCollections.observableArrayList("格林豪泰","青年旅馆","如家"));
 		hotel_name.getSelectionModel().selectFirst();
-		pane.add(hotel_name,column+3,row+2);
+		pane.add(hotel_name,column+3,row+4);
 		
 		Button search=new Button("搜索");
 		search.setFont(f);
-		pane.add(search,column+4,row+1);
+		pane.add(search,column+4,row+2);
 		
 		pane.setHalignment(City, HPos.CENTER);
 		pane.setHalignment(trade_area, HPos.CENTER);
@@ -126,8 +134,9 @@ public class HotelListPane {
 		pane.setHalignment(HotelName, HPos.CENTER);
 		pane.setHalignment(star_level, HPos.CENTER);
 		pane.setHalignment(hotel_name, HPos.CENTER);
-
-
+		
+		pane.add(hotel_list, column, row+5);
+		this.getChildren().addAll(pane);
 		/*Label hotel1=new Label("酒店1");
 		hotel1.setFont(f);
 		Button browse1=BrowseButton.get();
@@ -141,4 +150,10 @@ public class HotelListPane {
 		
 		
 	}
+	
+	public void setList(VBox info){
+		this.hotel_list=info;
+	}
+	
+	
 }

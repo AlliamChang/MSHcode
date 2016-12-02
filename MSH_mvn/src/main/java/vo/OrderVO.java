@@ -58,13 +58,18 @@ public class OrderVO {
 	 * 订单状态
 	 */
 	private OrderState state;
+	/**
+	 * 是否被评价
+	 */
+	private boolean isEvaluated;
 	
 	//测试
 	private StringProperty preCheckIn;
 	private String firstBooker;
-
+	private StringProperty evaluate;
+	private StringProperty operation;
 	public OrderVO(long i,String u, String h, String rs, int rn, String[] b,
-			String[] bp, int d, Date p, OrderState s) {
+			String[] bp, int d, Date p, OrderState s,boolean isEva) {
 		id = i;
 		userID = u;
 		hotel = h;
@@ -75,7 +80,7 @@ public class OrderVO {
 		days = d;
 		preCheckin = p;
 		state = s;
-		
+		isEvaluated=isEva;
 		preCheckIn = new SimpleStringProperty(p.getDate()); //测试
 		if(b.length > 0)
 			firstBooker = b[0]; //测试
@@ -101,6 +106,23 @@ public class OrderVO {
 			return new SimpleStringProperty("未执行");
 	}
 	
+	public StringProperty operationProperty(){
+		if(state==OrderState.EXECUTED){
+			if(isEvaluated==false){
+				return new SimpleStringProperty("评价");
+			}
+		}else if(state==OrderState.UNEXECUTED){
+			return new SimpleStringProperty("撤销");
+		} 
+			return new SimpleStringProperty("空");
+	}
+	public StringProperty evaluateProperty(){
+		if(isEvaluated==true)
+			evaluate=new SimpleStringProperty("有");
+		else 
+			evaluate=new SimpleStringProperty("无");
+		return evaluate;
+	}
 	
 	public String getUserID() {
 		return userID;
@@ -136,6 +158,10 @@ public class OrderVO {
 
 	public int getRoomNum() {
 		return roomNum;
+	}
+	
+	public boolean getEvaluated(){
+		return isEvaluated;
 	}
 
 	public void setRoomNum(int roomNum) {
@@ -204,5 +230,9 @@ public class OrderVO {
 
 	public void setState(OrderState state) {
 		this.state = state;
+	}
+	
+	public void setEvaluated(boolean eva){
+		this.isEvaluated=eva;
 	}
 }

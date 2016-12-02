@@ -3,13 +3,19 @@ package ui.webAdmin;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
+import ui.utility.MainPane;
 import vo.HotelVO;
+import vo.RoomVO;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
+import javafx.util.Callback;
 
 public class BrowseHotelPane extends VBox{
 	private Label nameLabel, cityLabel, areaLabel;
@@ -18,7 +24,7 @@ public class BrowseHotelPane extends VBox{
 	private HBox h1, h2;
 	private VBox v;
 	private ChoiceBox<String> provinceChoiceBox, cityChoiceBox, areaChoiceBox;
-	private TableView table;
+	private TableView<HotelVO> table;
 	private Separator sprt;
 
 	/*
@@ -35,6 +41,8 @@ public class BrowseHotelPane extends VBox{
 	
 	public BrowseHotelPane(){
 		super();
+		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setStyle("-fx-border-color: black");
 		setPadding(new Insets(20, 20, 20, 20));
 		setSpacing(20);
 		nameLabel = new Label("名称：");
@@ -84,16 +92,57 @@ public class BrowseHotelPane extends VBox{
 		table = new TableView<HotelVO>();
 		TableColumn<HotelVO, String> name = new TableColumn<HotelVO, String>("酒店名称");
 		name.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("name"));
-		name.setMinWidth(80);
+		name.setPrefWidth(200);
 		TableColumn<HotelVO, String> stuff = new TableColumn<HotelVO, String>("工作人员");
 		stuff.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("stuff"));
-		stuff.setMinWidth(80);
+		stuff.setPrefWidth(80);
 		TableColumn<HotelVO, String> stuffNumber = new TableColumn<HotelVO, String>("工作人员电话");
 		stuffNumber.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("number"));
-		stuffNumber.setMinWidth(435);
-		table.getColumns().setAll(name, stuff, stuffNumber);
+		stuffNumber.setPrefWidth(130);
+		stuffNumber.setSortable(false);
+		TableColumn<HotelVO, HBox> operation = new TableColumn<HotelVO, HBox>("");
+		operation.setPrefWidth(183);
+		operation.setSortable(false);
+		operation.setCellFactory(new Callback<TableColumn<HotelVO, HBox>, TableCell<HotelVO, HBox> >(){
+
+			@Override
+			public TableCell<HotelVO, HBox> call(TableColumn<HotelVO, HBox> col) {
+				return new TableCell<HotelVO, HBox>(){
+					
+					@Override
+					protected void updateItem(HBox item, boolean empty){
+						if (!empty){
+							item = new HBox();
+							item.setSpacing(5);
+							Button modefyButton = new Button("修改工作人员");
+							Button delButton = new Button("删除酒店");
+							modefyButton.setPadding(new Insets(2, 5, 2, 5));
+							delButton.setPadding(new Insets(2, 5, 2, 5));
+							delButton.setOnAction(e -> {
+								Alert alert = new Alert(AlertType.CONFIRMATION);
+								alert.initModality(Modality.APPLICATION_MODAL);
+								alert.getDialogPane().setHeaderText(null);
+								alert.getDialogPane().setContentText("确认删除？");
+								alert.showAndWait().filter(response -> response == ButtonType.OK)
+									.ifPresent(response -> {
+										table.getItems().remove(this.getTableRow().getIndex());
+									});
+							});
+							item.getChildren().addAll(modefyButton, delButton);
+						} else
+							item = null;
+						setGraphic(item);
+					}
+				};
+			}
+			
+		});
 		
+		table.getColumns().setAll(name, stuff, stuffNumber, operation); 
 		
+		table.getItems().add(new HotelVO("1","123","456","456", "456",null));
+		table.getItems().add(new HotelVO("2","dfdf","aaa","vvv", "c",null));
+		table.getItems().add(new HotelVO("4","d2fdf","a1aa","v3vv", "c",null));
 		
 		
 		getChildren().addAll(v, table);

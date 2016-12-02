@@ -13,11 +13,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class PersonInfoPane {
+public class PersonInfoPane extends Pane {
 	private static final String user_name="angel";
 	//private String name,phone_number,birthday;
 	private String name="xxx";
@@ -26,7 +27,7 @@ public class PersonInfoPane {
 	private int credit_value=100,vip_level=2;
 	private String type;
 	private String sex;
-	private MyNavigationBar navi;
+	//private MyNavigationBar navi;
 	private GridPane grid;
 	private static final int column=3;
 	private static final int row=2;
@@ -35,15 +36,12 @@ public class PersonInfoPane {
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
 	public PersonInfoPane(){
+		super();
 		initgrid();
-		init();
+		//MainPane.getInstance().getChildren().add(grid);
 	}
 	
-	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name));
-		MainPane.getInstance().getChildren().clear();
-		MainPane.getInstance().getChildren().addAll(navi,grid);
-	}
+	
 	
 	private void initgrid(){
 		this.grid=new GridPane();
@@ -108,7 +106,7 @@ public class PersonInfoPane {
 	    this.grid.add(browsecredit, column+2, row+4);
 	    
 	    browsecredit.setOnMouseClicked((MouseEvent me)->{
-	    	
+	    	MainPane.getInstance().setRightPane(new CreditRecordPane());
 	    });
 	    
 	    Label member=new Label("会员类型:");
@@ -161,6 +159,7 @@ public class PersonInfoPane {
 	    	
 	    });
 	    this.grid.add(change, column+2, row+7);
+	    this.getChildren().add(grid);
 	    
 	}
 }

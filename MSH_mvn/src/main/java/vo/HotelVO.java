@@ -4,17 +4,15 @@ import java.util.List;
 
 	public class HotelVO {
 		String name,address,tradeArea,introduction,facility;
-		List<RoomVO>Room;
 		
 		public HotelVO(){}
 		
-		public HotelVO(String n,String ad,String tA,String intro,String f,List<RoomVO> RT){
+		public HotelVO(String n,String ad,String tA,String intro,String f){
 			this.name=n;
 			this.address=ad;
 			this.tradeArea=tA;
 			this.introduction=intro;
 			this.facility=f;
-			this.Room=RT;
 
 		}
 		
@@ -36,10 +34,6 @@ import java.util.List;
 		
 		public String getF(){
 			return facility;
-		}
-		
-		public List<RoomVO> getRT(){
-			return Room;
 		}
 		
 		
@@ -64,9 +58,7 @@ import java.util.List;
 			facility=f;
 		}
 		
-		public void setRoom(List<RoomVO> rt){
-			Room=rt;
-		}
+		
 		
 		
 	}

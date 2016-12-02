@@ -40,5 +40,7 @@ public class SearchBox extends Region {
 		clearButton.resizeRelocate(getWidth() - 18, 8.5, 12, 13);
 	}
 	
-	
+	public String getContent(){
+		return textBox.getText();
+	}
 }
