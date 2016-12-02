@@ -40,22 +40,21 @@ public class WebAdminController {
 	public void init(){
 		naviBar = new MyNavigationBar(new Image(getClass().getResource("/image/admin.png").toExternalForm(), 120, 120, false, false),
 				Arrays.asList("Administrator"),
-				Arrays.asList("查询", "网站营销人员", "酒店"));
+				Arrays.asList("查询用户", "营销人员", "浏览酒店"));
 		MainPane.getInstance().setNavigationBar(naviBar);
 		naviBar.getToggle().selectedToggleProperty().addListener((o, oldValue, newValue) -> {
 			if(newValue != null){
 				String temp = newValue.toString().split("'")[1];
-				
 				switch(temp){
-				case "查询":
+				case "查询用户":
 					setInitialPane();
 					break;
 					
-				case "网站营销人员":
+				case "营销人员":
 					setBrowseMarketersPane();
 					break;
 					
-				case "酒店":
+				case "浏览酒店":
 					setBrowseHotelPane();
 					break;
 				}

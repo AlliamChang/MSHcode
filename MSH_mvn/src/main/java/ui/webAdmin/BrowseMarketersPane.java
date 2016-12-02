@@ -28,11 +28,10 @@ public class BrowseMarketersPane extends VBox{
 		setStyle("-fx-border-color: black");
 		
 		table = new TableView<UserVO>();
-		
 		table.setItems(WebAdminController.getInstance().getAllMarketers());
-		
 		table.setMaxWidth(600);
 		table.setMinHeight(450);
+		
 		TableColumn<UserVO, String> IDCol = new TableColumn<UserVO, String>("ID");
 		IDCol.setCellValueFactory(new PropertyValueFactory<UserVO, String>("ID"){
 			public ObservableValue<String> call(CellDataFeatures<UserVO, String> user){
@@ -88,8 +87,6 @@ public class BrowseMarketersPane extends VBox{
 			
 		});
 		
-		
-		
 		table.getColumns().addAll(IDCol, nameCol, numberCol, operation);
 		addButton = new Button("添加");
 		addButton.setPadding(new Insets(10, 30, 10, 30));
@@ -106,6 +103,6 @@ public class BrowseMarketersPane extends VBox{
 		setPadding(new Insets(50, 0, 0, 0));
 		setSpacing(20);
 		getChildren().addAll(table, hBox);
-	}
-	
+							}
+							
 }
