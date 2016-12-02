@@ -7,6 +7,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
+import tools.Date;
 
 public class MyDatePicker extends DatePicker{
 
@@ -55,6 +56,31 @@ public class MyDatePicker extends DatePicker{
 	     
 	}
 	
+	public MyDatePicker(String date){
+		this();
+		final Callback<DatePicker, DateCell> dayCellFactory = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
+	                            
+	                            LocalDate temp = LocalDate.of(Integer.valueOf(date.split("/")[0]),Integer.valueOf(date.split("/")[1]),Integer.valueOf(date.split("/")[2]));
+	                            	if (item.isBefore(temp.plusDays(1)) ) {
+	                            			setDisable(true);
+	                                    	setStyle("-fx-background-color: rgb(30,170,255);");
+	                                    
+	                            	}   
+	                            
+	                    }
+	                };
+	            }
+	        };
+	        
+	        this.setDayCellFactory(dayCellFactory);
+	}
 	
 	public void setBeforeDisable(DatePicker checkInPicker){
 		final Callback<DatePicker, DateCell> dayCellFactory = 

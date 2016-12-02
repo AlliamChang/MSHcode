@@ -3,6 +3,7 @@ package ui.hotelStuff;
 import java.util.Iterator;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
@@ -25,7 +27,7 @@ import vo.RoomVO;
 
 public class AddRoomPane extends VBox{
 
-	private GridPane textPane;
+	private HBox first,second;
 	private Label styleLab,bedLab,maxLab,numLab,priceLab;
 	private TextField styleText,numText,priceText;
 	private ChoiceBox<String> bedBox;
@@ -33,7 +35,7 @@ public class AddRoomPane extends VBox{
 	private RoomListTable table;
 	
 	public AddRoomPane(Iterator<RoomVO> roomList){
-		super(5);
+		super(10);
 		initText();
 		initTab(roomList);
 		init();
@@ -41,77 +43,72 @@ public class AddRoomPane extends VBox{
 	
 	private void init(){
 		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
-		this.setStyle("-fx-background-color:white;-fx-border-color:black;-fx-font-size:14;");
+		this.setStyle("-fx-background-color:white;-fx-border-color:black;-fx-font-size:15;");
 	}
 	
 	private void initText(){
-		textPane = new GridPane();
-		textPane.setMinHeight(MainPane.MINHEIGHT * 0.15);
-		textPane.setMaxHeight(MainPane.MINHEIGHT * 0.15);
-        RowConstraints rowinfo = new RowConstraints();
-        rowinfo.setPercentHeight(50);
-        textPane.getRowConstraints().addAll(rowinfo,rowinfo);
-        
-        ColumnConstraints colInfo1 = new ColumnConstraints();
-        colInfo1.setPercentWidth(15);
-        ColumnConstraints colInfo2 = new ColumnConstraints();
-        colInfo2.setPercentWidth(10);
-        for(int i = 0; i < 5; i ++){
-        	textPane.getColumnConstraints().add(colInfo1);
-        }
-        textPane.getColumnConstraints().add(colInfo2);
+		first = new HBox();
+		first.setAlignment(Pos.CENTER_LEFT);
+		first.setPadding(new Insets(10,0,1,40));
+		first.setMinHeight(MainPane.MINHEIGHT * 0.075);
+		first.setMaxHeight(MainPane.MINHEIGHT * 0.075);
+		
+		second = new HBox();
+		second.setPadding(new Insets(1,0,10,40));
+		second.setAlignment(Pos.CENTER_LEFT);
+		second.setMinHeight(MainPane.MINHEIGHT * 0.075);
+		second.setMaxHeight(MainPane.MINHEIGHT * 0.075);
+//        RowConstraints rowinfo = new RowConstraints();
+//        rowinfo.setPercentHeight(50);
+//        textPane.getRowConstraints().addAll(rowinfo,rowinfo);
+//        
+//        ColumnConstraints colInfo1 = new ColumnConstraints();
+//        colInfo1.setPercentWidth(15);
+//        ColumnConstraints colInfo2 = new ColumnConstraints();
+//        colInfo2.setPercentWidth(10);
+//        for(int i = 0; i < 5; i ++){
+//        	textPane.getColumnConstraints().add(colInfo1);
+//        }
+//        textPane.getColumnConstraints().add(colInfo2);
         
         styleLab = new Label("客房类型：");
-        GridPane.setHalignment(styleLab, HPos.RIGHT);
-        textPane.add(styleLab, 0, 0);
         
         styleText = new TextField();
-        GridPane.setHalignment(styleText, HPos.CENTER);
-        textPane.add(styleText, 1, 0, 3, 1);
+        styleText.setMinWidth(255);
         
         bedLab = new Label("床型：");
-        GridPane.setHalignment(bedLab, HPos.RIGHT);
-        textPane.add(bedLab, 4, 0);
         
         bedBox = new ChoiceBox<>();
         bedBox.getItems().addAll("大床","双床","上下铺");
-        bedBox.setMinWidth(75);
-        GridPane.setHalignment(bedBox, HPos.CENTER);
-        textPane.add(bedBox, 5, 0);
+        bedBox.setMinWidth(90);
+        
+        first.getChildren().addAll(styleLab,styleText,bedLab,bedBox);
+        HBox.setMargin(bedLab, new Insets(0,0,0,35));
         
         maxLab = new Label("最多可住人数：");
-        GridPane.setHalignment(maxLab, HPos.RIGHT);
-        textPane.add(maxLab, 0, 1);
         
         maxBox = new ChoiceBox<>();
         maxBox.getItems().addAll(1,2,3,4,5,6,7,8,9,10);
-        GridPane.setHalignment(maxBox, HPos.CENTER);
-        textPane.add(maxBox, 1, 1);
+        maxBox.setMinWidth(70);
         
         numLab = new Label("客房数量：");
-        GridPane.setHalignment(numLab, HPos.RIGHT);
-        textPane.add(numLab, 2, 1);
         
         numText = new TextField();
-        GridPane.setHalignment(numText, HPos.CENTER);
-        textPane.add(numText, 3, 1);
+        numText.setMaxWidth(60);
         
         priceLab = new Label("原始价格：");
-        GridPane.setHalignment(priceLab, HPos.RIGHT);
-        textPane.add(priceLab, 4, 1);
         
         priceText = new TextField();
-        GridPane.setHalignment(priceText, HPos.CENTER);
-        textPane.add(priceText, 5, 1);
+        priceText.setMaxWidth(80);
         
         Button add = new Button("添加");
         GridPane.setHalignment(add, HPos.CENTER);
         add.setOnAction(e -> {
-        	boolean noStyle = this.styleText.getText().equals(null) && this.styleText.getText().equals("");
+        	boolean noStyle = this.styleText.getText().equals(null) || this.styleText.getText().equals("");
         	boolean noBed = (this.bedBox.getValue() == null);
         	boolean noMax = (this.maxBox.getValue() == null);
-        	boolean noPrice = this.priceText.getText().equals(null) && this.priceText.getText().equals("");
-        	boolean noNum = this.numText.getText().equals(null) && this.numText.getText().equals("");
+        	boolean noPrice = this.priceText.getText().equals(null) || this.priceText.getText().equals("");
+        	boolean noNum = this.numText.getText().equals(null) || this.numText.getText().equals("");
 			if(!noStyle && !noBed && !noMax && !noPrice && !noNum){
 				BedStyle bedStyle;
 				switch(this.bedBox.getValue()){
@@ -154,10 +151,12 @@ public class AddRoomPane extends VBox{
 				alert.show();
 			}
         });
-        textPane.add(add, 6, 1);
-        textPane.setGridLinesVisible(true);
         
-        this.getChildren().add(textPane);
+        second.getChildren().addAll(maxLab,maxBox,numLab,numText,priceLab,priceText,add);
+        HBox.setMargin(numLab, new Insets(0,0,0,20));
+        HBox.setMargin(priceLab, new Insets(0,0,0,20));
+        HBox.setMargin(add, new Insets(0,0,0,20));
+        this.getChildren().addAll(first,second);
 	}
 	
 	private void initTab(Iterator<RoomVO> roomList){
@@ -172,7 +171,7 @@ public class AddRoomPane extends VBox{
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.getDialogPane().setHeaderText(null);
-				alert.getDialogPane().setContentText("确认删除？");
+				alert.getDialogPane().setContentText("确认要保存吗？");
 				alert.showAndWait().filter(response -> 
 					response == ButtonType.OK).ifPresent(response ->{
 						//HotelPaneController.getInstance()

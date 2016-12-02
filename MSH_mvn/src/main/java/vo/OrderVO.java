@@ -85,9 +85,30 @@ public class OrderVO {
 		if(b.length > 0)
 			firstBooker = b[0]; //测试
 	}
+	public OrderVO(long i,String u, String h, String rs, int rn, String[] b,
+			String[] bp, int d, Date p, OrderState s,boolean isEva,Date checkin) {
+		id = i;
+		userID = u;
+		hotel = h;
+		roomStyle = rs;
+		roomNum = rn;
+		booker = b;
+		bookerPhone = bp;
+		days = d;
+		preCheckin = p;
+		state = s;
+		isEvaluated=isEva;
+		preCheckIn = new SimpleStringProperty(p.getDate()); //测试
+		if(b.length > 0)
+			firstBooker = b[0]; //测试
+		this.checkin = checkin;
+	}
 	//测试
 	public StringProperty preCheckInProperty(){
 		return preCheckIn;
+	}
+	public void setPreCheckInProperty(String s){
+		this.preCheckIn = new SimpleStringProperty(s);
 	}
 	public String getPreCheckOut(){
 		return preCheckin.plus(days);

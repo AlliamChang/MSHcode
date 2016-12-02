@@ -71,16 +71,16 @@ public class OrderListPane extends TabPane{
 		GridPane.setValignment(preCinPick, VPos.BOTTOM);
 		this.allOrderPane.add(preCinPick, 1, 0);
 		
-		Label preCheckoutLabel = new Label("预计退房时间：");
-		GridPane.setHalignment(preCheckoutLabel, HPos.RIGHT);
-		GridPane.setValignment(preCheckoutLabel, VPos.BOTTOM);
-		this.allOrderPane.add(preCheckoutLabel, 2, 0);
+		Label checkinLabel = new Label("实际入住时间：");
+		GridPane.setHalignment(checkinLabel, HPos.RIGHT);
+		GridPane.setValignment(checkinLabel, VPos.BOTTOM);
+		this.allOrderPane.add(checkinLabel, 2, 0);
 		
-		MyDatePicker preCoutPick = new MyDatePicker();
-		preCoutPick.setBeforeDisable(preCinPick);
-		GridPane.setHalignment(preCoutPick, HPos.CENTER);
-		GridPane.setValignment(preCoutPick, VPos.BOTTOM);
-		this.allOrderPane.add(preCoutPick, 3, 0);
+		MyDatePicker checkinPick = new MyDatePicker();
+		checkinPick.setBeforeDisable(preCinPick);
+		GridPane.setHalignment(checkinPick, HPos.CENTER);
+		GridPane.setValignment(checkinPick, VPos.BOTTOM);
+		this.allOrderPane.add(checkinPick, 3, 0);
 		
 		Label orderIdLabel = new Label("订单号：");
 		GridPane.setHalignment(orderIdLabel, HPos.RIGHT);
@@ -114,11 +114,11 @@ public class OrderListPane extends TabPane{
 			RadioButton temp = (RadioButton)pickState.getSelectedToggle();
 			if(temp != null)
 				this.allOrderTable.filter(orderIdField.getText(),null,
-						preCinPick.getEditor().getText(),preCoutPick.getEditor().getText(),
+						checkinPick.getEditor().getText(),preCinPick.getEditor().getText(),
 						temp.getText());
 			else
 				this.allOrderTable.filter(orderIdField.getText(),null,
-						preCinPick.getEditor().getText(),preCoutPick.getEditor().getText(),
+						checkinPick.getEditor().getText(),preCinPick.getEditor().getText(),
 						null);
 			
 		});
@@ -130,7 +130,7 @@ public class OrderListPane extends TabPane{
 		clear.setOnAction(event -> {
 			this.allOrderTable.clear();
 			preCinPick.getEditor().setText("");
-			preCoutPick.getEditor().setText("");
+			checkinPick.getEditor().setText("");
 			orderIdField.setText("");
 			pickState.selectToggle(null);
 		});
