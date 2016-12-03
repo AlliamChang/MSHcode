@@ -123,4 +123,16 @@ public class WebAdminController {
 	public ObservableList<UserVO> getAllMarketers(){
 		return FXCollections.observableArrayList(userBLService.getAllMarketers());
 	}
+	
+	public List<String> getProvinces(){
+		return hotelBLService.getProvinces();
+	}
+	
+	public List<String> getCities(String province){
+		return hotelBLService.getCities(province);
+	}
+	
+	public List<String> getAreas(String province, String city){
+		return hotelBLService.getAreas(province, city);
+	}
 }

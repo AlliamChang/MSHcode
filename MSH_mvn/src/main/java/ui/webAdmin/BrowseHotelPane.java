@@ -26,18 +26,6 @@ public class BrowseHotelPane extends VBox{
 	private ChoiceBox<String> provinceChoiceBox, cityChoiceBox, areaChoiceBox;
 	private TableView<HotelVO> table;
 	private Separator sprt;
-
-	/*
-	 * 测试用
-	 */
-	private final ArrayList<String> provinceList = new ArrayList<String>(Arrays.asList("北京", "江苏省"));
-	private HashMap<String, ArrayList<String> > cityList = new HashMap<String, ArrayList<String> >(){
-		{
-			put("江苏省", new ArrayList<String>(Arrays.asList("南京市", "无锡市")));
-			put("山东省", new ArrayList<String>(Arrays.asList("济南市", "潍坊市")));
-		}
-	};
-	
 	
 	public BrowseHotelPane(){
 		super();
@@ -60,22 +48,36 @@ public class BrowseHotelPane extends VBox{
 		cityChoiceBox.setPrefWidth(100);
 		areaChoiceBox = new ChoiceBox<String>();
 		areaChoiceBox.setPrefWidth(200);
-		provinceChoiceBox.getItems().addAll(provinceList);
-		provinceChoiceBox.getSelectionModel().selectFirst();
+		
+		provinceChoiceBox.getItems().addAll(WebAdminController.getInstance().getProvinces());
 		
 		provinceChoiceBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
 			cityChoiceBox.getItems().clear();
-			ArrayList<String> cities = cityList.get((String)new_val);
+			List<String> cities = WebAdminController.getInstance().getCities((String)new_val);
 			if (cities != null){
 				cityChoiceBox.setDisable(false);;
 				cityChoiceBox.getItems().addAll(cities);
-			}
-			else
-				cityChoiceBox.setDisable(true);;
+			} else
+				cityChoiceBox.setDisable(true);
 			cityChoiceBox.getSelectionModel().selectFirst();
 		});
 		
-		cityChoiceBox.setDisable(true);;
+		cityChoiceBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+			areaChoiceBox.getItems().clear();
+			List<String> areas = WebAdminController.getInstance().getAreas(provinceChoiceBox.getValue(), (String)new_val);
+			if (areas != null){
+				areaChoiceBox.setDisable(false);
+				areaChoiceBox.getItems().addAll(areas);
+			} else
+				areaChoiceBox.setDisable(true);	
+			areaChoiceBox.getSelectionModel().selectFirst();
+		});
+		
+		provinceChoiceBox.getSelectionModel().selectFirst();
+		cityChoiceBox.getSelectionModel().selectFirst();
+		if (cityChoiceBox.getItems().isEmpty())
+			areaChoiceBox.getItems().addAll(WebAdminController.getInstance().getAreas(provinceChoiceBox.getValue(),null));
+		areaChoiceBox.getSelectionModel().selectFirst();
 		
 		h1 = new HBox(); h2 = new HBox();
 		h1.setSpacing(20); h2.setSpacing(20);
@@ -88,6 +90,11 @@ public class BrowseHotelPane extends VBox{
 		v.setPadding(new Insets(20, 20, 20, 20));
 		v.setSpacing(20);
 		v.setStyle("-fx-border-color: #CDCDC1");
+		
+		addButton.setOnAction(e -> {
+			
+		});
+		
 		
 		table = new TableView<HotelVO>();
 		TableColumn<HotelVO, String> name = new TableColumn<HotelVO, String>("酒店名称");

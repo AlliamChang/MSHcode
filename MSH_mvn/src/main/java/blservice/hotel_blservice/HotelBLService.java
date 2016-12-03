@@ -26,4 +26,10 @@ public interface HotelBLService {
 	public double CalRoomPrice(StrategyBLService strategy);
 	
 	public List<RoomVO> getRoom();
+	
+	public List<String> getProvinces();
+	
+	public List<String> getCities(String province);
+	
+	public List<String> getAreas(String province, String city);
 }
