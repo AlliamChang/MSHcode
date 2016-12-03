@@ -34,18 +34,17 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	public ResultMessage modify(UserVO userVO) {
-		// TODO Auto-generated method stub
+		System.out.println("修改成功！");
 		return ResultMessage.SUCCESS;
 	}
 
 	public ResultMessage delete(int ID) {
-		// TODO Auto-generated method stub
+		System.out.println("删除成功！");
 		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public List<CreditVO> getCredit(int ID) {
-		// TODO Auto-generated method stub
 		return Arrays.asList(new CreditVO(new Date("2016/09/01",false),ChangeReason.OFFLINE_RECHARGE,500,100),
 			new CreditVO(new Date("2016/09/28",false),ChangeReason.OFFLINE_RECHARGE,500,1500),
 			new CreditVO(new Date("2016/10/22",false),ChangeReason.ABNORMAL_ORDER,1500,1200));

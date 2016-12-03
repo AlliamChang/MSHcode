@@ -107,6 +107,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 					user.setGender(genderBox.getValue());
 					user.setNumber(numberField.getText());
 					WebAdminController.getInstance().modifyUser(user);
+					WebAdminController.getInstance().go(lastPane);
 				});
 			else
 				alert.show();

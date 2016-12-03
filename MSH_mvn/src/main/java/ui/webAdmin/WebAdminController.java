@@ -106,12 +106,10 @@ public class WebAdminController {
 	
 	public void deleteUser(UserVO user){
 		userBLService.delete(user.getID());
-		setInitialPane();
 	}
 	
 	public void modifyUser(UserVO user){
 		userBLService.modify(user);
-		setUserInfoPane(user);
 	}
 	
 	public List<CreditVO> getCredit(UserVO user){

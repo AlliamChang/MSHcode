@@ -74,6 +74,7 @@ public class BrowseMarketersPane extends VBox{
 								alert.getDialogPane().setContentText("确认删除？");
 								alert.showAndWait().filter(response -> response == ButtonType.OK)
 									.ifPresent(response -> {
+										WebAdminController.getInstance().deleteUser(table.getItems().get(getTableRow().getIndex()));
 										table.getItems().remove(getTableRow().getIndex());
 									});
 							});

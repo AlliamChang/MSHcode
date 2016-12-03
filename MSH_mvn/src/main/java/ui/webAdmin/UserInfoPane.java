@@ -85,7 +85,10 @@ public class UserInfoPane extends AnchorPane{
 			alert.setContentText("确认删除该用户？");
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.showAndWait().filter(response -> response == ButtonType.OK).ifPresent(response
-				-> WebAdminController.getInstance().deleteUser(user));
+				-> {
+					WebAdminController.getInstance().deleteUser(user);
+					WebAdminController.getInstance().setInitialPane();
+				});
 		});
 		hBox.getChildren().add(modifyButton);
 		hBox.getChildren().add(deleteButton);
