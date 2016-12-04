@@ -15,14 +15,6 @@ import blservice.user_blservice.UserBLService;
 
 public class UserBLService_Stub implements UserBLService {
 
-	public List<UserVO> getAll() {
-		// TODO Auto-generated method stub
-		UserVO testVO = new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER);
-		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		list.add(testVO);
-		return list;
-	}
-
 	public UserVO get(String name) {
 		// TODO Auto-generated method stub
 		return "123".equals(name) ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER) : null;
@@ -65,5 +57,11 @@ public class UserBLService_Stub implements UserBLService {
 	public ResultMessage modifyPassword(int ID, String password) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public List<String> getReservationHistory(int ID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
