@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import tools.BedStyle;
 import tools.ResultMessage;
 import ui.customer.PersonInfoPane;
+import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.HotelVO;
 import vo.RoomVO;
@@ -17,7 +18,7 @@ import blservice.strategy_blservice.StrategyBLService;
 
 public class HotelBLService_Stub implements HotelBLService {
 
-	public ResultMessage add(String hotel_id) {
+	public ResultMessage add(HotelVO hotel) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
@@ -98,7 +99,7 @@ public class HotelBLService_Stub implements HotelBLService {
 		// TODO Auto-generated method stub
 		Image image=new Image(PersonInfoPane.class.getResource("/image/hotel.jpg").toExternalForm(),
 				100,100,false,false);
-		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,image,4,4.5);
+		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,image,4,4.5,1,2);
 	}
 
 	@Override
@@ -106,6 +107,13 @@ public class HotelBLService_Stub implements HotelBLService {
 			String name) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<EvaluateVO> getEvaluate(String hotel_id) {
+		// TODO Auto-generated method stub
+		return  Arrays.asList(new EvaluateVO("环境很不错，交通很方便，价格也挺合适，体验不错","Aven","2016/11/01,14:35",4.8),
+				new EvaluateVO("房间很干净舒适,设施也很完善","晓风残月","2016/11/01,14:32",4.9));
 	}
 
 }

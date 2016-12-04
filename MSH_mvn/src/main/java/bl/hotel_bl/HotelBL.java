@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tools.ResultMessage;
+import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.HotelVO;
 import vo.RoomVO;
@@ -11,7 +12,7 @@ import blservice.strategy_blservice.StrategyBLService;
 public class HotelBL implements HotelBLService{
 
 	@Override
-	public ResultMessage add(String hotel_id) {
+	public ResultMessage add(HotelVO hotel) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -91,6 +92,12 @@ public class HotelBL implements HotelBLService{
 
 	@Override
 	public HotelInfoVO getHotel(String hotel_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EvaluateVO> getEvaluate(String hotel_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

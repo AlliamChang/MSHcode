@@ -31,14 +31,14 @@ public class MyOrderPane extends Pane{
 	
 	private void initPane(){
 		pane=new GridPane();
-		pane.setPadding(new Insets(10, 10, 10, 20));
+		pane.setPadding(new Insets(10, 10, 10, 0));
 		pane.setHgap(20);
 		pane.setVgap(20);
 		pane.setAlignment(Pos.CENTER_RIGHT);
 		
 		order=new MyOrderTable(CustomerPaneController.getInstance().getOrder());
 		
-		pane.add(order,1,2);
+		pane.add(order,0,2);
 		this.getChildren().add(pane);
 	}
 

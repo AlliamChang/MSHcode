@@ -117,6 +117,7 @@ public class MyOrderTable extends TableView{
 		
 		this.setItems(data);
 		this.getColumns().addAll(start_time,check_out_time,room_type,number,total,state,isEvaluated,operation);
+		this.setPrefHeight(300);
 	}
 	
 	public void setList(List<String> list){

@@ -38,6 +38,7 @@ public class CreditTable extends TableView{
 		this.setItems(data);
 		
 		this.getColumns().addAll(time,credit_change,change_reason);
+		this.setPrefSize(452, 300);
 }
 	
 }

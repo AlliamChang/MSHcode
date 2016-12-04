@@ -1,9 +1,13 @@
 package ui.customer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import bl_stub.HotelBLService_Stub;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import vo.EvaluateVO;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,10 +15,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -25,13 +31,14 @@ public class HotelConcreteInfoPane extends Pane{
 	private Label trade_area=new Label("商圈:");
 	private Label lowest_price=new Label("最低价格:");
 	private Label score=new Label("评分:");
-	private Label evaluate_area=new Label("评价区");
+	//private Label evaluate_area=new Label("评价区");
 	private Label star_level=new Label("星级:");
 	private TableView room_info;
 	private int column=0;
 	private int row=1;
 	private GridPane pane;
-	private ScrollPane sp;
+	//private ScrollPane sp;
+	private ScrollPane evaluate;
 	private static final String user_name="angel"; 
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
 	public HotelConcreteInfoPane(){
@@ -53,6 +60,16 @@ public class HotelConcreteInfoPane extends Pane{
 		 ColumnConstraints col3 = new ColumnConstraints(130);
 		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3);
 		//pane.setGridLinesVisible(true);
+		VBox vb=new VBox();
+		vb.setMinWidth(600);
+		vb.setPadding(new Insets(10, 10, 10, 10));
+		vb.setSpacing(10);
+		HotelBLService_Stub stub=new HotelBLService_Stub();
+		vb.getChildren().addAll(Evaluate.getEvaluate(stub.getEvaluate("1")));
+		evaluate=new ScrollPane(vb);
+		evaluate.setMinWidth(605);
+		evaluate.setPrefSize(600,400);
+		pane.add(evaluate,column,5,5,1);
 		
 		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom("1"));
 		pane.add(room_info, column, 4);
@@ -96,8 +113,8 @@ public class HotelConcreteInfoPane extends Pane{
 		star.setFont(f);
 		pane.add(star, column+3, row+2);
 		
-		evaluate_area.setFont(f);
-		pane.add(evaluate_area, column, row+4);
+		/*evaluate_area.setFont(f);
+		pane.add(evaluate_area, column, row+4);*/
 		pane.setHalignment(trade_area, HPos.RIGHT);
 		pane.setHalignment(address, HPos.RIGHT);
 		pane.setHalignment(star_level,HPos.RIGHT);
@@ -106,5 +123,39 @@ public class HotelConcreteInfoPane extends Pane{
 		pane.setHalignment(lowest_price,HPos.RIGHT);
 		this.getChildren().add(pane);
 
+	}
+}
+
+class Evaluate extends GridPane{
+	Evaluate(EvaluateVO ev){
+		super();
+		setStyle("-fx-border-color: gray");
+		setPadding(new Insets(5, 5, 5, 5));
+		setHgap(10);
+		setVgap(10);
+	    ColumnConstraints colInfo1 = new ColumnConstraints();
+	    colInfo1.setPercentWidth(50);
+	    ColumnConstraints colInfo2 = new ColumnConstraints();
+	    colInfo2.setPercentWidth(20);
+	    ColumnConstraints colInfo3 = new ColumnConstraints();
+	    colInfo3.setPercentWidth(30);
+		Text score=new Text(ev.getScore()+"");
+		TextArea content=new TextArea(ev.getcontent());
+		content.setEditable(false);
+		content.setMaxWidth(370);
+		content.setMaxHeight(50);
+		Text name=new Text(ev.getid());
+		Text time=new Text(ev.getdate());
+		this.add(score, 0, 0);
+		this.add(content, 0, 1);
+		this.add(name, 1, 1);
+		this.add(time, 2, 1);
+	}
+	
+	static List<Evaluate> getEvaluate(List<EvaluateVO> list){
+		ArrayList<Evaluate> eva=new ArrayList<Evaluate>();
+		for(EvaluateVO item:list)
+			eva.add(new Evaluate(item));
+		return eva;
 	}
 }

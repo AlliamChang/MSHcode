@@ -46,7 +46,7 @@ public class HotelListPane extends Pane{
 	
 	private void initPane(){
 		pane=new GridPane();
-		pane.setPadding(new Insets(10, 0, 10, 20));
+		pane.setPadding(new Insets(10, 0, 10, 0));
 		pane.setHgap(20);
 		pane.setVgap(10);
 		pane.setAlignment(Pos.TOP_LEFT);

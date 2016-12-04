@@ -3,7 +3,8 @@ package vo;
 import javafx.scene.image.Image;
 
 public class HotelInfoVO {
-
+	private int hotel_id;
+	private int stuff_id;
 	private String adress;
 	private String hotel;
 	private String phone;
@@ -17,7 +18,7 @@ public class HotelInfoVO {
 	private double score;
 	
 	public HotelInfoVO(String hotel, String adress,String phone, String[] facility, String introduction, String province,
-			String tradingArea,int year,Image scul,int star,double score) {
+			String tradingArea,int year,Image scul,int star,double score,int hotel_id,int stuff_id) {
 		this.hotel = hotel;
 		this.adress = adress;
 		this.phone = phone;
@@ -29,8 +30,23 @@ public class HotelInfoVO {
 		this.scul = scul;
 		this.star=star;
 		this.score=score;
+		this.hotel_id=hotel_id;
+		this.stuff_id=stuff_id;
+	}
+	public int get_hotel_id(){
+		return hotel_id;
+	}
+	public void set_hotel_id(int id){
+		this.hotel_id=id;
 	}
 	
+	public int get_stuff_id(){
+		return stuff_id;
+	}
+	
+	public void set_stuff_id(int id){
+		this.stuff_id=id;
+	}
 	public Image getScul() {
 		return scul;
 	}

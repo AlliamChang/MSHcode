@@ -108,6 +108,7 @@ public class EvaluatePane extends Pane{
 		
 		TextArea evaluate=new TextArea();
 		evaluate.setFont(f);
+		evaluate.setPrefSize(450, 80);
 		pane.add(evaluate,column_index+1,row_index+5,4,1);
 		
 		Button upload=new Button("确定");

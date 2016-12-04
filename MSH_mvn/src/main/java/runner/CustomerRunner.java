@@ -12,7 +12,7 @@ public class CustomerRunner extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		primaryStage.setScene(new Scene(MainPane.getInstance(),800,600));
-		primaryStage.setResizable(false);
+		primaryStage.setResizable(true);
 		primaryStage.show();
 	}
 	

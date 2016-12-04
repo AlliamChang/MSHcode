@@ -5,13 +5,14 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 import blservice.strategy_blservice.StrategyBLService;
+import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.HotelVO;
 import vo.RoomVO;
 import tools.ResultMessage;
 
 public interface HotelBLService {
-	public ResultMessage add(String hotel_id);
+	public ResultMessage add(HotelVO hotel);
 
 	public ResultMessage delete(String hotel_id);
 
@@ -38,5 +39,8 @@ public interface HotelBLService {
 	public List<String> getAreas(String province, String city);
 	
 	public HotelInfoVO getHotel(String hotel_id);
+	
+	public List<EvaluateVO> getEvaluate(String hotel_id);
+	}
 		
-}
+

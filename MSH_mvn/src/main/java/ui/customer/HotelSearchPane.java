@@ -47,7 +47,7 @@ public class HotelSearchPane extends Pane{
 	
 	private void initPane(){
 		pane=new GridPane();
-		pane.setPadding(new Insets(10, 10, 10, 10));
+		pane.setPadding(new Insets(10, 10, 10, 0));
 		pane.setHgap(20);
 		pane.setVgap(20);
 		pane.setAlignment(Pos.TOP_LEFT);
@@ -128,16 +128,17 @@ public class HotelSearchPane extends Pane{
 		 ToggleButton tb1 = new ToggleButton("评分");
 		 ToggleButton tb2 = new ToggleButton("价格");
 		 ToggleButton tb3= new ToggleButton("星级");
-		 hb.getChildren().addAll(tb1,tb2,tb3);
+		 ToggleButton tb4= new ToggleButton("历史酒店");
+		 hb.getChildren().addAll(tb1,tb2,tb3,tb4);
 		ScrollPane sp=new ScrollPane(vb);
-		sp.setPrefHeight(400);
+		sp.setPrefSize(520,400);
 		vb.setMinWidth(510);
 		vb.setPadding(new Insets(10, 10, 10, 10));
 		vb.setSpacing(10);
 		HotelBLService_Stub stub=new HotelBLService_Stub();
 		vb.getChildren().add(hb);
 		vb.getChildren().addAll(content.makeList(stub.search("南京市", "鼓楼区")));
-		sp.setMinWidth(600);
+		sp.setMinWidth(648);
 		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		return sp;
 	}
