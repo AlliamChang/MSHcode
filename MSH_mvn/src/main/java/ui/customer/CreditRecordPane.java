@@ -16,22 +16,16 @@ import javafx.scene.layout.Pane;
 
 public class CreditRecordPane extends Pane{
 	
-	private MyNavigationBar navi;
 	private GridPane pane;
 	private static final String user_name="angel";
-	private Image scul;
-	//private CreditTable table;
-	private int width=150;
 	private CreditTable credit;
+	
 	public CreditRecordPane(){
 		super();
 		initPane();
 	}
 	
-
-	
 	private void initPane(){
-		
 		pane=new GridPane();
 		pane.setPadding(new Insets(10, 10, 10, 20));
 		pane.setHgap(20);
@@ -42,7 +36,5 @@ public class CreditRecordPane extends Pane{
 		
 		pane.add(credit,4,5);
 		this.getChildren().add(pane);
-		
-		
 	}
 }

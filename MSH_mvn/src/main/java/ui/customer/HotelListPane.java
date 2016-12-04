@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -30,24 +32,23 @@ public class HotelListPane extends Pane{
 	private Label price_range=new Label("价格区间");
 	private Label score_range=new Label("评分区间");
 	private Label star=new Label("星级");
-	private Label HotelName=new Label("酒店名称");
+	//private Label HotelName=new Label("酒店名称");
 	private int column=0;
 	private int row=0;
 	private static final String user_name="angel"; 
-	private VBox hotel_list=new VBox();
+	private ScrollPane sp;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
-	public HotelListPane(VBox b){
+	public HotelListPane(ScrollPane s){
 		super();
-		this.setList(b);
+		this.setList(s);
 		initPane();
-		
 	}
 	
 	private void initPane(){
 		pane=new GridPane();
-		pane.setPadding(new Insets(10, 10, 10, 20));
+		pane.setPadding(new Insets(10, 0, 10, 20));
 		pane.setHgap(20);
-		pane.setVgap(20);
+		pane.setVgap(10);
 		pane.setAlignment(Pos.TOP_LEFT);
 		//pane.setGridLinesVisible(true);
 		
@@ -57,12 +58,6 @@ public class HotelListPane extends Pane{
 		 ColumnConstraints col3 = new ColumnConstraints(130);
 		 ColumnConstraints col4 = new ColumnConstraints(100);
 		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
-		/*ColumnConstraints colInfo=new ColumnConstraints();
-	       colInfo.setPercentWidth(20);
-	      for(int i=0;i<100/(int)(colInfo.getPercentWidth());i++){
-	    	  this.pane.getColumnConstraints().add(colInfo);
-	      }*/
-	     // System.out.println((int)(100/colInfo.getPercentWidth()));
 		
 		City.setFont(f);
 		pane.add(City, column, row);
@@ -113,16 +108,12 @@ public class HotelListPane extends Pane{
 		star_level.getSelectionModel().selectFirst();
 		pane.add(star_level,column+2,row+4);
 		
-		HotelName.setFont(f);
-		pane.add(HotelName,column+3,row+3);
-		
-		ChoiceBox hotel_name=new ChoiceBox(FXCollections.observableArrayList("格林豪泰","青年旅馆","如家"));
-		hotel_name.getSelectionModel().selectFirst();
-		pane.add(hotel_name,column+3,row+4);
-		
 		Button search=new Button("搜索");
 		search.setFont(f);
 		pane.add(search,column+4,row+2);
+		
+		TextField key=new TextField();
+		pane.add(key,column,row+2,4,1);
 		
 		pane.setHalignment(City, HPos.CENTER);
 		pane.setHalignment(trade_area, HPos.CENTER);
@@ -131,29 +122,16 @@ public class HotelListPane extends Pane{
 		pane.setHalignment(price_range, HPos.CENTER);
 		pane.setHalignment(score_range, HPos.CENTER);
 		pane.setHalignment(star, HPos.CENTER);
-		pane.setHalignment(HotelName, HPos.CENTER);
 		pane.setHalignment(star_level, HPos.CENTER);
-		pane.setHalignment(hotel_name, HPos.CENTER);
 		
-		pane.add(hotel_list, column, row+5);
+		pane.add(sp, column, row+5);
 		this.getChildren().addAll(pane);
-		/*Label hotel1=new Label("酒店1");
-		hotel1.setFont(f);
-		Button browse1=BrowseButton.get();
-		browse1.setFont(f);
-		
-		Label hotel2=new Label("酒店2");
-		hotel2.setFont(f);
-		
-		Button browse2=BrowseButton.get();
-		browse2.setFont(f);*/
-		
 		
 	}
 	
-	public void setList(VBox info){
-		this.hotel_list=info;
+	public void setList(ScrollPane  info){
+		this.sp=info;
 	}
 	
-	
+
 }

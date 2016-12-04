@@ -20,14 +20,12 @@ import javafx.scene.text.Text;
 
 public class PersonInfoPane extends Pane {
 	private static final String user_name="angel";
-	//private String name,phone_number,birthday;
 	private String name="xxx";
 	private String phone_number="18360977498";
 	private String birthday="1997-01-04";
 	private int credit_value=100,vip_level=2;
-	private String type;
-	private String sex;
-	//private MyNavigationBar navi;
+	private String type="普通会员";
+	private String sex="男";
 	private GridPane grid;
 	private static final int column=3;
 	private static final int row=2;
@@ -38,10 +36,7 @@ public class PersonInfoPane extends Pane {
 	public PersonInfoPane(){
 		super();
 		initgrid();
-		//MainPane.getInstance().getChildren().add(grid);
 	}
-	
-	
 	
 	private void initgrid(){
 		this.grid=new GridPane();
@@ -58,8 +53,6 @@ public class PersonInfoPane extends Pane {
 		ImageView iv1 = new ImageView(scul);
 		this.grid.add(iv1,column,row);
 				
-		
-		
 		Text uncontent=new Text(this.user_name);
 		uncontent.setFont(f);
 		this.grid.add(uncontent,column+1,row);
@@ -72,8 +65,6 @@ public class PersonInfoPane extends Pane {
 		namecontent.setFont(f);
 		this.grid.add(namecontent,column+1, row+1);
 		
-		
-		
 		Label sextual=new Label("性别:");
 		sextual.setFont(f);
 		this.grid.add(sextual, column, row+2);
@@ -82,8 +73,6 @@ public class PersonInfoPane extends Pane {
 		sextualcontent.setFont(f);
 		this.grid.add(sextualcontent,column+1,row+2);
 		
-		
-		
 	    Label phone=new Label("联系方式:");
 	    phone.setFont(f);
 	    this.grid.add(phone, column, row+3);
@@ -91,8 +80,6 @@ public class PersonInfoPane extends Pane {
 	    Text phonecontent=new Text(phone_number);
 	    phonecontent.setFont(f);
 	    this.grid.add(phonecontent, column+1, row+3);
-	    
-	    
 	    
 	    Label credit=new Label("信用值:");
 	    credit.setFont(f);
@@ -156,10 +143,8 @@ public class PersonInfoPane extends Pane {
 	    	phone_content.setPrefWidth(140);
 	    	this.grid.add(phone_content,column+1,row+3);
 	    	
-	    	
 	    });
 	    this.grid.add(change, column+2, row+7);
 	    this.getChildren().add(grid);
-	    
 	}
 }

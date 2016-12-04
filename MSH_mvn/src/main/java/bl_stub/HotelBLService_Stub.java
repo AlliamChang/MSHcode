@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.scene.image.Image;
 import tools.BedStyle;
 import tools.ResultMessage;
+import ui.customer.PersonInfoPane;
+import vo.HotelInfoVO;
 import vo.HotelVO;
 import vo.RoomVO;
 import blservice.hotel_blservice.HotelBLService;
@@ -34,9 +37,9 @@ public class HotelBLService_Stub implements HotelBLService {
 		return new HotelVO();
 	}
 
-	public ArrayList<HotelVO> search(String address, String tradeArea) {
+	public List<String> search(String address, String tradeArea) {
 		// TODO Auto-generated method stub
-		return new ArrayList<HotelVO>();
+		return Arrays.asList("渡口客栈","青年旅馆");
 	}
 
 	public ResultMessage update(String id) {
@@ -52,12 +55,6 @@ public class HotelBLService_Stub implements HotelBLService {
 	public double CalRoomPrice(StrategyBLService strategy) {
 		// TODO Auto-generated method stub
 		return 0.0;
-	}
-	
-	public List<RoomVO> getRoom(){
-		return Arrays.asList(new RoomVO("大床房", BedStyle.DOUBLE_BEDS, 589, 0, 0),
-				new RoomVO("单人房",BedStyle.BUNK_BED,489,0,0),
-				new RoomVO("钟点房",BedStyle.BUNK_BED,280,0,0));
 	}
 
 	@Override
@@ -86,6 +83,29 @@ public class HotelBLService_Stub implements HotelBLService {
 			}
 		};
 		return areaList.get(province + (city == null ? "" : city));
+	}
+
+	@Override
+	public List<RoomVO> getRoom(String id) {
+		// TODO Auto-generated method stub
+		return Arrays.asList(new RoomVO("大床房", BedStyle.DOUBLE_BEDS, 589, 0, 0),
+				new RoomVO("单人房",BedStyle.BUNK_BED,489,0,0),
+				new RoomVO("钟点房",BedStyle.BUNK_BED,280,0,0));
+	}
+
+
+	public HotelInfoVO getHotel(String hotel_id) {
+		// TODO Auto-generated method stub
+		Image image=new Image(PersonInfoPane.class.getResource("/image/hotel.jpg").toExternalForm(),
+				100,100,false,false);
+		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,image,4,4.5);
+	}
+
+	@Override
+	public List<HotelVO> search(String province, String city, String tradeArea,
+			String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

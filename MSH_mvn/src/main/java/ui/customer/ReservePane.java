@@ -25,21 +25,13 @@ public class ReservePane extends Pane {
 	private GridPane pane;
 	private List<String>room_type;
 	private static final String user_name="angel"; 
-	private MyNavigationBar navi;
-	private Image scul;
 	private int row_index=1;
 	private int column_index=1;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
 	
 	public ReservePane(){
+		super();
 		initPane();
-		init();
-	}
-	
-	private void init(){
-		navi = new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),Arrays.asList("个人信息","我的订单","搜索"));
-		MainPane.getInstance().getChildren().clear();
-		MainPane.getInstance().getChildren().addAll(navi,pane);
 	}
 	
 	private void initPane(){
@@ -145,5 +137,6 @@ public class ReservePane extends Pane {
 		Button ensure=new Button("确定");
 		ensure.setFont(f);
 		pane.add(ensure, column_index+5, row_index+10);
+		this.getChildren().add(pane);
 	}
 }

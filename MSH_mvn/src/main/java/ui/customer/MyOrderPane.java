@@ -23,15 +23,11 @@ public class MyOrderPane extends Pane{
 	private MyOrderTable order;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
-	
-	
 	public MyOrderPane(){
 		super();
 		initPane();
 		
 	}
-	
-	
 	
 	private void initPane(){
 		pane=new GridPane();

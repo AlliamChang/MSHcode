@@ -76,7 +76,6 @@ public class MyOrderTable extends TableView{
 
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<OrderVO, String> param) {
-				// TODO Auto-generated method stub
 				return param.getValue().operationProperty();
 			}
 			
@@ -93,19 +92,13 @@ public class MyOrderTable extends TableView{
 							bn.setOnMouseClicked((MouseEvent me)->{
 								List<String> list=new LinkedList<String>();
 								int row=this.getTableRow().getIndex();
-								System.out.println(row);
 								OrderVO this_row=MyOrderTable.this.list.get(row);
-								/*if(this_row==null)
-									System.out.println(2);
-								System.out.println(this_row.getCheckin());
-								System.out.println(this_row.getRoomStyle());*/
 								list.add(this_row.getPreCheckin().getDate());
 								list.add(this_row.getPreCheckOut());
 								list.add(this_row.getRoomStyle());
 								list.add(this_row.getRoomNum()+"");
 								list.add(this_row.getPrice()+"");
 								MyOrderTable.this.setList(list);
-								System.out.println(list.get(0));
 								MainPane.getInstance().setRightPane(new EvaluatePane());
 							});
 							setGraphic(bn);
@@ -120,9 +113,6 @@ public class MyOrderTable extends TableView{
 					}
 				};
 			}
-
-			
-			
 		});
 		
 		this.setItems(data);

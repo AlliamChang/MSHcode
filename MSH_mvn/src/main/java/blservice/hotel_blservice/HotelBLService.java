@@ -3,7 +3,9 @@ package blservice.hotel_blservice;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.image.Image;
 import blservice.strategy_blservice.StrategyBLService;
+import vo.HotelInfoVO;
 import vo.HotelVO;
 import vo.RoomVO;
 import tools.ResultMessage;
@@ -16,8 +18,10 @@ public interface HotelBLService {
 	public ResultMessage modify(String hotel_id, String hotel_item, String input);
 
 	public HotelVO browse(ArrayList<HotelVO> hotelList);
+	
+	public List<String> search(String province,String city );
 
-	public ArrayList<HotelVO> search(String address, String tradeArea);
+	public List<HotelVO> search(String province, String city,String tradeArea,String name);
 
 	public ResultMessage update(String id);
 
@@ -25,11 +29,14 @@ public interface HotelBLService {
 
 	public double CalRoomPrice(StrategyBLService strategy);
 	
-	public List<RoomVO> getRoom();
+	public List<RoomVO> getRoom(String hotel_id);
 	
 	public List<String> getProvinces();
 	
 	public List<String> getCities(String province);
 	
 	public List<String> getAreas(String province, String city);
+	
+	public HotelInfoVO getHotel(String hotel_id);
+		
 }

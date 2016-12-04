@@ -34,6 +34,7 @@ public class CustomerPaneController {
 		return controller;
 	}
 	
+	//导航栏
 	public void CustomerLogin(String username,Image scul){
 		this.user_name=username;
 		MyNavigationBar navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),naviInfo);
@@ -57,40 +58,39 @@ public class CustomerPaneController {
 						case "搜索":
 							createHotelSearchPane();
 							break;
-							
 						
 						}
 					}
 				});
 	}
-	
+	//个人信息界面
 	public void createPersonInfoPane(){
 		MainPane.getInstance().setRightPane(new PersonInfoPane());
 	}
-	
+	//我的订单界面
 	public void createMyOrderPane(){
 		MainPane.getInstance().setRightPane(new MyOrderPane());
 	}
-	
+	//搜索界面
 	public void createHotelSearchPane(){
 		MainPane.getInstance().setRightPane(new HotelSearchPane());
 	}
-	
+	//得到信用记录
 	public List<CreditVO> getcredit(){
 		UserBL=new UserBLService_Stub();
-		List <CreditVO>credit_list=UserBL.getCredit();
+		List <CreditVO>credit_list=UserBL.getCredit(1);
 		return credit_list;
 	}
-	
+	//得到订单记录
 	public List<OrderVO> getOrder(){
 		OrderBL=new Order_Stub();
 		List<OrderVO> order_list=OrderBL.getUserOrder(null);
 		return order_list;
 	}
-	
-	public List<RoomVO> getRoom(){
+	//得到酒店房间信息
+	public List<RoomVO> getRoom(String id){
 		HotelBL=new HotelBLService_Stub();
-		List<RoomVO> room_list=HotelBL.getRoom();
+		List<RoomVO> room_list=HotelBL.getRoom(id);
 		return room_list;
 	}
 }

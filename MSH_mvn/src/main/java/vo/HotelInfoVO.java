@@ -13,9 +13,11 @@ public class HotelInfoVO {
 	private String tradingArea;
 	private int year;
 	private Image scul;
+	private int star;
+	private double score;
 	
 	public HotelInfoVO(String hotel, String adress,String phone, String[] facility, String introduction, String province,
-			String tradingArea,int year,Image scul) {
+			String tradingArea,int year,Image scul,int star,double score) {
 		this.hotel = hotel;
 		this.adress = adress;
 		this.phone = phone;
@@ -25,6 +27,8 @@ public class HotelInfoVO {
 		this.tradingArea = tradingArea;
 		this.year = year;
 		this.scul = scul;
+		this.star=star;
+		this.score=score;
 	}
 	
 	public Image getScul() {
@@ -86,5 +90,21 @@ public class HotelInfoVO {
 	}
 	public void setTradingArea(String tradingArea) {
 		this.tradingArea = tradingArea;
+	}
+	
+	public double getscore(){
+		return score;
+	}
+	
+	public void setScore(double score){
+		this.score=score;
+	}
+	
+	public int star(){
+		return star;
+	}
+	
+	public void setStar(int star){
+		this.star=star;
 	}
 }
