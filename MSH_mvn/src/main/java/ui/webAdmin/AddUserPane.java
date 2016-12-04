@@ -2,6 +2,7 @@ package ui.webAdmin;
 
 import tools.UserType;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -18,9 +19,8 @@ public class AddUserPane extends AnchorPane{
 	private HBox hBox;
 	private Button confirm, cancel;
 	
-	public AddUserPane(UserType userType){
+	public AddUserPane(UserType userType, Parent lastPane){
 		super();
-		setStyle("-fx-font-size: 20px;");
 		grid = new GridPane();
 		setAccountLabel = new Label("设置登录账号：");
 		userTypeLabel = new Label("账号类型：" + (userType == UserType.MARKETER ? "网站营销人员" : "酒店工作人员"));
@@ -28,7 +28,7 @@ public class AddUserPane extends AnchorPane{
 		textField.setPromptText(userType == UserType.MARKETER ? "如：maketer_0000" : "如：XXHotelStuff");
 		textField.setMinWidth(250);
 		textField.setStyle("-fx-prompt-text-fill: grey;");
-		grid.setVgap(15);
+		grid.setVgap(25);
 		grid.setHgap(5);
 		grid.add(setAccountLabel, 0, 0);
 		grid.add(textField, 1, 0);
@@ -38,8 +38,8 @@ public class AddUserPane extends AnchorPane{
 		hBox.setSpacing(30);
 		confirm = new Button("确定");
 		cancel = new Button("取消");
-		confirm.setPadding(new Insets(7, 25, 7, 25));
-		cancel.setPadding(new Insets(7, 25, 7, 25));
+		confirm.setPrefSize(80, 30);
+		cancel.setPrefSize(80, 30);
 		hBox.getChildren().add(confirm);
 		hBox.getChildren().add(cancel);
 		
@@ -58,10 +58,10 @@ public class AddUserPane extends AnchorPane{
 			alert.getDialogPane().setHeaderText(null);
 			alert.showAndWait()
 				.filter(response -> response == ButtonType.OK)
-				.ifPresent(response -> System.out.println("Duang"));
+				.ifPresent(response -> WebAdminController.getInstance().go(lastPane));
 		});
 		cancel.setOnAction(event -> {
-			System.out.println("Cancel");
+			WebAdminController.getInstance().go(lastPane);
 		});
 	}
 }

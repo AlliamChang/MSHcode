@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
+import tools.UserType;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CreditVO;
@@ -27,14 +28,12 @@ public class WebAdminController {
 	
 	private UserBLService userBLService;
 	private HotelBLService hotelBLService;
-	private OrderBLService orderBLService;
 	
 	private MyNavigationBar naviBar;
 	
 	private WebAdminController(){
 		userBLService = new UserBLService_Stub();
 		hotelBLService = new HotelBLService_Stub();
-		orderBLService = new Order_Stub();
 	}
 	
 	public void init(){
@@ -79,8 +78,23 @@ public class WebAdminController {
 		MainPane.getInstance().setRightPane(new ModifyUserInfoPane(user, lastPane));
 	}
 	
-	public void go(Parent pane){
-		MainPane.getInstance().setRightPane(pane);
+	public void setAddMarketerPane(){
+		MainPane.getInstance().setRightPane(new AddMarketerPane());
+	}
+	
+	public void go(Parent pane, Object... param){
+		if (pane.getClass().equals(UserInfoPane.class))
+			setUserInfoPane((UserVO)param[0]);
+		else
+			try {
+				MainPane.getInstance().setRightPane(pane.getClass().newInstance());
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	public void notFound(){
 		Alert alert = new Alert(AlertType.ERROR);
@@ -102,6 +116,10 @@ public class WebAdminController {
 			notFound();
 		else
 			setUserInfoPane(result);
+	}
+	
+	public void addUser(UserVO user){
+		userBLService.add(user);
 	}
 	
 	public void deleteUser(UserVO user){
@@ -134,5 +152,9 @@ public class WebAdminController {
 	
 	public List<String> getAreas(String province, String city){
 		return hotelBLService.getAreas(province, city);
+	}
+	
+	public void setAddUserPane(UserType type, Parent lastPane){
+		MainPane.getInstance().setRightPane(new AddUserPane(type, lastPane));
 	}
 }

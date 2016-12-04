@@ -9,17 +9,15 @@ public class UserVO {
 	private int level, credit, ID;
 	private UserType type;
 	private ArrayList<String> creditChange;
+	public static String INIT_PASSWORD = "123456";
 
-	public UserVO(String account, String password, String name, String gender, String number, UserType type, int level,
-			int credit) {
+	public UserVO(String account, String password, String name, String gender, String number, UserType type) {
 		this.account = account;
 		this.password = password;
 		this.name = name;
 		this.gender = gender;
 		this.number = number;
 		this.type = type;
-		this.level = level;
-		this.credit = credit;
 		creditChange = new ArrayList<String>();
 	}
 

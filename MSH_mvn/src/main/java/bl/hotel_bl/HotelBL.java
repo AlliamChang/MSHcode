@@ -1,8 +1,10 @@
 package bl.hotel_bl;
 import java.util.ArrayList;
+import java.util.List;
 
 import tools.ResultMessage;
 import vo.HotelVO;
+import vo.RoomVO;
 import blservice.hotel_blservice.*;
 import blservice.strategy_blservice.StrategyBLService;
 public class HotelBL implements HotelBLService{
@@ -53,6 +55,30 @@ public class HotelBL implements HotelBLService{
 	public double CalRoomPrice(StrategyBLService strategy) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<RoomVO> getRoom() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getProvinces() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getCities(String province) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getAreas(String province, String city) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

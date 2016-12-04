@@ -26,5 +26,5 @@ public interface UserBLService {
 	
 	public Image getImage(int ID);
 	
-	public ResultMessage modefyPassword(int ID, String password);
+	public ResultMessage modifyPassword(int ID, String password);
 }

@@ -17,7 +17,7 @@ public class UserBLService_Stub implements UserBLService {
 
 	public List<UserVO> getAll() {
 		// TODO Auto-generated method stub
-		UserVO testVO = new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER, 2, 100);
+		UserVO testVO = new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER);
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		list.add(testVO);
 		return list;
@@ -25,11 +25,11 @@ public class UserBLService_Stub implements UserBLService {
 
 	public UserVO get(String name) {
 		// TODO Auto-generated method stub
-		return "123".equals(name) ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER, 2, 100) : null;
+		return "123".equals(name) ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER) : null;
 	}
 
 	public ResultMessage add(UserVO userVO) {
-		// TODO Auto-generated method stub
+		System.out.println("成功添加 ");
 		return ResultMessage.SUCCESS;
 	}
 
@@ -52,8 +52,8 @@ public class UserBLService_Stub implements UserBLService {
 
 	@Override
 	public List<UserVO> getAllMarketers() {
-		return Arrays.asList(new UserVO("marketer1", "123", "郑晓峰", "男", "15050582962", UserType.MARKETER, 0, 0){{setID(1);}},
-				new UserVO("marketer2", "123", "郑皓铭", "男", "15011112962", UserType.MARKETER, 0, 0){{setID(2);}});
+		return Arrays.asList(new UserVO("marketer1", "123", "郑晓峰", "男", "15050582962", UserType.MARKETER){{setID(1);}},
+				new UserVO("marketer2", "123", "郑皓铭", "男", "15011112962", UserType.MARKETER){{setID(2);}});
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	@Override
-	public ResultMessage modefyPassword(int ID, String password) {
+	public ResultMessage modifyPassword(int ID, String password) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
 	}
