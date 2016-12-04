@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.util.Callback;
 
@@ -30,6 +31,8 @@ public class BrowseHotelPane extends VBox{
 	public BrowseHotelPane(){
 		super();
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		
 		setStyle("-fx-border-color: black");
 		setPadding(new Insets(20, 20, 20, 20));
 		setSpacing(20);
@@ -100,13 +103,13 @@ public class BrowseHotelPane extends VBox{
 		TableColumn<HotelVO, String> name = new TableColumn<HotelVO, String>("酒店名称");
 		name.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("name"));
 		name.setPrefWidth(200);
-		TableColumn<HotelVO, String> stuff = new TableColumn<HotelVO, String>("工作人员");
-		stuff.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("stuff"));
-		stuff.setPrefWidth(80);
-		TableColumn<HotelVO, String> stuffNumber = new TableColumn<HotelVO, String>("工作人员电话");
-		stuffNumber.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("number"));
-		stuffNumber.setPrefWidth(130);
-		stuffNumber.setSortable(false);
+		TableColumn<HotelVO, String> staff = new TableColumn<HotelVO, String>("工作人员");
+		staff.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("staff"));
+		staff.setPrefWidth(80);
+		TableColumn<HotelVO, String> staffNumber = new TableColumn<HotelVO, String>("工作人员电话");
+		staffNumber.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("number"));
+		staffNumber.setPrefWidth(130);
+		staffNumber.setSortable(false);
 		TableColumn<HotelVO, HBox> operation = new TableColumn<HotelVO, HBox>("");
 		operation.setPrefWidth(183);
 		operation.setSortable(false);
@@ -145,13 +148,11 @@ public class BrowseHotelPane extends VBox{
 			
 		});
 		
-		table.getColumns().setAll(name, stuff, stuffNumber, operation); 
-		
-		table.getItems().add(new HotelVO("1","123","456","456", "456"));
-		table.getItems().add(new HotelVO("2","dfdf","aaa","vvv", "c"));
-		table.getItems().add(new HotelVO("4","d2fdf","a1aa","v3vv", "c"));
-		
+		table.getColumns().setAll(name, staff, staffNumber, operation); 
+		table.setPlaceholder(new Text("请补充条件并点击筛选。"){{setStyle("-fx-fill: gray");}});
 		
 		getChildren().addAll(v, table);
+		
+		addButton.setOnAction(e -> WebAdminController.getInstance().setAddHotelPane());
 	}
 }

@@ -2,6 +2,7 @@ package bl.user_bl;
 
 import java.util.List;
 
+import dataservice.user_dataservice.UserDataService;
 import javafx.scene.image.Image;
 import tools.ResultMessage;
 import vo.CreditVO;
@@ -9,10 +10,10 @@ import vo.UserVO;
 import blservice.user_blservice.UserBLService;
 
 public class UserBL implements UserBLService{
-	
+	private UserDataService uds;
 	@Override
 	public List<UserVO> getAllMarketers() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

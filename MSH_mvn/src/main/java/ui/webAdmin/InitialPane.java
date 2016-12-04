@@ -17,6 +17,8 @@ public class InitialPane extends GridPane{
 	public InitialPane(){
 		super();
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+
 		setStyle("-fx-border-color: black");
 		searchButton = new Button("查询");
 		searchButton.setId("searchButton");

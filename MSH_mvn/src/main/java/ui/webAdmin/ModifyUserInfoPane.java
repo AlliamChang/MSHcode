@@ -23,6 +23,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 	public ModifyUserInfoPane(UserVO user, Parent lastPane){
 		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
 		typeLabel = new Label("账户类型：" + UserInfoPane.typeCheck(user.getType()));
 		nameLabel = new Label("姓名：");
@@ -114,7 +115,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 		});
 		
 		cancelButton.setOnAction(e -> {
-			WebAdminController.getInstance().go(lastPane, user);;
+			WebAdminController.getInstance().goBack(lastPane);;
 		});
 	}
 }

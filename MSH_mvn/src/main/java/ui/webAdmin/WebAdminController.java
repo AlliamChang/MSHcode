@@ -14,6 +14,7 @@ import tools.UserType;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CreditVO;
+import vo.HotelVO;
 import vo.UserVO;
 import bl_stub.*;
 import blservice.hotel_blservice.HotelBLService;
@@ -82,6 +83,14 @@ public class WebAdminController {
 		MainPane.getInstance().setRightPane(new AddMarketerPane());
 	}
 	
+	public void setAddHotelPane(){
+		MainPane.getInstance().setRightPane(new AddHotelPane());
+	}
+	
+	public void setAddHotelStaffPane(AddHotelPane owner){
+		MainPane.getInstance().setRightPane(new AddHotelStaffPane(owner));
+	}
+	
 	public void go(Parent pane, Object... param){
 		if (pane.getClass().equals(UserInfoPane.class))
 			setUserInfoPane((UserVO)param[0]);
@@ -96,6 +105,11 @@ public class WebAdminController {
 				e.printStackTrace();
 			}
 	}
+	
+	public void goBack(Parent pane){
+		MainPane.getInstance().setRightPane(pane);
+	}
+	
 	public void notFound(){
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.initModality(Modality.APPLICATION_MODAL);
@@ -130,6 +144,10 @@ public class WebAdminController {
 		userBLService.modify(user);
 	}
 	
+	public void addHotel(HotelVO hotel){
+		
+	}
+	
 	public List<CreditVO> getCredit(UserVO user){
 		return userBLService.getCredit(user.getID());
 	}
@@ -154,7 +172,4 @@ public class WebAdminController {
 		return hotelBLService.getAreas(province, city);
 	}
 	
-	public void setAddUserPane(UserType type, Parent lastPane){
-		MainPane.getInstance().setRightPane(new AddUserPane(type, lastPane));
-	}
 }

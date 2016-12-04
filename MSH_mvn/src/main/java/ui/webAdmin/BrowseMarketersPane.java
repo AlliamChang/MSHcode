@@ -25,6 +25,7 @@ public class BrowseMarketersPane extends VBox{
 	@SuppressWarnings("unchecked")
 	public BrowseMarketersPane(){
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		setStyle("-fx-border-color: black");
 		
 		table = new TableView<UserVO>();

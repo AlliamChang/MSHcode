@@ -6,9 +6,8 @@ import tools.UserType;
 
 public class UserVO {
 	private String name, account, password, gender, number;
-	private int level, credit, ID;
+	private int level, credit, ID, hotelID;
 	private UserType type;
-	private ArrayList<String> creditChange;
 	public static String INIT_PASSWORD = "123456";
 
 	public UserVO(String account, String password, String name, String gender, String number, UserType type) {
@@ -18,7 +17,6 @@ public class UserVO {
 		this.gender = gender;
 		this.number = number;
 		this.type = type;
-		creditChange = new ArrayList<String>();
 	}
 
 	public int getID() {
@@ -93,12 +91,11 @@ public class UserVO {
 		this.credit = credit;
 	}
 
-	public ArrayList<String> getCreditChange() {
-		return creditChange;
+	public int getHotelID() {
+		return hotelID;
 	}
 
-	public void setCreditChange(ArrayList<String> creditChange) {
-		this.creditChange = creditChange;
+	public void setHotelID(int hotelID) {
+		this.hotelID = hotelID;
 	}
-
 }

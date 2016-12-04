@@ -3,7 +3,6 @@ package ui.webAdmin;
 import tools.UserType;
 import ui.utility.MainPane;
 import vo.UserVO;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -16,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 
-public class AddMarketerPane extends AnchorPane{
+public class AddHotelStaffPane extends AnchorPane {
 	private GridPane grid;
 	private Label userTypeLabel, nameLabel, genderLabel, numberLabel;
 	private TextField nameField, numberField;
@@ -24,14 +23,14 @@ public class AddMarketerPane extends AnchorPane{
 	private Button confirm, cancel;
 	private ChoiceBox<String> genderBox;
 	
-	public AddMarketerPane(){
+	public AddHotelStaffPane(AddHotelPane owner){
 		super();
 		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
-
+		
 		grid = new GridPane();
-		userTypeLabel = new Label("账号类型：网站营销人员");
+		userTypeLabel = new Label("账号类型：酒店工作人员");
 		nameLabel = new Label("姓名");
 		genderLabel = new Label("性别");
 		genderBox = new ChoiceBox<String>();
@@ -79,26 +78,28 @@ public class AddMarketerPane extends AnchorPane{
 		AnchorPane.setTopAnchor(grid, 180.0);
 		
 		confirm.setOnAction(event -> {
-			WebAdminController.getInstance().addUser(
-					new UserVO(null, UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.MARKETER));
-			Alert alert = new Alert(AlertType.INFORMATION, "");
-			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.getDialogPane().setContentText("添加成功！\n初始密码是 \''123456\''");
-			alert.getDialogPane().setHeaderText(null);
 			if (nameField.getText() == null || nameField.getText().replace(" ", "").length() == 0
 					|| numberField.getText() == null || numberField.getText().replace(" ", "").length() == 0
 					|| genderBox.getValue() == null){
-				alert.setAlertType(AlertType.ERROR);
+				Alert alert = new Alert(AlertType.ERROR, "");
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.getDialogPane().setHeaderText(null);
 				alert.getDialogPane().setContentText("信息不完整！");
 				alert.show();
 				return;
+			} else {
+				owner.changeLabel(nameField.getText());
+				owner.changeButton();
+				owner.setAddPane(AddHotelStaffPane.this);
+				WebAdminController.getInstance().goBack(owner);
 			}
-			alert.showAndWait()
-				.filter(response -> response == ButtonType.OK)
-				.ifPresent(response -> WebAdminController.getInstance().setBrowseMarketersPane());
 		});
 		cancel.setOnAction(event -> {
-			WebAdminController.getInstance().setBrowseMarketersPane();
+			WebAdminController.getInstance().goBack(owner);
 		});
+	}
+	
+	public UserVO createStaff(){
+		return new UserVO(null, UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.HOTEL_STAFF);
 	}
 }

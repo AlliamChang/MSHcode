@@ -30,6 +30,7 @@ public class UserInfoPane extends AnchorPane{
 		super();
 		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
 		typeLabel = new Label("账户类型：" + typeCheck(user.getType()));
 		nameLabel = new Label("姓名：" + user.getName());
