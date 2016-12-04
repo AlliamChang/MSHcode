@@ -42,6 +42,9 @@ public class BrowseMarketersPane extends VBox{
 		TableColumn<UserVO, String> nameCol = new TableColumn<UserVO, String>("姓名");
 		nameCol.setCellValueFactory(new PropertyValueFactory<UserVO, String>("name"));
 		nameCol.setMinWidth(100);
+		TableColumn<UserVO, String> genderCol = new TableColumn<UserVO, String>("性别");
+		genderCol.setCellValueFactory(new PropertyValueFactory<UserVO, String>("gender"));
+		genderCol.setMinWidth(50);
 		TableColumn<UserVO, String> numberCol = new TableColumn<UserVO, String>("联系电话");
 		numberCol.setCellValueFactory(new PropertyValueFactory<UserVO, String>("number"));
 		numberCol.setMinWidth(200);
@@ -88,13 +91,10 @@ public class BrowseMarketersPane extends VBox{
 			
 		});
 		
-		table.getColumns().addAll(IDCol, nameCol, numberCol, operation);
+		table.getColumns().addAll(IDCol, nameCol, genderCol, numberCol, operation);
 		addButton = new Button("添加");
-		addButton.setPadding(new Insets(10, 30, 10, 30));
-		addButton.setStyle("-fx-font-size: 17px");
-		addButton.setOnAction(e -> {
-			table.getItems().add(new UserVO("afdd", "123456", "郑皓铭", "男", "10086", UserType.MARKETER, 0, 1000){{setID(2);}});
-		});
+		addButton.setPrefSize(80, 30);
+		addButton.setOnAction(e -> WebAdminController.getInstance().setAddMarketerPane());
 		hBox = new HBox();
 		hBox.getChildren().add(addButton);
 		hBox.setAlignment(Pos.CENTER_RIGHT);
@@ -104,6 +104,6 @@ public class BrowseMarketersPane extends VBox{
 		setPadding(new Insets(50, 0, 0, 0));
 		setSpacing(20);
 		getChildren().addAll(table, hBox);
-							}
+	}
 							
 }

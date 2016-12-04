@@ -9,8 +9,6 @@ import vo.CreditVO;
 import vo.UserVO;
 
 public interface UserBLService {
-
-	public List<UserVO> getAll();
 	
 	public List<UserVO> getAllMarketers();
 
@@ -26,5 +24,7 @@ public interface UserBLService {
 	
 	public Image getImage(int ID);
 	
-	public ResultMessage modefyPassword(int ID, String password);
+	public ResultMessage modifyPassword(int ID, String password);
+	
+	public List<String> getReservationHistory(int ID);
 }
