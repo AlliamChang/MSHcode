@@ -1,5 +1,6 @@
 package tools;
 
-public class CostType {
+public enum CostType {
+	RMB,PERCENT
 
 }

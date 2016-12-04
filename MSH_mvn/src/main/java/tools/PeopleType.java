@@ -1,5 +1,6 @@
 package tools;
 
-public class PeopleType {
+public enum PeopleType {
+	NORMAL,VIP
 
 }
