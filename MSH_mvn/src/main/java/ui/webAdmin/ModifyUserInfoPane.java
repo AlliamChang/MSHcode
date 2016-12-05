@@ -89,8 +89,8 @@ public class ModifyUserInfoPane extends AnchorPane{
 			AlertType type;
 			String content;
 			Alert alert;
-			if (nameField.getText() == null || nameField.getText().length() == 0 
-					|| numberField.getText() == null || numberField.getText().length() == 0){
+			if (nameField.getText().trim().isEmpty()
+					|| numberField.getText().trim().isEmpty()){
 				content = "信息不完整！";
 				type = AlertType.ERROR;
 			} else {

@@ -43,4 +43,8 @@ public class SearchBox extends Region {
 	public String getContent(){
 		return textBox.getText();
 	}
+	
+	public void requestFocus(){
+		textBox.requestFocus();
+	}
 }

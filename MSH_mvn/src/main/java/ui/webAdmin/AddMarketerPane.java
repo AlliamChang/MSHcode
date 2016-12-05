@@ -84,8 +84,8 @@ public class AddMarketerPane extends AnchorPane{
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.getDialogPane().setContentText("添加成功！\n初始密码是 \''123456\''");
 			alert.getDialogPane().setHeaderText(null);
-			if (nameField.getText() == null || nameField.getText().replace(" ", "").length() == 0
-					|| numberField.getText() == null || numberField.getText().replace(" ", "").length() == 0
+			if (nameField.getText() == null || nameField.getText().trim().isEmpty()
+					|| numberField.getText() == null || numberField.getText().trim().isEmpty()
 					|| genderBox.getValue() == null){
 				alert.setAlertType(AlertType.ERROR);
 				alert.getDialogPane().setContentText("信息不完整！");

@@ -1,6 +1,10 @@
 package ui.webAdmin;
 
+import java.util.Optional;
+
+import ui.utility.LoginDialog;
 import ui.utility.MainPane;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,6 +12,7 @@ import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.util.Pair;
 
 public class InitialPane extends GridPane{
 	private ImageView imageView;
@@ -41,7 +46,13 @@ public class InitialPane extends GridPane{
 		add(searchButton, 1, 1);
 		
 		searchButton.setOnAction(e -> {
-			WebAdminController.getInstance().search(searchBox.getContent());
+//			WebAdminController.getInstance().search(searchBox.getContent());
+			LoginDialog ss = new LoginDialog();
+			ss.showAndWait().ifPresent(info -> {
+				System.out.println(info.getKey() + " " + info.getValue());
+			});
 		});
+		
+		Platform.runLater(() -> searchBox.requestFocus());
 	}
 }

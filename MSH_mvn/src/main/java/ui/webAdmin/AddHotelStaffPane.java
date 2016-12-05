@@ -77,8 +77,8 @@ public class AddHotelStaffPane extends AnchorPane {
 		AnchorPane.setTopAnchor(grid, 180.0);
 		
 		confirm.setOnAction(event -> {
-			if (nameField.getText() == null || nameField.getText().replace(" ", "").length() == 0
-					|| numberField.getText() == null || numberField.getText().replace(" ", "").length() == 0
+			if (nameField.getText() == null || nameField.getText().trim().isEmpty()
+					|| numberField.getText() == null || numberField.getText().trim().isEmpty()
 					|| genderBox.getValue() == null){
 				Alert alert = new Alert(AlertType.ERROR, "");
 				alert.initModality(Modality.APPLICATION_MODAL);

@@ -125,7 +125,7 @@ public class AddHotelPane extends AnchorPane{
 		confirm.setOnAction(e -> {
 			AlertType type = AlertType.INFORMATION;
 			String s = "添加成功！";
-			if (textField.getText().replace(" ", "").length() == 0 || staffNameLabel.getText().equals("无")){
+			if (textField.getText().trim().isEmpty() || staffNameLabel.getText().equals("无")){
 				type = AlertType.ERROR;
 				s = "请补全酒店信息！";
 			}

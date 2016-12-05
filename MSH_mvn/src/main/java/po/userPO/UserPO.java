@@ -1,5 +1,6 @@
 package po.userPO;
 
+import javafx.scene.image.Image;
 import tools.UserType;
 import vo.UserVO;
 
@@ -7,9 +8,10 @@ public class UserPO {
 	private String name, account, password, gender, number, company;
 	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
+	private Image image;
 	public static String INIT_PASSWORD = "123456";
 
-	public UserPO(UserVO userVO){
+	public UserPO(UserVO vo) {
 		
 	}
 	
@@ -125,10 +127,18 @@ public class UserPO {
 		this.company = company;
 	}
 	
+	public Image getImage() {
+		return image;
+	}
+	
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
 	public UserVO toVO(){
 		UserVO ret = new UserVO(account, password, name, gender,
-				number, company, year, month, day, type);
-		ret.setID(ID); ret.setHotelID(hotelID);
+			number, company, year, month, day, type, image);
+		ret.setID(ID);
 		return ret;
 	}
 }

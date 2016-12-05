@@ -123,7 +123,7 @@ public class WebAdminController {
 	}
 	
 	public void search(String s){
-		if (s == null || s.length() == 0)
+		if (s == null || s.trim().isEmpty())
 			return;
 		UserVO result = userBLService.get(s);
 		if (null == result)
