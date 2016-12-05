@@ -12,9 +12,11 @@ public interface UserBLService {
 	
 	public List<UserVO> getAllMarketers();
 
+	public UserVO get(int ID);
+	
 	public UserVO get(String name);
 
-	public ResultMessage add(UserVO userVO);
+	public int add(UserVO userVO);
 
 	public ResultMessage modify(UserVO userVO);
 

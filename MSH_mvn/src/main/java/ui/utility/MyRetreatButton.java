@@ -1,5 +1,6 @@
 package ui.utility;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -17,7 +18,7 @@ public class MyRetreatButton extends Button{
 	private static final ImageView VIEW = new ImageView(PIC);
 	
 	
-	public MyRetreatButton(Region lastPane){
+	public MyRetreatButton(Parent lastPane){
 		super(null,VIEW);
 		this.setStyle("-fx-background-color:null;");
 		this.setPrefSize(50, 50);

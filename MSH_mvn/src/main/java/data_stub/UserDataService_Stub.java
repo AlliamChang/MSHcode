@@ -10,32 +10,29 @@ import dataservice.user_dataservice.UserDataService;
 
 public class UserDataService_Stub implements UserDataService {
 
-	public ArrayList<UserPO> getAll() {
-		// TODO Auto-generated method stub
-		UserPO testPO = new UserPO("֣����", "123456", UserType.CUSTOMER, 0, 0);
-		ArrayList<UserPO> list = new ArrayList<UserPO>();
-		list.add(testPO);
-		return list;
-	}
-
+	@Override
 	public UserPO get(String name) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new UserPO("֣����", "123456", UserType.CUSTOMER, 0, 0);
+		return null;
 	}
 
+	@Override
 	public ResultMessage add(UserPO userPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
+	@Override
 	public ResultMessage modify(UserPO userPO) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		return null;
 	}
 
+	@Override
 	public ResultMessage delete(String name) throws RemoteException {
 		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
+		return null;
 	}
+
 
 }

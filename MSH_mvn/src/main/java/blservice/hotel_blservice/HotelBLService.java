@@ -12,7 +12,7 @@ import vo.RoomVO;
 import tools.ResultMessage;
 
 public interface HotelBLService {
-	public ResultMessage add(HotelVO hotel);
+	public ResultMessage add(HotelInfoVO hotel);
 
 	public ResultMessage delete(String hotel_id);
 
@@ -22,7 +22,7 @@ public interface HotelBLService {
 	
 	public List<String> search(String province,String city );
 
-	public List<HotelVO> search(String province, String city,String tradeArea,String name);
+	public List<HotelInfoVO> search(String province, String city,String tradeArea,String name);
 
 	public ResultMessage update(String id);
 

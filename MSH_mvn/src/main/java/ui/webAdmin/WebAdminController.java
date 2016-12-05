@@ -14,7 +14,7 @@ import tools.UserType;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CreditVO;
-import vo.HotelVO;
+import vo.HotelInfoVO;
 import vo.UserVO;
 import bl_stub.*;
 import blservice.hotel_blservice.HotelBLService;
@@ -93,7 +93,7 @@ public class WebAdminController {
 	
 	public void go(Parent pane, Object... param){
 		if (pane.getClass().equals(UserInfoPane.class))
-			setUserInfoPane((UserVO)param[0]);
+			setUserInfoPane((UserVO)param[0], ((UserInfoPane)pane).getLastPane());
 		else
 			try {
 				MainPane.getInstance().setRightPane(pane.getClass().newInstance());
@@ -118,8 +118,8 @@ public class WebAdminController {
 		alert.show();
 	}
 	
-	public void setUserInfoPane(UserVO user){
-		MainPane.getInstance().setRightPane(new UserInfoPane(user));
+	public void setUserInfoPane(UserVO user, Parent lastPane){
+		MainPane.getInstance().setRightPane(new UserInfoPane(user, lastPane));
 	}
 	
 	public void search(String s){
@@ -129,11 +129,15 @@ public class WebAdminController {
 		if (null == result)
 			notFound();
 		else
-			setUserInfoPane(result);
+			setUserInfoPane(result, new InitialPane());
 	}
 	
-	public void addUser(UserVO user){
-		userBLService.add(user);
+	public UserVO getUser(int id){
+		return userBLService.get(id);
+	}
+	
+	public int addUser(UserVO user){
+		return userBLService.add(user);
 	}
 	
 	public void deleteUser(UserVO user){
@@ -144,8 +148,12 @@ public class WebAdminController {
 		userBLService.modify(user);
 	}
 	
-	public void addHotel(HotelVO hotel){
-		
+	public void addHotel(HotelInfoVO hotel){
+		hotelBLService.add(hotel);
+	}
+	
+	public void delHotel(HotelInfoVO hotel){
+		hotelBLService.delete(String.valueOf(hotel.get_hotel_id()));
 	}
 	
 	public List<CreditVO> getCredit(UserVO user){
@@ -170,6 +178,11 @@ public class WebAdminController {
 	
 	public List<String> getAreas(String province, String city){
 		return hotelBLService.getAreas(province, city);
+	}
+
+	public List<HotelInfoVO> filterHotel(String province, String city, String area,
+			String name) {
+		return hotelBLService.search(province, city, area, name);
 	}
 	
 }

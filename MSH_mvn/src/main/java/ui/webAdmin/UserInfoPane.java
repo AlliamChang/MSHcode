@@ -7,10 +7,12 @@ import tools.ChangeReason;
 import tools.Date;
 import tools.UserType;
 import ui.utility.MainPane;
+import ui.utility.MyRetreatButton;
 import vo.CreditVO;
 import vo.UserVO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -26,11 +28,20 @@ public class UserInfoPane extends AnchorPane{
 	private ScrollPane sp;
 	private Label typeLabel, nameLabel, genderLabel, phoneNumberLabel, levelLabel, creditLabel, creditChangeLabel, accountLabel;
 	private Button modifyButton, deleteButton;
-	public UserInfoPane(UserVO user){
+	private Parent lastPane;
+	private BackButton backButton;
+	
+	public UserInfoPane(UserVO user, Parent lastPane){
 		super();
+		this.lastPane = lastPane;
 		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		
+		backButton = new BackButton(lastPane);
+		getChildren().add(backButton);
+		AnchorPane.setTopAnchor(backButton, 15.0);
+		AnchorPane.setLeftAnchor(backButton, 15.0);
 		
 		typeLabel = new Label("账户类型：" + typeCheck(user.getType()));
 		nameLabel = new Label("姓名：" + user.getName());
@@ -93,6 +104,8 @@ public class UserInfoPane extends AnchorPane{
 		});
 		hBox.getChildren().add(modifyButton);
 		hBox.getChildren().add(deleteButton);
+		if (user.getType() == UserType.HOTEL_STAFF)
+			deleteButton.setDisable(true);
 		
 
 		getChildren().add(hBox);
@@ -100,6 +113,10 @@ public class UserInfoPane extends AnchorPane{
 		AnchorPane.setBottomAnchor(hBox, 15.0);
 		AnchorPane.setLeftAnchor(hBox, 230.0);
 		
+	}
+	
+	public Parent getLastPane(){
+		return lastPane;
 	}
 	
 	public static String typeCheck(UserType userType){

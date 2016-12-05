@@ -1,13 +1,9 @@
 package ui.webAdmin;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import ui.utility.MainPane;
-import vo.HotelVO;
-import javafx.geometry.Insets;
+import vo.HotelInfoVO;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -16,7 +12,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -141,8 +136,10 @@ public class AddHotelPane extends AnchorPane{
 			if (type.equals(AlertType.ERROR))
 				alert.show();
 			else {
-				WebAdminController.getInstance().addUser(addPane.createStaff());
-				WebAdminController.getInstance().addHotel(new HotelVO());
+				int id = WebAdminController.getInstance().addUser(addPane.createStaff());
+				WebAdminController.getInstance().addHotel(
+						new HotelInfoVO(textField.getText(), null, null, null, null, 
+								provinceChoiceBox.getValue(), areaChoiceBox.getValue(), 0, null, 0, 0, 0, id));
 				alert.showAndWait().filter(r -> r == ButtonType.OK).ifPresent(r -> 
 					WebAdminController.getInstance().setBrowseHotelPane());
 			}

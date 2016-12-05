@@ -18,11 +18,6 @@ import blservice.strategy_blservice.StrategyBLService;
 
 public class HotelBLService_Stub implements HotelBLService {
 
-	public ResultMessage add(HotelVO hotel) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
 	public ResultMessage delete(String hotel_id) {
 		// TODO Auto-generated method stub
 		return ResultMessage.SUCCESS;
@@ -103,10 +98,10 @@ public class HotelBLService_Stub implements HotelBLService {
 	}
 
 	@Override
-	public List<HotelVO> search(String province, String city, String tradeArea,
+	public List<HotelInfoVO> search(String province, String city, String tradeArea,
 			String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return Arrays.asList(new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2),
+				new HotelInfoVO("如家快捷酒店", "南京市中山南路10号", "123456789", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1, 1));
 	}
 
 	@Override
@@ -114,6 +109,12 @@ public class HotelBLService_Stub implements HotelBLService {
 		// TODO Auto-generated method stub
 		return  Arrays.asList(new EvaluateVO("环境很不错，交通很方便，价格也挺合适，体验不错","Aven","2016/11/01,14:35",4.8),
 				new EvaluateVO("房间很干净舒适,设施也很完善","晓风残月","2016/11/01,14:32",4.9));
+	}
+
+	@Override
+	public ResultMessage add(HotelInfoVO hotel) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

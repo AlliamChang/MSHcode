@@ -20,9 +20,9 @@ public class UserBLService_Stub implements UserBLService {
 		return "123".equals(name) ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER) : null;
 	}
 
-	public ResultMessage add(UserVO userVO) {
+	public int add(UserVO userVO) {
 		System.out.println("成功添加 ");
-		return ResultMessage.SUCCESS;
+		return 0;
 	}
 
 	public ResultMessage modify(UserVO userVO) {
@@ -63,5 +63,11 @@ public class UserBLService_Stub implements UserBLService {
 	public List<String> getReservationHistory(int ID) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public UserVO get(int ID) {
+		// TODO Auto-generated method stub
+		return ID == 1 ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.HOTEL_STAFF) : null;
 	}
 }

@@ -2,6 +2,7 @@ package bl.user_bl;
 
 import java.util.List;
 
+import data_stub.UserDataService_Stub;
 import dataservice.user_dataservice.UserDataService;
 import javafx.scene.image.Image;
 import tools.ResultMessage;
@@ -11,6 +12,11 @@ import blservice.user_blservice.UserBLService;
 
 public class UserBL implements UserBLService{
 	private UserDataService uds;
+	
+	public UserBL(){
+		uds = new UserDataService_Stub();
+	}
+	
 	@Override
 	public List<UserVO> getAllMarketers() {
 		
@@ -23,10 +29,13 @@ public class UserBL implements UserBLService{
 		return null;
 	}
 
+	/**
+	 * 返回ID
+	 */
 	@Override
-	public ResultMessage add(UserVO userVO) {
+	public int add(UserVO userVO) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package ui.webAdmin;
 
 import tools.UserType;
 import ui.utility.MainPane;
-import vo.HotelVO;
+import vo.HotelInfoVO;
 import vo.UserVO;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;

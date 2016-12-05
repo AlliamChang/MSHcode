@@ -6,12 +6,16 @@ import java.util.HashMap;
 import java.util.List;
 
 import ui.utility.MainPane;
-import vo.HotelVO;
+import vo.HotelInfoVO;
 import vo.RoomVO;
+import vo.UserVO;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -25,7 +29,7 @@ public class BrowseHotelPane extends VBox{
 	private HBox h1, h2;
 	private VBox v;
 	private ChoiceBox<String> provinceChoiceBox, cityChoiceBox, areaChoiceBox;
-	private TableView<HotelVO> table;
+	private TableView<HotelInfoVO> table;
 	private Separator sprt;
 	
 	public BrowseHotelPane(){
@@ -94,40 +98,47 @@ public class BrowseHotelPane extends VBox{
 		v.setSpacing(20);
 		v.setStyle("-fx-border-color: #CDCDC1");
 		
-		addButton.setOnAction(e -> {
-			
+		table = new TableView<HotelInfoVO>();
+		TableColumn<HotelInfoVO, String> name = new TableColumn<HotelInfoVO, String>("酒店名称");
+		name.setCellValueFactory(new PropertyValueFactory<HotelInfoVO, String>("hotel"));
+		name.setPrefWidth(210);
+		TableColumn<HotelInfoVO, String> number = new TableColumn<HotelInfoVO, String>("联系电话");
+		number.setCellValueFactory(new PropertyValueFactory<HotelInfoVO, String>("phone"));
+		number.setPrefWidth(100);
+		number.setSortable(false);
+		TableColumn<HotelInfoVO, String> staff = new TableColumn<HotelInfoVO, String>("工作人员ID");
+		staff.setCellValueFactory(new PropertyValueFactory<HotelInfoVO, String>("stuff_id"){
+			public ObservableValue<String> call(CellDataFeatures<HotelInfoVO, String> hotel){
+				return new ReadOnlyObjectWrapper<String>(String.format("%08d", hotel.getValue().get_stuff_id()));
+			}
 		});
-		
-		
-		table = new TableView<HotelVO>();
-		TableColumn<HotelVO, String> name = new TableColumn<HotelVO, String>("酒店名称");
-		name.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("name"));
-		name.setPrefWidth(200);
-		TableColumn<HotelVO, String> staff = new TableColumn<HotelVO, String>("工作人员");
-		staff.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("staff"));
-		staff.setPrefWidth(80);
-		TableColumn<HotelVO, String> staffNumber = new TableColumn<HotelVO, String>("工作人员电话");
-		staffNumber.setCellValueFactory(new PropertyValueFactory<HotelVO, String>("number"));
-		staffNumber.setPrefWidth(130);
-		staffNumber.setSortable(false);
-		TableColumn<HotelVO, HBox> operation = new TableColumn<HotelVO, HBox>("");
+		staff.setPrefWidth(90);
+		staff.setSortable(false);
+		TableColumn<HotelInfoVO, HBox> operation = new TableColumn<HotelInfoVO, HBox>("");
 		operation.setPrefWidth(183);
 		operation.setSortable(false);
-		operation.setCellFactory(new Callback<TableColumn<HotelVO, HBox>, TableCell<HotelVO, HBox> >(){
+		operation.setCellFactory(new Callback<TableColumn<HotelInfoVO, HBox>, TableCell<HotelInfoVO, HBox> >(){
 
 			@Override
-			public TableCell<HotelVO, HBox> call(TableColumn<HotelVO, HBox> col) {
-				return new TableCell<HotelVO, HBox>(){
+			public TableCell<HotelInfoVO, HBox> call(TableColumn<HotelInfoVO, HBox> col) {
+				return new TableCell<HotelInfoVO, HBox>(){
 					
 					@Override
 					protected void updateItem(HBox item, boolean empty){
 						if (!empty){
 							item = new HBox();
 							item.setSpacing(5);
-							Button modefyButton = new Button("修改工作人员");
+							Button modifyButton = new Button("查看工作人员");
 							Button delButton = new Button("删除酒店");
-							modefyButton.setPadding(new Insets(2, 5, 2, 5));
+							modifyButton.setPadding(new Insets(2, 5, 2, 5));
 							delButton.setPadding(new Insets(2, 5, 2, 5));
+							
+							modifyButton.setOnAction(e -> {
+								UserVO temp = WebAdminController.getInstance()
+										.getUser(table.getItems().get(this.getTableRow().getIndex()).get_stuff_id());
+								WebAdminController.getInstance().setUserInfoPane(temp, BrowseHotelPane.this);
+							});
+							
 							delButton.setOnAction(e -> {
 								Alert alert = new Alert(AlertType.CONFIRMATION);
 								alert.initModality(Modality.APPLICATION_MODAL);
@@ -135,10 +146,11 @@ public class BrowseHotelPane extends VBox{
 								alert.getDialogPane().setContentText("确认删除？");
 								alert.showAndWait().filter(response -> response == ButtonType.OK)
 									.ifPresent(response -> {
+										WebAdminController.getInstance().delHotel(table.getItems().get(this.getTableRow().getIndex()));
 										table.getItems().remove(this.getTableRow().getIndex());
 									});
 							});
-							item.getChildren().addAll(modefyButton, delButton);
+							item.getChildren().addAll(modifyButton, delButton);
 						} else
 							item = null;
 						setGraphic(item);
@@ -148,11 +160,17 @@ public class BrowseHotelPane extends VBox{
 			
 		});
 		
-		table.getColumns().setAll(name, staff, staffNumber, operation); 
+		table.getColumns().setAll(name, number, staff, operation); 
 		table.setPlaceholder(new Text("请补充条件并点击筛选。"){{setStyle("-fx-fill: gray");}});
 		
 		getChildren().addAll(v, table);
 		
 		addButton.setOnAction(e -> WebAdminController.getInstance().setAddHotelPane());
+		
+		filterButton.setOnAction(e -> {
+			table.getItems().clear();
+			table.getItems().addAll(WebAdminController.getInstance()
+					.filterHotel(provinceChoiceBox.getValue(), cityChoiceBox.getValue(), areaChoiceBox.getValue(), textField.getText()));
+		});
 	}
 }

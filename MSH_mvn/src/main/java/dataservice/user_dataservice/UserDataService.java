@@ -7,8 +7,6 @@ import tools.ResultMessage;
 
 public interface UserDataService {
 
-	public ArrayList<UserPO> getAll();
-
 	public UserPO get(String name) throws RemoteException;
 
 	public ResultMessage add(UserPO userPO) throws RemoteException;
