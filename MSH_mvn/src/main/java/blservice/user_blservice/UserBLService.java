@@ -16,6 +16,11 @@ public interface UserBLService {
 	
 	public UserVO get(String name);
 
+	/**
+	 * 新增用户
+	 * @param userVO
+	 * @return 系统为新增用户分配的ID
+	 */
 	public int add(UserVO userVO);
 
 	public ResultMessage modify(UserVO userVO);

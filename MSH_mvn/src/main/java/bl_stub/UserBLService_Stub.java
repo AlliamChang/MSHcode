@@ -17,7 +17,9 @@ public class UserBLService_Stub implements UserBLService {
 
 	public UserVO get(String name) {
 		// TODO Auto-generated method stub
-		return "123".equals(name) ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.CUSTOMER) : null;
+		return "123".equals(name) 
+				? new UserVO( "123","456" , "小红", "女", "18360977498", "南京大学教育超市北边收银台", 0, 0, 0, UserType.COMPANY_CUSTOMER) 
+				: null;
 	}
 
 	public int add(UserVO userVO) {

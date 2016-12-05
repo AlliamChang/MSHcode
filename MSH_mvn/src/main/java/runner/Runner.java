@@ -17,7 +17,6 @@ public class Runner extends Application {
 	}
 	
 	public static void main(String []args){
-		new OrderListPane(1000,"七天酒店",null);
 		launch(args);
 	}
 

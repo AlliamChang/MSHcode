@@ -73,7 +73,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 		imageNameBox.getChildren().addAll(userImage, accountLabel);
 		getChildren().add(imageNameBox);
 		AnchorPane.setRightAnchor(imageNameBox, 70.0);
-		AnchorPane.setTopAnchor(imageNameBox, 70.0);
+		AnchorPane.setTopAnchor(imageNameBox, 90.0);
 		
 		confirmButton = new Button("确定");
 		cancelButton = new Button("取消");

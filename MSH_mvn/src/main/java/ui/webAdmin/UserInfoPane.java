@@ -30,6 +30,7 @@ public class UserInfoPane extends AnchorPane{
 	private Button modifyButton, deleteButton;
 	private Parent lastPane;
 	private BackButton backButton;
+	private TextFlow typeFlow;
 	
 	public UserInfoPane(UserVO user, Parent lastPane){
 		super();
@@ -47,11 +48,16 @@ public class UserInfoPane extends AnchorPane{
 		nameLabel = new Label("姓名：" + user.getName());
 		genderLabel = new Label("性别：" + user.getGender());
 		phoneNumberLabel = new Label("联系电话：" + user.getNumber());
+		typeFlow = new TextFlow();
+		typeFlow.getChildren().add(typeLabel);
+		if (user.getType() == UserType.COMPANY_CUSTOMER)
+			typeFlow.getChildren().add(new Text(" (" + user.getCompany() + ")"){{setStyle("-fx-fill: gray");}});
 		detailBox = new VBox();
 		detailBox.setSpacing(20);
-		detailBox.getChildren().addAll(typeLabel, nameLabel, genderLabel, phoneNumberLabel);
+		
+		detailBox.getChildren().addAll(typeFlow, nameLabel, genderLabel, phoneNumberLabel);
 
-		if (user.getType() == UserType.CUSTOMER){
+		if (user.getType() == UserType.CUSTOMER || user.getType() == UserType.COMPANY_CUSTOMER){
 			levelLabel = new Label("会员等级：" + String.valueOf(user.getLevel()));
 			creditLabel = new Label("信用值：" + String.valueOf(user.getCredit()));
 			creditChangeLabel = new Label("信用记录：");
@@ -80,7 +86,7 @@ public class UserInfoPane extends AnchorPane{
 		AnchorPane.setLeftAnchor(detailBox, 70.0);
 		getChildren().add(imageNameBox);
 		AnchorPane.setRightAnchor(imageNameBox, 70.0);
-		AnchorPane.setTopAnchor(imageNameBox, 70.0);
+		AnchorPane.setTopAnchor(imageNameBox, 90.0);
 		
 		hBox = new HBox();
 		hBox.setSpacing(30);
@@ -123,6 +129,8 @@ public class UserInfoPane extends AnchorPane{
 		switch(userType){
 		case CUSTOMER:
 			return "普通用户";
+		case COMPANY_CUSTOMER:
+			return "企业用户";
 		case HOTEL_STAFF:
 			return "酒店工作人员";
 		case WEB_ADMIN:

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import tools.UserType;
 
 public class UserVO {
-	private String name, account, password, gender, number;
-	private int level, credit, ID, hotelID;
+	private String name, account, password, gender, number, company;
+	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
 	public static String INIT_PASSWORD = "123456";
 
@@ -19,12 +19,26 @@ public class UserVO {
 		this.type = type;
 	}
 
+	public UserVO(String account, String password, String name, String gender,
+			String number, int year, int month, int day, UserType type){
+		this(account, password, name, gender, number, type);
+		this.year = year;
+		this.month = month;
+		this.day = day;
+	}
+	
+	public UserVO(String account, String password, String name, String gender,
+			String number, String company, int year, int month, int day, UserType type){
+		this(account, password, name, gender, number, year, month, day, type);
+		this.company = company;
+	}
+	
 	public int getID() {
 		return ID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setID(int ID) {
+		this.ID = ID;
 	}
 	
 	public String getNumber() {
@@ -97,5 +111,13 @@ public class UserVO {
 
 	public void setHotelID(int hotelID) {
 		this.hotelID = hotelID;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
 }

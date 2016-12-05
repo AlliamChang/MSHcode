@@ -12,14 +12,16 @@ import blservice.user_blservice.UserBLService;
 
 public class UserBL implements UserBLService{
 	private UserDataService uds;
-	
-	public UserBL(){
-		uds = new UserDataService_Stub();
-	}
-	
+
 	@Override
 	public List<UserVO> getAllMarketers() {
-		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserVO get(int ID) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -29,9 +31,6 @@ public class UserBL implements UserBLService{
 		return null;
 	}
 
-	/**
-	 * 返回ID
-	 */
 	@Override
 	public int add(UserVO userVO) {
 		// TODO Auto-generated method stub
