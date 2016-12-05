@@ -3,11 +3,9 @@ package ui.webAdmin;
 import java.util.ArrayList;
 import java.util.List;
 
-import tools.ChangeReason;
-import tools.Date;
 import tools.UserType;
 import ui.utility.MainPane;
-import ui.utility.MyRetreatButton;
+import ui.utility.MyImageView;
 import vo.CreditVO;
 import vo.UserVO;
 import javafx.geometry.Insets;
@@ -16,7 +14,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.image.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import javafx.stage.Modality;
@@ -72,12 +69,12 @@ public class UserInfoPane extends AnchorPane{
 			creditChangeBox.getChildren().addAll(Record.makeRecords((WebAdminController.getInstance().getCredit(user))));
 			detailBox.getChildren().addAll(levelLabel, creditLabel, creditChangeLabel, sp);
 		}
-		ImageView userImage = new ImageView(WebAdminController.getInstance().getImage(user));
+		MyImageView userImage = new MyImageView(user.getImage());
 		userImage.setFitWidth(200); userImage.setFitHeight(200);
-		accountLabel = new Label(user.getAccount());
+		accountLabel = new Label(user.getAccount() != null ? user.getAccount() : ("ID: " + String.format("%08d", user.getID())));
 		accountLabel.setPrefWidth(200);
 		accountLabel.setMaxWidth(200);
-		accountLabel.setStyle("-fx-font-size: 40px; -fx-alignment: center;");
+		accountLabel.setStyle("-fx-font-size: 30px; -fx-alignment: center;");
 		imageNameBox = new VBox();
 		imageNameBox.getChildren().addAll(userImage, accountLabel);
 		

@@ -160,10 +160,6 @@ public class WebAdminController {
 		return userBLService.getCredit(user.getID());
 	}
 	
-	public Image getImage(UserVO user){
-		return userBLService.getImage(user.getID());
-	}
-	
 	public ObservableList<UserVO> getAllMarketers(){
 		return FXCollections.observableArrayList(userBLService.getAllMarketers());
 	}

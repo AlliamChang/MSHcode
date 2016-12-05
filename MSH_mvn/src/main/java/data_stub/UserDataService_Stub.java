@@ -2,6 +2,7 @@ package data_stub;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 import po.userPO.UserPO;
 import tools.ResultMessage;
@@ -17,9 +18,21 @@ public class UserDataService_Stub implements UserDataService {
 	}
 
 	@Override
-	public ResultMessage add(UserPO userPO) throws RemoteException {
+	public UserPO get(int ID) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<UserPO> getAllMarketers() throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int add(UserPO userPO) throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -29,10 +42,9 @@ public class UserDataService_Stub implements UserDataService {
 	}
 
 	@Override
-	public ResultMessage delete(String name) throws RemoteException {
+	public ResultMessage delete(int ID) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

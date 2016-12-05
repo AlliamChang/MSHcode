@@ -1,28 +1,26 @@
 package po.userPO;
 
-import java.util.ArrayList;
-
 import tools.UserType;
+import vo.UserVO;
 
 public class UserPO {
-	private String name, account, password, gender, number;
-	private int level, credit;
+	private String name, account, password, gender, number, company;
+	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
-	private ArrayList<String> creditChange;
+	public static String INIT_PASSWORD = "123456";
 
-	public UserPO(String account, String password, String name, String gender, String number, UserType type, int level,
-			int credit) {
-		this.account = account;
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-		this.number = number;
-		this.type = type;
-		this.level = level;
-		this.credit = credit;
-		creditChange = new ArrayList<String>();
+	public UserPO(UserVO userVO){
+		
+	}
+	
+	public int getID() {
+		return ID;
 	}
 
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+	
 	public String getNumber() {
 		return number;
 	}
@@ -45,6 +43,30 @@ public class UserPO {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
 	}
 
 	public String getName() {
@@ -87,12 +109,26 @@ public class UserPO {
 		this.credit = credit;
 	}
 
-	public ArrayList<String> getCreditChange() {
-		return creditChange;
+	public int getHotelID() {
+		return hotelID;
 	}
 
-	public void setCreditChange(ArrayList<String> creditChange) {
-		this.creditChange = creditChange;
+	public void setHotelID(int hotelID) {
+		this.hotelID = hotelID;
 	}
 
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	
+	public UserVO toVO(){
+		UserVO ret = new UserVO(account, password, name, gender,
+				number, company, year, month, day, type);
+		ret.setID(ID); ret.setHotelID(hotelID);
+		return ret;
+	}
 }

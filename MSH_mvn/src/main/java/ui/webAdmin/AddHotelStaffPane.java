@@ -5,7 +5,6 @@ import ui.utility.MainPane;
 import vo.UserVO;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -100,6 +99,6 @@ public class AddHotelStaffPane extends AnchorPane {
 	}
 	
 	public UserVO createStaff(){
-		return new UserVO(null, UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.HOTEL_STAFF);
+		return new UserVO(UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.HOTEL_STAFF);
 	}
 }

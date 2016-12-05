@@ -3,7 +3,6 @@ package ui.webAdmin;
 import tools.UserType;
 import ui.utility.MainPane;
 import vo.UserVO;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -80,7 +79,7 @@ public class AddMarketerPane extends AnchorPane{
 		
 		confirm.setOnAction(event -> {
 			WebAdminController.getInstance().addUser(
-					new UserVO(null, UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.MARKETER));
+					new UserVO(UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.MARKETER));
 			Alert alert = new Alert(AlertType.INFORMATION, "");
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.getDialogPane().setContentText("添加成功！\n初始密码是 \''123456\''");

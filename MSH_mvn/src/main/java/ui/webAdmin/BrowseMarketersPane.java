@@ -1,12 +1,9 @@
 package ui.webAdmin;
 
-import tools.UserType;
 import ui.utility.MainPane;
-import vo.HotelInfoVO;
 import vo.UserVO;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -14,7 +11,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
-import javafx.scene.text.*;
 import javafx.stage.Modality;
 import javafx.util.Callback;
 

@@ -1,12 +1,11 @@
 package ui.webAdmin;
 
-import tools.UserType;
 import ui.utility.MainPane;
+import ui.utility.MyImageView;
 import vo.UserVO;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 
@@ -15,7 +14,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 	private TextField nameField, numberField;
 	private ChoiceBox<String> genderBox;
 	private GridPane grid;
-	private ImageView userImage;
+	private MyImageView userImage;
 	private VBox imageNameBox;
 	private HBox buttonBox;
 	private Button confirmButton, cancelButton;
@@ -63,12 +62,12 @@ public class ModifyUserInfoPane extends AnchorPane{
 		AnchorPane.setLeftAnchor(grid, 70.0);
 		
 
-		userImage = new ImageView(WebAdminController.getInstance().getImage(user));
+		userImage = new MyImageView(user.getImage());
 		userImage.setFitWidth(200); userImage.setFitHeight(200);
-		accountLabel = new Label(user.getAccount());
+		accountLabel = new Label(user.getAccount() != null ? user.getAccount() : ("ID: " + String.format("%08d", user.getID())));
 		accountLabel.setPrefWidth(200);
 		accountLabel.setMaxWidth(200);
-		accountLabel.setStyle("-fx-font-size: 40px; -fx-alignment: center;");
+		accountLabel.setStyle("-fx-font-size: 30px; -fx-alignment: center;");
 		imageNameBox = new VBox();
 		imageNameBox.getChildren().addAll(userImage, accountLabel);
 		getChildren().add(imageNameBox);

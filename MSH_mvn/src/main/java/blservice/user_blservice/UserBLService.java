@@ -1,9 +1,7 @@
 package blservice.user_blservice;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.image.Image;
 import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
@@ -19,7 +17,7 @@ public interface UserBLService {
 	/**
 	 * 新增用户
 	 * @param userVO
-	 * @return 系统为新增用户分配的ID
+	 * @return 系统为新增用户分配的ID，若添加失败返回-1。
 	 */
 	public int add(UserVO userVO);
 
@@ -28,10 +26,6 @@ public interface UserBLService {
 	public ResultMessage delete(int ID);
 	
 	public List<CreditVO> getCredit(int ID);
-	
-	public Image getImage(int ID);
-	
-	public ResultMessage modifyPassword(int ID, String password);
 	
 	public List<String> getReservationHistory(int ID);
 }

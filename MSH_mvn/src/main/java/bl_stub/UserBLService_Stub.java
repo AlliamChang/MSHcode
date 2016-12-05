@@ -18,7 +18,7 @@ public class UserBLService_Stub implements UserBLService {
 	public UserVO get(String name) {
 		// TODO Auto-generated method stub
 		return "123".equals(name) 
-				? new UserVO( "123","456" , "小红", "女", "18360977498", "南京大学教育超市北边收银台", 0, 0, 0, UserType.COMPANY_CUSTOMER) 
+				? new UserVO( "123", "456" , "小红", "女", "18360977498", "南京大学教育超市北边收银台", 0, 0, 0, UserType.COMPANY_CUSTOMER, null) 
 				: null;
 	}
 
@@ -46,13 +46,8 @@ public class UserBLService_Stub implements UserBLService {
 
 	@Override
 	public List<UserVO> getAllMarketers() {
-		return Arrays.asList(new UserVO("marketer1", "123", "郑晓峰", "男", "15050582962", UserType.MARKETER){{setID(1);}},
-				new UserVO("marketer2", "123", "郑皓铭", "男", "15011112962", UserType.MARKETER){{setID(2);}});
-	}
-
-	@Override
-	public Image getImage(int ID) {
-		return new Image(getClass().getResource("/image/用户.png").toExternalForm());
+		return Arrays.asList(new UserVO("123", "郑晓峰", "男", "15050582962", UserType.MARKETER){{setID(1);}},
+				new UserVO("123", "郑皓铭", "男", "15011112962", UserType.MARKETER){{setID(2);}});
 	}
 
 	@Override
@@ -70,6 +65,6 @@ public class UserBLService_Stub implements UserBLService {
 	@Override
 	public UserVO get(int ID) {
 		// TODO Auto-generated method stub
-		return ID == 1 ? new UserVO( "123","456" , "angel", "女", "18360977498", UserType.HOTEL_STAFF) : null;
+		return ID == 1 ? new UserVO("456" , "angel", "女", "18360977498", UserType.HOTEL_STAFF) : null;
 	}
 }
