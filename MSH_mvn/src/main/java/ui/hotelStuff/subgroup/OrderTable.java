@@ -16,11 +16,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -29,6 +32,8 @@ import javafx.util.Callback;
 import javafx.util.StringConverter;
 import tools.Date;
 import tools.OrderState;
+import ui.hotelStuff.CheckinInfoPane;
+import ui.hotelStuff.OrderListPane;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import vo.OrderVO;
@@ -36,17 +41,19 @@ import vo.OrderVO;
 public class OrderTable extends TableView{
 	
 	protected final ObservableList<OrderVO> data;
+	private OrderListPane parent;
 	
 	/**
 	 * 建立订单列表
 	 * @param orderList
 	 */
-	public OrderTable(List<OrderVO> orderList){
+	public OrderTable(List<OrderVO> orderList,OrderListPane parent){
 		super();
 		data = FXCollections.observableArrayList();
 		for(int i = 0; i < orderList.size(); i ++){
 			data.add(orderList.get(i));
 		}
+		this.parent = parent;
 		this.init();
 	}
 	
@@ -156,6 +163,7 @@ public class OrderTable extends TableView{
 		this.getColumns().addAll(orderId,firstBooker,checkin,preCheckIn,orderState,orderOp);
 		this.setPadding(new Insets(10,10,10,10));
 		
+		
 	}
 	
 	public void filter(String id,String fb,String in,String preIn,String state){
@@ -178,6 +186,38 @@ public class OrderTable extends TableView{
 	public void clear(){
 		this.setItems(data);
 	}
+	
+	private <T> void addTooltipToRows(TableRow<OrderVO> row) {
+		if(row != null){
+			OrderVO o = (OrderVO)this.getItems().get(row.getIndex());
+			Tooltip tip = new Tooltip();
+			StringBuilder message = new StringBuilder();
+			message.append("住客信息：\n");
+			for(int i = 0; i < o.getBooker().length; i ++){
+				message.append("   入住客人" + (i+1) + "：" + o.getBooker()[i] + "\n");
+				message.append("   入住客人" + (i+1) + "：" + o.getBookerPhone()[i] + "\n");
+			}
+			message.append("入住信息：\n");
+			message.append("   入住房型：" +o.getRoomStyle() + "\n");
+			message.append("   房间数量：" + o.getRoomNum() + "\n");
+			message.append("   入住天数：" + o.getDays() + "\n");
+			message.append("\n订单总价：" + o.getPrice());
+			tip.setText(message.toString());
+			row.setTooltip(tip);
+			row.setOnMouseClicked(e -> {
+				tip.show(row, e.getScreenX(), e.getScreenY());
+				
+			});
+			row.setOnMouseExited(e -> {
+				System.out.println(2);
+			});
+//			row.setone(e -> {
+//				System.out.println(2);
+//				tip.hide();
+//				tip.setAutoHide(true);
+//			});
+		}
+	}
 
 	private class ExecuteCell extends TableCell<OrderVO,String>{
 		// a button for adding a new person.
@@ -196,6 +236,7 @@ public class OrderTable extends TableView{
 	    protected void updateItem(String item, boolean empty) {
 	      super.updateItem(item, empty);
 	      if (!empty) {
+	    	OrderTable.this.addTooltipToRows(this.getTableRow());
 	        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 	        setGraphic(paddedButton);
 	        if(paddedButton.getChildren().size() > 0){
@@ -246,13 +287,16 @@ public class OrderTable extends TableView{
 	    			alert.setContentText("确定要入住吗？");
 	    			alert.showAndWait().ifPresent(response -> {
 	    				if(response == ButtonType.OK){
-	    					
+	    					int i = this.getTableRow().getIndex();
+	    					OrderVO o = (OrderVO)table.getItems().get(i);
+	    					MainPane.getInstance().setRightPane(new CheckinInfoPane(parent,o.getBooker()[0],o.getRoomStyle(),o.getPreCheckin().getLocalDate(),o.getPreCheckin().getLocalDate().plusDays(o.getDays()),o.getId()));
 	    				}
 	    			});
 	        	});
 	            paddedButton.getChildren().add(addButton);
 	        }
 	      }else{
+	    	  
 	    	  this.setGraphic(null);
 	      }
 	    }

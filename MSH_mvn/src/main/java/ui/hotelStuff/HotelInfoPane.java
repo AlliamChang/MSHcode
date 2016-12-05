@@ -70,14 +70,17 @@ public class HotelInfoPane extends AnchorPane{
 		Label tradAreaLabel = new Label("所属商圈：");
 		infoPane.add(tradAreaLabel, 0, 3);
 		
+		Label starLabel = new Label("酒店星级：");
+		infoPane.add(starLabel, 0, 4);
+		
 		Label openLabel = new Label("开业时间：");
-		infoPane.add(openLabel, 0, 4);
+		infoPane.add(openLabel, 0, 5);
 		
 		Label faciLabel = new Label("酒店设施：");
-		infoPane.add(faciLabel, 0, 5);
+		infoPane.add(faciLabel, 0, 6);
 		
 		Label introLable = new Label("酒店简介：");
-		infoPane.add(introLable, 0, 6);
+		infoPane.add(introLable, 0, 7);
 		
 		Text adressText = new Text(hotelInfo.getAdress());
 		infoPane.add(adressText, 1, 0);
@@ -91,8 +94,11 @@ public class HotelInfoPane extends AnchorPane{
 		Text tradAreaText = new Text(hotelInfo.getTradingArea());
 		infoPane.add(tradAreaText, 1, 3);
 		
+		Text starText = new Text();
+		infoPane.add(starText, 1, 4);
+		
 		Text openLabelText = new Text(hotelInfo.getYear()+"年开业");
-		infoPane.add(openLabelText, 1, 4);
+		infoPane.add(openLabelText, 1, 5);
 		
 		Text faciText = new Text();
 		StringBuilder temp = new StringBuilder();
@@ -103,7 +109,7 @@ public class HotelInfoPane extends AnchorPane{
 		}
 		faciText.setText(temp.toString());
 		faciText.setWrappingWidth(250);
-		infoPane.add(faciText, 1, 5);
+		infoPane.add(faciText, 1, 6);
 		
 		Text introText = new Text(hotelInfo.getIntroduction());
 		introText.setWrappingWidth(320);
@@ -112,7 +118,7 @@ public class HotelInfoPane extends AnchorPane{
 		scro.setPrefSize(340, 150);
 		scro.setContent(introText);
 		scro.setStyle("-fx-background-color:white");
-		infoPane.add(scro, 1, 6);
+		infoPane.add(scro, 1, 7);
 		
 		for(int i = 0; i < infoPane.getChildren().size()-1; i ++)
 			GridPane.setValignment(infoPane.getChildren().get(i), VPos.BASELINE);

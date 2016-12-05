@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
@@ -52,11 +53,11 @@ public class OrderListPane extends TabPane{
 		
 		this.todayOrderTab = new Tab();
 		this.todayOrderTab.setText("当天订单");
-		this.todayOrderTable = new OrderTable(HotelPaneController.getInstance().getTodayOrder());
+		this.todayOrderTable = new OrderTable(HotelPaneController.getInstance().getTodayOrder(),this);
 		
 		this.allOrderTab = new Tab();
 		this.allOrderTab.setText("所有订单");
-		this.allOrderTable = new OrderTable(HotelPaneController.getInstance().getAllOrder());
+		this.allOrderTable = new OrderTable(HotelPaneController.getInstance().getAllOrder(),this);
 
 		this.initAllOrderPane();
 		
@@ -101,11 +102,16 @@ public class OrderListPane extends TabPane{
 		RadioButton unusual = new RadioButton("异常订单");
 		unusual.setToggleGroup(pickState);
 		
+		RadioButton cancel = new RadioButton("已撤销");
+		cancel.setToggleGroup(pickState);
+		
 		HBox pickButton = new HBox(3);
 		GridPane.setHalignment(pickButton, HPos.CENTER);
 		pickButton.setPadding(new Insets(0,8,0,8));
 		pickButton.setMaxSize(260, 20);
-		pickButton.getChildren().addAll(unexecuted,executed,unusual);
+		pickButton.getChildren().addAll(unexecuted,executed,unusual,cancel);
+		pickButton.setStyle("-fx-font-size:11");
+		pickButton.setAlignment(Pos.CENTER);
 		
 		Button search = new Button("查询");
 		GridPane.setHalignment(search, HPos.CENTER);

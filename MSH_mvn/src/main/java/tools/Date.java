@@ -26,6 +26,9 @@ public class Date {
 		return date;
 	}
 	
+	public LocalDate getLocalDate(){
+		return LocalDate.of(year, month, day);
+	}
 	
 	public String plus(int days){
 		l = LocalDate.of(year, month, day);

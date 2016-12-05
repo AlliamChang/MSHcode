@@ -5,8 +5,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import tools.BedStyle;
+import tools.Date;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import vo.CheckInVO;
 import vo.HotelInfoVO;
 import vo.OrderVO;
 import vo.RoomVO;
@@ -23,6 +25,7 @@ public class HotelPaneController {
 	private static HotelPaneController controller;
 	private OrderBLService orderBL;
 	private List<OrderVO> orderList;
+	private List<String> roomStyle;
 	private long id;
 	private String hotel;
 	private final List<String> naviInfo = Arrays.asList("订单列表","客房列表","入住信息","促销策略","基本信息");
@@ -40,6 +43,7 @@ public class HotelPaneController {
 	
 	public void hotelStuffLogin(long id,String hotel,Image scul){
 
+		this.roomStyle = Arrays.asList(new String[]{"温暖大床房","经济标准间","难民六人间"});
 		this.id = id;
 		this.hotel = hotel;
 		MyNavigationBar navi= new MyNavigationBar(scul,Arrays.asList("ID:"+id,"酒店名："+hotel),naviInfo);
@@ -108,14 +112,24 @@ public class HotelPaneController {
 	 * 跳转至酒店入住信息界面
 	 */
 	public void createCheckInPane(){
-		MainPane.getInstance().setRightPane(new CheckInPane());
+		String[] roomStyle = {"温暖大床房","经济标准间","难民六人间"};
+		List<CheckInVO> stub = Arrays.asList(
+				new CheckInVO("温暖大床房","丁二玉",new Date("2016/12/05 11:11:11",true),
+						new Date("2016/12/06",false)
+						,1000000001,true,new String[]{"501","503"},2),
+				new CheckInVO("经济标准间","丁二玉",new Date("2016/12/05 11:11:11",true),
+						new Date("2016/12/06",false),0,false,new String[]{"502"},1),
+				new CheckInVO("难民六人间","丁二玉",new Date("2016/12/05 11:11:11",true),
+						new Date("2016/12/06",false)
+						,1000000001,true,new String[]{"503"},1));
+		MainPane.getInstance().setRightPane(new CheckInListPane(roomStyle,stub.iterator()));
 	}
 	
 	public Iterator<RoomVO> getRoomList(){
 		return Arrays.asList(
-				new RoomVO("阳光大床房", BedStyle.KING_SIZE_BED, 320.00, 32, 2),
-				new RoomVO("温暖双人房",BedStyle.DOUBLE_BEDS,349.00,50,2),
-				new RoomVO("拥挤六人间", BedStyle.BUNK_BED, 99.00, 90, 6)).iterator();
+				new RoomVO("温暖大床房", BedStyle.KING_SIZE_BED, 320.00, 2, 2),
+				new RoomVO("经济标准间",BedStyle.DOUBLE_BEDS,349.00,50,2),
+				new RoomVO("难民六人间", BedStyle.BUNK_BED, 99.00, 90, 6)).iterator();
 	}
 	
 	public HotelInfoVO getHotelInfo(){
@@ -134,5 +148,9 @@ public class HotelPaneController {
 	
 	public List<OrderVO> getAllOrder(){
 		return orderBL.getAllHotelOrder(id, hotel);
+	}
+	
+	public List<String> getRoomStyle(){
+		return this.roomStyle;
 	}
 }

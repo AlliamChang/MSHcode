@@ -1,9 +1,14 @@
 package ui.hotelStuff;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
@@ -14,6 +19,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -86,14 +92,17 @@ public class HotelInfoRevisePane extends AnchorPane{
 		Label tradAreaLabel = new Label("所属商圈：");
 		infoPane.add(tradAreaLabel, 0, 3);
 		
+		Label starLabel = new Label("酒店星级：");
+		infoPane.add(starLabel, 0, 4);
+		
 		Label openLabel = new Label("开业时间：");
-		infoPane.add(openLabel, 0, 4);
+		infoPane.add(openLabel, 0, 5);
 		
 		Label faciLabel = new Label("酒店设施：");
-		infoPane.add(faciLabel, 0, 5);
+		infoPane.add(faciLabel, 0, 6);
 		
 		Label introLable = new Label("酒店简介：");
-		infoPane.add(introLable, 0, 6);
+		infoPane.add(introLable, 0, 7);
 		
 		TextField adressText = new TextField(hotelInfo.getAdress());
 		adressText.setMaxWidth(200);
@@ -111,25 +120,40 @@ public class HotelInfoRevisePane extends AnchorPane{
 		tradAreaText.setMaxWidth(100);
 		infoPane.add(tradAreaText, 1, 3);
 		
+		ChoiceBox<String> starBox = new ChoiceBox<>();
+		starBox.getItems().addAll("经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华");
+		infoPane.add(starBox, 1, 4);
+		
 		TextField openLabelText = new TextField(hotelInfo.getYear()+"");
 		openLabelText.setMaxWidth(100);
-		infoPane.add(openLabelText, 1, 4);
+		infoPane.add(openLabelText, 1, 5);
 		
-		Text faciText = new Text();
-		StringBuilder temp = new StringBuilder();
+		FlowPane flow = new FlowPane(Orientation.HORIZONTAL,3,4);
+		flow.setPrefWrapLength(350);
+		List<TextField> faciText = new ArrayList<TextField>();
 		for(int i = 0; i < hotelInfo.getFacility().length; i ++){
-			temp.append(hotelInfo.getFacility()[i]);
-			if(i < hotelInfo.getFacility().length - 1)
-				temp.append("、");
+			TextField temp = new TextField(hotelInfo.getFacility()[i]);
+			temp.setMaxWidth(100);
+			faciText.add(temp);
+			flow.getChildren().add(temp);
 		}
-		faciText.setText(temp.toString());
-		faciText.setWrappingWidth(250);
-		infoPane.add(faciText, 1, 5);
+		Button addFaci = new Button("+");
+		addFaci.setMinWidth(20);
+		addFaci.setStyle("-fx-background-color:white");
+		addFaci.setOnAction(e -> {
+			TextField temp = new TextField();
+			temp.setMaxWidth(100);
+			faciText.add(temp);
+			flow.getChildren().add(flow.getChildren().size()-1, temp);
+		});
+		flow.getChildren().add(addFaci);
+		infoPane.add(flow, 1, 6);
+		
 		
 		TextArea introText = new TextArea(hotelInfo.getIntroduction());
 		introText.setPrefSize(340, 150);
 		introText.setWrapText(true);
-		infoPane.add(introText, 1, 6);
+		infoPane.add(introText, 1, 7);
 		
 		for(int i = 0; i < infoPane.getChildren().size()-1; i ++)
 			GridPane.setValignment(infoPane.getChildren().get(i), VPos.BASELINE);
@@ -151,7 +175,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 				}
 			});
 		});
-		AnchorPane.setRightAnchor(save, 130.0);
+		AnchorPane.setRightAnchor(save, 100.0);
 		AnchorPane.setBottomAnchor(save, LEFT_ANCHOR-10);
 		
 		Button cancel = new Button("取消");
@@ -168,7 +192,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 				}
 			});
 		});
-		AnchorPane.setRightAnchor(cancel, 40.0);
+		AnchorPane.setRightAnchor(cancel, 20.0);
 		AnchorPane.setBottomAnchor(cancel, LEFT_ANCHOR-10);
 		
 
