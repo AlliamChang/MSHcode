@@ -1,5 +1,8 @@
 package po.hotelPO;
 
-public class HotelPO {
+import java.io.Serializable;
+
+public class HotelPO implements Serializable{
+
 
 }
