@@ -81,6 +81,10 @@ public class CreditPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(80));
 		this.getColumnConstraints().add(new ColumnConstraints(100));
 		this.getColumnConstraints().add(new ColumnConstraints(120));
+		
+		chargeButton.setOnAction(e ->{
+			//充值事件
+		});
 	}
 
 }

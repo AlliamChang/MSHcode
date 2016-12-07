@@ -88,6 +88,10 @@ public class CancelSurePane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(20));
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(100));
+		
+		cancelButton.setOnAction(e ->{
+			//撤销后事件
+		});
 	}
 
 }

@@ -4,6 +4,8 @@ import javafx.scene.text.Font;
 import tools.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+
+import java.time.LocalDate;
 import java.util.List;
 import vo.*;
 import tools.*;
@@ -18,6 +20,7 @@ public class ModifyStrategyPane extends GridPane{
 	private static final Font normalFont=new Font("方正幼圆",20);
 	private static final String normalPeople="普通及会员";
 	private static final String vipPeople="仅限会员";
+	private static final String FONT_STYLE="-fx-font-size:20";
 	
 	private Label startLabel;
 	private Label nameLabel;
@@ -52,6 +55,7 @@ public class ModifyStrategyPane extends GridPane{
     
     public ModifyStrategyPane(StrategyVO strategy){
     	super();
+    	this.strategy=strategy;
     	this.start();
     	
     }
@@ -111,14 +115,19 @@ public class ModifyStrategyPane extends GridPane{
 		ObservableList peopleList=FXCollections.observableArrayList(normalPeople,vipPeople);
 		
 		cityBox=new ChoiceBox();
+		cityBox.setStyle(FONT_STYLE);
 		areaBox=new ChoiceBox();
+		areaBox.setStyle(FONT_STYLE);
 		costBox=new ChoiceBox();
+		costBox.setStyle(FONT_STYLE);
 		peopleBox=new ChoiceBox();
+		peopleBox.setStyle(FONT_STYLE);
 		cityBox.setItems(cityList);
 		areaBox.setItems(areaList);
 		costBox.setItems(costList);
 		peopleBox.setItems(peopleList);
 		modifyButton=new Button("修改");
+		modifyButton.setFont(normalFont);
 		this.setHalignment(cityBox, HPos.RIGHT);
 		this.setValignment(cityBox, VPos.CENTER);
 		this.setHalignment(areaBox, HPos.RIGHT);
@@ -131,7 +140,9 @@ public class ModifyStrategyPane extends GridPane{
 		this.setValignment(modifyButton, VPos.CENTER);
 		
 		startDate=new MyDatePicker();
+		startDate.setStyle(FONT_STYLE);
 		endDate=new MyDatePicker(); 
+		endDate.setStyle(FONT_STYLE);
 		
 		this.add(startLabel, 1, 1,5,1);
 	    this.add(nameLabel, 2, 2,2,1);
@@ -163,6 +174,29 @@ public class ModifyStrategyPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(130));
 		this.getColumnConstraints().add(new ColumnConstraints(90));
 		this.getColumnConstraints().add(new ColumnConstraints(150));
+		
+		
+		cityBox.getSelectionModel().select(strategy.getCity());
+		areaBox.getSelectionModel().select(strategy.getArea());
+		System.out.println(strategy.getName());
+        if(strategy.getCostType().equals(CostType.PERCENT)){
+        	costBox.getSelectionModel().select("%");
+        }
+        else
+        	costBox.getSelectionModel().select("元");
+        if(strategy.getPeople().equals(PeopleType.NORMAL)){
+        	peopleBox.getSelectionModel().select(normalPeople);
+        }
+        else
+        	peopleBox.getSelectionModel().select(vipPeople);
+		nameText.setText(strategy.getName());
+		costText.setText(strategy.getCost());
+		startDate.setValue(LocalDate.of(2016, 1, 1));//获得年月日，需要增加
+		endDate.setValue(LocalDate.of(2016, 5, 5));//需要增加
+		
+		modifyButton.setOnAction(e ->{
+			//修改策略信息
+		});
     }
     
     

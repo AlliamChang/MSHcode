@@ -31,9 +31,9 @@ public class WebsitePaneController {
 	private final OrderVO o2=new OrderVO(100,"u","h","rs",8,new String[]{"2"},new String[]{"3"},9,new Date("2016/11/11",false),
 		    OrderState.EXECUTED,true,new Date("2016/11/12",false));
 	private List<OrderVO> order=Arrays.asList(o1,o2);
-	private final StrategyVO s1=new StrategyVO("11",StrategyType.VIP,"NanJ","QiX",new Date("2016/11/11",false)
-			,new Date("2016/11/12",false),"99.00",CostType.RMB,PeopleType.NORMAL);
-	private final StrategyVO s2=new StrategyVO("11",StrategyType.CO_OPERATION,"NanJI","QiXI",new Date("2016/11/11",false)
+	private final StrategyVO s1=new StrategyVO("11",StrategyType.VIP,"南京市","栖霞区",new Date("2016/11/11",false)
+			,new Date("2016/11/12",false),"99.00",CostType.PERCENT,PeopleType.NORMAL);
+	private final StrategyVO s2=new StrategyVO("11",StrategyType.CO_OPERATION,"南京市","栖霞区",new Date("2016/11/11",false)
 			,new Date("2016/11/12",false),"99.00",CostType.RMB,PeopleType.VIP);
 	private List<StrategyVO> strategy=Arrays.asList(s1,s2);
 	private UserVO u1=new UserVO("zhr123","123","zhr","666",UserType.CUSTOMER);

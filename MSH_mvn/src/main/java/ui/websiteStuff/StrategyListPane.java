@@ -189,6 +189,7 @@ public class StrategyListPane extends GridPane{
 							while(!button[i].isSelected()){
 								i++;
 							}
+							System.out.print(i);
 							WebsitePaneController.getInstance().createModifyStrategyPane(strategy.get(i));
 						});
 						cancelButton.setOnAction(e ->{
