@@ -1,4 +1,4 @@
-package blservice.user_dao;
+package blservice.user_blservice;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
 
-public interface UserDao {
+public interface UserBLService {
 	
 	public List<UserVO> getAllMarketers();
 

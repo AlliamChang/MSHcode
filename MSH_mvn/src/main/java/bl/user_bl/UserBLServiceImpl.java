@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import blservice.user_dao.UserDao;
+import blservice.user_blservice.UserBLService;
 import po.userPO.UserPO;
 import dao.user_dao.*;
 import data_stub.CreditRecordsDAO_Stub;
@@ -14,7 +14,7 @@ import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
 
-public class UserBLServiceImpl implements UserDao{
+public class UserBLServiceImpl implements UserBLService{
 	private UserDAO uds;
 	private CreditRecordsDAO crds;
 	private HistorDAO hds;

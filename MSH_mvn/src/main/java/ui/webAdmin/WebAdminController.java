@@ -19,7 +19,7 @@ import bl.hotel_bl.HotelBL;
 import bl.user_bl.UserBLServiceImpl;
 import bl_stub.HotelBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
-import blservice.user_dao.UserDao;
+import blservice.user_blservice.UserBLService;
 
 public class WebAdminController {
 	private static WebAdminController INSTANCE;
@@ -27,7 +27,7 @@ public class WebAdminController {
 		return INSTANCE != null ? INSTANCE : (INSTANCE = new WebAdminController());
 	}
 	
-	private UserDao userBLService;
+	private UserBLService userBLService;
 	private HotelBLService hotelBLService;
 	
 	private MyNavigationBar naviBar;

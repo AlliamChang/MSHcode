@@ -2,13 +2,13 @@ package bl_driver;
 
 import java.util.ArrayList;
 
-import blservice.user_dao.UserDao;
+import blservice.user_blservice.UserBLService;
 import tools.ResultMessage;
 import tools.UserType;
 import vo.UserVO;
 
 public class UserBLService_Driver {
-	public void drive(UserDao userBLService) {
+	public void drive(UserBLService userBLService) {
 		ResultMessage rm = userBLService.add(new UserVO("֣����", "123456",
 				UserType.CUSTOMER, 0, 0));
 		System.out.println(rm);

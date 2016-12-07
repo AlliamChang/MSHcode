@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import blservice.user_dao.UserDao;
+import blservice.user_blservice.UserBLService;
 import javafx.scene.image.Image;
 import tools.ChangeReason;
 import tools.Date;
@@ -13,7 +13,7 @@ import tools.UserType;
 import vo.CreditVO;
 import vo.UserVO;
 
-public class UserBLService_Stub implements UserDao {
+public class UserBLService_Stub implements UserBLService {
 
 	public UserVO get(String account) {
 		// TODO Auto-generated method stub
