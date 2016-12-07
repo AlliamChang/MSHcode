@@ -24,7 +24,7 @@ public class PersonInfoPane extends Pane {
 	private String phone_number="18360977498";
 	private String birthday="1997-01-04";
 	private int credit_value=100,vip_level=2;
-	private String type="普通会员";
+	private String type="普通会";
 	private String sex="男";
 	private GridPane grid;
 	private static final int column=3;
@@ -99,10 +99,22 @@ public class PersonInfoPane extends Pane {
 	    Label member=new Label("会员类型:");
 	    member.setFont(f);
 	    this.grid.add(member, column, row+5);
-	    
-	    Text membercontent=new Text(type);
-	    membercontent.setFont(f);
-	    this.grid.add(membercontent, column+1, row+5);
+	    Text membercontent;
+	    if(type.equals("普通会员")||type.equals("企业会员")){
+	    	membercontent=new Text(type);
+	     	membercontent.setFont(f);
+		    this.grid.add(membercontent, column+1, row+5);
+
+	    }
+	    else{
+	    	membercontent=new Text("非会员");
+	    	membercontent.setFont(f);
+	    	this.grid.add(membercontent, column+1, row+5);
+	    	
+	    	Button register=new Button("注册");
+	    	//register.setFont(f);
+	    	this.grid.add(register, column+2, row+5);
+	    }
 	    
 	    Label vip=new Label("vip等级:");
 	    vip.setFont(f);

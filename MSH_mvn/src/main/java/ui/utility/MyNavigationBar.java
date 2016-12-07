@@ -1,10 +1,11 @@
 package ui.utility;
 
 import java.util.List;
-
+import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Toggle;
@@ -38,10 +39,22 @@ public class MyNavigationBar extends VBox {
 	 *未登录状态下的导航栏构造方法 
 	 */
 	public MyNavigationBar(){
-		super(0);
-		this.initNavi(null);
-		naviBox.setMinSize(MAX_WIDTH, MAX_HEIGHT+10);
-		this.init();
+		super(SPACE);
+		this.setPrefSize(MAX_WIDTH, MAX_HEIGHT);
+		this.setStyle(BACKGROUND_STYLE);
+		this.setStyle(BORDER_STYLE);
+		this.setAlignment(Pos.CENTER);
+		this.setSpacing(100);
+		Button login=new Button("登录");
+		login.setOnMouseClicked((MouseEvent me)->{
+			
+		});
+		Button register=new Button("注册");
+		register.setOnMouseClicked((MouseEvent me)->{
+			
+		});
+		this.getChildren().addAll(login,register);
+		
 	}
 	
 	/**

@@ -38,7 +38,7 @@ public class ReservePane extends Pane {
 		pane=new GridPane();
 		pane.setPadding(new Insets(10, 10, 10, 10));
 		pane.setHgap(10);
-		pane.setVgap(20);
+		pane.setVgap(16);
 		pane.setAlignment(Pos.TOP_LEFT);
 		//pane.setGridLinesVisible(true);
 		
@@ -73,8 +73,9 @@ public class ReservePane extends Pane {
 		out_time.setFont(f);
 		pane.add(out_time, column_index+3, row_index+2);
 		
-		DatePicker out=new MyDatePicker();
+		MyDatePicker out=new MyDatePicker();
 		out.setMaxWidth(130);
+		out.setBeforeDisable(enter);
 		pane.add(out, column_index+4, row_index+2);
 		
 		Label num=new Label("房间数量:");

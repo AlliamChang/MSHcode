@@ -20,10 +20,13 @@ import blservice.hotel_blservice.HotelBLService;
 public class CustomerPaneController {
 	private static CustomerPaneController controller;
 	private String user_name;
+	private String type="普通会员";
+	private boolean isRegistered=true;
+	private boolean isLog=true;
 	private HotelBLService HotelBL;
 	private UserBLService_Stub UserBL;
 	private Order_Stub OrderBL;
-	private final List<String> naviInfo = Arrays.asList("个人信息","我的订单","搜索");
+	private final List<String> naviInfo = Arrays.asList("搜索","个人信息","我的订单");
 	private CustomerPaneController(){
 		HotelBL=new HotelBLService_Stub();
 	}
@@ -37,9 +40,14 @@ public class CustomerPaneController {
 	//导航栏
 	public void CustomerLogin(String username,Image scul){
 		this.user_name=username;
-		MyNavigationBar navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),naviInfo);
+		MyNavigationBar navi;
+		if(!isRegistered)
+			 navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),naviInfo);
+		else
+			 navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name+"\n会员类型:"+type),naviInfo);
+		if(isLog==true){
 		MainPane.getInstance().setNavigationBar(navi);
-		this.createPersonInfoPane();
+		this.createHotelSearchPane();
 		
 		navi.getToggle().selectedToggleProperty().addListener(
 				(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) -> {
@@ -62,6 +70,11 @@ public class CustomerPaneController {
 						}
 					}
 				});
+		}else{
+			 navi=new MyNavigationBar ();
+			 MainPane.getInstance().setNavigationBar(navi);
+			 this.createHotelSearchPane();
+		}
 	}
 	//个人信息界面
 	public void createPersonInfoPane(){

@@ -43,11 +43,11 @@ public class MyOrderTable extends TableView{
 	
 	public void init(){
 		TableColumn start_time=new TableColumn("开始时间");
-		start_time.setMinWidth(width);
+		start_time.setMinWidth(width-10);
 		start_time.setCellValueFactory(new PropertyValueFactory("preCheckIn"));
 		
 		TableColumn check_out_time=new TableColumn("退房时间");
-		check_out_time.setMinWidth(width);
+		check_out_time.setMinWidth(width-10);
 		check_out_time.setCellValueFactory(new PropertyValueFactory("preCheckOut"));
 		
 		TableColumn room_type=new TableColumn("房间类型");
@@ -55,15 +55,15 @@ public class MyOrderTable extends TableView{
 		room_type.setCellValueFactory(new PropertyValueFactory("roomStyle"));
 		
 		TableColumn number=new TableColumn("数量");
-		number.setMinWidth(width);
+		number.setMinWidth(width/2);
 		number.setCellValueFactory(new PropertyValueFactory("roomNum"));
 		
 		TableColumn total=new TableColumn("总价(¥)");
-		total.setMinWidth(width);
+		total.setMinWidth(width-1);
 		total.setCellValueFactory(new PropertyValueFactory("price"));
 		
 		TableColumn state=new TableColumn("状态");
-		state.setMinWidth(width);
+		state.setMinWidth(width-10);
 		state.setCellValueFactory(new PropertyValueFactory("orderState"));
 		
 		TableColumn isEvaluated=new TableColumn("有无评价");
@@ -71,7 +71,7 @@ public class MyOrderTable extends TableView{
 		isEvaluated.setCellValueFactory(new PropertyValueFactory("evaluate"));
 		
 		TableColumn<OrderVO, String> operation = new TableColumn<OrderVO, String>("");
-		operation.setMinWidth(width);
+		operation.setMinWidth(width-10);
 		operation.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<OrderVO, String>, ObservableValue<String>>() {
 
 			@Override
@@ -117,7 +117,7 @@ public class MyOrderTable extends TableView{
 		
 		this.setItems(data);
 		this.getColumns().addAll(start_time,check_out_time,room_type,number,total,state,isEvaluated,operation);
-		this.setPrefHeight(300);
+		this.setPrefHeight(520);
 	}
 	
 	public void setList(List<String> list){

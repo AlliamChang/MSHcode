@@ -5,9 +5,11 @@ import java.util.List;
 
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -98,8 +100,8 @@ public class EvaluatePane extends Pane{
 		score.setFont(f);
 		pane.add(score, column_index, row_index+4);
 		
-		TextField grade=new TextField();
-		grade.setFont(f);
+		ChoiceBox grade=new ChoiceBox(FXCollections.observableArrayList("1","2","3","4","5"));
+		grade.getSelectionModel().selectFirst();
 		pane.add(grade,column_index+1,row_index+4);
 		
 		Label content=new Label("评价内容");
@@ -116,14 +118,14 @@ public class EvaluatePane extends Pane{
 		upload.setOnMouseClicked((MouseEvent me)->{
 			
 		});
-		pane.add(upload, column_index+5, row_index+7);
+		pane.add(upload, column_index+5, row_index+6);
 		
 		Button cancel=new Button("取消");
 		cancel.setFont(f);
 		cancel.setOnMouseClicked((MouseEvent me)->{
 			
 		});
-		pane.add(cancel,column_index+5,row_index+8);
+		pane.add(cancel,column_index+5,row_index+7);
 		
 		this.getChildren().add(pane);
 	}
