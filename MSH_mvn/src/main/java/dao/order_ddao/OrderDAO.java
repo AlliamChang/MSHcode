@@ -1,4 +1,4 @@
-package dataservice.order_dataservice;
+package dao.order_ddao;
 
 import java.util.*;
 import java.rmi.*;
@@ -9,7 +9,7 @@ import po.orderPO.OrderPO;
 import po.userPO.UserPO;
 import tools.ResultMessage;
 
-public interface OrderDataService {
+public interface OrderDAO {
 	public ResultMessage add(OrderPO order) throws RemoteException;
 
 	public List<OrderPO> userShow(UserPO user) throws RemoteException;

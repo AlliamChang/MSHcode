@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import blservice.hotel_blservice.HotelBLService;
+import blservice.strategy_blservice.StrategyBLService;
 import javafx.scene.image.Image;
 import tools.BedStyle;
 import tools.ResultMessage;
@@ -13,8 +15,6 @@ import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.HotelVO;
 import vo.RoomVO;
-import blservice.hotel_blservice.HotelBLService;
-import blservice.strategy_blservice.StrategyBLService;
 
 public class HotelBLService_Stub implements HotelBLService {
 

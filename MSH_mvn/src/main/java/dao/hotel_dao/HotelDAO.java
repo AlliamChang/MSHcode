@@ -1,10 +1,10 @@
-package dataservice.hotel_dataservice;
+package dao.hotel_dao;
 
 import java.rmi.RemoteException;
 
 import po.hotelPO.*;
 
-public interface Hotel_dataService {
+public interface HotelDAO {
 	public HotelPO find(String id) throws RemoteException;
 
 	public void add(HotelPO po) throws RemoteException;

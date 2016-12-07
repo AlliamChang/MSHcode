@@ -107,7 +107,7 @@ public class UserInfoPane extends AnchorPane{
 		});
 		hBox.getChildren().add(modifyButton);
 		hBox.getChildren().add(deleteButton);
-		if (user.getType() == UserType.HOTEL_STAFF)
+		if (user.getType() == UserType.HOTEL_STAFF || user.getType() == UserType.WEB_ADMIN)
 			deleteButton.setDisable(true);
 		
 

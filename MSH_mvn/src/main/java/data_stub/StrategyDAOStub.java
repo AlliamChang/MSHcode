@@ -1,9 +1,9 @@
 package data_stub;
-import dataservice.strategy_dataservice.*;
+import dao.strategy_dao.*;
 import po.strategyPO.*;
 import tools.*;
 
-public class StrategyData_Stub implements StrategyDataService{
+public class StrategyDAOStub implements StrategyDAO{
 	
 	public StrategyPO getStrategyType(){
 		return null;

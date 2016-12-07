@@ -1,10 +1,10 @@
-package dataservice.strategy_dataservice;
+package dao.strategy_dao;
 
 import po.strategyPO.*;
 
 import tools.*;
 
-public interface StrategyDataService {
+public interface StrategyDAO {
     public StrategyPO getStrategyType();
 	
 	public StrategyPO getName();

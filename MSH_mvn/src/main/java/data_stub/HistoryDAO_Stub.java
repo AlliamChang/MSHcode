@@ -3,9 +3,9 @@ package data_stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import dataservice.user_dataservice.HistoryDataService;
+import dao.user_dao.HistorDAO;
 
-public class HistoryDataService_Stub implements HistoryDataService{
+public class HistoryDAO_Stub implements HistorDAO{
 
 	@Override
 	public List<String> getHistory(int ID) throws RemoteException {

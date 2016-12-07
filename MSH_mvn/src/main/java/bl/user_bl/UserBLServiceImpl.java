@@ -4,25 +4,25 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import blservice.user_dao.UserDao;
 import po.userPO.UserPO;
-import data_stub.CreditRecordsDataService_Stub;
-import data_stub.HistoryDataService_Stub;
-import data_stub.UserDataService_Stub;
-import dataservice.user_dataservice.*;
+import dao.user_dao.*;
+import data_stub.CreditRecordsDAO_Stub;
+import data_stub.HistoryDAO_Stub;
+import data_stub.UserDAOStub;
 import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
-import blservice.user_blservice.UserBLService;
 
-public class UserBL implements UserBLService{
-	private UserDataService uds;
-	private CreditRecordsDataService crds;
-	private HistoryDataService hds;
+public class UserBLServiceImpl implements UserDao{
+	private UserDAO uds;
+	private CreditRecordsDAO crds;
+	private HistorDAO hds;
 
-	public UserBL(){
-		uds = new UserDataService_Stub();
-		crds = new CreditRecordsDataService_Stub();
-		hds = new HistoryDataService_Stub();
+	public UserBLServiceImpl(){
+		uds = new UserDAOStub();
+		crds = new CreditRecordsDAO_Stub();
+		hds = new HistoryDAO_Stub();
 	}
 	
 	@Override
@@ -42,7 +42,8 @@ public class UserBL implements UserBLService{
 	@Override
 	public UserVO get(int ID) {
 		try {
-			return uds.get(ID).toVO();
+			UserPO temp = uds.get(ID);
+			return null == temp ? null : uds.get(ID).toVO();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -50,9 +51,10 @@ public class UserBL implements UserBLService{
 	}
 
 	@Override
-	public UserVO get(String name) {
+	public UserVO get(String account) {
 		try {
-			return uds.get(name).toVO();
+			UserPO result = uds.get(account);
+			return null == result ? null : uds.get(account).toVO();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

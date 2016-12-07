@@ -6,11 +6,11 @@ import java.util.List;
 
 import po.hotelPO.*;
 import po.userPO.*;
-import dataservice.order_dataservice.OrderDataService;
+import dao.order_ddao.OrderDAO;
 import po.orderPO.OrderPO;
 import tools.ResultMessage;
 
-public class OrderData_Stub implements OrderDataService {
+public class OrderDAOStub implements OrderDAO {
 
 	public ResultMessage add(OrderPO order) throws RemoteException {
 		// TODO Auto-generated method stub

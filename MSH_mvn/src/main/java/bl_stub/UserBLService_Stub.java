@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import blservice.user_dao.UserDao;
 import javafx.scene.image.Image;
 import tools.ChangeReason;
 import tools.Date;
@@ -11,13 +12,12 @@ import tools.ResultMessage;
 import tools.UserType;
 import vo.CreditVO;
 import vo.UserVO;
-import blservice.user_blservice.UserBLService;
 
-public class UserBLService_Stub implements UserBLService {
+public class UserBLService_Stub implements UserDao {
 
-	public UserVO get(String name) {
+	public UserVO get(String account) {
 		// TODO Auto-generated method stub
-		return "123".equals(name) 
+		return "123".equals(account) 
 				? new UserVO( "123", "456" , "小红", "女", "18360977498", "南京大学教育超市北边收银台", 0, 0, 0, UserType.COMPANY_CUSTOMER, null) 
 				: null;
 	}
@@ -48,12 +48,6 @@ public class UserBLService_Stub implements UserBLService {
 	public List<UserVO> getAllMarketers() {
 		return Arrays.asList(new UserVO("123", "郑晓峰", "男", "15050582962", UserType.MARKETER){{setID(1);}},
 				new UserVO("123", "郑皓铭", "男", "15011112962", UserType.MARKETER){{setID(2);}});
-	}
-
-	@Override
-	public ResultMessage modifyPassword(int ID, String password) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
 	}
 
 	@Override

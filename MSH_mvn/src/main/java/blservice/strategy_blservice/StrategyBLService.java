@@ -12,12 +12,6 @@ public interface StrategyBLService {
 	
 	public StrategyVO getEndTime();
 	
-	public VipPlaceDiscountVO getVipPlaceDiscount();
-	
-	public RankDiscountVO getRankDiscount();
-
-	public RankVO getRank();
-	
 	public ResultMessage setBirthDiscount(int cost);
 	
 	public ResultMessage setPluralDiscount(int cost);

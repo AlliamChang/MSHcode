@@ -1,4 +1,4 @@
-package dataservice.user_dataservice;
+package dao.user_dao;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import po.userPO.*;
 import tools.ResultMessage;
 
-public interface UserDataService {
+public interface UserDAO {
 
-	public UserPO get(String name) throws RemoteException;
+	public UserPO get(String account) throws RemoteException;
 	
 	public UserPO get(int ID) throws RemoteException;
 	

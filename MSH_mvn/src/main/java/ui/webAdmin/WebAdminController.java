@@ -10,16 +10,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
-import tools.UserType;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CreditVO;
 import vo.HotelInfoVO;
 import vo.UserVO;
-import bl_stub.*;
+import bl.hotel_bl.HotelBL;
+import bl.user_bl.UserBLServiceImpl;
+import bl_stub.HotelBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
-import blservice.order_blservice.OrderBLService;
-import blservice.user_blservice.UserBLService;
+import blservice.user_dao.UserDao;
 
 public class WebAdminController {
 	private static WebAdminController INSTANCE;
@@ -27,13 +27,13 @@ public class WebAdminController {
 		return INSTANCE != null ? INSTANCE : (INSTANCE = new WebAdminController());
 	}
 	
-	private UserBLService userBLService;
+	private UserDao userBLService;
 	private HotelBLService hotelBLService;
 	
 	private MyNavigationBar naviBar;
 	
 	private WebAdminController(){
-		userBLService = new UserBLService_Stub();
+		userBLService = new UserBLServiceImpl();
 		hotelBLService = new HotelBLService_Stub();
 	}
 	
@@ -125,7 +125,13 @@ public class WebAdminController {
 	public void search(String s){
 		if (s == null || s.trim().isEmpty())
 			return;
-		UserVO result = userBLService.get(s);
+		UserVO result = null;
+		try {
+			int id = Integer.parseInt(s);
+			result = userBLService.get(id);
+		} catch (NumberFormatException e){
+			result = userBLService.get(s);
+		}
 		if (null == result)
 			notFound();
 		else

@@ -1,7 +1,7 @@
 package bl.login_bl;
 
-import tools.ResultMessage;
 import blservice.login_blservice.LoginBLService;
+import tools.ResultMessage;
 
 public class LoginBL implements LoginBLService {
 

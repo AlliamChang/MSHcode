@@ -1,10 +1,12 @@
 package po.userPO;
 
+import java.io.Serializable;
+
 import javafx.scene.image.Image;
 import tools.UserType;
 import vo.UserVO;
 
-public class UserPO {
+public class UserPO implements Serializable{
 	private String name, account, password, gender, number, company;
 	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
@@ -12,7 +14,21 @@ public class UserPO {
 	public static String INIT_PASSWORD = "123456";
 
 	public UserPO(UserVO vo) {
-		
+		this.name = vo.getName();
+		this.account = vo.getAccount();
+		this.password = vo.getPassword();
+		this.gender = vo.getGender();
+		this.number = vo.getNumber();
+		this.company = vo.getCompany();
+		this.level = vo.getLevel();
+		this.credit = vo.getCredit();
+		this.ID = vo.getID();
+		this.hotelID = vo.getHotelID();
+		this.year = vo.getYear();
+		this.month = vo.getMonth();
+		this.day = vo.getDay();
+		this.type = vo.getType();
+		this.image = vo.getImage();
 	}
 	
 	public int getID() {

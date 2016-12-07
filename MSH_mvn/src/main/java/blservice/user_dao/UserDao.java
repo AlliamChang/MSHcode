@@ -1,4 +1,4 @@
-package blservice.user_blservice;
+package blservice.user_dao;
 
 import java.util.List;
 
@@ -6,13 +6,13 @@ import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
 
-public interface UserBLService {
+public interface UserDao {
 	
 	public List<UserVO> getAllMarketers();
 
 	public UserVO get(int ID);
 	
-	public UserVO get(String name);
+	public UserVO get(String account);
 
 	/**
 	 * 新增用户

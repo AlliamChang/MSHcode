@@ -1,5 +1,6 @@
 package bl.strategy_bl;
 
+import blservice.strategy_blservice.StrategyBLService;
 import tools.ResultMessage;
 import vo.BirthDiscountVO;
 import vo.CoDiscountVO;
@@ -9,7 +10,6 @@ import vo.RankDiscountVO;
 import vo.RankVO;
 import vo.StrategyVO;
 import vo.VipPlaceDiscountVO;
-import blservice.strategy_blservice.StrategyBLService;
 
 public class StrategyBL implements StrategyBLService{
 

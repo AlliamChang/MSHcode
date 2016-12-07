@@ -1,8 +1,8 @@
 package bl_stub;
 
+import blservice.strategy_blservice.*;
 import vo.*;
 import tools.*;
-import blservice.strategy_blservice.*;
 
 public class Strategy_Stub implements StrategyBLService {
 	double discount;

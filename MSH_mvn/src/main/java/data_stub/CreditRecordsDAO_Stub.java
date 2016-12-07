@@ -4,9 +4,9 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 import vo.CreditVO;
-import dataservice.user_dataservice.CreditRecordsDataService;
+import dao.user_dao.CreditRecordsDAO;
 
-public class CreditRecordsDataService_Stub implements CreditRecordsDataService{
+public class CreditRecordsDAO_Stub implements CreditRecordsDAO{
 
 	@Override
 	public List<CreditVO> getRecords(int UserID) throws RemoteException {

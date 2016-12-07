@@ -3,10 +3,11 @@ package data_stub;
 
 import java.rmi.RemoteException;
 import java.util.List;
-import po.hotelPO.*;
-import dataservice.hotel_dataservice.Hotel_dataService;
 
-public class hotel_dataService_Stub implements Hotel_dataService {
+import po.hotelPO.*;
+import dao.hotel_dao.HotelDAO;
+
+public class HotelDAOStub implements HotelDAO {
 
 	public HotelPO find(String id) throws RemoteException {
 		// TODO Auto-generated method stub
