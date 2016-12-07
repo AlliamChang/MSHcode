@@ -169,7 +169,7 @@ public class DealPane extends GridPane{
 		this.getRowConstraints().add(new RowConstraints(40));
 		this.getRowConstraints().add(new RowConstraints(40));
 		this.getRowConstraints().add(new RowConstraints(20));
-		this.getColumnConstraints().add(new ColumnConstraints(40));
+		this.getColumnConstraints().add(new ColumnConstraints(20));
 		this.getColumnConstraints().add(new ColumnConstraints(40));
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(120));

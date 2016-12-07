@@ -1,7 +1,15 @@
 package ui.websiteStuff;
 
 import javafx.scene.text.Font;
-import javafx.scene.control.*;
+import javafx.stage.Modality;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import java.util.*;
 import vo.*;
@@ -10,6 +18,7 @@ import ui.utility.*;
 import javafx.scene.image.*;
 import javafx.geometry.*;
 import javafx.scene.text.*;
+import javafx.beans.value.*;
 
 public class StrategyListPane extends GridPane{
 	private static final Font startFont=new Font("方正幼圆",30);
@@ -96,9 +105,11 @@ public class StrategyListPane extends GridPane{
 		createButton=new Button("新增");
 		this.setHalignment(createButton, HPos.LEFT);
 		this.setValignment(createButton, VPos.BOTTOM);
+		
 		modifyButton=new Button("修改");
 		this.setHalignment(modifyButton, HPos.LEFT);
 		this.setValignment(modifyButton, VPos.BOTTOM);
+		
 		cancelButton=new Button("撤销");
 		this.setHalignment(cancelButton, HPos.LEFT);
 		this.setValignment(cancelButton, VPos.BOTTOM);
@@ -166,7 +177,51 @@ public class StrategyListPane extends GridPane{
 			button[i].setVisible(true);
 		}
 		
+		createButton.setOnAction((e) ->{
+			WebsitePaneController.getInstance().createCreateStrategyPane();
+		});
 		
+		group.selectedToggleProperty().addListener(
+				(ObservableValue<? extends Toggle> observable,Toggle oldValue,Toggle newValue) ->{
+					if(group.getSelectedToggle()!=null){
+						modifyButton.setOnAction(e ->{
+							int i=0;
+							while(!button[i].isSelected()){
+								i++;
+							}
+							WebsitePaneController.getInstance().createModifyStrategyPane(strategy.get(i));
+						});
+						cancelButton.setOnAction(e ->{
+							Alert alert=new Alert(AlertType.CONFIRMATION);
+							alert.initModality(Modality.APPLICATION_MODAL);
+							alert.getDialogPane().setHeaderText(null);
+							alert.setContentText("确定要撤销选中的营销策略吗");
+							alert.showAndWait().ifPresent(response ->{
+								if(response==ButtonType.OK){
+									//数据库中撤销策略
+								}
+							});
+						});
+					}
+		});//修改按钮的事件
+		modifyButton.setOnAction(e ->{
+			if(group.getSelectedToggle()==null){
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.getDialogPane().setHeaderText(null);
+				alert.setContentText("营销策略不存在或没有选中一个营销策略");
+				alert.showAndWait();
+			}
+		});//修改按钮出错的事件
+		cancelButton.setOnAction(e ->{
+			if(group.getSelectedToggle()==null){
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.getDialogPane().setHeaderText(null);
+				alert.setContentText("营销策略不存在或没有选中一个营销策略");
+				alert.showAndWait();
+			}
+		});//撤销按钮出错的事件
 	}
 	
 	

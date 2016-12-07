@@ -20,10 +20,7 @@ public class WebStuffStartPane extends GridPane{
 	
 	private static final Font startFont=new Font("方正幼圆",30);
 	private static final Font normalFont=new Font("方正幼圆",15);
-	private final List<String> naviInfo=Arrays.asList("管理营销策略","修改营销策略"
-			,"添加营销策略","处理异常订单","用户信用充值");
 	
-	private MyNavigationBar navi;
 	private Label startLabel;
 	private Label numberLabel;
 	private Label idLabel;
@@ -78,7 +75,19 @@ public class WebStuffStartPane extends GridPane{
 		this.getRowConstraints().add(new RowConstraints(40));
 		this.getRowConstraints().add(new RowConstraints(40));
 		this.getRowConstraints().add(new RowConstraints(40));
-		this.getColumnConstraints().add(new ColumnConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getRowConstraints().add(new RowConstraints(40));
+		this.getColumnConstraints().add(new ColumnConstraints(20));
 		this.getColumnConstraints().add(new ColumnConstraints(100));
 		this.getColumnConstraints().add(new ColumnConstraints(100));
 		this.getColumnConstraints().add(new ColumnConstraints(100));

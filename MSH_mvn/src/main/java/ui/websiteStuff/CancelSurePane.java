@@ -80,12 +80,12 @@ public class CancelSurePane extends GridPane{
         this.add(cancelButton, 2, 5);
         this.add(backButton, 3, 5);
         
-        this.getRowConstraints().add(new RowConstraints(40));
+        this.getRowConstraints().add(new RowConstraints(20));
         this.getRowConstraints().add(new RowConstraints(100));
         this.getRowConstraints().add(new RowConstraints(100));
         this.getRowConstraints().add(new RowConstraints(100));
         this.getRowConstraints().add(new RowConstraints(120));
-		this.getColumnConstraints().add(new ColumnConstraints(40));
+		this.getColumnConstraints().add(new ColumnConstraints(20));
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(100));
 	}

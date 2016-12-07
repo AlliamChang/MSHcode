@@ -22,7 +22,7 @@ public class WebsitePaneController {
 	private OrderBLService orderBL;
 	private List<OrderVO> orderVO;
 	private List<StrategyVO> strategyVO;
-	private final List<String> naviInfo=Arrays.asList("管理营销策略","修改营销策略"
+	private final List<String> naviInfo=Arrays.asList("查看未执行订单","管理营销策略"
 			,"添加营销策略","处理异常订单","用户信用充值");
 	private final List<String> stuff=Arrays.asList("zhr","100");
 
@@ -36,7 +36,7 @@ public class WebsitePaneController {
 	private final StrategyVO s2=new StrategyVO("11",StrategyType.CO_OPERATION,"NanJI","QiXI",new Date("2016/11/11",false)
 			,new Date("2016/11/12",false),"99.00",CostType.RMB,PeopleType.VIP);
 	private List<StrategyVO> strategy=Arrays.asList(s1,s2);
-	private UserVO u1=new UserVO("zhr123","123","zhr","666","0001",UserType.CUSTOMER);
+	private UserVO u1=new UserVO("zhr123","123","zhr","666",UserType.CUSTOMER);
 	private MyNavigationBar navi;
 	
 	private WebsitePaneController(){
@@ -61,10 +61,10 @@ public class WebsitePaneController {
 						String temp = newValue.toString().split("'")[1];
 						
 						switch(temp){
+						case "查看未执行订单":
+							createWebStuffStartPane();break;
 						case "管理营销策略":
-							createStrategyListPane();break;
-						case "修改营销策略":
-						    createModifyStrategyPane();break;
+						    createStrategyListPane();break;
 						case "添加营销策略":
 							createCreateStrategyPane();break;
 						case "处理异常订单":
@@ -89,8 +89,8 @@ public class WebsitePaneController {
 		MainPane.getInstance().setRightPane(new CreateStrategyPane());
 	}
 	
-	public void createModifyStrategyPane(){
-		MainPane.getInstance().setRightPane(new ModifyStrategyPane(s1));
+	public void createModifyStrategyPane(StrategyVO strategy){
+		MainPane.getInstance().setRightPane(new ModifyStrategyPane(strategy));
 	}
 	
 	public void createDealPane(){

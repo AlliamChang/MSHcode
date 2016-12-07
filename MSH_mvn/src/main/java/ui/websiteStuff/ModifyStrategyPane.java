@@ -15,7 +15,7 @@ import javafx.collections.*;
 
 public class ModifyStrategyPane extends GridPane{
 	private static final Font startFont=new Font("方正幼圆",30);
-	private static final Font normalFont=new Font("方正幼圆",15);
+	private static final Font normalFont=new Font("方正幼圆",20);
 	private static final String normalPeople="普通及会员";
 	private static final String vipPeople="仅限会员";
 	

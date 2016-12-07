@@ -31,6 +31,7 @@ public class CreditPane extends GridPane{
 	
 	private void start(){
 		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		this.setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
 		this.startLabel=new Label("用户信用充值");
 		startLabel.setFont(startFont);
@@ -61,21 +62,25 @@ public class CreditPane extends GridPane{
 		chargeButton.setFont(normalFont);
 		
 		this.add(startLabel, 1, 1,5,1);
-		this.add(idLabel, 2, 2);
-		this.add(creditLabel, 2, 3);
-		this.add(nameField, 4, 2);
-		this.add(creditField, 4, 3);
-		this.add(chargeButton, 3, 4);
+		this.add(idLabel, 3, 3);
+		this.add(creditLabel, 3, 4);
+		this.add(nameField, 5, 3);
+		this.add(creditField, 5, 4);
+		this.add(chargeButton, 4, 5);
 		
 		this.getRowConstraints().add(new RowConstraints(40));
-		this.getRowConstraints().add(new RowConstraints(150));
-		this.getRowConstraints().add(new RowConstraints(100));
+		this.getRowConstraints().add(new RowConstraints(40));
+		
+		this.getRowConstraints().add(new RowConstraints(50));
 		this.getRowConstraints().add(new RowConstraints(120));
-		this.getColumnConstraints().add(new ColumnConstraints(40));
-		this.getColumnConstraints().add(new ColumnConstraints(80));
+		this.getRowConstraints().add(new RowConstraints(180));
+		this.getColumnConstraints().add(new ColumnConstraints(20));
+		this.getColumnConstraints().add(new ColumnConstraints(20));
+		
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(80));
-		this.getColumnConstraints().add(new ColumnConstraints(140));
+		this.getColumnConstraints().add(new ColumnConstraints(100));
+		this.getColumnConstraints().add(new ColumnConstraints(120));
 	}
 
 }
