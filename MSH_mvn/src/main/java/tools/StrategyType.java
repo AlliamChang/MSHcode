@@ -1,5 +1,6 @@
 package tools;
 
-public class StrategyType {
+public enum StrategyType {
+	BIRTHDAY,TRIPLEROOM,CO_OPERATION,HOLIDAY,VIP
 
 }

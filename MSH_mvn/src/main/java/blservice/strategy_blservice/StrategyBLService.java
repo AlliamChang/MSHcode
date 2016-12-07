@@ -4,25 +4,44 @@ import tools.*;
 import vo.*;
 
 public interface StrategyBLService {
-	public StrategyVO getStrategyType();
+	public String getName();
 	
-	public StrategyVO getName();
+	public void setName(String name);
 	
-	public StrategyVO getStartTime();
+	public StrategyType getStrategyType();
 	
-	public StrategyVO getEndTime();
+	public void setStrategyType(StrategyType strategyType);
 	
+<<<<<<< HEAD
+	public String getCity();
+	
+	public void setCity(String city);
+	
+	public String getArea();
+	
+	public void setArea(String area);
+	
+	public Date getStartTime();
+	
+	public void setStartTime(Date startTime);
+	
+	public Date getEndTime();
+	
+	public void setEndTime(Date endTime);
+	
+	public String getCost();
+=======
 	public ResultMessage setBirthDiscount(int cost);
+>>>>>>> origin/master
 	
-	public ResultMessage setPluralDiscount(int cost);
+	public void setCost(String cost);
 	
-	public ResultMessage setCoDiscount();
+	public CostType getCostType();
 	
-	public ResultMessage setDateDiscount();
+	public void setCostType(CostType costType);
 	
-	public ResultMessage setVipPlaceDiscount();
+	public PeopleType getPeople();
 	
-	public ResultMessage setRankDiscount();
+	public void setPeople(PeopleType people);
 
-	public ResultMessage setRank();
 }

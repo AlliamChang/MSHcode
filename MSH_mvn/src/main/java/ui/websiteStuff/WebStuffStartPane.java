@@ -1,6 +1,5 @@
 package ui.websiteStuff;
 
-import java.util.Arrays;
 import javafx.scene.text.*;
 
 
@@ -21,6 +20,8 @@ public class WebStuffStartPane extends GridPane{
 	
 	private static final Font startFont=new Font("方正幼圆",30);
 	private static final Font normalFont=new Font("方正幼圆",15);
+	private final List<String> naviInfo=Arrays.asList("管理营销策略","修改营销策略"
+			,"添加营销策略","处理异常订单","用户信用充值");
 	
 	private MyNavigationBar navi;
 	private Label startLabel;
@@ -30,43 +31,44 @@ public class WebStuffStartPane extends GridPane{
 	private Label startTimeLabel;
 	private Label endTimeLabel;
 	private ScrollPane sp;
-	private Text numberText;
+	/*private Text numberText;
 	private Text idText;
 	private Text nameText;
 	private Text startTimeText;
-	private Text endTimeText;
-	private static WebStuffStartPane startPane;
+	private Text endTimeText;*/
+	private List<String> stuff;
 	
-	private OrderVO order;
-	private List<String> stuffName;
-	private List<String> stuffId;
+	private List<OrderVO> order;
+
 	private long orderNumber;
 	private long userId;
 	private String userName;
 	private String startTime;
 	private String endTime;
 	
-	public WebStuffStartPane(List<String> stuffName,List<String> stuffId,long orderNumber,long userId,
-			String userName,String startTime,String endTime,Image scul){
+	public WebStuffStartPane(/*List<String> stuffName,List<String> stuffId,long orderNumber,long userId,
+			String userName,String startTime,String endTime,Image scul*/
+			List<String> stuff,List<OrderVO> order){
 		super();
-		
-		this.stuffName=stuffName;
+		this.order=order;
+		this.stuff=stuff;
+		/*this.stuffName=stuffName;
 		this.stuffId=stuffId;
 		this.orderNumber=orderNumber;
 		this.userId=userId;
 		this.userName=userName;
 		this.startTime=startTime;
-		this.endTime=endTime;
-		this.init(scul);
+		this.endTime=endTime;*/
+		
 		this.start();
 	}
 	
-	private void init(Image scul){
-		navi = new MyNavigationBar(scul,stuffName,stuffId);
+	/*private void init(Image scul){
+		navi = new MyNavigationBar(scul,stuff,naviInfo);
 		MainPane.getInstance().setNavigationBar(navi);
 		MainPane.getInstance().setRightPane(this);
 		
-	}
+	}*/
 	
 	
 	
@@ -108,12 +110,12 @@ public class WebStuffStartPane extends GridPane{
 		this.setHalignment(startTimeLabel, HPos.CENTER);
 		this.setValignment(startTimeLabel, VPos.CENTER);
 		
-		this.endTimeLabel=new Label("订单需被执行时间");
+		this.endTimeLabel=new Label("订单到期时间");
 		endTimeLabel.setFont(normalFont);
 		this.setHalignment(endTimeLabel, HPos.CENTER);
 		this.setValignment(endTimeLabel, VPos.CENTER);
 		
-		numberText=new Text();
+		/*numberText=new Text();
 		numberText.setFont(normalFont);
 		UndoneOrderInfo.setNumber(orderNumber, numberText);
 		this.setHalignment(numberText, HPos.CENTER);
@@ -128,6 +130,9 @@ public class WebStuffStartPane extends GridPane{
 		nameText=new Text();
 		nameText.setFont(normalFont);
 		UndoneOrderInfo.setName(userName, nameText);
+		UndoneOrderInfo.setName("2", nameText);
+		UndoneOrderInfo.setName("2", nameText);
+		nameText.setText("3");
 		this.setHalignment(nameText, HPos.CENTER);
 		this.setValignment(nameText, VPos.TOP);
 		
@@ -141,7 +146,40 @@ public class WebStuffStartPane extends GridPane{
 		endTimeText.setFont(normalFont);
 	    UndoneOrderInfo.setEndTime(endTime, endTimeText);
 	    this.setHalignment(endTimeText, HPos.CENTER);
-		this.setValignment(endTimeText, VPos.TOP);
+		this.setValignment(endTimeText, VPos.TOP);*/
+		
+		for(int i=0;i<order.size();i++){
+			Text numberText=new Text();
+			numberText.setFont(normalFont);
+			this.setHalignment(numberText, HPos.CENTER);
+			this.setValignment(numberText, VPos.CENTER);
+			numberText.setText(String.valueOf(order.get(i).getId()));
+			this.add(numberText, 1, i+3);
+			Text idText=new Text();
+			idText.setFont(normalFont);
+			this.setHalignment(idText, HPos.CENTER);
+			this.setValignment(idText, VPos.CENTER);
+			idText.setText(String.valueOf("用户ID"));
+			this.add(idText, 2, i+3);
+			Text nameText=new Text();
+			nameText.setFont(normalFont);
+			this.setHalignment(nameText, HPos.CENTER);
+			this.setValignment(nameText, VPos.CENTER);
+			nameText.setText(String.valueOf("用户姓名"));
+			this.add(nameText, 3, i+3);
+			Text startTimeText=new Text();
+			startTimeText.setFont(normalFont);
+			this.setHalignment(startTimeText, HPos.CENTER);
+			this.setValignment(startTimeText, VPos.CENTER);
+			startTimeText.setText(order.get(i).getPreCheckin().getDate());
+			this.add(startTimeText, 4, i+3);
+			Text endTimeText=new Text();
+			endTimeText.setFont(normalFont);
+			this.setHalignment(endTimeText, HPos.CENTER);
+			this.setValignment(endTimeText, VPos.CENTER);
+			endTimeText.setText(order.get(i).getCheckin().getDate());
+			this.add(endTimeText, 5, i+3);
+		}
 		
 	    this.add(startLabel, 1, 1, 5, 1);
 		this.add(numberLabel, 1, 2);
@@ -149,11 +187,11 @@ public class WebStuffStartPane extends GridPane{
 		this.add(nameLabel, 3, 2);
 		this.add(startTimeLabel, 4, 2);
 		this.add(endTimeLabel, 5, 2);
-		this.add(numberText, 1, 3);
+		/*this.add(numberText, 1, 3);
 		this.add(idText, 2, 3);
 		this.add(nameText, 3, 3);
 		this.add(startTimeText, 4, 3);
-		this.add(endTimeText, 5, 3);
+		this.add(endTimeText, 5, 3);*/
 	}
 	
 	

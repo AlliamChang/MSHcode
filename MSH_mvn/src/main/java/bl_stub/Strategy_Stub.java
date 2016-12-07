@@ -5,102 +5,85 @@ import vo.*;
 import tools.*;
 
 public class Strategy_Stub implements StrategyBLService {
-	double discount;
-	String birthday;
-	int room;// ��������
-	String date;
-	String place;
-	int rank;
-	int credit;
-	String type;// �ͻ�����
-	ResultMessage result;
-
-	public Strategy_Stub(double dis, String birth, int rm, String dt,
-			String pl, int rk, int cre, String tp) {
-		discount = dis;
-		birthday = birth;
-		room = rm;
-		date = dt;
-		place = pl;
-		rank = rk;
-		credit = cre;
-		type = tp;
+	private String name;
+	private StrategyType strategyType;
+	private String city;
+	private String area;
+	private Date startTime;
+	private Date endTime;
+	private String cost;
+	private CostType costType;
+	private PeopleType people;
+	
+	public String getName(){
+		return "double11";
 	}
-
-	public BirthDiscountVO getBirthDiscount() {
-		return null;
+	
+	public void setName(String name){
+		this.name=name;
 	}
-
-	public PluralDiscountVO getPluralDiscount() {
-		return null;
+	
+	public StrategyType getStrategyType(){
+		return StrategyType.BIRTHDAY;
 	}
-
-	public DateDiscountVO getDateDiscount() {
-		return null;
+	
+	public void setStrategyType(StrategyType st){
+		this.strategyType=st;
 	}
-
-	public CoDiscountVO getCoDiscount() {
-		return null;
+	
+	public String getCity(){
+		return "NanJING";	
 	}
-
-	public VipPlaceDiscountVO getVipPlaceDiscount() {
-		return null;
+	
+	public void setCity(String city){
+		this.city=city;
 	}
-
-	public RankDiscountVO getRankDiscount() {
-		return null;
+	
+	public String getArea(){
+		return "QIXIA";
 	}
-
-	public RankVO getRank() {
-		return null;
+	
+	public void setArea(String area){
+		this.area=area;
 	}
-
-	public ResultMessage setBirthDiscount(int cost) {
-		return null;
+	
+	public Date getStartTime(){
+		return new Date("2016/1/1",false);
 	}
-
-	public ResultMessage setPluralDiscount(int cost) {
-		return null;
+	
+	public void setStartTime(Date startTime){
+		this.startTime=startTime;
 	}
-
-	public ResultMessage setDateDiscount() {
-		return null;
+	
+	public Date getEndTime(){
+		return new Date("2016/2/2",false);
 	}
-
-	public ResultMessage setCoDiscount() {
-		return null;
+	
+	public void setEndTime(Date endTime){
+		this.endTime=endTime;
 	}
-
-	public ResultMessage setVipPlaceDiscount() {
-		return null;
+	
+	public String getCost(){
+		return "99.00";
 	}
-
-	public ResultMessage setRankDiscount() {
-		return null;
+	
+	public void setCost(String cost){
+		this.cost=cost;
 	}
-
-	public ResultMessage setRank() {
-		return null;
+	
+	public CostType getCostType(){
+		return CostType.RMB;
 	}
-
-	public StrategyVO getStrategyType() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public void setCostType(CostType ct){
+		this.costType=ct;
 	}
-
-	public StrategyVO getName() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public PeopleType getPeople(){
+		return PeopleType.VIP;
 	}
-
-	public StrategyVO getStartTime() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public void setPeople(PeopleType people){
+		this.people=people;
 	}
-
-	public StrategyVO getEndTime() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

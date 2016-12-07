@@ -37,6 +37,7 @@ public class ModifyStrategyPane extends GridPane{
     private ChoiceBox<String> costBox;
     private ChoiceBox<String> peopleBox;
 	
+    private StrategyVO strategy;
 	private List<String> stuffName;
 	private List<String> stuffId;
 	private String name;
@@ -47,36 +48,18 @@ public class ModifyStrategyPane extends GridPane{
     private String cost;
     private CostType costType;
     private PeopleType people;
-    private ObservableList<String> cityList;
-    private ObservableList<String> areaList;	
+
     
-    public ModifyStrategyPane(List<String> stuffName,List<String> stuffId,String name,String city,String area,Date startTime,Date endTime,
-    		String cost,CostType costType,PeopleType people,Image scul){
+    public ModifyStrategyPane(StrategyVO strategy){
     	super();
-    	this.stuffName=stuffName;
-    	this.stuffId=stuffId;
-    	this.name=name;
-    	this.city=city;
-    	this.area=area;
-    	this.startTime=startTime;
-    	this.endTime=endTime;
-    	this.cost=cost;
-    	this.costType=costType;
-    	this.people=people;
-    	this.init(scul);
     	this.start();
-    	System.out.println("1");
+    	
     }
     
-    private void init(Image scul){
-		navi = new MyNavigationBar(scul,stuffName,stuffId);
-		MainPane.getInstance().setNavigationBar(navi);
-		MainPane.getInstance().setRightPane(this);	
-	}
     
     private void start(){
     	this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
-    	this.setGridLinesVisible(true);
+    	this.setGridLinesVisible(false);
     	
     	this.startLabel=new Label("修改营销策略");
     	startLabel.setFont(startFont);
@@ -85,17 +68,17 @@ public class ModifyStrategyPane extends GridPane{
 		
 		this.nameLabel=new Label("营销策略名称");
 		nameLabel.setFont(normalFont);
-		this.setHalignment(nameLabel, HPos.CENTER);
+		this.setHalignment(nameLabel, HPos.LEFT);
 		this.setValignment(nameLabel, VPos.CENTER);
 		
 		this.areaLabel=new Label("城市与商圈");
 		areaLabel.setFont(normalFont);
-		this.setHalignment(areaLabel, HPos.CENTER);
+		this.setHalignment(areaLabel, HPos.LEFT);
 		this.setValignment(areaLabel, VPos.CENTER);
 		
 		this.timeLabel=new Label("时间");
 		timeLabel.setFont(normalFont);
-		this.setHalignment(timeLabel, HPos.CENTER);
+		this.setHalignment(timeLabel, HPos.LEFT);
 		this.setValignment(timeLabel, VPos.CENTER);
 		
 		this.toLabel=new Label("至");
@@ -105,48 +88,81 @@ public class ModifyStrategyPane extends GridPane{
 		
 		this.costLabel=new Label("折扣");
 		costLabel.setFont(normalFont);
-		this.setHalignment(costLabel, HPos.CENTER);
+		this.setHalignment(costLabel, HPos.LEFT);
 		this.setValignment(costLabel, VPos.CENTER);
 		
 		this.peopleLabel=new Label("面向人群");
 		peopleLabel.setFont(normalFont);
-		this.setHalignment(peopleLabel, HPos.CENTER);
+		this.setHalignment(peopleLabel, HPos.LEFT);
 		this.setValignment(peopleLabel, VPos.CENTER);
 		
 		this.nameText=new TextField();
 		nameText.setFont(normalFont);
+		this.setHalignment(nameText, HPos.RIGHT);
+		this.setValignment(nameText, VPos.CENTER);
 		this.costText=new TextField();
 		costText.setFont(normalFont);
-	
+		this.setHalignment(costText, HPos.RIGHT);
+		this.setValignment(costText, VPos.CENTER);
+	    
+		ObservableList cityList=FXCollections.observableArrayList("南京市","北京市");
+		ObservableList areaList=FXCollections.observableArrayList("栖霞区");
+		ObservableList costList=FXCollections.observableArrayList("元","%");
+		ObservableList peopleList=FXCollections.observableArrayList(normalPeople,vipPeople);
+		
 		cityBox=new ChoiceBox();
 		areaBox=new ChoiceBox();
 		costBox=new ChoiceBox();
 		peopleBox=new ChoiceBox();
 		cityBox.setItems(cityList);
 		areaBox.setItems(areaList);
-		costBox.setItems(FXCollections.observableArrayList("元","%"));
-		peopleBox.setItems(FXCollections.observableArrayList(normalPeople,vipPeople));
+		costBox.setItems(costList);
+		peopleBox.setItems(peopleList);
 		modifyButton=new Button("修改");
+		this.setHalignment(cityBox, HPos.RIGHT);
+		this.setValignment(cityBox, VPos.CENTER);
+		this.setHalignment(areaBox, HPos.RIGHT);
+		this.setValignment(areaBox, VPos.CENTER);
+		this.setHalignment(costBox, HPos.RIGHT);
+		this.setValignment(costBox, VPos.CENTER);
+		this.setHalignment(peopleBox, HPos.RIGHT);
+		this.setValignment(peopleBox, VPos.CENTER);
+		this.setHalignment(modifyButton, HPos.RIGHT);
+		this.setValignment(modifyButton, VPos.CENTER);
 		
 		startDate=new MyDatePicker();
 		endDate=new MyDatePicker(); 
 		
 		this.add(startLabel, 1, 1,5,1);
-		this.add(nameLabel, 2, 2,2,1);
-		this.add(areaLabel, 3, 3);
-		this.add(timeLabel, 3, 4);
-		this.add(costLabel, 3, 5);
-		this.add(peopleLabel, 3, 6);
-		this.add(modifyButton, 5, 7);
-		this.add(nameText, 5, 2,5,1);
-		this.add(cityBox, 5, 3,2,1);
-		this.add(areaBox, 7, 3,2,1);
-		this.add(startDate, 5, 4,2,1);
-		this.add(toLabel, 6, 4);
-		this.add(endDate, 7, 4,2,1);
-		this.add(costText,5,5,2,1);
-		this.add(costBox, 7, 5,2,1);
-		this.add(peopleBox, 7, 5,2,1);
+	    this.add(nameLabel, 2, 2,2,1);
+	    this.add(areaLabel, 2, 3,2,1);
+	    this.add(timeLabel, 2, 4,2,1);
+	    this.add(toLabel, 4, 4);
+	    this.add(costLabel, 2, 5,2,1);
+	    this.add(peopleLabel,2,6,2,1);
+	    this.add(nameText,3,2,4,1);
+	    this.add(cityBox, 3, 3,2,1);
+	    this.add(areaBox, 5, 3,2,1);
+	    this.add(startDate, 3, 4);
+	    this.add(endDate, 5, 4);
+	    this.add(costText, 3, 5);
+	    this.add(costBox, 5, 5);
+	    this.add(peopleBox, 5, 6,3,1);
+	    this.add(modifyButton, 3, 7);
+		
+	    this.getRowConstraints().add(new RowConstraints(20));
+	    this.getRowConstraints().add(new RowConstraints(80));
+	    this.getRowConstraints().add(new RowConstraints(80));
+	    this.getRowConstraints().add(new RowConstraints(80));
+	    this.getRowConstraints().add(new RowConstraints(80));
+	    this.getRowConstraints().add(new RowConstraints(80));
+	    this.getRowConstraints().add(new RowConstraints(80));
+		this.getColumnConstraints().add(new ColumnConstraints(20));
+		this.getColumnConstraints().add(new ColumnConstraints(50));
+		this.getColumnConstraints().add(new ColumnConstraints(150));
+		this.getColumnConstraints().add(new ColumnConstraints(130));
+		this.getColumnConstraints().add(new ColumnConstraints(90));
+		this.getColumnConstraints().add(new ColumnConstraints(150));
     }
     
     

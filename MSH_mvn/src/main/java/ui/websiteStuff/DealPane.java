@@ -37,19 +37,9 @@ public class DealPane extends GridPane{
 	public DealPane(List<OrderVO> order){
 		super();
 		this.order=order;
-		this.init(null);
 		this.start();
 	}
 	
-	private void init(Image scul){
-		List<String> a=new ArrayList();
-		a.add("zhr");
-		List<String> b=new ArrayList();
-		b.add("1");
-		MyNavigationBar navi = new MyNavigationBar(scul,a,b);
-		MainPane.getInstance().setNavigationBar(navi);
-		MainPane.getInstance().setRightPane(this);
-	}	
 	
 	private void start(){
 		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);

@@ -11,7 +11,7 @@ import javafx.scene.image.*;
 import javafx.geometry.*;
 import javafx.scene.text.*;
 
-public class WebsiteStrategyMainPane extends GridPane{
+public class StrategyListPane extends GridPane{
 	private static final Font startFont=new Font("方正幼圆",30);
 	private static final Font normalFont=new Font("方正幼圆",15);
 	private static final String normalPeople="普通及会员";
@@ -20,15 +20,15 @@ public class WebsiteStrategyMainPane extends GridPane{
 	private Button modifyButton;
 	private Button createButton;
 	private Button cancelButton;
-	private RadioButton allChooseButton;
 	private Label startLabel;
 	private Label strategyNameLabel;
 	private Label peopleLabel;
 	private Label costLabel;
 	private Label startTimeLabel;
 	private Label endTimeLabel;
-	private MyNavigationBar navi;
-	private RadioButton chooseButton1;
+	//private MyNavigationBar navi;
+	private RadioButton[] button=new RadioButton[9];
+	/*private RadioButton chooseButton1;
 	private RadioButton chooseButton2;
 	private RadioButton chooseButton3;
 	private RadioButton chooseButton4;
@@ -36,42 +36,23 @@ public class WebsiteStrategyMainPane extends GridPane{
 	private RadioButton chooseButton6;
 	private RadioButton chooseButton7;
 	private RadioButton chooseButton8;
-	private RadioButton chooseButton9;
+	private RadioButton chooseButton9;*/
 	private ToggleGroup group;
 	
 	private OrderVO vo;
-	private List<String> stuffName;
-	private List<String> stuffId;
-	private List<String> strategyName;
-	private List<PeopleType> people;
-	private List<String> cost;
-	private List<String> startTime;
-	private List<String> endTime;
+	private List<StrategyVO> strategy;
 	
-	public WebsiteStrategyMainPane(List<String> stuffName,List<String> stuffId,List<String> strategyName
-			,List<PeopleType> people,List<String> cost,List<String> startTime,List<String> endTime,Image scul){
+	public StrategyListPane(List<StrategyVO> strategy){
 		super();
-		this.stuffName=stuffName;
-		this.stuffId=stuffId;
-		this.strategyName=strategyName;
-		this.people=people;
-		this.cost=cost;
-		this.startTime=startTime;
-		this.endTime=endTime;
-		this.init(scul);
+		this.strategy=strategy;
+		
 		this.start();
 	}
-	
-	private void init(Image scul){
-		navi = new MyNavigationBar(scul,stuffName,stuffId);
-		MainPane.getInstance().setNavigationBar(navi);
-		MainPane.getInstance().setRightPane(this);
-		
-	}
+
 	
 	private void start(){
 		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
-		this.setGridLinesVisible(true);
+		this.setGridLinesVisible(false);
 		
 		
 		this.startLabel=new Label("促销策略列表");
@@ -105,28 +86,12 @@ public class WebsiteStrategyMainPane extends GridPane{
 		this.setValignment(endTimeLabel, VPos.CENTER);
 		
 		group=new ToggleGroup();
-		chooseButton1=new RadioButton();
-		chooseButton2=new RadioButton();
-		chooseButton3=new RadioButton();
-		chooseButton4=new RadioButton();
-		chooseButton5=new RadioButton();
-		chooseButton6=new RadioButton();
-		chooseButton7=new RadioButton();
-		chooseButton8=new RadioButton();
-		chooseButton9=new RadioButton();
-		chooseButton1.setToggleGroup(group);
-		chooseButton2.setToggleGroup(group);
-		chooseButton3.setToggleGroup(group);
-		chooseButton4.setToggleGroup(group);
-		chooseButton5.setToggleGroup(group);
-		chooseButton6.setToggleGroup(group);
-		chooseButton7.setToggleGroup(group);
-		chooseButton8.setToggleGroup(group);
-		chooseButton9.setToggleGroup(group);
-		
-		allChooseButton=new RadioButton();
-		allChooseButton.setVisible(true);
-		allChooseButton.setSelected(true);
+		for(int i=0;i<button.length;i++){
+			button[i]=new RadioButton();
+			button[i].setToggleGroup(group);
+			this.add(button[i], 1, i+3);
+			button[i].setVisible(false);
+		}
 		
 		createButton=new Button("新增");
 		this.setHalignment(createButton, HPos.LEFT);
@@ -144,16 +109,6 @@ public class WebsiteStrategyMainPane extends GridPane{
 		this.add(costLabel, 4, 2);
 		this.add(startTimeLabel, 5, 2);
 		this.add(endTimeLabel, 6, 2);
-		this.add(allChooseButton, 1, 2);
-		this.add(chooseButton1, 1, 3);
-		this.add(chooseButton2, 1, 4);
-		this.add(chooseButton3, 1, 5);
-		this.add(chooseButton4, 1, 6);
-		this.add(chooseButton5, 1, 7);
-		this.add(chooseButton6, 1, 8);
-		this.add(chooseButton7, 1, 9);
-		this.add(chooseButton8, 1, 10);
-		this.add(chooseButton9, 1, 11);
 		this.add(createButton, 3, 12,2,1);
 		this.add(modifyButton, 4, 12,2,1);
 		this.add(cancelButton, 5, 12,2,1);
@@ -179,14 +134,14 @@ public class WebsiteStrategyMainPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(110));
 		this.getColumnConstraints().add(new ColumnConstraints(110));
 		
-		for(int i=0;i<strategyName.size();i++){
+		for(int i=0;i<strategy.size();i++){
 			Text nameText=new Text();
-			nameText.setText(strategyName.get(i));
+			nameText.setText(strategy.get(i).getName());
 			this.setHalignment(nameText,HPos.CENTER);
 			this.setValignment(nameText, VPos.CENTER);
 			this.add(nameText, 2, i+3);
 			Text peopleText=new Text();
-			if(people.get(i).equals(PeopleType.NORMAL))
+			if(strategy.get(i).getPeople().equals(PeopleType.NORMAL))
 				peopleText.setText(normalPeople);
 			else
 				peopleText.setText(vipPeople);
@@ -194,21 +149,21 @@ public class WebsiteStrategyMainPane extends GridPane{
 			this.setValignment(peopleText, VPos.CENTER);
 			this.add(peopleText, 3, i+3);
 			Text costText=new Text();
-			costText.setText("￥"+cost.get(i));
+			costText.setText("￥"+strategy.get(i).getCost());
 			this.setHalignment(costText,HPos.CENTER);
 			this.setValignment(costText, VPos.CENTER);
 			this.add(costText, 4, i+3);
 			Text startTimeText=new Text();
-			startTimeText.setText(startTime.get(i));
+			startTimeText.setText(strategy.get(i).getStartTime().getDate());
 			this.setHalignment(startTimeText,HPos.CENTER);
 			this.setValignment(startTimeText, VPos.CENTER);
 			this.add(startTimeText, 5, i+3);
 			Text endTimeText=new Text();
-			endTimeText.setText(endTime.get(i));
+			endTimeText.setText(strategy.get(i).getEndTime().getDate());
 			this.setHalignment(endTimeText,HPos.CENTER);
 			this.setValignment(endTimeText, VPos.CENTER);
 			this.add(endTimeText, 6, i+3);
-			
+			button[i].setVisible(true);
 		}
 		
 		

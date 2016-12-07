@@ -48,20 +48,10 @@ public class CreateStrategyPane extends GridPane{
 	private Button createButton;
 	
 	public CreateStrategyPane(){
-	    this.stuffName=new ArrayList();
-	    stuffName.add("zhr");
-	    this.stuffId=new ArrayList();
-	    stuffId.add("100");
-	    this.init(null);
+	    super();
 	    this.start();
 	}
 	
-	private void init(Image scul){
-		MyNavigationBar navi = new MyNavigationBar(scul,stuffName,stuffId);
-		MainPane.getInstance().setNavigationBar(navi);
-		MainPane.getInstance().setRightPane(this);
-		
-	}
 	
 	private void start(){
 		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
