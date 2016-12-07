@@ -27,5 +27,15 @@ public interface UserBLService {
 	
 	public List<CreditVO> getCredit(int ID);
 	
+	public ResultMessage addCreditRecord(int ID, CreditVO creditVO);
+	
+	/**
+	 * 更改信用值，包括增加、减少、返还
+	 * @param ID 用户ID
+	 * @param val 改变值
+	 * @return 执行结果
+	 */
+	public ResultMessage updateCredit(int ID, int val);
+	
 	public List<String> getReservationHistory(int ID);
 }

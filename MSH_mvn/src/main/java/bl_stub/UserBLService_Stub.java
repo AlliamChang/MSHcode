@@ -61,4 +61,11 @@ public class UserBLService_Stub implements UserBLService {
 		// TODO Auto-generated method stub
 		return ID == 1 ? new UserVO("456" , "angel", "女", "18360977498", UserType.HOTEL_STAFF) : null;
 	}
+
+	@Override
+	public ResultMessage updateCredit(int ID, int val) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

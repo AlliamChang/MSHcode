@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import po.userPO.UserPO;
+import po.UserPO;
 import tools.ResultMessage;
 import tools.UserType;
 import vo.UserVO;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import blservice.user_blservice.UserBLService;
-import po.userPO.UserPO;
+import po.UserPO;
 import dao.user_dao.*;
 import data_stub.CreditRecordsDAO_Stub;
 import data_stub.HistoryDAO_Stub;
@@ -111,4 +111,26 @@ public class UserBLServiceImpl implements UserBLService{
 		}
 	}
 
+	@Override
+	public ResultMessage updateCredit(int ID, int val) {
+		try {
+			UserPO po = uds.get(ID);
+			if (null == po)
+				return ResultMessage.NOT_EXIST;
+			po.setCredit(po.getCredit() + val);
+			uds.modify(po);
+			return ResultMessage.SUCCESS;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+
+	@Override
+	public ResultMessage addCreditRecord(int ID, CreditVO creditVO) {
+		
+		return null;
+	}
+
+	
 }

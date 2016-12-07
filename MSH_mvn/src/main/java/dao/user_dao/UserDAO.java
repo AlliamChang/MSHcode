@@ -3,7 +3,7 @@ package dao.user_dao;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import po.userPO.*;
+import po.UserPO;
 import tools.ResultMessage;
 
 public interface UserDAO {

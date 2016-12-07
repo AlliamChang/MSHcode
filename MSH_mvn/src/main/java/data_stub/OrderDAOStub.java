@@ -17,7 +17,7 @@ public class OrderDAOStub implements OrderDAO {
 		return ResultMessage.SUCCESS;
 	}
 
-	public List<OrderPO> userShow(po.userPO.UserPO user) throws RemoteException {
+	public List<OrderPO> userShow(po.UserPO user) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
