@@ -26,6 +26,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import ui.utility.MainPane;
+import ui.utility.MyDeletableButton;
 import ui.utility.MyRetreatButton;
 import vo.HotelInfoVO;
 
@@ -122,6 +123,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		
 		ChoiceBox<String> starBox = new ChoiceBox<>();
 		starBox.getItems().addAll("经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华");
+		starBox.getSelectionModel().select(hotelInfo.getStar()-1);
 		infoPane.add(starBox, 1, 4);
 		
 		TextField openLabelText = new TextField(hotelInfo.getYear()+"");
@@ -130,9 +132,9 @@ public class HotelInfoRevisePane extends AnchorPane{
 		
 		FlowPane flow = new FlowPane(Orientation.HORIZONTAL,3,4);
 		flow.setPrefWrapLength(350);
-		List<TextField> faciText = new ArrayList<TextField>();
+		List<MyDeletableButton> faciText = new ArrayList<MyDeletableButton>();
 		for(int i = 0; i < hotelInfo.getFacility().length; i ++){
-			TextField temp = new TextField(hotelInfo.getFacility()[i]);
+			MyDeletableButton temp = new MyDeletableButton(flow,hotelInfo.getFacility()[i]);
 			temp.setMaxWidth(100);
 			faciText.add(temp);
 			flow.getChildren().add(temp);
@@ -141,7 +143,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		addFaci.setMinWidth(20);
 		addFaci.setStyle("-fx-background-color:white");
 		addFaci.setOnAction(e -> {
-			TextField temp = new TextField();
+			MyDeletableButton temp = new MyDeletableButton(flow);
 			temp.setMaxWidth(100);
 			faciText.add(temp);
 			flow.getChildren().add(flow.getChildren().size()-1, temp);

@@ -32,13 +32,13 @@ public class Order_Stub implements OrderBLService {
 	public List<OrderVO> getUserOrder(UserVO user) {
 		// TODO Auto-generated method stub
 		return Arrays.asList(
-				new OrderVO(1000000001, "aven", "七天", "大床房", 1, new String[]{"刘钦"},
+				new OrderVO(1000000001, 1, "aven", "七天", "大床房", 1, new String[]{"刘钦"},
 						new String[]{"12345678910"},3,
 						new Date("2016/11/22",false), OrderState.UNEXECUTED,false),
-				new OrderVO(1000000002, "aven", "七天", "大床房", 1, new String[]{"丁二玉"},
+				new OrderVO(1000000002, 2, "aven", "七天", "大床房", 1, new String[]{"丁二玉"},
 						new String[]{"12345678910"},2, 
 						new Date("2016/11/03",false), OrderState.EXECUTED,false),
-				new OrderVO(1000000013, "aven", "七天", "大床房", 1, new String[]{"张田田"},
+				new OrderVO(1000000013, 3, "aven", "七天", "大床房", 1, new String[]{"张田田"},
 						new String[]{"12345678910"},1, 
 						new Date("2016/11/20",false), OrderState.ABNORMITY,false));
 	}
@@ -72,7 +72,7 @@ public class Order_Stub implements OrderBLService {
 	public List<OrderVO> getTodayHotelOrder(long id, String hotel) {
 		// TODO Auto-generated method stub
 		return Arrays.asList(
-				new OrderVO(1000000001, "aven", "七天", "温暖大床房", 1, new String[]{"刘钦"},
+				new OrderVO(1000000001, 1, "aven", "七天", "温暖大床房", 1, new String[]{"刘钦"},
 						new String[]{"12345678910"},3,
 						new Date("2016/11/22",false), OrderState.UNEXECUTED,false));
 	}
@@ -81,16 +81,16 @@ public class Order_Stub implements OrderBLService {
 	public List<OrderVO> getAllHotelOrder(long id, String hotel) {
 		// TODO Auto-generated method stub
 		return Arrays.asList(
-				new OrderVO(1000000001, "aven", "七天", "大床房", 1, new String[]{"刘钦"},
+				new OrderVO(1000000001, 1,"aven", "七天", "大床房", 1, new String[]{"刘钦"},
 						new String[]{"12345678910"},3,
 						new Date("2016/11/22",false), OrderState.UNEXECUTED,false),
-				new OrderVO(1000000002, "aven", "七天", "大床房", 1, new String[]{"丁二玉"},
+				new OrderVO(1000000002, 2,"aven", "七天", "大床房", 1, new String[]{"丁二玉"},
 						new String[]{"12345678910"},2, 
 						new Date("2016/11/03",false), OrderState.EXECUTED,false,new Date("2016/11/20 12:31:02",true)),
-				new OrderVO(1000000013, "aven", "七天", "大床房", 1, new String[]{"张田田"},
+				new OrderVO(1000000013, 3,"aven", "七天", "大床房", 1, new String[]{"张田田"},
 						new String[]{"12345678910"},1, 
 						new Date("2016/11/20",false), OrderState.ABNORMITY,false),
-				new OrderVO(1000000014, "aven", "七天", "大床房", 1, new String[]{"邵东"},
+				new OrderVO(1000000014, 4,"aven", "七天", "大床房", 1, new String[]{"邵东"},
 						new String[]{"12345678910"},1, 
 						new Date("2016/12/01",false), OrderState.CANCELED,false));
 	}

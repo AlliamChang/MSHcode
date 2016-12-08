@@ -5,20 +5,23 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import tools.BedStyle;
+import tools.CostType;
 import tools.Date;
+import tools.HotelStrategyType;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CheckInVO;
 import vo.HotelInfoVO;
+import vo.HotelStrategyVO;
 import vo.OrderVO;
 import vo.RoomVO;
+import blservice.order_blservice.*;
 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import bl_stub.Order_Stub;
-import blservice.order_blservice.*;
 
 public class HotelPaneController {
 	
@@ -105,7 +108,10 @@ public class HotelPaneController {
 	 * 跳转至酒店促销策略界面
 	 */
 	public void createHotelStrategyPane(){
-		MainPane.getInstance().setRightPane(new HotelStrategyPane());
+		MainPane.getInstance().setRightPane(new HotelStrategyPane(Arrays.asList(
+				new HotelStrategyVO("双十一促销", HotelStrategyType.FESTIVAL, CostType.PERCENT,10, new Date("2016/11/10",false), new Date("2016/11/12",false)),
+				new HotelStrategyVO("腾讯公司合作优惠", HotelStrategyType.BUSINESS, CostType.RMB,50, new Date("2016/11/10",false), new Date("2016/12/12",false))
+				)));
 	}
 	
 	/**
@@ -137,7 +143,8 @@ public class HotelPaneController {
 				new String[]{"24小时热水","普通分体空调","国内长途电话"}, 
 				"南京夫子庙国际青年旅舍位于南京夫子庙平江府路68号（夫子庙东大门旁）。傍依秦淮河，是一幢具有明清风格的建筑。一楼为接待处，四楼酒吧茶座，并提供简餐，立志将其打造成户外自助旅游者的主题酒吧；二楼三楼四楼为客房。酒店诚心欢迎社会各界友人前来入住。交通：从南京南站出来，乘地铁3号线到夫子庙站下车，2号口出来之后右转至平江府路，由北向南步行约100米到店，与顺发扑克和苏克快餐店相邻。", 
 				"南京", "夫子庙", 2015,
-				new Image(HotelPaneController.class.getResourceAsStream("/image/hotel_scul.png"),200,200,false,false));
+				new Image(HotelPaneController.class.getResourceAsStream("/image/hotel_scul.png"),200,200,false,false),
+				4,4.5,1,1);
 	}
 	
 	public List<OrderVO> getTodayOrder(){

@@ -13,7 +13,11 @@ public class OrderVO {
 	/**
 	 * 用户id
 	 */
-	private String userID;
+	private long userID;
+	/**
+	 * 用户账号
+	 */
+	private String userAccount;
 	/**
 	 * 酒店名称
 	 */
@@ -68,10 +72,11 @@ public class OrderVO {
 	private String firstBooker;
 	private StringProperty evaluate;
 	private StringProperty operation;
-	public OrderVO(long i,String u, String h, String rs, int rn, String[] b,
+	public OrderVO(long i,long u, String userAccount,String h, String rs, int rn, String[] b,
 			String[] bp, int d, Date p, OrderState s,boolean isEva) {
 		id = i;
 		userID = u;
+		this.userAccount = userAccount;
 		hotel = h;
 		roomStyle = rs;
 		roomNum = rn;
@@ -85,10 +90,11 @@ public class OrderVO {
 		if(b.length > 0)
 			firstBooker = b[0]; //测试
 	}
-	public OrderVO(long i,String u, String h, String rs, int rn, String[] b,
+	public OrderVO(long i,long u,String userAccount, String h, String rs, int rn, String[] b,
 			String[] bp, int d, Date p, OrderState s,boolean isEva,Date checkin) {
 		id = i;
 		userID = u;
+		this.userAccount = userAccount;
 		hotel = h;
 		roomStyle = rs;
 		roomNum = rn;
@@ -145,14 +151,20 @@ public class OrderVO {
 		return evaluate;
 	}
 	
-	public String getUserID() {
+	public long getUserID() {
 		return userID;
 	}
 
-	public void setUserID(String userID) {
+	public void setUserID(long userID) {
 		this.userID = userID;
 	}
 
+	public String getUserAccount() {
+		return userAccount;
+	}
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
 	public long getId() {
 		return id;
 	}

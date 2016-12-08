@@ -123,4 +123,22 @@ public class HotelInfoVO {
 	public void setStar(int star){
 		this.star=star;
 	}
+	public int getHotel_id() {
+		return hotel_id;
+	}
+	public void setHotel_id(int hotel_id) {
+		this.hotel_id = hotel_id;
+	}
+	public int getStuff_id() {
+		return stuff_id;
+	}
+	public void setStuff_id(int stuff_id) {
+		this.stuff_id = stuff_id;
+	}
+	public int getStar() {
+		return star;
+	}
+	public double getScore() {
+		return score;
+	}
 }

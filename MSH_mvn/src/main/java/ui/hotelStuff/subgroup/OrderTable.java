@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -127,18 +128,18 @@ public class OrderTable extends TableView{
 		preCheckIn.setText("预订入住时间");
 		preCheckIn.setCellValueFactory(new PropertyValueFactory("preCheckIn"));
 		preCheckIn.setCellFactory(TextFieldTableCell.forTableColumn(sc));
-		preCheckIn.setMinWidth(125);
+		preCheckIn.setMinWidth(115);
 		preCheckIn.setStyle("-fx-alignment:center;");
 		
 		TableColumn orderState = new TableColumn();
 		orderState.setText("订单状态");
 		orderState.setCellValueFactory(new PropertyValueFactory("orderState"));
 		orderState.setCellFactory(TextFieldTableCell.forTableColumn(sc));
-		orderState.setMinWidth(90);
+		orderState.setMinWidth(80);
 		orderState.setStyle("-fx-alignment:center;");
 		
 		TableColumn<OrderVO,String> orderOp = new TableColumn<>();
-		orderOp.setMinWidth(70);
+		orderOp.setMinWidth(90);
 		orderOp.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<OrderVO, String>, ObservableValue<String>>() {
 
 				@Override
@@ -204,13 +205,6 @@ public class OrderTable extends TableView{
 			message.append("\n订单总价：" + o.getPrice());
 			tip.setText(message.toString());
 			row.setTooltip(tip);
-			row.setOnMouseClicked(e -> {
-				tip.show(row, e.getScreenX(), e.getScreenY());
-				
-			});
-			row.setOnMouseExited(e -> {
-				System.out.println(2);
-			});
 //			row.setone(e -> {
 //				System.out.println(2);
 //				tip.hide();
@@ -223,11 +217,14 @@ public class OrderTable extends TableView{
 		// a button for adding a new person.
 	    final Button addButton       = new Button();
 	    // pads and centers the add button in the cell.
-	    final StackPane paddedButton = new StackPane();
+	    final HBox paddedButton = new HBox();
+	    final Button moreButton = new Button("详情");
 	    final OrderTable table;
+	    Tooltip tip = null;
 	    
 	    ExecuteCell(OrderTable table){
-	    	addButton.setStyle("-fx-font-size:13");
+	    	addButton.setStyle("-fx-font-size:12");
+	    	moreButton.setStyle("-fx-font-size:12");
 	    	this.table = table;
 	    }
 
@@ -241,6 +238,7 @@ public class OrderTable extends TableView{
 	        setGraphic(paddedButton);
 	        if(paddedButton.getChildren().size() > 0){
 	        	paddedButton.getChildren().remove(0);
+	        	paddedButton.getChildren().remove(1);
 	        }
 	        if(item.equals("异常订单")){
 	        	addButton.setText("延期");
@@ -293,8 +291,28 @@ public class OrderTable extends TableView{
 	    				}
 	    			});
 	        	});
+	        	
 	            paddedButton.getChildren().add(addButton);
 	        }
+	        
+	        moreButton.setOnMouseClicked(e -> {
+	        	if(moreButton.getText().equals("详情")){
+	        		tip = this.getTableRow().getTooltip();
+	        		tip.show(this.getTableRow(), e.getScreenX()-200, e.getScreenY());
+//	        		this.getTableRow().getTooltip().setConsumeAutoHidingEvents(true);
+	        		this.getTableRow().setTooltip(null);
+	        		moreButton.setText("收起");
+	        	}else{
+	        		tip.hide();
+	        		this.getTableRow().setTooltip(tip);
+	        		tip = null;
+	        		moreButton.setText("详情");
+	        	}
+	        });
+	        
+	        paddedButton.getChildren().add(moreButton);
+	        
+	        
 	      }else{
 	    	  
 	    	  this.setGraphic(null);

@@ -6,25 +6,26 @@ import java.util.List;
 
 import vo.HotelVO;
 import vo.UserVO;
+import tools.Date;
 import tools.ResultMessage;
 
 public interface OrderBLService {
 
-	public OrderVO createOrder(UserVO user, HotelVO hotel, OrderVO order);
+	public OrderVO createOrder( OrderVO order);
 
-	public List<OrderVO> getTodayHotelOrder(long id,String hotel);
+	public List<OrderVO> getTodayHotelOrder(long hotelId,String hotel);
 	
-	public List<OrderVO> getAllHotelOrder(long id,String hotel);
+	public List<OrderVO> getAllHotelOrder(long hotelId,String hotel);
 
-	public List<OrderVO> getUserOrder(UserVO user);
+	public List<OrderVO> getUserOrder(long userID, String userAccount);
 
 	public OrderVO search(long id);
 
-	public ResultMessage execute(OrderVO order);
+	public ResultMessage execute(long orderID, Date executeTime);
 
-	public ResultMessage executeAbnormity(OrderVO order);
+	public ResultMessage delayAbnormity(long orderID,Date delayDate);
 
-	public ResultMessage cancel(OrderVO order);
+	public ResultMessage cancel(long orderID);
 
-	public ResultMessage cancelAbnormity(OrderVO order);
+	public ResultMessage cancelAbnormity(long orderID);
 }
