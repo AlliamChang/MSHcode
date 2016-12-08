@@ -12,13 +12,14 @@ public class HotelInfoVO {
 	private String introduction;
 	private String province;
 	private String tradingArea;
+	private String city;
 	private int year;
 	private Image scul;
 	private int star;
 	private double score;
 	
 	public HotelInfoVO(String hotel, String adress,String phone, String[] facility, String introduction, String province,
-			String tradingArea,int year,Image scul,int star,double score,int hotel_id,int stuff_id) {
+			String tradingArea,int year,Image scul,int star,double score,int hotel_id,int stuff_id,String city) {
 		this.hotel = hotel;
 		this.adress = adress;
 		this.phone = phone;
@@ -32,6 +33,13 @@ public class HotelInfoVO {
 		this.score=score;
 		this.hotel_id=hotel_id;
 		this.stuff_id=stuff_id;
+		this.city=city;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
 	}
 	public int get_hotel_id(){
 		return hotel_id;

@@ -18,40 +18,12 @@ import vo.RoomVO;
 
 public class HotelBLService_Stub implements HotelBLService {
 
-	public ResultMessage delete(String hotel_id) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
-	public ResultMessage modify(String hotel_id, String hotel_item, String input) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
-	public HotelVO browse(ArrayList<HotelVO> hotelList) {
-		// TODO Auto-generated method stub
-		return new HotelVO();
-	}
 
 	public List<String> search(String address, String tradeArea) {
 		// TODO Auto-generated method stub
 		return Arrays.asList("渡口客栈","青年旅馆");
 	}
 
-	public ResultMessage update(String id) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
-	public ResultMessage inputRoom(String type, double price) {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
-	public double CalRoomPrice(StrategyBLService strategy) {
-		// TODO Auto-generated method stub
-		return 0.0;
-	}
 
 	@Override
 	public List<String> getProvinces() {
@@ -82,11 +54,11 @@ public class HotelBLService_Stub implements HotelBLService {
 	}
 
 	@Override
-	public List<RoomVO> getRoom(String id) {
+	public List<RoomVO> getRoom(int id) {
 		// TODO Auto-generated method stub
-		return Arrays.asList(new RoomVO("大床房", BedStyle.DOUBLE_BEDS, 589, 0, 0),
-				new RoomVO("单人房",BedStyle.BUNK_BED,489,0,0),
-				new RoomVO("钟点房",BedStyle.BUNK_BED,280,0,0));
+		return Arrays.asList(new RoomVO("大床房", BedStyle.DOUBLE_BEDS, 589, 0, 0,1),
+				new RoomVO("单人房",BedStyle.BUNK_BED,489,0,0,1),
+				new RoomVO("钟点房",BedStyle.BUNK_BED,280,0,0,1));
 	}
 
 
@@ -94,18 +66,18 @@ public class HotelBLService_Stub implements HotelBLService {
 		// TODO Auto-generated method stub
 		Image image=new Image(PersonInfoPane.class.getResource("/image/hotel.jpg").toExternalForm(),
 				100,100,false,false);
-		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,image,4,4.5,1,2);
+		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,image,4,4.5,1,2,"南京市");
 	}
 
 	@Override
 	public List<HotelInfoVO> search(String province, String city, String tradeArea,
 			String name) {
-		return Arrays.asList(new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2),
-				new HotelInfoVO("如家快捷酒店", "南京市中山南路10号", "123456789", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1, 1));
+		return Arrays.asList(new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2,"南京市"),
+				new HotelInfoVO("如家快捷酒店", "南京市中山南路10号", "123456789", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1, 1,"南京市"));
 	}
 
 	@Override
-	public List<EvaluateVO> getEvaluate(String hotel_id) {
+	public List<EvaluateVO> getEvaluate(int hotel_id) {
 		// TODO Auto-generated method stub
 		return  Arrays.asList(new EvaluateVO("环境很不错，交通很方便，价格也挺合适，体验不错","Aven","2016/11/01,14:35",4.8),
 				new EvaluateVO("房间很干净舒适,设施也很完善","晓风残月","2016/11/01,14:32",4.9));
@@ -113,6 +85,44 @@ public class HotelBLService_Stub implements HotelBLService {
 
 	@Override
 	public ResultMessage add(HotelInfoVO hotel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage delete(int hotel_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage modify(HotelInfoVO hotelinfo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage inputRoom(RoomVO room) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HotelInfoVO getHotel(int hotel_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public double CalRoomPrice(StrategyBLService strategy) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public List<Integer> search(String province, String city, String tradeArea) {
 		// TODO Auto-generated method stub
 		return null;
 	}

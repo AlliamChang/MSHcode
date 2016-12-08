@@ -163,7 +163,7 @@ public class HotelSearchPane extends Pane{
 			score=new Label(stub.getHotel(hotel_name).getscore()+"");
 			lowest_price=new Label("¥"+"500"+"起");
 			this.image=stub.getHotel(hotel_name).getScul();
-			this.list=stub.getRoom(hotel_name);
+			this.list=stub.getRoom(1);
 			 table=new HotelRoomTable(list);
 			 ImageView im=new ImageView(image);
 			 bn.setOnMouseClicked((MouseEvent me)->{

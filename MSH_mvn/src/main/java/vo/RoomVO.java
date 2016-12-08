@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 import tools.BedStyle;
 
 public class RoomVO {
-	
+	private int hotel_id;
 	private String roomStyle;
 	private BedStyle bedStyle;
 	private Double price;
@@ -23,12 +23,13 @@ public class RoomVO {
 	 * @param num
 	 * @param maxCustomer
 	 */
-	public RoomVO(String roomStyle,BedStyle bedStyle,double price,int num,int maxCustomer){
+	public RoomVO(String roomStyle,BedStyle bedStyle,double price,int num,int maxCustomer,int id){
 		this.roomStyle = roomStyle;
 		this.bedStyle = bedStyle;
 		this.price = price;
 		this.num = num;
 		this.maxCustomer = maxCustomer;
+		this.hotel_id=id;
 	}
 	
 	//
@@ -58,6 +59,14 @@ public class RoomVO {
 
 	public void setBedStyle(BedStyle bedStyle) {
 		this.bedStyle = bedStyle;
+	}
+	
+	public int getid(){
+		return this.hotel_id;
+	}
+	
+	public void setid(int id){
+		this.hotel_id=id;
 	}
 
 	public double getPrice() {

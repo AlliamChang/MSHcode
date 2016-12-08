@@ -101,7 +101,7 @@ public class CustomerPaneController {
 		return order_list;
 	}
 	//得到酒店房间信息
-	public List<RoomVO> getRoom(String id){
+	public List<RoomVO> getRoom(int id){
 		HotelBL=new HotelBLService_Stub();
 		List<RoomVO> room_list=HotelBL.getRoom(id);
 		return room_list;

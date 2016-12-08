@@ -1,7 +1,12 @@
 package bl.hotel_bl;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.UserPO;
+import po.hotelPO.HotelPO;
+import po.hotelPO.RoomPO;
+import data_stub.HotelDAOStub;
 import blservice.hotel_blservice.*;
 import blservice.strategy_blservice.StrategyBLService;
 import tools.ResultMessage;
@@ -10,47 +15,41 @@ import vo.HotelInfoVO;
 import vo.HotelVO;
 import vo.RoomVO;
 public class HotelBL implements HotelBLService{
-
-	@Override
-	public ResultMessage add(HotelVO hotel) {
-		// TODO Auto-generated method stub
-		return null;
+	private HotelDAOStub hotel;
+	
+	public HotelBL(){
+		hotel=new HotelDAOStub();
 	}
 
 	@Override
-	public ResultMessage delete(String hotel_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage delete(int hotel_id) {
+		try {
+			return hotel.delete(hotel_id);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
 	}
 
 	@Override
-	public ResultMessage modify(String hotel_id, String hotel_item, String input) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage modify(HotelInfoVO hotelinfo) {
+		try {
+			return hotel.modify(new HotelPO(hotelinfo));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
 	}
 
-	@Override
-	public HotelVO browse(ArrayList<HotelVO> hotelList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public List<String> search(String address, String tradeArea) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage update(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage inputRoom(String type, double price) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage inputRoom(RoomVO vo) {
+		try {
+			return hotel.addRoom(new RoomPO(vo));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
 	}
 
 	@Override
@@ -60,44 +59,91 @@ public class HotelBL implements HotelBLService{
 	}
 
 	@Override
-	public List<HotelVO> search(String province, String city, String tradeArea,
+	public List<HotelInfoVO> search(String province, String city, String tradeArea,
 			String name) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
+		try{
+		List<HotelPO> list=hotel.get(province, city, tradeArea, name);
+		for(int i=0;i<list.size();i++)
+			ret.add(list.get(i).tovo());
+		}catch(RemoteException e){
+			e.printStackTrace();
+		}
+		return ret;
+		
 	}
 
 	@Override
-	public List<RoomVO> getRoom(String hotel_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<RoomVO> getRoom(int hotel_id) {
+		ArrayList<RoomVO> ret=new ArrayList<RoomVO>();
+		try{
+			List<RoomPO> list=hotel.getRoom(hotel_id);
+			for(int i=0;i<list.size();i++)
+				ret.add(list.get(i).tovo());
+		}catch(RemoteException e){
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	@Override
 	public List<String> getProvinces() {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return hotel.getProvinces();
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public List<String> getCities(String province) {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			return hotel.getCities(province);
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public List<String> getAreas(String province, String city) {
+		try{
+			return hotel.getAreas(province, city);
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public HotelInfoVO getHotel(int hotel_id) {
+		try{
+		return hotel.find(hotel_id).tovo();
+		}catch (RemoteException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<EvaluateVO> getEvaluate(int hotel_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public HotelInfoVO getHotel(String hotel_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultMessage add(HotelInfoVO hotel) {
+		try {
+			return this.hotel.add(new HotelPO(hotel));
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
 	}
 
 	@Override
-	public List<EvaluateVO> getEvaluate(String hotel_id) {
+	public List<Integer> search(String province, String city, String tradeArea) {
 		// TODO Auto-generated method stub
 		return null;
 	}

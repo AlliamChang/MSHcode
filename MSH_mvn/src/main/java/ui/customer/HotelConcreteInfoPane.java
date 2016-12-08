@@ -69,7 +69,7 @@ public class HotelConcreteInfoPane extends Pane{
 		vb.setPadding(new Insets(10, 10, 10, 10));
 		vb.setSpacing(10);
 		HotelBLService_Stub stub=new HotelBLService_Stub();
-		vb.getChildren().addAll(Evaluate.getEvaluate(stub.getEvaluate("1")));
+		vb.getChildren().addAll(Evaluate.getEvaluate(stub.getEvaluate(1)));
 		evaluate=new ScrollPane(vb);
 		evaluate.setMinWidth(605);
 		evaluate.setPrefSize(600,400);
@@ -80,7 +80,7 @@ public class HotelConcreteInfoPane extends Pane{
 		pane.add(image, column, 0,1,2);
 		
 		
-		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom("1"));
+		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom(1));
 		pane.add(room_info, column, 4);
 		
 		hotel_name.setFont(f);
