@@ -37,5 +37,7 @@ public interface UserBLService {
 	 */
 	public ResultMessage updateCredit(int ID, int val);
 	
+	public int updateLevel(int credit);
+	
 	public List<String> getReservationHistory(int ID);
 }

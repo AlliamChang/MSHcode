@@ -17,11 +17,7 @@ public class UserDAOStub implements UserDAO {
 	
 	public UserDAOStub(){
 		dataBase = new ArrayList<UserPO>();
-		dataBase.add(new UserPO(new UserVO("hello", "郑晓峰", "男", "15012345678", UserType.WEB_ADMIN){{setID(1);}}));
-		dataBase.add(new UserPO(new UserVO("123456", "郑皓铭", "男", "15045671257", UserType.MARKETER){{setID(2);}}));
-		dataBase.add(new UserPO(new UserVO("love", "赵新宇", "男", "13845126987", UserType.MARKETER){{setID(3);}}));
-		dataBase.add(new UserPO(new UserVO("gay", "赵鸿儒", "男", "13878126987", UserType.MARKETER){{setID(4);}}));
-		maxID = 4;
+		maxID = 0;
 	}
 	
 	@Override

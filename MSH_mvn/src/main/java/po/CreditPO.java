@@ -2,6 +2,10 @@ package po;
 
 import java.io.Serializable;
 
-public class CreditPO implements Serializable{
+import vo.CreditVO;
 
+public class CreditPO implements Serializable{
+	public CreditPO(CreditVO vo){
+		
+	}
 }

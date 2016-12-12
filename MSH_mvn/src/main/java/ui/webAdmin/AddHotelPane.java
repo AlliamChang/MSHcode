@@ -124,10 +124,14 @@ public class AddHotelPane extends AnchorPane{
 		
 		confirm.setOnAction(e -> {
 			AlertType type = AlertType.INFORMATION;
-			String s = "添加成功！";
+			String s;
+			int staffID = -1;
 			if (textField.getText().trim().isEmpty() || staffNameLabel.getText().equals("无")){
 				type = AlertType.ERROR;
 				s = "请补全酒店信息！";
+			} else {
+				staffID = WebAdminController.getInstance().addUser(addPane.getStaff());
+				s = "添加成功！\n工作人员ID：" + staffID + "        初始密码：123456";
 			}
 			Alert alert = new Alert(type, "");
 			alert.initModality(Modality.APPLICATION_MODAL);
@@ -136,10 +140,9 @@ public class AddHotelPane extends AnchorPane{
 			if (type.equals(AlertType.ERROR))
 				alert.show();
 			else {
-				int id = WebAdminController.getInstance().addUser(addPane.createStaff());
 				WebAdminController.getInstance().addHotel(
 						new HotelInfoVO(textField.getText(), null, null, null, null, 
-								provinceChoiceBox.getValue(), areaChoiceBox.getValue(), 0, null, 0, 0, 0, id));
+								provinceChoiceBox.getValue(), areaChoiceBox.getValue(), 0, null, 0, 0, 0, staffID));
 				alert.showAndWait().filter(r -> r == ButtonType.OK).ifPresent(r -> 
 					WebAdminController.getInstance().setBrowseHotelPane());
 			}

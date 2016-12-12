@@ -1,17 +1,26 @@
-package vo;
+package po;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import javafx.scene.image.Image;
-import po.UserPO;
 import tools.UserType;
 
-public class UserVO {
+@Entity
+@Table(name = "user")
+public class UserPO implements Serializable{
 	private String name, account, password, gender, number, company;
 	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
-	private Image image;
-	public static String INIT_PASSWORD = "123456";
+//	private Image image;
 
-	public UserVO(String password, String name, String gender, String number, UserType type) {
+	public UserPO(){}
+	
+	public UserPO(String password, String name, String gender, String number, UserType type) {
 		this.password = password;
 		this.name = name;
 		this.gender = gender;
@@ -19,7 +28,7 @@ public class UserVO {
 		this.type = type;
 	}
 
-	public UserVO(String account, String password, String name, String gender,
+/*	public UserPO(String account, String password, String name, String gender,
 			String number, int year, int month, int day, UserType type, Image image){
 		this(password, name, gender, number, type);
 		this.account = account;
@@ -27,39 +36,16 @@ public class UserVO {
 		this.month = month;
 		this.day = day;
 		this.image = image;
-	}
+	}*/
 	
-	public UserVO(String account, String password, String name, String gender,
+/*	public UserPO(String account, String password, String name, String gender,
 			String number, String company, int year, int month, int day, UserType type, Image image){
 		this(account, password, name, gender, number, year, month, day, type, image);
 		this.company = company;
 	}
-	
-	public UserVO(UserPO po) {
-		this.name = po.getName();
-		this.account = po.getAccount();
-		this.password = po.getPassword();
-		this.gender = po.getGender();
-		this.number = po.getNumber();
-		this.company = po.getCompany();
-		this.level = po.getLevel();
-		this.credit = po.getCredit();
-		this.ID = po.getID();
-		this.hotelID = po.getHotelID();
-		this.year = po.getYear();
-		this.month = po.getMonth();
-		this.day = po.getDay();
-		this.type = po.getType();
-		this.image = po.getImage();
-	}
-	
-	public UserPO toPO(){
-		UserPO ret = new UserPO(account, password, name, gender, number, company, year, month, day, type, image);
-		ret.setID(ID);
-		ret.setHotelID(hotelID);
-		return ret;
-	}
-	
+	*/
+	@Id
+	@Column(name = "ID")
 	public int getID() {
 		return ID;
 	}
@@ -68,6 +54,7 @@ public class UserVO {
 		this.ID = ID;
 	}
 	
+	@Column(name = "number")
 	public String getNumber() {
 		return number;
 	}
@@ -76,6 +63,7 @@ public class UserVO {
 		this.number = number;
 	}
 
+	@Column(name = "account")
 	public String getAccount() {
 		return account;
 	}
@@ -84,6 +72,7 @@ public class UserVO {
 		this.account = account;
 	}
 
+	@Column(name = "gender")
 	public String getGender() {
 		return gender;
 	}
@@ -92,6 +81,7 @@ public class UserVO {
 		this.gender = gender;
 	}
 
+	@Column(name = "year")
 	public int getYear() {
 		return year;
 	}
@@ -100,6 +90,7 @@ public class UserVO {
 		this.year = year;
 	}
 
+	@Column(name = "month")
 	public int getMonth() {
 		return month;
 	}
@@ -108,6 +99,7 @@ public class UserVO {
 		this.month = month;
 	}
 
+	@Column(name = "day")
 	public int getDay() {
 		return day;
 	}
@@ -116,6 +108,7 @@ public class UserVO {
 		this.day = day;
 	}
 
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
@@ -124,6 +117,7 @@ public class UserVO {
 		this.name = name;
 	}
 
+	@Column(name = "password")
 	public String getPassword() {
 		return password;
 	}
@@ -132,6 +126,7 @@ public class UserVO {
 		this.password = password;
 	}
 
+	@Column(name = "type")
 	public UserType getType() {
 		return type;
 	}
@@ -140,6 +135,7 @@ public class UserVO {
 		this.type = type;
 	}
 
+	@Column(name = "level")
 	public int getLevel() {
 		return level;
 	}
@@ -148,6 +144,7 @@ public class UserVO {
 		this.level = level;
 	}
 
+	@Column(name = "credit")
 	public int getCredit() {
 		return credit;
 	}
@@ -156,6 +153,7 @@ public class UserVO {
 		this.credit = credit;
 	}
 
+	@Column(name = "hotelID")
 	public int getHotelID() {
 		return hotelID;
 	}
@@ -164,6 +162,7 @@ public class UserVO {
 		this.hotelID = hotelID;
 	}
 
+	@Column(name = "company")
 	public String getCompany() {
 		return company;
 	}
@@ -171,12 +170,21 @@ public class UserVO {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	
+/*	
 	public Image getImage() {
 		return image;
 	}
 	
 	public void setImage(Image image) {
 		this.image = image;
+	}*/
+
+/*	@Column(name = "image")
+	public String getImagePath() {
+		return imagePath;
 	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}*/
 }

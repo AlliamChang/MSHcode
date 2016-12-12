@@ -21,6 +21,7 @@ public class AddHotelStaffPane extends AnchorPane {
 	private HBox hBox;
 	private Button confirm, cancel;
 	private ChoiceBox<String> genderBox;
+	private UserVO staff;
 	
 	public AddHotelStaffPane(AddHotelPane owner){
 		super();
@@ -90,6 +91,7 @@ public class AddHotelStaffPane extends AnchorPane {
 				owner.changeLabel(nameField.getText());
 				owner.changeButton();
 				owner.setAddPane(AddHotelStaffPane.this);
+				createStaff();
 				WebAdminController.getInstance().goBack(owner);
 			}
 		});
@@ -98,7 +100,11 @@ public class AddHotelStaffPane extends AnchorPane {
 		});
 	}
 	
-	public UserVO createStaff(){
-		return new UserVO(UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.HOTEL_STAFF);
+	public void createStaff(){
+		staff = new UserVO(UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.HOTEL_STAFF);
+	}
+	
+	public UserVO getStaff(){
+		return staff;
 	}
 }

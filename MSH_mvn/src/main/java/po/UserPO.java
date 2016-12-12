@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javafx.scene.image.Image;
 import tools.UserType;
-import vo.UserVO;
 
 public class UserPO implements Serializable{
 	private String name, account, password, gender, number, company;
@@ -13,22 +12,28 @@ public class UserPO implements Serializable{
 	private Image image;
 	public static String INIT_PASSWORD = "123456";
 
-	public UserPO(UserVO vo) {
-		this.name = vo.getName();
-		this.account = vo.getAccount();
-		this.password = vo.getPassword();
-		this.gender = vo.getGender();
-		this.number = vo.getNumber();
-		this.company = vo.getCompany();
-		this.level = vo.getLevel();
-		this.credit = vo.getCredit();
-		this.ID = vo.getID();
-		this.hotelID = vo.getHotelID();
-		this.year = vo.getYear();
-		this.month = vo.getMonth();
-		this.day = vo.getDay();
-		this.type = vo.getType();
-		this.image = vo.getImage();
+	public UserPO(String password, String name, String gender, String number, UserType type) {
+		this.password = password;
+		this.name = name;
+		this.gender = gender;
+		this.number = number;
+		this.type = type;
+	}
+
+	public UserPO(String account, String password, String name, String gender,
+			String number, int year, int month, int day, UserType type, Image image){
+		this(password, name, gender, number, type);
+		this.account = account;
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.image = image;
+	}
+	
+	public UserPO(String account, String password, String name, String gender,
+			String number, String company, int year, int month, int day, UserType type, Image image){
+		this(account, password, name, gender, number, year, month, day, type, image);
+		this.company = company;
 	}
 	
 	public int getID() {
@@ -149,12 +154,5 @@ public class UserPO implements Serializable{
 	
 	public void setImage(Image image) {
 		this.image = image;
-	}
-	
-	public UserVO toVO(){
-		UserVO ret = new UserVO(account, password, name, gender,
-			number, company, year, month, day, type, image);
-		ret.setID(ID);
-		return ret;
 	}
 }
