@@ -78,11 +78,11 @@ public class AddMarketerPane extends AnchorPane{
 		AnchorPane.setTopAnchor(grid, 180.0);
 		
 		confirm.setOnAction(event -> {
-			WebAdminController.getInstance().addUser(
+			int id = WebAdminController.getInstance().addUser(
 					new UserVO(UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.MARKETER));
 			Alert alert = new Alert(AlertType.INFORMATION, "");
 			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.getDialogPane().setContentText("添加成功！\n初始密码是 \''123456\''");
+			alert.getDialogPane().setContentText("添加成功！\n营销人员ID：" + id + "        初始密码：123456");
 			alert.getDialogPane().setHeaderText(null);
 			if (nameField.getText() == null || nameField.getText().trim().isEmpty()
 					|| numberField.getText() == null || numberField.getText().trim().isEmpty()

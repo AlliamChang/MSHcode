@@ -142,7 +142,7 @@ public class AddHotelPane extends AnchorPane{
 			else {
 				WebAdminController.getInstance().addHotel(
 						new HotelInfoVO(textField.getText(), null, null, null, null, 
-								provinceChoiceBox.getValue(), areaChoiceBox.getValue(), 0, null, 0, 0, 0, staffID));
+								provinceChoiceBox.getValue(), areaChoiceBox.getValue(), 0, null, 0, 0, 0, staffID, s));
 				alert.showAndWait().filter(r -> r == ButtonType.OK).ifPresent(r -> 
 					WebAdminController.getInstance().setBrowseHotelPane());
 			}

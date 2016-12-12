@@ -21,7 +21,7 @@ public class UserDAOStub implements UserDAO {
 	}
 	
 	@Override
-	public UserPO get(String account) throws RemoteException {
+	public UserPO getUser(String account) throws RemoteException {
 		for (UserPO po: dataBase)
 			if (account.equals(po.getAccount()))
 				return po;
@@ -29,7 +29,7 @@ public class UserDAOStub implements UserDAO {
 	}
 
 	@Override
-	public UserPO get(int ID) throws RemoteException {
+	public UserPO getUser(int ID) throws RemoteException {
 		for (UserPO po: dataBase)
 			if (po.getID() == ID)
 				return po;
@@ -46,7 +46,7 @@ public class UserDAOStub implements UserDAO {
 	}
 
 	@Override
-	public int add(UserPO userPO) throws RemoteException {
+	public int addUser(UserPO userPO) throws RemoteException {
 		maxID++;
 		userPO.setID(maxID);
 		dataBase.add(userPO);
@@ -54,7 +54,7 @@ public class UserDAOStub implements UserDAO {
 	}
 
 	@Override
-	public ResultMessage modify(UserPO userPO) throws RemoteException {
+	public ResultMessage modifyUser(UserPO userPO) throws RemoteException {
 		for (int i = 0; i < dataBase.size(); i++)
 			if (dataBase.get(i).getID() == userPO.getID()){
 				dataBase.set(i, userPO);
@@ -63,7 +63,7 @@ public class UserDAOStub implements UserDAO {
 	}
 
 	@Override
-	public ResultMessage delete(int ID) throws RemoteException {
+	public ResultMessage deleteUser(int ID) throws RemoteException {
 		for (int i = 0; i < dataBase.size(); i++)
 			if (dataBase.get(i).getID() == ID)
 				dataBase.remove(i);

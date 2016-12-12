@@ -16,7 +16,7 @@ import tools.ResultMessage;
 public class UserDAOImpl implements UserDAO{
 
 	@Override
-	public UserPO get(String account) throws RemoteException {
+	public UserPO getUser(String account) throws RemoteException {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		Query query = session.createQuery("from UserPO where account = '" + account + "'");
@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public UserPO get(int ID) throws RemoteException {
+	public UserPO getUser(int ID) throws RemoteException {
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		UserPO result = (UserPO) session.get(UserPO.class, ID);
@@ -48,7 +48,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public int add(UserPO userPO) throws RemoteException {
+	public int addUser(UserPO userPO) throws RemoteException {
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(userPO);
@@ -59,7 +59,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public ResultMessage modify(UserPO userPO) throws RemoteException {
+	public ResultMessage modifyUser(UserPO userPO) throws RemoteException {
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 		session.update(userPO);
@@ -69,7 +69,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public ResultMessage delete(int ID) throws RemoteException {
+	public ResultMessage deleteUser(int ID) throws RemoteException {
 		try{
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();

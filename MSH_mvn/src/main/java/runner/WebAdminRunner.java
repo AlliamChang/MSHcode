@@ -1,14 +1,17 @@
 package runner;
 
-import tools.UserType;
 import ui.utility.MainPane;
 import ui.webAdmin.*;
-import vo.UserVO;
+
+import java.rmi.Naming;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import rmi.RemoteHelper;
 
 public class WebAdminRunner extends Application{
+	private RemoteHelper remoteHelper;
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -29,7 +32,18 @@ public class WebAdminRunner extends Application{
 	}
 
 	public static void main(String[] args){
+		new WebAdminRunner().linkToServer();
 		launch(args);
+	}
+
+	private void linkToServer() {
+		try {
+			remoteHelper = RemoteHelper.getInstance();
+			remoteHelper.setRemote(Naming.lookup("rmi://127.0.0.1:8888/RemoteImpl"));
+			System.out.println("linked");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

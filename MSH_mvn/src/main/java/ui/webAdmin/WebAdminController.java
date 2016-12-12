@@ -159,7 +159,7 @@ public class WebAdminController {
 	}
 	
 	public void delHotel(HotelInfoVO hotel){
-		hotelBLService.delete(String.valueOf(hotel.get_hotel_id()));
+		hotelBLService.delete(hotel.get_hotel_id());
 	}
 	
 	public List<CreditVO> getCredit(UserVO user){

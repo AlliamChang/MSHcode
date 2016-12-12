@@ -1,16 +1,17 @@
 package dao.user_dao;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
 import po.UserPO;
 import tools.ResultMessage;
 
-public interface UserDAO {
+public interface UserDAO extends Remote {
 
-	public UserPO get(String account) throws RemoteException;
+	public UserPO getUser(String account) throws RemoteException;
 	
-	public UserPO get(int ID) throws RemoteException;
+	public UserPO getUser(int ID) throws RemoteException;
 	
 	public List<UserPO> getAllMarketers() throws RemoteException;
 
@@ -20,9 +21,9 @@ public interface UserDAO {
 	 * @return
 	 * @throws RemoteException
 	 */
-	public int add(UserPO userPO) throws RemoteException;
+	public int addUser(UserPO userPO) throws RemoteException;
 	
-	public ResultMessage modify(UserPO userPO) throws RemoteException;
+	public ResultMessage modifyUser(UserPO userPO) throws RemoteException;
 
-	public ResultMessage delete(int ID) throws RemoteException;
+	public ResultMessage deleteUser(int ID) throws RemoteException;
 }

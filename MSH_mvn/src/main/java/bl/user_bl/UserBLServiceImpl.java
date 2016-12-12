@@ -7,6 +7,7 @@ import java.util.List;
 import blservice.user_blservice.UserBLService;
 import po.CreditPO;
 import po.UserPO;
+import rmi.RemoteHelper;
 import dao.user_dao.*;
 import data_stub.CreditRecordsDAO_Stub;
 import data_stub.HistoryDAO_Stub;
@@ -19,9 +20,11 @@ public class UserBLServiceImpl implements UserBLService{
 	private UserDAO ud;
 	private CreditRecordsDAO crd;
 	private HistorDAO hd;
+	private RemoteHelper helper;
 
 	public UserBLServiceImpl(){
-		ud = new UserDAOStub();
+		helper = RemoteHelper.getInstance();
+		ud = helper.getUserDAO();
 		crd = new CreditRecordsDAO_Stub();
 		hd = new HistoryDAO_Stub();
 	}
@@ -43,8 +46,8 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public UserVO get(int ID) {
 		try {
-			UserPO temp = ud.get(ID);
-			return null == temp ? null : new UserVO(ud.get(ID));
+			UserPO temp = ud.getUser(ID);
+			return null == temp ? null : new UserVO(ud.getUser(ID));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -54,8 +57,8 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public UserVO get(String account) {
 		try {
-			UserPO result = ud.get(account);
-			return null == result ? null : new UserVO(ud.get(account));
+			UserPO result = ud.getUser(account);
+			return null == result ? null : new UserVO(ud.getUser(account));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -65,7 +68,7 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public int add(UserVO userVO) {
 		try {
-			return ud.add(userVO.toPO());
+			return ud.addUser(userVO.toPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return -1;
@@ -75,7 +78,7 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public ResultMessage modify(UserVO userVO) {
 		try {
-			return ud.modify(userVO.toPO());
+			return ud.modifyUser(userVO.toPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -85,7 +88,7 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public ResultMessage delete(int ID) {
 		try {
-			return ud.delete(ID);
+			return ud.deleteUser(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -115,12 +118,12 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public ResultMessage updateCredit(int ID, int val) {
 		try {
-			UserPO po = ud.get(ID);
+			UserPO po = ud.getUser(ID);
 			if (null == po)
 				return ResultMessage.NOT_EXIST;
 			po.setCredit(po.getCredit() + val);
 			po.setLevel(updateLevel(po.getCredit()));
-			ud.modify(po);
+			ud.modifyUser(po);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();

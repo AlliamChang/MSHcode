@@ -1,5 +1,7 @@
 package runner;
 
+import rmi.RemoteHelper;
+
 public class ServerRunner {
 	
 	public ServerRunner(){
@@ -7,7 +9,7 @@ public class ServerRunner {
 	}
 	
 	public static void main(String[] args){
-//		new ServerRunner();
-		System.out.println("It's on");
+		new ServerRunner();
+		System.out.println("OK!");
 	}
 }
