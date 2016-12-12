@@ -1,19 +1,28 @@
 package dao.user_dao;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import po.userPO.*;
+import java.util.List;
+
+import po.UserPO;
 import tools.ResultMessage;
 
-public interface UserDao {
+public interface UserDAO {
+
+	public UserPO get(String account) throws RemoteException;
 	
-	public ArrayList<UserPO> getAll();
+	public UserPO get(int ID) throws RemoteException;
 	
-	public UserPO get(String name) throws RemoteException;
-	
-	public ResultMessage add(UserPO userPO) throws RemoteException;
+	public List<UserPO> getAllMarketers() throws RemoteException;
+
+	/**
+	 * 添加新用户，返回系统分配ID
+	 * @param userPO
+	 * @return
+	 * @throws RemoteException
+	 */
+	public int add(UserPO userPO) throws RemoteException;
 	
 	public ResultMessage modify(UserPO userPO) throws RemoteException;
-	
-	public ResultMessage delete(String name) throws RemoteException;
+
+	public ResultMessage delete(int ID) throws RemoteException;
 }
