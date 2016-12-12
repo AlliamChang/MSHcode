@@ -1,44 +1,34 @@
 package dao.strategy_dao;
 
 import po.strategyPO.*;
+import java.rmi.RemoteException;
 
 import tools.*;
 
 public interface StrategyDAO {
-    public StrategyPO getStrategyType();
-	
-	public StrategyPO getName();
-	
-	public StrategyPO getStartTime();
-	
-	public StrategyPO getEndTime();
-	
-	public StrategyPO getCity();
-	
-	public StrategyPO getArea();
-	
-	public StrategyPO getCost();
 
-	public StrategyPO getCostUnit();
-	
-	public StrategyPO getPeople();
-	
-    public StrategyType setStrategyType();
-	
-	public ResultMessage setName();
-	
-	public ResultMessage setStartTime();
-	
-	public ResultMessage setEndTime();
-	
-	public ResultMessage setCity();
-	
-	public ResultMessage setArea();
-	
-	public ResultMessage setCost();
+    public StrategyPO find(String name) throws RemoteException;
+    
+    public ResultMessage add(StrategyPO po) throws RemoteException;
+    
+    public ResultMessage delete(String name) throws RemoteException;
 
-	public ResultMessage setCostUnit();
+	public void update(StrategyPO po) throws RemoteException;
 	
-	public ResultMessage setPeople();
+	public ResultMessage modify(StrategyPO po) throws RemoteException;
+	
+	public void init() throws RemoteException;
+	
+//<<<<<<< HEAD
+	
+	//public void setCost(String cost) throws RemoteException;
+	
+	//public CostType getCostType() throws RemoteException;
+	
+	//public void setCostType(CostType costType) throws RemoteException;
+	
+	//public PeopleType getPeople() throws RemoteException;
+	
+	//public void setPeople(PeopleType people) throws RemoteException;
 
 }

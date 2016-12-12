@@ -12,6 +12,7 @@ public class StrategyVO {
     private String cost;  //策略折扣
     private CostType costType;  //策略折扣单位
     private PeopleType people;  //策略面向人群
+    private String hotelName;  //酒店名
     
     public StrategyVO(String name,StrategyType staretgyType,String city,String area
     		,Date startTime,Date endTime,String cost,CostType costType,PeopleType people){
@@ -24,6 +25,13 @@ public class StrategyVO {
     	this.cost=cost;
     	this.costType=costType;
     	this.people=people;
+    }
+    
+    public StrategyVO(String name,StrategyType staretgyType,String city,String area
+    		,Date startTime,Date endTime,String cost,CostType costType,PeopleType people,String hotelName){
+    	this(name,staretgyType,city,area
+    		,startTime,endTime,cost,costType,people);
+    	this.hotelName=hotelName;
     }
     
     public String getName(){
@@ -98,4 +106,11 @@ public class StrategyVO {
     	this.people=people;
     }
     
+    public String getHotelName(){
+    	return hotelName;
+    }
+    
+    public void setHotelName(String hotelName){
+    	this.hotelName=hotelName;
+    }
 }

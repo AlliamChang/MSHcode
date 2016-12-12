@@ -1,29 +1,29 @@
 package po.strategyPO;
 
 import tools.*;
+import vo.StrategyVO;
 
 public class StrategyPO {
-	StrategyType strategyType;
-	String name;
-	String city;
-	String area;
-	Date startTime;
-	Date endTime;
-	String cost;
-	CostType costUnit;
-	PeopleType people;
+	private StrategyType strategyType;
+	private String name;
+	private String city;
+	private String area;
+	private Date startTime;
+	private Date endTime;
+	private String cost;
+	private CostType costType;
+	private PeopleType people;
 	
-	public StrategyPO(StrategyType strategyType,String name,Date startTime,Date endTime,
-			String city,String area,String cost,CostType costUnit,PeopleType people){
-		this.strategyType=strategyType;
-		this.name=name;
-		this.startTime=startTime;
-		this.endTime=endTime;
-		this.city=city;
-		this.area=area;
-		this.cost=cost;
-		this.costUnit=costUnit;
-		this.people=people;
+	public StrategyPO(StrategyVO vo){
+		this.strategyType=vo.getStrategyType();
+		this.name=vo.getName();
+		this.startTime=vo.getStartTime();
+		this.endTime=vo.getEndTime();
+		this.city=vo.getCity();
+		this.area=vo.getArea();
+		this.cost=vo.getCost();
+		this.costType=vo.getCostType();
+		this.people=vo.getPeople();
 	}
 	
 	public StrategyType getStrategyType(){
@@ -54,16 +54,52 @@ public class StrategyPO {
 		return cost;
 	}
 	
-	public CostType getCostUnit(){
-		return costUnit;
+	public CostType getCostType(){
+		return costType;
 	}
 	
 	public PeopleType getPeople(){
 		return people;
 	}
 	
+	public void setName(String name){
+		this.name=name;
+	}
 	
+	public void setStrategyType(StrategyType strategyType){
+		this.strategyType=strategyType;
+	}
 	
+	public void setCity(String city){
+		this.city=city;
+	}
 	
+	public void setArea(String area){
+		this.area=area;
+	}
+	
+	public void setStartTime(Date startTime){
+		this.startTime=startTime;
+	}
+	
+	public void setEndTime(Date endTime){
+		this.endTime=endTime;
+	}
+	
+	public void setCost(String cost){
+		this.cost=cost;
+	}
+	
+	public void setCostType(CostType costType){
+		this.costType=costType;
+	}
+	
+	public void setPeople(PeopleType people){
+		this.people=people;
+	}
+	
+	public StrategyVO toVO(){
+		return new StrategyVO(name,strategyType,city,area,startTime,endTime,cost,costType,people);
+	}
 
 }

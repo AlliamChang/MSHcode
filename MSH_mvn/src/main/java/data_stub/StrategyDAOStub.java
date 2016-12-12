@@ -1,81 +1,83 @@
 package data_stub;
 import dao.strategy_dao.*;
+import java.util.ArrayList;
 import po.strategyPO.*;
 import tools.*;
+import java.rmi.*;
+import vo.*;
 
 public class StrategyDAOStub implements StrategyDAO{
+	private ArrayList<StrategyPO> database;
 	
-	public StrategyPO getStrategyType(){
-		return null;
+	public StrategyDAOStub(){
+		database=new ArrayList<StrategyPO>();
+		database.add(new StrategyPO(new StrategyVO("double11",StrategyType.BIRTHDAY,"Nanjing","Qixia"
+				,new Date("2016/11/11",false),new Date("2016/11/12",false),"99.00",CostType.RMB,PeopleType.VIP)));
 	}
 	
-	public StrategyPO getName(){
-		return null;
-		
+	public StrategyPO find(String name) throws RemoteException{
+		StrategyPO ret=null;
+		for(int i=0;i<database.size();i++){
+			if(database.get(i).getName().equals(name)){
+			    ret=database.get(i);
+			    break;
+			}	
+		}
+		return ret;
 	}
-	
-	public StrategyPO getStartTime(){
-		return null;
-	}
-	
-	public StrategyPO getEndTime(){
-		return null;
-	}
-	
-	public StrategyPO getCity(){
-		return null;
-	}
-	
-	public StrategyPO getArea(){
-		return null;
-	}
-	
-	public StrategyPO getCost(){
-		return null;
-	}
-	
-	public StrategyPO getCostUnit(){
-		return null;
-	}
-	
-	public StrategyPO getPeople(){
-		return null;
-	}
-	
-	public StrategyType setStrategyType(){
-		return null;
-	}
-	
-	public ResultMessage setName(){
-		return null;
-	}
-	
-	public ResultMessage setStartTime(){
-		return null;
-	}
-	
-    public ResultMessage setEndTime(){
-    	return null;
+
+	public ResultMessage add(StrategyPO po) throws RemoteException{
+    	boolean isExist=false;
+    	for(int i=0;i<database.size();i++){
+    		if(database.get(i).getName().equals(po.getName()))
+    			isExist=true;
+    	}
+    	if(isExist)
+    		return ResultMessage.EXIST;
+    	else{
+    		database.add(po);
+    		return ResultMessage.SUCCESS;
+    	}
     }
 	
-	public ResultMessage setCity(){
-		return null;
+	public ResultMessage delete(String name) throws RemoteException{
+		for(int i=0;i<database.size();i++){
+			if(database.get(i).getName().equals(name)){
+				database.remove(i);
+			}
+		}
+		return ResultMessage.SUCCESS;
 	}
 	
-	public ResultMessage setArea(){
-		return null;
+	public void update(StrategyPO po) throws RemoteException{
+		System.out.println("Update Succeed!");
 	}
 	
-	public ResultMessage setCost(){
-		return null;
+	public ResultMessage modify(StrategyPO po) throws RemoteException{
+		for(int i=0;i<database.size();i++){
+			if(database.get(i).getName().equals(po.getName())){
+				database.set(i, po);
+			}
+		}
+		return ResultMessage.SUCCESS;
 	}
 	
-	public ResultMessage setCostUnit(){
-		return null;
+	public void init() throws RemoteException{
+		System.out.println("Init Succeed!");
 	}
+	//public void setName(String name);
 	
-	public ResultMessage setPeople(){
-		return null;
-	}
+	//public StrategyType getStrategyType();
+	
+	//public void setStrategyType(StrategyType strategyType);
+	
+//<<<<<<< HEAD
+	//public String getCity();
+	
+	//public void setCity(String city);
+	
+	//public String getArea();
+	
+	
 
 }

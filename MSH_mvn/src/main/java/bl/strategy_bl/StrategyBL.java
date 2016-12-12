@@ -1,28 +1,58 @@
 package bl.strategy_bl;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import tools.*;
+import data_stub.*;
 
 import blservice.strategy_blservice.StrategyBLService;
-=======
+//=======
 import blservice.strategy_blservice.StrategyBLService;
-import tools.ResultMessage;
-import vo.BirthDiscountVO;
-import vo.CoDiscountVO;
-import vo.DateDiscountVO;
-import vo.PluralDiscountVO;
-import vo.RankDiscountVO;
-import vo.RankVO;
-import vo.StrategyVO;
-import vo.VipPlaceDiscountVO;
->>>>>>> origin/master
+
+//>>>>>>> origin/master
 
 public class StrategyBL implements StrategyBLService{
+	private StrategyDAOStub strategy;
 	
+    public String getName(){
+    	return 
+    }
 	
-
-	public String getName(){
-		return null;
-	}
+	public void setName(String name);
+	
+	public StrategyType getStrategyType();
+	
+	public void setStrategyType(StrategyType strategyType);
+	
+//<<<<<<< HEAD
+	public String getCity();
+	
+	public void setCity(String city);
+	
+	public String getArea();
+	
+	public void setArea(String area);
+	
+	public Date getStartTime();
+	
+	public void setStartTime(Date startTime);
+	
+	public Date getEndTime();
+	
+	public void setEndTime(Date endTime);
+	
+	public String getCost();
+//=======
+	public ResultMessage setBirthDiscount(int cost);
+//>>>>>>> origin/master
+	
+	public void setCost(String cost);
+	
+	public CostType getCostType();
+	
+	public void setCostType(CostType costType);
+	
+	public PeopleType getPeople();
+	
+	public void setPeople(PeopleType people);
 	
 }

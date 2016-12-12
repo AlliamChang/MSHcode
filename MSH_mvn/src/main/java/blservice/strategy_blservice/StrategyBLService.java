@@ -12,7 +12,7 @@ public interface StrategyBLService {
 	
 	public void setStrategyType(StrategyType strategyType);
 	
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	public String getCity();
 	
 	public void setCity(String city);
@@ -30,9 +30,9 @@ public interface StrategyBLService {
 	public void setEndTime(Date endTime);
 	
 	public String getCost();
-=======
+//=======
 	public ResultMessage setBirthDiscount(int cost);
->>>>>>> origin/master
+//>>>>>>> origin/master
 	
 	public void setCost(String cost);
 	
