@@ -5,38 +5,49 @@ import java.util.ArrayList;
 import java.util.List;
 
 import po.hotelPO.*;
-import po.userPO.*;
 import dao.order_ddao.OrderDAO;
 import po.orderPO.OrderPO;
 import tools.ResultMessage;
 
 public class OrderDAOStub implements OrderDAO {
 
+	@Override
 	public ResultMessage add(OrderPO order) throws RemoteException {
-		// TODO Auto-generated method stub
-		return ResultMessage.SUCCESS;
-	}
-
-	public List<OrderPO> userShow(po.UserPO user) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<OrderPO> hotelShow(po.hotelPO.HotelPO hotel)
-			throws RemoteException {
+	@Override
+	public List<OrderPO> userShow(int userId) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new ArrayList<OrderPO>();
+		return null;
 	}
 
-	public void update(OrderPO order) throws RemoteException {
+	@Override
+	public List<OrderPO> hotelShowToday(int hotelId) throws RemoteException {
 		// TODO Auto-generated method stub
-
+		return null;
 	}
 
+	@Override
+	public List<OrderPO> hotelShowAll(int hotelId) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage update(OrderPO order) throws RemoteException {
+		return null;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public OrderPO find(long id) throws RemoteException {
 		// TODO Auto-generated method stub
-		return new OrderPO(id, null, null, null, 0, null, null, 0, null, null,
-				null, id, null);
+		return null;
 	}
+
+	
 
 }

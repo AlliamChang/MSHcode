@@ -2,6 +2,7 @@ package vo;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import po.orderPO.OrderPO;
 import tools.Date;
 import tools.OrderState;
 
@@ -13,11 +14,15 @@ public class OrderVO {
 	/**
 	 * 用户id
 	 */
-	private long userID;
+	private int userID;
 	/**
 	 * 用户账号
 	 */
 	private String userAccount;
+	/**
+	 * 酒店id
+	 */
+	private int hotelId;
 	/**
 	 * 酒店名称
 	 */
@@ -47,6 +52,10 @@ public class OrderVO {
 	 */
 	private Date preCheckin;
 	/**
+	 * 最晚入住时间
+	 */
+	private int latestCheckin;
+	/**
 	 * 实际入住时间
 	 */
 	private Date checkin;
@@ -54,6 +63,10 @@ public class OrderVO {
 	 * 退房时间
 	 */
 	private Date checkout;
+	/**
+	 * 是否有小孩
+	 */
+	private boolean hasChild;
 	/**
 	 * 订单总价
 	 */
@@ -67,60 +80,84 @@ public class OrderVO {
 	 */
 	private boolean isEvaluated;
 	
-	//测试
-	private StringProperty preCheckIn;
-	private String firstBooker;
-	private StringProperty evaluate;
-	private StringProperty operation;
-	public OrderVO(long i,long u, String userAccount,String h, String rs, int rn, String[] b,
-			String[] bp, int d, Date p, OrderState s,boolean isEva) {
-		id = i;
-		userID = u;
+	public OrderVO(long id, int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
+			String[] booker, String[] bookerPhone, int days, Date preCheckin, int latestCheckin, Date checkin,
+			Date checkout, boolean hasChild, double price, OrderState state, boolean isEvaluated) {
+		super();
+		this.id = id;
+		this.userID = userID;
 		this.userAccount = userAccount;
-		hotel = h;
-		roomStyle = rs;
-		roomNum = rn;
-		booker = b;
-		bookerPhone = bp;
-		days = d;
-		preCheckin = p;
-		state = s;
-		isEvaluated=isEva;
-		preCheckIn = new SimpleStringProperty(p.getDate()); //测试
-		if(b.length > 0)
-			firstBooker = b[0]; //测试
-	}
-	public OrderVO(long i,long u,String userAccount, String h, String rs, int rn, String[] b,
-			String[] bp, int d, Date p, OrderState s,boolean isEva,Date checkin) {
-		id = i;
-		userID = u;
-		this.userAccount = userAccount;
-		hotel = h;
-		roomStyle = rs;
-		roomNum = rn;
-		booker = b;
-		bookerPhone = bp;
-		days = d;
-		preCheckin = p;
-		state = s;
-		isEvaluated=isEva;
-		preCheckIn = new SimpleStringProperty(p.getDate()); //测试
-		if(b.length > 0)
-			firstBooker = b[0]; //测试
+		this.hotelId = hotelId;
+		this.hotel = hotel;
+		this.roomStyle = roomStyle;
+		this.roomNum = roomNum;
+		this.booker = booker;
+		this.bookerPhone = bookerPhone;
+		this.days = days;
+		this.preCheckin = preCheckin;
+		this.latestCheckin = latestCheckin;
 		this.checkin = checkin;
+		this.checkout = checkout;
+		this.hasChild = hasChild;
+		this.price = price;
+		this.state = state;
+		this.isEvaluated = isEvaluated;
 	}
+
+	public OrderVO(OrderPO po){
+		super();
+		this.id = po.getId();
+		this.userID = po.getUserID();
+		this.userAccount = po.getUserAccount();
+		this.hotelId = po.getHotelId();
+		this.hotel = po.getHotel();
+		this.roomStyle = po.getRoomStyle();
+		this.roomNum = po.getRoomNum();
+		this.booker = po.getBooker();
+		this.bookerPhone = po.getBookerPhone();
+		this.days = po.getDays();
+		this.preCheckin = new Date(po.getPreCheckin(),false);
+		this.latestCheckin = po.getLatestCheckin();
+		this.checkin = new Date(po.getCheckin(),true);
+		this.checkout = new Date(po.getCheckout(),true);
+		this.hasChild = po.isHasChild();
+		this.price = po.getPrice();
+		this.state = po.getState();
+		this.isEvaluated = po.isEvaluated();
+	}
+	
+	public OrderPO toPO(){
+		OrderPO po = new OrderPO();
+		po.setId(id);
+		po.setUserID(userID);
+		po.setUserAccount(userAccount);
+		po.setHotelId(hotelId);
+		po.setHotel(hotel);
+		po.setRoomStyle(roomStyle);
+		po.setRoomNum(roomNum);
+		po.setBooker(booker);
+		po.setBookerPhone(bookerPhone);
+		po.setDays(days);
+		po.setPreCheckin(preCheckin.getDate());
+		po.setLatestCheckin(latestCheckin);
+		po.setCheckin(checkin == null?null:checkin.getDate());
+		po.setCheckout(checkout == null?null:checkout.getDate());
+		po.setHasChild(hasChild);
+		po.setPrice(price);
+		po.setState(state);
+		po.setEvaluated(isEvaluated);
+		return po;
+	}
+	
 	//测试
 	public StringProperty preCheckInProperty(){
-		return preCheckIn;
+		return new SimpleStringProperty(preCheckin.getDate());
 	}
-	public void setPreCheckInProperty(String s){
-		this.preCheckIn = new SimpleStringProperty(s);
-	}
-	public String getPreCheckOut(){
-		return preCheckin.plus(days);
+	public StringProperty preCheckOutProperty(){
+		return new SimpleStringProperty(preCheckin.plus(days));
 	}
 	public String getFirstBooker(){
-		return firstBooker;
+		return this.booker[0];
 	}
 	public StringProperty orderStateProperty(){
 		if(state == OrderState.ABNORMITY)
@@ -132,7 +169,6 @@ public class OrderVO {
 		else
 			return new SimpleStringProperty("未执行");
 	}
-	
 	public StringProperty operationProperty(){
 		if(state==OrderState.EXECUTED){
 			if(isEvaluated==false){
@@ -145,32 +181,41 @@ public class OrderVO {
 	}
 	public StringProperty evaluateProperty(){
 		if(isEvaluated==true)
-			evaluate=new SimpleStringProperty("有");
+			return new SimpleStringProperty("有");
 		else 
-			evaluate=new SimpleStringProperty("无");
-		return evaluate;
-	}
-	
-	public long getUserID() {
-		return userID;
+			return new SimpleStringProperty("无");
 	}
 
-	public void setUserID(long userID) {
-		this.userID = userID;
-	}
-
-	public String getUserAccount() {
-		return userAccount;
-	}
-	public void setUserAccount(String userAccount) {
-		this.userAccount = userAccount;
-	}
 	public long getId() {
 		return id;
 	}
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+	public String getUserAccount() {
+		return userAccount;
+	}
+
+	public void setUserAccount(String userAccount) {
+		this.userAccount = userAccount;
+	}
+
+	public int getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
 	}
 
 	public String getHotel() {
@@ -191,10 +236,6 @@ public class OrderVO {
 
 	public int getRoomNum() {
 		return roomNum;
-	}
-	
-	public boolean getEvaluated(){
-		return isEvaluated;
 	}
 
 	public void setRoomNum(int roomNum) {
@@ -233,6 +274,14 @@ public class OrderVO {
 		this.preCheckin = preCheckin;
 	}
 
+	public int getLatestCheckin() {
+		return latestCheckin;
+	}
+
+	public void setLatestCheckin(int latestCheckin) {
+		this.latestCheckin = latestCheckin;
+	}
+
 	public Date getCheckin() {
 		return checkin;
 	}
@@ -247,6 +296,14 @@ public class OrderVO {
 
 	public void setCheckout(Date checkout) {
 		this.checkout = checkout;
+	}
+
+	public boolean isHasChild() {
+		return hasChild;
+	}
+
+	public void setHasChild(boolean hasChild) {
+		this.hasChild = hasChild;
 	}
 
 	public double getPrice() {
@@ -264,8 +321,14 @@ public class OrderVO {
 	public void setState(OrderState state) {
 		this.state = state;
 	}
-	
-	public void setEvaluated(boolean eva){
-		this.isEvaluated=eva;
+
+	public boolean isEvaluated() {
+		return isEvaluated;
 	}
+
+	public void setEvaluated(boolean isEvaluated) {
+		this.isEvaluated = isEvaluated;
+	}
+	
+	
 }

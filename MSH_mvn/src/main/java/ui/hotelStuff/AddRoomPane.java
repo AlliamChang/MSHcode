@@ -128,7 +128,7 @@ public class AddRoomPane extends VBox{
 				this.table.getItems().add(
 						new RoomVO(this.styleText.getText(),bedStyle,
 								Double.valueOf(this.priceText.getText()),Integer.valueOf(this.numText.getText()),
-								this.maxBox.getValue()));
+								this.maxBox.getValue(),HotelPaneController.getInstance().getHotelId()));
 //				System.out.println(this.styleText.getText());
 //				System.out.println(this.numText.getText());
 //				System.out.println(this.priceText.getText());
