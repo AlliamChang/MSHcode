@@ -101,7 +101,8 @@ public class AddHotelStaffPane extends AnchorPane {
 	}
 	
 	public void createStaff(){
-		staff = new UserVO(UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.HOTEL_STAFF);
+		staff = new UserVO(null, UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(),
+				null, null, 0, 0, 0, UserType.HOTEL_STAFF);
 	}
 	
 	public UserVO getStaff(){

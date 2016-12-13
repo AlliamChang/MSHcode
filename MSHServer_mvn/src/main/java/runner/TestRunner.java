@@ -18,14 +18,24 @@ public class TestRunner {
 	public static void main(String[] args){
 		UserDAO daoTest = new UserDAOImpl();
 		TestRunner test = new TestRunner();
-		String readPath = "C:/Users/I Like Milk/Desktop/1.png";
+		String readPath = "C:/Users/I Like Milk/Desktop/1.jpg";
 		String writePath = "C:/Users/I Like Milk/Desktop/2.png";
 		try {
-//			daoTest.addUser(new UserPO("zxf", "hello", "郑晓峰", "男",
-//					"15050582962", "南京大学", 1997, 6, 23, UserType.COMPANY_CUSTOMER, test.fileToByte(readPath)));
-			UserPO po = daoTest.getUser(5);
-			test.byteToFile(po.getImage(), writePath);
-			
+			UserPO po = new UserPO();
+			po.setAccount("zxf");
+			po.setPassword("zxf111");
+			po.setCredit(1000);
+			po.setDay(23);
+			po.setGender("男");
+			po.setImage(test.fileToByte(readPath));
+			po.setImageExtension("jpg");
+			po.setLevel(99);
+			po.setMonth(6);
+			po.setName("郑晓峰");
+			po.setNumber("15050582962");
+			po.setType(UserType.CUSTOMER);
+			po.setYear(1997);
+			daoTest.addUser(po);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

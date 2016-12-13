@@ -79,7 +79,8 @@ public class AddMarketerPane extends AnchorPane{
 		
 		confirm.setOnAction(event -> {
 			int id = WebAdminController.getInstance().addUser(
-					new UserVO(UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(), UserType.MARKETER));
+					new UserVO(null, UserVO.INIT_PASSWORD, nameField.getText(), genderBox.getValue(), numberField.getText(),
+							null, null, 0, 0, 0, UserType.MARKETER));
 			Alert alert = new Alert(AlertType.INFORMATION, "");
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.getDialogPane().setContentText("添加成功！\n营销人员ID：" + id + "        初始密码：123456");

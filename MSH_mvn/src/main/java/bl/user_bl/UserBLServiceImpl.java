@@ -47,7 +47,7 @@ public class UserBLServiceImpl implements UserBLService{
 	public UserVO get(int ID) {
 		try {
 			UserPO temp = ud.getUser(ID);
-			return null == temp ? null : new UserVO(ud.getUser(ID));
+			return null == temp ? null : new UserVO(temp);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -57,8 +57,8 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public UserVO get(String account) {
 		try {
-			UserPO result = ud.getUser(account);
-			return null == result ? null : new UserVO(ud.getUser(account));
+			UserPO temp = ud.getUser(account);
+			return null == temp ? null : new UserVO(temp);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;

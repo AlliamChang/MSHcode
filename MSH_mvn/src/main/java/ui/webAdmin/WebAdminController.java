@@ -43,7 +43,7 @@ public class WebAdminController {
 				Arrays.asList("查询用户", "营销人员", "浏览酒店"));
 		MainPane.getInstance().setNavigationBar(naviBar);
 		naviBar.getToggle().selectedToggleProperty().addListener((o, oldValue, newValue) -> {
-			if(newValue != null){
+			if(newValue != null && !newValue.equals(oldValue)){
 				String temp = newValue.toString().split("'")[1];
 				switch(temp){
 				case "查询用户":

@@ -165,8 +165,9 @@ class Record extends GridPane{
 	
 	static List<Record> makeRecords(List<CreditVO> list){
 		ArrayList<Record> ret = new ArrayList<Record>();
-		for (CreditVO item: list)
-			ret.add(new Record(item));
+		if (list != null)
+			for (CreditVO item: list)
+				ret.add(new Record(item));
 		return ret;
 	}
 }

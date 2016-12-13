@@ -16,36 +16,12 @@ public class UserPO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -991412794071048850L;
-	private String name, account, password, gender, number, company;
+	private String name, account, password, gender, number, company, imageExtension;
 	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
 	private byte[] image;
 
 	public UserPO(){}
-	
-	public UserPO(String password, String name, String gender, String number, UserType type) {
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-		this.number = number;
-		this.type = type;
-	}
-
-	public UserPO(String account, String password, String name, String gender,
-			String number, int year, int month, int day, UserType type, byte[] image){
-		this(password, name, gender, number, type);
-		this.account = account;
-		this.year = year;
-		this.month = month;
-		this.day = day;
-		this.image = image;
-	}
-	
-	public UserPO(String account, String password, String name, String gender,
-			String number, String company, int year, int month, int day, UserType type, byte[] image){
-		this(account, password, name, gender, number, year, month, day, type, image);
-		this.company = company;
-	}
 	
 	@Id
 	@Column(name = "ID")
@@ -181,5 +157,14 @@ public class UserPO implements Serializable{
 	
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	@Column(name = "imageExtension")
+	public String getImageExtension() {
+		return imageExtension;
+	}
+
+	public void setImageExtension(String imageExtension) {
+		this.imageExtension = imageExtension;
 	}
 }

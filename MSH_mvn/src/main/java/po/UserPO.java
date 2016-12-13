@@ -2,39 +2,20 @@ package po;
 
 import java.io.Serializable;
 
-import javafx.scene.image.Image;
+
 import tools.UserType;
 
 public class UserPO implements Serializable{
-	private String name, account, password, gender, number, company;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -991412794071048850L;
+	private String name, account, password, gender, number, company, imageExtension;
 	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
-	private Image image;
-	public static String INIT_PASSWORD = "123456";
+	private byte[] image;
 
-	public UserPO(String password, String name, String gender, String number, UserType type) {
-		this.password = password;
-		this.name = name;
-		this.gender = gender;
-		this.number = number;
-		this.type = type;
-	}
-
-	public UserPO(String account, String password, String name, String gender,
-			String number, int year, int month, int day, UserType type, Image image){
-		this(password, name, gender, number, type);
-		this.account = account;
-		this.year = year;
-		this.month = month;
-		this.day = day;
-		this.image = image;
-	}
-	
-	public UserPO(String account, String password, String name, String gender,
-			String number, String company, int year, int month, int day, UserType type, Image image){
-		this(account, password, name, gender, number, year, month, day, type, image);
-		this.company = company;
-	}
+	public UserPO(){}
 	
 	public int getID() {
 		return ID;
@@ -148,11 +129,19 @@ public class UserPO implements Serializable{
 		this.company = company;
 	}
 	
-	public Image getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 	
-	public void setImage(Image image) {
+	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public String getImageExtension() {
+		return imageExtension;
+	}
+
+	public void setImageExtension(String imageExtension) {
+		this.imageExtension = imageExtension;
 	}
 }
