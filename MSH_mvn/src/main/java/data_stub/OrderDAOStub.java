@@ -4,9 +4,9 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.OrderPO;
 import po.hotelPO.*;
 import dao.order_ddao.OrderDAO;
-import po.orderPO.OrderPO;
 import tools.ResultMessage;
 
 public class OrderDAOStub implements OrderDAO {

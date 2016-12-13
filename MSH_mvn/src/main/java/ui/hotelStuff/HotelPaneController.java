@@ -153,6 +153,10 @@ public class HotelPaneController {
 				4,4.5,1,1);
 	}
 	
+	public long getHotelId(){
+		return this.id;
+	}
+	
 	public List<OrderVO> getTodayOrder(){
 		
 		orderList = orderBL.getTodayHotelOrder(id, hotel);

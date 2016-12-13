@@ -1,16 +1,20 @@
-package po.orderPO;
+package po;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import tools.OrderState;
 
-public class OrderPO implements Serializable {
-
+@Entity
+@Table(name = "order")
+public class OrderPO implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	/**
 	 * 订单号
 	 */
@@ -112,6 +116,7 @@ public class OrderPO implements Serializable {
 		this.isEvaluated = isEvaluated;
 	}
 
+	@Id
 	public long getId() {
 		return id;
 	}
@@ -260,5 +265,4 @@ public class OrderPO implements Serializable {
 		return serialVersionUID;
 	}
 	
-		
 }

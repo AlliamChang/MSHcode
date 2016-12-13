@@ -13,7 +13,7 @@ import blservice.strategy_blservice.StrategyBLService;
 import blservice.user_blservice.UserBLService;
 import dao.order_ddao.OrderDAO;
 import data_stub.OrderDAOStub;
-import po.orderPO.OrderPO;
+import po.OrderPO;
 import tools.Date;
 import tools.OrderState;
 import tools.ResultMessage;
@@ -21,7 +21,7 @@ import vo.OrderVO;
 
 public class OrderBL implements OrderBLService{
 	
-	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/mm/dd hh:mm:ss");
+	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
 	
 	private OrderDAO orderDataBase;
 	private UserBLService user;

@@ -2,6 +2,7 @@ package rmi;
 
 import java.rmi.Remote;
 
+import dao.order_ddao.OrderDAO;
 import dao.user_dao.UserDAO;
 
 public class RemoteHelper {
@@ -19,5 +20,9 @@ public class RemoteHelper {
 	
 	public UserDAO getUserDAO(){
 		return (UserDAO)remote;
+	}
+	
+	public OrderDAO getOrderDAO(){
+		return (OrderDAO)remote;
 	}
 }

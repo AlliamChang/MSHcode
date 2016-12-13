@@ -5,7 +5,6 @@ import java.rmi.*;
 
 import po.*;
 import po.hotelPO.HotelPO;
-import po.orderPO.OrderPO;
 import tools.ResultMessage;
 
 public interface OrderDAO extends Remote{
