@@ -2,9 +2,20 @@ package blservice.strategy_blservice;
 
 import tools.*;
 import vo.*;
+import java.util.*;
 
 public interface StrategyBLService {
-	public String getName();
+	
+	public ResultMessage add(StrategyVO strategy);
+	
+	public ResultMessage delete(String name);
+	
+	public ResultMessage modify(StrategyVO vo);
+	
+	public double getFinalPrice(OrderVO order,UserVO user,StrategyVO strategy);
+	
+	public ArrayList<StrategyVO> getAllStrategy(String hotelName);
+	/*public String getName();
 	
 	public void setName(String name);
 	
@@ -42,6 +53,6 @@ public interface StrategyBLService {
 	
 	public PeopleType getPeople();
 	
-	public void setPeople(PeopleType people);
+	public void setPeople(PeopleType people);*/
 
 }

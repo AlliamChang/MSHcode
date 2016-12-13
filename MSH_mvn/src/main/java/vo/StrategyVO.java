@@ -1,6 +1,7 @@
 package vo;
 
 import tools.*;
+import po.strategyPO.*;
 
 public class StrategyVO {
 	private String name;  //策略名
@@ -14,7 +15,7 @@ public class StrategyVO {
     private PeopleType people;  //策略面向人群
     private String hotelName;  //酒店名
     
-    public StrategyVO(String name,StrategyType staretgyType,String city,String area
+    public StrategyVO(String name,StrategyType strategyType,String city,String area
     		,Date startTime,Date endTime,String cost,CostType costType,PeopleType people){
     	this.name=name;
     	this.strategyType=strategyType;
@@ -32,6 +33,20 @@ public class StrategyVO {
     	this(name,staretgyType,city,area
     		,startTime,endTime,cost,costType,people);
     	this.hotelName=hotelName;
+    }
+    
+    public StrategyVO(StrategyPO po){
+    	this.strategyType=po.getStrategyType();
+		this.name=po.getName();
+		this.startTime=po.getStartTime();
+		this.endTime=po.getEndTime();
+		this.city=po.getCity();
+		this.area=po.getArea();
+		this.cost=po.getCost();
+		this.costType=po.getCostType();
+		this.people=po.getPeople();
+		if(po.getHotelName()!=null)
+		    this.hotelName=po.getHotelName();
     }
     
     public String getName(){
@@ -112,5 +127,9 @@ public class StrategyVO {
     
     public void setHotelName(String hotelName){
     	this.hotelName=hotelName;
+    }
+    
+    public StrategyPO toPO(){
+    	return new StrategyPO(this);
     }
 }

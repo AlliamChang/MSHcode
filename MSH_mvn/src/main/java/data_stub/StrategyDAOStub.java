@@ -1,18 +1,20 @@
 package data_stub;
 import dao.strategy_dao.*;
-import java.util.ArrayList;
+import java.util.*;
 import po.strategyPO.*;
 import tools.*;
+import tools.Date;
 import java.rmi.*;
 import vo.*;
+import java.time.LocalDate;
 
 public class StrategyDAOStub implements StrategyDAO{
 	private ArrayList<StrategyPO> database;
 	
 	public StrategyDAOStub(){
 		database=new ArrayList<StrategyPO>();
-		database.add(new StrategyPO(new StrategyVO("double11",StrategyType.BIRTHDAY,"Nanjing","Qixia"
-				,new Date("2016/11/11",false),new Date("2016/11/12",false),"99.00",CostType.RMB,PeopleType.VIP)));
+		database.add(new StrategyPO("double11",StrategyType.BIRTHDAY,"Nanjing","Qixia"
+				,new Date("2016/11/11",false),new Date("2016/11/12",false),"99.00",CostType.RMB,PeopleType.VIP));
 	}
 	
 	public StrategyPO find(String name) throws RemoteException{
@@ -64,6 +66,40 @@ public class StrategyDAOStub implements StrategyDAO{
 	
 	public void init() throws RemoteException{
 		System.out.println("Init Succeed!");
+	}
+	
+	public ArrayList<StrategyVO> getStrategy(String hotelName){
+		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+		for(int i=0;i<database.size();i++){
+			if(database.get(i).getHotelName()!=null&&database.get(i).getHotelName().equals(hotelName)){
+				ret.add(new StrategyVO(database.get(i)));
+			}
+		}
+		return ret;
+	}
+	
+	public ArrayList<StrategyVO> getStrategy(){
+		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+		for(int i=0;i<database.size();i++){
+			if(database.get(i).getHotelName()==null){
+				ret.add(new StrategyVO(database.get(i)));
+			}
+		}
+		return ret;
+	}
+	
+	public double getFinalPrice(OrderVO order,UserVO user,String hotelName){
+		double finalPrice=0.0;
+		LocalDate now=LocalDate.now();
+		for(int i=0;i<database.size();i++){
+			if(now.getMonthValue()==user.getMonth()){
+				if(hotelName==database.get(i).getHotelName()&&
+						database.get(i).getStrategyType()==StrategyType.BIRTHDAY){
+					
+				}
+			}
+		}
+		return finalPrice;
 	}
 	//public void setName(String name);
 	

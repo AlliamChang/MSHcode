@@ -1,7 +1,7 @@
 package po.strategyPO;
 
 import tools.*;
-import vo.StrategyVO;
+
 
 public class StrategyPO {
 	private StrategyType strategyType;

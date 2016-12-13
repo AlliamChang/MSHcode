@@ -1,8 +1,9 @@
 package dao.strategy_dao;
 
 import po.strategyPO.*;
+import vo.*;
 import java.rmi.RemoteException;
-
+import java.util.*;
 import tools.*;
 
 public interface StrategyDAO {
@@ -18,6 +19,12 @@ public interface StrategyDAO {
 	public ResultMessage modify(StrategyPO po) throws RemoteException;
 	
 	public void init() throws RemoteException;
+	
+	public ArrayList<StrategyVO> getStrategy(String hotelName);
+	
+	public ArrayList<StrategyVO> getStrategy();
+	
+	public double getFinalPrice(OrderVO order,UserVO user,String hotelName);
 	
 //<<<<<<< HEAD
 	

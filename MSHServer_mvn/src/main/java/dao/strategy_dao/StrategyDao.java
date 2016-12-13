@@ -1,37 +1,30 @@
 package dao.strategy_dao;
 
+import java.rmi.*;
+import java.util.ArrayList;
+
 import po.strategyPO.*;
 import tools.ResultMessage;
+import po.orderPO.*;
+import po.UserPO;
 
-public interface StrategyDao {
-	public void init();
-	
-	public BirthDiscountPO getBirthDiscount();
-	
-	public PluralDiscountPO getPluralDiscount();
-	
-	public CoDiscountPO getCoDiscount();
-	
-	public DateDiscountPO getDateDiscount();
-	
-	public VipPlaceDiscountPO getVipDiscount();
-	
-	public RankDiscountPO getRankDiscount();
+public interface StrategyDao extends Remote{
+	    public StrategyPO find(String name) throws RemoteException;
+	    
+	    public ResultMessage add(StrategyPO po) throws RemoteException;
+	    
+	    public ResultMessage delete(String name) throws RemoteException;
 
-	public RankPO getRank();
-    
-	public ResultMessage setBirthDiscount();
-	
-	public ResultMessage setPluralDiscount();
-	
-	public ResultMessage setCoDiscount();
-	
-	public ResultMessage setDateDiscount();
-	
-	public ResultMessage setVipDiscount();
-	
-	public ResultMessage setRankDiscount();
-
-	public ResultMessage setRank();
+		public void update(StrategyPO po) throws RemoteException;
+		
+		public ResultMessage modify(StrategyPO po) throws RemoteException;
+		
+		public void init() throws RemoteException;
+		
+		public ArrayList<StrategyPO> getStrategy(String hotelName);
+		
+		public ArrayList<StrategyPO> getStrategy();
+		
+		public double getFinalPrice(OrderPO order,UserPO user);
 
 }

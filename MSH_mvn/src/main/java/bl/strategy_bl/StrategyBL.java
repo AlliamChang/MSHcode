@@ -3,56 +3,53 @@ package bl.strategy_bl;
 //<<<<<<< HEAD
 import tools.*;
 import data_stub.*;
-
+import java.rmi.*;
+import java.util.*;
+import vo.*;
+import po.strategyPO.*;
 import blservice.strategy_blservice.StrategyBLService;
 //=======
-import blservice.strategy_blservice.StrategyBLService;
+
 
 //>>>>>>> origin/master
 
 public class StrategyBL implements StrategyBLService{
 	private StrategyDAOStub strategy;
+	private OrderDAOStub order;
+	private UserDAOStub user;
 	
-    public String getName(){
-    	return 
-    }
+	public ResultMessage add(StrategyVO vo){
+		try{
+			return strategy.add(vo.toPO());
+		} catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return ResultMessage.FAIL;
+	}
 	
-	public void setName(String name);
+	public ResultMessage delete(String name){
+		try{
+			return strategy.delete(name);
+		} catch (RemoteException e){
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
 	
-	public StrategyType getStrategyType();
+	public ResultMessage modify(StrategyVO vo){
+		try{
+			return strategy.modify(vo.toPO());
+		} catch (RemoteException e){
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+   
+	public ArrayList<StrategyVO> getStrategy(String hotelName) throws RemoteException{
+		return strategy.getStrategy(hotelName);
+	}
 	
-	public void setStrategyType(StrategyType strategyType);
-	
-//<<<<<<< HEAD
-	public String getCity();
-	
-	public void setCity(String city);
-	
-	public String getArea();
-	
-	public void setArea(String area);
-	
-	public Date getStartTime();
-	
-	public void setStartTime(Date startTime);
-	
-	public Date getEndTime();
-	
-	public void setEndTime(Date endTime);
-	
-	public String getCost();
-//=======
-	public ResultMessage setBirthDiscount(int cost);
-//>>>>>>> origin/master
-	
-	public void setCost(String cost);
-	
-	public CostType getCostType();
-	
-	public void setCostType(CostType costType);
-	
-	public PeopleType getPeople();
-	
-	public void setPeople(PeopleType people);
-	
+	public double getFinalPrice(OrderVO order,UserVO user) throws RemoteException{
+		return 0.0;
+	}
 }
