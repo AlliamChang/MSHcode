@@ -116,10 +116,6 @@ public class HotelInfoVO {
 		this.tradingArea = tradingArea;
 	}
 	
-	public double getscore(){
-		return score;
-	}
-	
 	public void setScore(double score){
 		this.score=score;
 	}

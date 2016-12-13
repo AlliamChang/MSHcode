@@ -5,7 +5,6 @@ import java.util.List;
 
 import tools.OrderState;
 import ui.utility.MainPane;
-import vo.HotelVO;
 import vo.OrderVO;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -94,7 +93,7 @@ public class MyOrderTable extends TableView{
 								int row=this.getTableRow().getIndex();
 								OrderVO this_row=MyOrderTable.this.list.get(row);
 								list.add(this_row.getPreCheckin().getDate());
-								list.add(this_row.getPreCheckOut());
+								list.add(this_row.getCheckout().getDate());
 								list.add(this_row.getRoomStyle());
 								list.add(this_row.getRoomNum()+"");
 								list.add(this_row.getPrice()+"");

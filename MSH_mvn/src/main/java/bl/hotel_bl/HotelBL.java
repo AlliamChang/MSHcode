@@ -12,7 +12,6 @@ import blservice.strategy_blservice.StrategyBLService;
 import tools.ResultMessage;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
-import vo.HotelVO;
 import vo.RoomVO;
 public class HotelBL implements HotelBLService{
 	private HotelDAOStub hotel;
@@ -32,9 +31,9 @@ public class HotelBL implements HotelBLService{
 	}
 
 	@Override
-	public ResultMessage modify(HotelInfoVO hotelinfo) {
+	public ResultMessage modify(HotelInfoVO hotel) {
 		try {
-			return hotel.modify(new HotelPO(hotelinfo));
+			return this.hotel.modify(new HotelPO(hotel.getAdress(),hotel.getTradingArea(),hotel.getCity(),hotel.getProvince(),hotel.getHotel(),hotel.getPhone(),hotel.getIntroduction(),hotel.getHotel_id(),hotel.getStar(),hotel.get_stuff_id(),hotel.getYear(),hotel.getScore(),hotel.getScul(),hotel.getFacility()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -45,7 +44,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public ResultMessage inputRoom(RoomVO vo) {
 		try {
-			return hotel.addRoom(new RoomPO(vo));
+			return hotel.addRoom(new RoomPO(vo.getRoomStyle(),vo.getBedStyle(),vo.getPrice(),vo.getNum(),vo.getid(),vo.getMaxCustomer()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -135,7 +134,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public ResultMessage add(HotelInfoVO hotel) {
 		try {
-			return this.hotel.add(new HotelPO(hotel));
+			return this.hotel.add(new HotelPO(hotel.getAdress(),hotel.getTradingArea(),hotel.getCity(),hotel.getProvince(),hotel.getHotel(),hotel.getPhone(),hotel.getIntroduction(),hotel.getHotel_id(),hotel.getStar(),hotel.get_stuff_id(),hotel.getYear(),hotel.getScore(),hotel.getScul(),hotel.getFacility()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;

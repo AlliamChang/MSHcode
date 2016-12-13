@@ -11,13 +11,13 @@ public class RoomPO {
 	private int hotel_id;
 	private int maxCustomer;
 	
-	public RoomPO(RoomVO vo){
-		this.room_type=vo.getRoomStyle();
-		this.bedStyle=vo.getBedStyle();
-		this.price=vo.getPrice();
-		this.num=vo.getNum();
-		this.hotel_id=vo.getid();
-		this.maxCustomer=vo.getMaxCustomer();
+	public RoomPO(String room_type,BedStyle bedStyle,double price,int num,int hotel_id,int maxCustomer){
+		this.room_type=room_type;
+		this.bedStyle=bedStyle;
+		this.price=price;
+		this.num=num;
+		this.hotel_id=hotel_id;
+		this.maxCustomer=maxCustomer;
 	}
 
 	public String getRoom_type() {

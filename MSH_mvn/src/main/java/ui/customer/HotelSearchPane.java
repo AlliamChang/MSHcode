@@ -30,7 +30,6 @@ import javafx.scene.text.FontWeight;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
-import vo.HotelVO;
 import vo.RoomVO;
 
 public class HotelSearchPane extends Pane{
@@ -160,7 +159,7 @@ public class HotelSearchPane extends Pane{
 		        }
 			name=new Label(hotel_name);
 			HotelBLService_Stub stub=new HotelBLService_Stub();
-			score=new Label(stub.getHotel(hotel_name).getscore()+"");
+			score=new Label(stub.getHotel(hotel_name).getScore()+"");
 			lowest_price=new Label("¥"+"500"+"起");
 			this.image=stub.getHotel(hotel_name).getScul();
 			this.list=stub.getRoom(1);
