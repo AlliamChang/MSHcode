@@ -10,13 +10,13 @@ public class StrategyVO {
 	private String area;  //策略商圈
 	private Date startTime;  //策略开始时间
     private Date endTime;  //策略结束时间
-    private String cost;  //策略折扣
+    private double cost;  //策略折扣
     private CostType costType;  //策略折扣单位
     private PeopleType people;  //策略面向人群
-    private String hotelName;  //酒店名
+    private int hotelId;  //酒店id
     
     public StrategyVO(String name,StrategyType strategyType,String city,String area
-    		,Date startTime,Date endTime,String cost,CostType costType,PeopleType people){
+    		,Date startTime,Date endTime,double cost,CostType costType,PeopleType people){
     	this.name=name;
     	this.strategyType=strategyType;
     	this.city=city;
@@ -29,10 +29,10 @@ public class StrategyVO {
     }
     
     public StrategyVO(String name,StrategyType staretgyType,String city,String area
-    		,Date startTime,Date endTime,String cost,CostType costType,PeopleType people,String hotelName){
+    		,Date startTime,Date endTime,double cost,CostType costType,PeopleType people,int hotelId){
     	this(name,staretgyType,city,area
     		,startTime,endTime,cost,costType,people);
-    	this.hotelName=hotelName;
+    	this.hotelId=hotelId;
     }
     
     public StrategyVO(StrategyPO po){
@@ -45,8 +45,8 @@ public class StrategyVO {
 		this.cost=po.getCost();
 		this.costType=po.getCostType();
 		this.people=po.getPeople();
-		if(po.getHotelName()!=null)
-		    this.hotelName=po.getHotelName();
+		if(po.getHotelId()!=0)
+		    this.hotelId=po.getHotelId();
     }
     
     public String getName(){
@@ -97,11 +97,11 @@ public class StrategyVO {
     	this.endTime=endTime;
     }
     
-    public String getCost(){
+    public double getCost(){
     	return cost;
     }
     
-    public void setCost(String cost){
+    public void setCost(double cost){
     	this.cost=cost;
     }
     
@@ -121,15 +121,18 @@ public class StrategyVO {
     	this.people=people;
     }
     
-    public String getHotelName(){
-    	return hotelName;
+    public int getHotelId(){
+    	return hotelId;
     }
     
-    public void setHotelName(String hotelName){
-    	this.hotelName=hotelName;
+    public void setHotelId(int hotelId){
+    	this.hotelId=hotelId;
     }
     
     public StrategyPO toPO(){
-    	return new StrategyPO(this);
+    	if(hotelId!=0)
+    		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,costType,people,hotelId);
+    	else
+    		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,costType,people);
     }
 }

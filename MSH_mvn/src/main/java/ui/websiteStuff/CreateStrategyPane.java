@@ -22,7 +22,7 @@ public class CreateStrategyPane extends GridPane{
 	private String name;
 	private String city;
 	private String area;
-	private String cost;
+	private double cost;
 	private Date startTime;
 	private Date endTime;
 	private CostType costType;

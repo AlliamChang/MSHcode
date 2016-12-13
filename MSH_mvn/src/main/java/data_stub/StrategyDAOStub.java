@@ -14,7 +14,7 @@ public class StrategyDAOStub implements StrategyDAO{
 	public StrategyDAOStub(){
 		database=new ArrayList<StrategyPO>();
 		database.add(new StrategyPO("double11",StrategyType.BIRTHDAY,"Nanjing","Qixia"
-				,new Date("2016/11/11",false),new Date("2016/11/12",false),"99.00",CostType.RMB,PeopleType.VIP));
+				,new Date("2016/11/11",false),new Date("2016/11/12",false),99.00,CostType.RMB,PeopleType.VIP));
 	}
 	
 	public StrategyPO find(String name) throws RemoteException{
@@ -68,10 +68,10 @@ public class StrategyDAOStub implements StrategyDAO{
 		System.out.println("Init Succeed!");
 	}
 	
-	public ArrayList<StrategyVO> getStrategy(String hotelName){
+	public ArrayList<StrategyVO> getStrategy(int hotelId){
 		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
 		for(int i=0;i<database.size();i++){
-			if(database.get(i).getHotelName()!=null&&database.get(i).getHotelName().equals(hotelName)){
+			if(database.get(i).getHotelId()!=0&&database.get(i).getHotelId()==hotelId){
 				ret.add(new StrategyVO(database.get(i)));
 			}
 		}
@@ -81,26 +81,99 @@ public class StrategyDAOStub implements StrategyDAO{
 	public ArrayList<StrategyVO> getStrategy(){
 		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
 		for(int i=0;i<database.size();i++){
-			if(database.get(i).getHotelName()==null){
+			if(database.get(i).getHotelId()==0){
 				ret.add(new StrategyVO(database.get(i)));
 			}
 		}
 		return ret;
 	}
 	
-	public double getFinalPrice(OrderVO order,UserVO user,String hotelName){
-		double finalPrice=0.0;
+	public double getFinalPrice(UserVO user,RoomVO room,OrderVO order,int hotelId){
+		double finalPrice=0.00;
+		finalPrice+=getLowestPrice(user,room,hotelId)+getRoomPrice(order,hotelId);
+		return finalPrice;
+	}
+	
+	public double getLowestPrice(UserVO user,RoomVO room,int hotelId){
+		double lowestPrice=0.00;
+		lowestPrice+=getBirthPrice(user,hotelId)+getTimePrice(hotelId)+getVipPrice(user)+getCooperationPrice(user,hotelId);
+		return lowestPrice;
+	}//酒店策略--未下单时减少的价格
+	
+	public double getBirthPrice(UserVO user,int hotelId){
+		double birthPrice=0.00;
 		LocalDate now=LocalDate.now();
 		for(int i=0;i<database.size();i++){
-			if(now.getMonthValue()==user.getMonth()){
-				if(hotelName==database.get(i).getHotelName()&&
-						database.get(i).getStrategyType()==StrategyType.BIRTHDAY){
-					
+			if(database.get(i).getHotelId()==hotelId&&database.get(i).getStrategyType()==StrategyType.BIRTHDAY
+					&&now.getYear()==user.getYear()&&now.getMonthValue()==user.getMonth()&&now.getDayOfMonth()==user.getDay()){
+				birthPrice+=database.get(i).getCost();
+			}
+		}
+		return birthPrice;
+	}//酒店策略--生日策略减少价
+	
+	public double getTimePrice(int hotelId){
+		double timePrice=0.00;
+		LocalDate now=LocalDate.now();
+		for(int i=0;i<database.size();i++){
+			if(database.get(i).getStrategyType()==StrategyType.HOLIDAY&&database.get(i).getHotelId()==hotelId){
+				String startTime=database.get(i).getStartTime().getDate();
+				String endTime=database.get(i).getEndTime().getDate();
+				String[] temp1=startTime.split("/");
+				String[] temp2=endTime.split("/");
+				int sYear=Integer.valueOf(temp1[0]);
+				int eYear=Integer.valueOf(temp2[0]);
+				int sMonth=Integer.valueOf(temp1[1]);
+				int eMonth=Integer.valueOf(temp2[1]);
+				int sDay=Integer.valueOf(temp1[2]);
+				int eDay=Integer.valueOf(temp2[2]);
+				if(now.getYear()>=sYear&&now.getYear()<eYear){
+					if(now.getMonthValue()>=sMonth){
+						if(now.getDayOfMonth()>=sDay){
+							timePrice+=database.get(i).getCost();
+						}
+					}
+				}
+				else if(now.getYear()==sYear){
+					if(now.getMonthValue()>=sMonth){
+						if(now.getMonthValue()<eMonth){
+							timePrice+=database.get(i).getCost();
+						}
+						else if(now.getMonthValue()==eMonth){
+							if(now.getDayOfMonth()<=eDay){
+								timePrice+=database.get(i).getCost();
+							}
+						}
+					}
 				}
 			}
 		}
-		return finalPrice;
+		return timePrice;
+	}//酒店策略--特定日期减少价
+	
+	public double getRoomPrice(OrderVO order,int hotelId){
+		double roomPrice=0.00;
+		for(int i=0;i<database.size();i++){
+			if(order.getRoomNum()>=3&&database.get(i).getStrategyType()==StrategyType.TRIPLEROOM&&database.get(i).getHotelId()==hotelId)
+				roomPrice+=database.get(i).getCost();
+		}
+		return roomPrice;
+	}//酒店策略--三间房减少价
+	
+	public double getVipPrice(UserVO user){
+		double vipPrice=0.00;
+		
+		return vipPrice;
 	}
+	
+	public double getCooperationPrice(UserVO user,int hotelId){
+		double cooperationPrice=0.00;
+		for(int i=0;i<database.size();i++){
+			if(database.get(i).getStrategyType()==StrategyType.CO_OPERATION&&user.getType()==UserType.COMPANY_CUSTOMER&&database.get(i).getHotelId()==hotelId)
+				cooperationPrice+=database.get(i).getCost();
+		}
+		return cooperationPrice;
+	}//酒店--合作企业折扣
 	//public void setName(String name);
 	
 	//public StrategyType getStrategyType();

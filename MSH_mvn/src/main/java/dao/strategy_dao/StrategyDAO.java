@@ -20,11 +20,23 @@ public interface StrategyDAO {
 	
 	public void init() throws RemoteException;
 	
-	public ArrayList<StrategyVO> getStrategy(String hotelName);
+	public ArrayList<StrategyVO> getStrategy(int hotelId);
 	
 	public ArrayList<StrategyVO> getStrategy();
 	
-	public double getFinalPrice(OrderVO order,UserVO user,String hotelName);
+	public double getFinalPrice(UserVO user,RoomVO room,OrderVO order,int hotelId);
+	
+	public double getLowestPrice(UserVO user,RoomVO room,int hotelId);
+	
+	public double getBirthPrice(UserVO user,int hotelId);
+	
+	public double getTimePrice(int hotelId);
+	
+	public double getRoomPrice(OrderVO order,int hotelId);
+	
+	public double getVipPrice(UserVO user);
+	
+	public double getCooperationPrice(UserVO user,int hotelId);
 	
 //<<<<<<< HEAD
 	

@@ -48,7 +48,7 @@ public class ModifyStrategyPane extends GridPane{
 	private String area;
 	private Date startTime;
     private Date endTime;
-    private String cost;
+    private double cost;
     private CostType costType;
     private PeopleType people;
 
@@ -190,7 +190,7 @@ public class ModifyStrategyPane extends GridPane{
         else
         	peopleBox.getSelectionModel().select(vipPeople);
 		nameText.setText(strategy.getName());
-		costText.setText(strategy.getCost());
+		costText.setText(String.valueOf(strategy.getCost()));
 		startDate.setValue(LocalDate.of(2016, 1, 1));//获得年月日，需要增加
 		endDate.setValue(LocalDate.of(2016, 5, 5));//需要增加
 		
