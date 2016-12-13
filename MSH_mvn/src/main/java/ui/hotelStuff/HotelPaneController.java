@@ -15,26 +15,32 @@ import vo.HotelInfoVO;
 import vo.HotelStrategyVO;
 import vo.OrderVO;
 import vo.RoomVO;
+import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.*;
 
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import bl.hotel_bl.HotelBL;
+import bl.order_bl.OrderBL;
 import bl_stub.Order_Stub;
 
 public class HotelPaneController {
 	
 	private static HotelPaneController controller;
+	private HotelBLService hotelBL;
 	private OrderBLService orderBL;
 	private List<OrderVO> orderList;
 	private List<String> roomStyle;
 	private long id;
 	private String hotel;
+	
 	private final List<String> naviInfo = Arrays.asList("订单列表","客房列表","入住信息","促销策略","基本信息");
 	
 	private HotelPaneController(){
-		orderBL = new Order_Stub();
+		orderBL = new OrderBL();
+		hotelBL = new HotelBL();
 	}
 	
 	public static HotelPaneController getInstance(){
@@ -145,6 +151,10 @@ public class HotelPaneController {
 				"南京", "夫子庙", 2015,
 				new Image(HotelPaneController.class.getResourceAsStream("/image/hotel_scul.png"),200,200,false,false),
 				4,4.5,1,1);
+	}
+	
+	public long getHotelId(){
+		return this.id;
 	}
 	
 	public List<OrderVO> getTodayOrder(){

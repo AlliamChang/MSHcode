@@ -149,12 +149,12 @@ class Evaluate extends GridPane{
 	    ColumnConstraints colInfo3 = new ColumnConstraints();
 	    colInfo3.setPercentWidth(30);
 		Text score=new Text(ev.getScore()+"");
-		TextArea content=new TextArea(ev.getcontent());
+		TextArea content=new TextArea(ev.getContent());
 		content.setEditable(false);
 		content.setMaxWidth(370);
 		content.setMaxHeight(50);
-		Text name=new Text(ev.getid());
-		Text time=new Text(ev.getdate());
+		Text name=new Text(ev.getId()+"");
+		Text time=new Text(ev.getDate());
 		this.add(score, 0, 0);
 		this.add(content, 0, 1);
 		this.add(name, 1, 1);

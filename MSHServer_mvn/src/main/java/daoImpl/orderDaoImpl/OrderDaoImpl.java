@@ -3,11 +3,15 @@ package daoImpl.orderDaoImpl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import dao.order_dao.OrderDao;
-import po.hotelPO.HotelPO;
-import po.orderPO.OrderPO;
-import po.userPO.UserPO;
+import daoImpl.HibernateUtil;
+import po.OrderPO;
 import tools.ResultMessage;
 
 public class OrderDaoImpl extends UnicastRemoteObject implements OrderDao{
@@ -17,35 +21,62 @@ public class OrderDaoImpl extends UnicastRemoteObject implements OrderDao{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public OrderDaoImpl() throws RemoteException {
+	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	
+	protected OrderDaoImpl() throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public ResultMessage add(OrderPO order) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.save(order);
+		transaction.commit();
+		session.close();
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public List<OrderPO> userShow(int userId) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<OrderPO> userShow(UserPO user) throws RemoteException {
+	@Override
+	public List<OrderPO> hotelShowToday(int hotelId) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<OrderPO> hotelShow(HotelPO hotel) throws RemoteException {
+	@Override
+	public List<OrderPO> hotelShowAll(int hotelId) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public void update(OrderPO order) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public ResultMessage update(OrderPO order) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(order);
+		transaction.commit();
+		session.close();
+		return ResultMessage.SUCCESS;
 	}
 
+	@Override
 	public OrderPO find(long id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from OrderPO where id = '" + id + "'");
+		List<OrderPO> list = query.list();
+		session.close();
+		if(list.size() == 0)
+			return null;
+		else
+			return list.get(0);
 	}
 	
-
+	
 }

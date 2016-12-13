@@ -1,12 +1,16 @@
-package vo;
+package po;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import po.OrderPO;
-import tools.Date;
+import java.io.Serializable;
+
 import tools.OrderState;
 
-public class OrderVO {
+public class OrderPO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	/**
 	 * 订单号
 	 */
@@ -50,7 +54,7 @@ public class OrderVO {
 	/**
 	 * 预订入住日期
 	 */
-	private Date preCheckin;
+	private String preCheckin;
 	/**
 	 * 最晚入住时间
 	 */
@@ -58,11 +62,11 @@ public class OrderVO {
 	/**
 	 * 实际入住时间
 	 */
-	private Date checkin;
+	private String checkin;
 	/**
 	 * 退房时间
 	 */
-	private Date checkout;
+	private String checkout;
 	/**
 	 * 是否有小孩
 	 */
@@ -80,9 +84,13 @@ public class OrderVO {
 	 */
 	private boolean isEvaluated;
 	
-	public OrderVO(long id, int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
-			String[] booker, String[] bookerPhone, int days, Date preCheckin, int latestCheckin, Date checkin,
-			Date checkout, boolean hasChild, double price, OrderState state, boolean isEvaluated) {
+	public OrderPO(){
+		
+	}
+	
+	public OrderPO(long id, int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
+			String[] booker, String[] bookerPhone, int days, String preCheckin, int latestCheckin, String checkin,
+			String checkout, boolean hasChild, double price, OrderState state, boolean isEvaluated) {
 		super();
 		this.id = id;
 		this.userID = userID;
@@ -102,88 +110,6 @@ public class OrderVO {
 		this.price = price;
 		this.state = state;
 		this.isEvaluated = isEvaluated;
-	}
-
-	public OrderVO(OrderPO po){
-		super();
-		this.id = po.getId();
-		this.userID = po.getUserID();
-		this.userAccount = po.getUserAccount();
-		this.hotelId = po.getHotelId();
-		this.hotel = po.getHotel();
-		this.roomStyle = po.getRoomStyle();
-		this.roomNum = po.getRoomNum();
-		this.booker = po.getBooker();
-		this.bookerPhone = po.getBookerPhone();
-		this.days = po.getDays();
-		this.preCheckin = new Date(po.getPreCheckin(),false);
-		this.latestCheckin = po.getLatestCheckin();
-		this.checkin = new Date(po.getCheckin(),true);
-		this.checkout = new Date(po.getCheckout(),true);
-		this.hasChild = po.isHasChild();
-		this.price = po.getPrice();
-		this.state = po.getState();
-		this.isEvaluated = po.isEvaluated();
-	}
-	
-	public OrderPO toPO(){
-		OrderPO po = new OrderPO();
-		po.setId(id);
-		po.setUserID(userID);
-		po.setUserAccount(userAccount);
-		po.setHotelId(hotelId);
-		po.setHotel(hotel);
-		po.setRoomStyle(roomStyle);
-		po.setRoomNum(roomNum);
-		po.setBooker(booker);
-		po.setBookerPhone(bookerPhone);
-		po.setDays(days);
-		po.setPreCheckin(preCheckin.getDate());
-		po.setLatestCheckin(latestCheckin);
-		po.setCheckin(checkin == null?null:checkin.getDate());
-		po.setCheckout(checkout == null?null:checkout.getDate());
-		po.setHasChild(hasChild);
-		po.setPrice(price);
-		po.setState(state);
-		po.setEvaluated(isEvaluated);
-		return po;
-	}
-	
-	//测试
-	public StringProperty preCheckInProperty(){
-		return new SimpleStringProperty(preCheckin.getDate());
-	}
-	public StringProperty preCheckOutProperty(){
-		return new SimpleStringProperty(preCheckin.plus(days));
-	}
-	public String getFirstBooker(){
-		return this.booker[0];
-	}
-	public StringProperty orderStateProperty(){
-		if(state == OrderState.ABNORMITY)
-			return new SimpleStringProperty("异常订单");
-		else if(state == OrderState.CANCELED)
-			return new SimpleStringProperty("已撤销");
-		else if(state == OrderState.EXECUTED)
-			return new SimpleStringProperty("已执行");
-		else
-			return new SimpleStringProperty("未执行");
-	}
-	public StringProperty operationProperty(){
-		if(state==OrderState.EXECUTED){
-			if(isEvaluated==false){
-				return new SimpleStringProperty("评价");
-			}
-		}else if(state==OrderState.UNEXECUTED){
-			return new SimpleStringProperty("撤销");
-		} 
-			return new SimpleStringProperty("空");
-	}
-	public StringProperty evaluateProperty(){
-		if(isEvaluated==true)
-			return new SimpleStringProperty("有");
-		else 
-			return new SimpleStringProperty("无");
 	}
 
 	public long getId() {
@@ -266,11 +192,11 @@ public class OrderVO {
 		this.days = days;
 	}
 
-	public Date getPreCheckin() {
+	public String getPreCheckin() {
 		return preCheckin;
 	}
 
-	public void setPreCheckin(Date preCheckin) {
+	public void setPreCheckin(String preCheckin) {
 		this.preCheckin = preCheckin;
 	}
 
@@ -282,19 +208,19 @@ public class OrderVO {
 		this.latestCheckin = latestCheckin;
 	}
 
-	public Date getCheckin() {
+	public String getCheckin() {
 		return checkin;
 	}
 
-	public void setCheckin(Date checkin) {
+	public void setCheckin(String checkin) {
 		this.checkin = checkin;
 	}
 
-	public Date getCheckout() {
+	public String getCheckout() {
 		return checkout;
 	}
 
-	public void setCheckout(Date checkout) {
+	public void setCheckout(String checkout) {
 		this.checkout = checkout;
 	}
 
@@ -329,6 +255,10 @@ public class OrderVO {
 	public void setEvaluated(boolean isEvaluated) {
 		this.isEvaluated = isEvaluated;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
-	
+		
 }

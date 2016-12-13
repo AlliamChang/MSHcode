@@ -14,22 +14,22 @@ public class HotelPO {
 	private List<RoomPO>room;
 	//private boolean isEmpty;
 	
-	public HotelPO(HotelInfoVO vo){
-		this.id=vo.get_hotel_id();
-		this.name=vo.getHotel();
-		this.address=vo.getAdress();
-		this.trade_area=vo.getTradingArea();
-		this.city=vo.getCity();
+	public HotelPO(String address,String trade_area,String city,String province,String name,String phone,String introductin,int id,int star_level,int stuff_id,int year,double score,Image scul,String[]facility){
+		this.id=id;
+		this.name=name;
+		this.address=address;
+		this.trade_area=trade_area;
+		this.city=city;
 		//this.lowest_price=vo.get
-		this.score=vo.getscore();
-		this.star_level=vo.star();
-		this.scul=vo.getScul();
-		this.stuff_id=vo.get_stuff_id();
-		this.phone=vo.getPhone();
-		this.year=vo.getYear();
-		this.introduction=vo.getIntroduction();
-		this.facility=vo.getFacility();
-		this.province=vo.getProvince();
+		this.score=score;
+		this.star_level=star_level;
+		this.scul=scul;
+		this.stuff_id=stuff_id;
+		this.phone=phone;
+		this.year=year;
+		this.introduction=introduction;
+		this.facility=facility;
+		this.province=province;
 		
 		//this.room=room;
 	}

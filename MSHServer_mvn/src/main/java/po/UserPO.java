@@ -7,16 +7,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import javafx.scene.image.Image;
 import tools.UserType;
 
 @Entity
 @Table(name = "user")
 public class UserPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -991412794071048850L;
 	private String name, account, password, gender, number, company;
 	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
-//	private Image image;
+	private byte[] image;
 
 	public UserPO(){}
 	
@@ -28,22 +31,22 @@ public class UserPO implements Serializable{
 		this.type = type;
 	}
 
-/*	public UserPO(String account, String password, String name, String gender,
-			String number, int year, int month, int day, UserType type, Image image){
+	public UserPO(String account, String password, String name, String gender,
+			String number, int year, int month, int day, UserType type, byte[] image){
 		this(password, name, gender, number, type);
 		this.account = account;
 		this.year = year;
 		this.month = month;
 		this.day = day;
 		this.image = image;
-	}*/
+	}
 	
-/*	public UserPO(String account, String password, String name, String gender,
-			String number, String company, int year, int month, int day, UserType type, Image image){
+	public UserPO(String account, String password, String name, String gender,
+			String number, String company, int year, int month, int day, UserType type, byte[] image){
 		this(account, password, name, gender, number, year, month, day, type, image);
 		this.company = company;
 	}
-	*/
+	
 	@Id
 	@Column(name = "ID")
 	public int getID() {
@@ -170,21 +173,13 @@ public class UserPO implements Serializable{
 	public void setCompany(String company) {
 		this.company = company;
 	}
-/*	
-	public Image getImage() {
+	
+	@Column(name = "image")
+	public byte[] getImage() {
 		return image;
 	}
 	
-	public void setImage(Image image) {
+	public void setImage(byte[] image) {
 		this.image = image;
-	}*/
-
-/*	@Column(name = "image")
-	public String getImagePath() {
-		return imagePath;
 	}
-
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}*/
 }
