@@ -32,7 +32,7 @@ public class WebAdminRunner extends Application{
 	}
 
 	public static void main(String[] args){
-		new WebAdminRunner().linkToServer();
+//		new WebAdminRunner().linkToServer();
 		launch(args);
 	}
 
