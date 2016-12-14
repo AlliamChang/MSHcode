@@ -12,7 +12,7 @@ import tools.UserType;
 import vo.UserVO;
 import bl.user_bl.UserBLServiceImpl;
 import blservice.user_blservice.UserBLService;
-import dao.user_dao.UserDAO;
+import dao.user.UserDAO;
 import data_stub.UserDAOStub;
 
 public class UserBLServiceImplTest {

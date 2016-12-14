@@ -4,11 +4,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.user.UserDAO;
 import po.UserPO;
 import tools.ResultMessage;
 import tools.UserType;
 import vo.UserVO;
-import dao.user_dao.UserDAO;
 
 public class UserDAOStub implements UserDAO {
 

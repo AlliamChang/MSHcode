@@ -19,6 +19,10 @@ public class CreditPO implements Serializable{
 		this.user_id=user_id;
 	}
 
+	public CreditPO(CreditVO creditVO) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getUser_id() {
 		return user_id;
 	}

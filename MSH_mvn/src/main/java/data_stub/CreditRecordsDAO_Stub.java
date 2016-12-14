@@ -3,10 +3,10 @@ package data_stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import dao.user.CreditRecordsDAO;
 import po.CreditPO;
 import tools.ResultMessage;
 import vo.CreditVO;
-import dao.user_dao.CreditRecordsDAO;
 
 public class CreditRecordsDAO_Stub implements CreditRecordsDAO{
 

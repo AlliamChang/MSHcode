@@ -3,7 +3,7 @@ package data_stub;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import dao.user_dao.HistorDAO;
+import dao.user.HistorDAO;
 
 public class HistoryDAO_Stub implements HistorDAO{
 

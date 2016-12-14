@@ -3,7 +3,7 @@ package rmi;
 import java.rmi.Remote;
 
 import dao.order_ddao.OrderDAO;
-import dao.user_dao.UserDAO;
+import dao.user.UserDAO;
 
 public class RemoteHelper {
 	private Remote remote;

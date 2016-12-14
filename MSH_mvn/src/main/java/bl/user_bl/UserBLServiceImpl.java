@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import blservice.user_blservice.UserBLService;
+import dao.user.*;
 import po.CreditPO;
 import po.UserPO;
 import rmi.RemoteHelper;
-import dao.user_dao.*;
 import data_stub.CreditRecordsDAO_Stub;
 import data_stub.HistoryDAO_Stub;
 import data_stub.UserDAOStub;

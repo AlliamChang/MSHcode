@@ -17,6 +17,10 @@ import tools.ResultMessage;
 
 public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5259237922846833482L;
 	private UserDAO userDAO;
 	private HotelDAO hotelDAO;
 	

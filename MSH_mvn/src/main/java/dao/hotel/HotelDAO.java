@@ -1,4 +1,4 @@
-package dao.hotel_dao;
+package dao.hotel;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

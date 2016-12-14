@@ -3,7 +3,7 @@ package bl.login_bl;
 import java.rmi.RemoteException;
 
 import blservice.login_blservice.LoginBLService;
-import dao.user_dao.UserDAO;
+import dao.user.UserDAO;
 import tools.ResultMessage;
 import vo.UserVO;
 

@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.hotel.HotelDAO;
 import javafx.scene.image.Image;
 import po.hotelPO.*;
 import tools.BedStyle;
@@ -12,7 +13,6 @@ import tools.ResultMessage;
 import ui.customer.PersonInfoPane;
 import vo.HotelInfoVO;
 import vo.RoomVO;
-import dao.hotel_dao.HotelDAO;
 
 public class HotelDAOStub implements HotelDAO {
 	private ArrayList<HotelPO> dataBase;
