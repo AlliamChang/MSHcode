@@ -6,15 +6,19 @@ import java.util.*;
 
 public interface StrategyBLService {
 	
-	public ResultMessage add(StrategyVO strategy);
+	public ResultMessage addStrategy(StrategyVO strategy);
 	
-	public ResultMessage delete(String name);
+	public ResultMessage deleteStrategy(String name);
 	
-	public ResultMessage modify(StrategyVO vo);
+	public ResultMessage modifyStrategy(StrategyVO vo);
 	
-	public double getFinalPrice(OrderVO order,UserVO user,StrategyVO strategy);
+	public double getFinalPriceInHotel(UserVO user,OrderVO order,RoomVO room,int hotelId);
 	
-	public ArrayList<StrategyVO> getAllStrategy(String hotelName);
+	public double getFinalPriceInWeb(UserVO user);
+	
+	public ArrayList<StrategyVO> getStrategyInHotel(int hotelId);
+	
+	public ArrayList<StrategyVO> getStrategyInWeb();
 	/*public String getName();
 	
 	public void setName(String name);

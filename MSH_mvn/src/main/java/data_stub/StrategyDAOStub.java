@@ -17,7 +17,7 @@ public class StrategyDAOStub implements StrategyDAO{
 				,new Date("2016/11/11",false),new Date("2016/11/12",false),99.00,CostType.RMB,PeopleType.VIP));
 	}
 	
-	public StrategyPO find(String name) throws RemoteException{
+	public StrategyPO findStrategy(String name) throws RemoteException{
 		StrategyPO ret=null;
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getName().equals(name)){
@@ -28,7 +28,7 @@ public class StrategyDAOStub implements StrategyDAO{
 		return ret;
 	}
 
-	public ResultMessage add(StrategyPO po) throws RemoteException{
+	public ResultMessage addStrategy(StrategyPO po) throws RemoteException{
     	boolean isExist=false;
     	for(int i=0;i<database.size();i++){
     		if(database.get(i).getName().equals(po.getName()))
@@ -42,7 +42,7 @@ public class StrategyDAOStub implements StrategyDAO{
     	}
     }
 	
-	public ResultMessage delete(String name) throws RemoteException{
+	public ResultMessage deleteStrategy(String name) throws RemoteException{
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getName().equals(name)){
 				database.remove(i);
@@ -51,11 +51,11 @@ public class StrategyDAOStub implements StrategyDAO{
 		return ResultMessage.SUCCESS;
 	}
 	
-	public void update(StrategyPO po) throws RemoteException{
+	public void updateStrategy(StrategyPO po) throws RemoteException{
 		System.out.println("Update Succeed!");
 	}
 	
-	public ResultMessage modify(StrategyPO po) throws RemoteException{
+	public ResultMessage modifyStrategy(StrategyPO po) throws RemoteException{
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getName().equals(po.getName())){
 				database.set(i, po);
@@ -64,11 +64,11 @@ public class StrategyDAOStub implements StrategyDAO{
 		return ResultMessage.SUCCESS;
 	}
 	
-	public void init() throws RemoteException{
+	public void initStrategy() throws RemoteException{
 		System.out.println("Init Succeed!");
 	}
 	
-	public ArrayList<StrategyVO> getStrategy(int hotelId){
+	public ArrayList<StrategyVO> getStrategyInHotel(int hotelId) throws RemoteException{
 		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getHotelId()!=0&&database.get(i).getHotelId()==hotelId){
@@ -78,7 +78,7 @@ public class StrategyDAOStub implements StrategyDAO{
 		return ret;
 	}
 	
-	public ArrayList<StrategyVO> getStrategy(){
+	public ArrayList<StrategyVO> getStrategyInWeb() throws RemoteException{
 		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getHotelId()==0){
@@ -88,13 +88,18 @@ public class StrategyDAOStub implements StrategyDAO{
 		return ret;
 	}
 	
-	public double getFinalPrice(UserVO user,RoomVO room,OrderVO order,int hotelId){
+	public double getFinalPriceInHotel(UserVO user,RoomVO room,OrderVO order,int hotelId) throws RemoteException{
 		double finalPrice=0.00;
 		finalPrice+=getLowestPrice(user,room,hotelId)+getRoomPrice(order,hotelId);
 		return finalPrice;
 	}
 	
-	public double getLowestPrice(UserVO user,RoomVO room,int hotelId){
+	public double getFinalPriceInWeb(UserVO user) throws RemoteException{
+		double finalPrice=0.00;
+		return finalPrice;
+	}
+	
+	public double getLowestPrice(UserVO user,RoomVO room,int hotelId) throws RemoteException{
 		double lowestPrice=0.00;
 		lowestPrice+=getBirthPrice(user,hotelId)+getTimePrice(hotelId)+getVipPrice(user)+getCooperationPrice(user,hotelId);
 		return lowestPrice;

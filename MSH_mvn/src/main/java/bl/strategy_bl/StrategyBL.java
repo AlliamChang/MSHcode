@@ -15,41 +15,72 @@ import blservice.strategy_blservice.StrategyBLService;
 
 public class StrategyBL implements StrategyBLService{
 	private StrategyDAOStub strategy;
-	private OrderDAOStub order;
-	private UserDAOStub user;
+
 	
-	public ResultMessage add(StrategyVO vo){
+	public ResultMessage addStrategy(StrategyVO vo){
 		try{
-			return strategy.add(vo.toPO());
+			return strategy.addStrategy(vo.toPO());
 		} catch (RemoteException e){
 			e.printStackTrace();
 		}
 		return ResultMessage.FAIL;
 	}
 	
-	public ResultMessage delete(String name){
+	public ResultMessage deleteStrategy(String name){
 		try{
-			return strategy.delete(name);
+			return strategy.deleteStrategy(name);
 		} catch (RemoteException e){
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
 	}
 	
-	public ResultMessage modify(StrategyVO vo){
+	public ResultMessage modifyStrategy(StrategyVO vo){
 		try{
-			return strategy.modify(vo.toPO());
+			return strategy.modifyStrategy(vo.toPO());
 		} catch (RemoteException e){
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
 	}
    
-	public ArrayList<StrategyVO> getStrategy(String hotelName) throws RemoteException{
-		return strategy.getStrategy(hotelName);
+	public ArrayList<StrategyVO> getStrategyInHotel(int hotelId){
+		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+		try{
+			ret=strategy.getStrategyInHotel(hotelId);
+		} catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return ret;
 	}
 	
-	public double getFinalPrice(OrderVO order,UserVO user) throws RemoteException{
-		return 0.0;
+	public ArrayList<StrategyVO> getStrategyInWeb(){
+		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+		try{
+			ret=strategy.getStrategyInWeb();
+		} catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	public double getFinalPriceInHotel(UserVO user,OrderVO order,RoomVO room,int hotelId){
+		double finalPrice=0.00;
+		try{
+			finalPrice=strategy.getFinalPriceInHotel(user, room, order, hotelId);
+		} catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return finalPrice;
+	}
+	
+	public double getFinalPriceInWeb(UserVO user){
+		double finalPrice=0.00;
+		try{
+			finalPrice=strategy.getFinalPriceInWeb(user);
+		} catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return finalPrice;
 	}
 }
