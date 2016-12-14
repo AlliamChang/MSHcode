@@ -71,7 +71,7 @@ public class StrategyPO {
 		return people;
 	}
 	
-	public String getHotelId(){
+	public int getHotelId(){
 		return hotelId;
 	}
 	

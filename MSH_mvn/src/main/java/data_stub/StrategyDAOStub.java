@@ -5,7 +5,8 @@ import po.strategyPO.*;
 import tools.*;
 import tools.Date;
 import java.rmi.*;
-import vo.*;
+import po.*;
+import po.hotelPO.RoomPO;
 import java.time.LocalDate;
 
 public class StrategyDAOStub implements StrategyDAO{
@@ -68,44 +69,44 @@ public class StrategyDAOStub implements StrategyDAO{
 		System.out.println("Init Succeed!");
 	}
 	
-	public ArrayList<StrategyVO> getStrategyInHotel(int hotelId) throws RemoteException{
-		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+	public ArrayList<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException{
+		ArrayList<StrategyPO> ret=new ArrayList<StrategyPO>();
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getHotelId()!=0&&database.get(i).getHotelId()==hotelId){
-				ret.add(new StrategyVO(database.get(i)));
+				ret.add(database.get(i));
 			}
 		}
 		return ret;
 	}
 	
-	public ArrayList<StrategyVO> getStrategyInWeb() throws RemoteException{
-		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+	public ArrayList<StrategyPO> getStrategyInWeb() throws RemoteException{
+		ArrayList<StrategyPO> ret=new ArrayList<StrategyPO>();
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getHotelId()==0){
-				ret.add(new StrategyVO(database.get(i)));
+				ret.add(database.get(i));
 			}
 		}
 		return ret;
 	}
 	
-	public double getFinalPriceInHotel(UserVO user,RoomVO room,OrderVO order,int hotelId) throws RemoteException{
+	public double getFinalPriceInHotel(UserPO user,RoomPO room,OrderPO order,int hotelId) throws RemoteException{
 		double finalPrice=0.00;
 		finalPrice+=getLowestPrice(user,room,hotelId)+getRoomPrice(order,hotelId);
 		return finalPrice;
 	}
 	
-	public double getFinalPriceInWeb(UserVO user) throws RemoteException{
+	public double getFinalPriceInWeb(UserPO user) throws RemoteException{
 		double finalPrice=0.00;
 		return finalPrice;
 	}
 	
-	public double getLowestPrice(UserVO user,RoomVO room,int hotelId) throws RemoteException{
+	public double getLowestPrice(UserPO user,RoomPO room,int hotelId) throws RemoteException{
 		double lowestPrice=0.00;
 		lowestPrice+=getBirthPrice(user,hotelId)+getTimePrice(hotelId)+getVipPrice(user)+getCooperationPrice(user,hotelId);
 		return lowestPrice;
 	}//酒店策略--未下单时减少的价格
 	
-	public double getBirthPrice(UserVO user,int hotelId){
+	public double getBirthPrice(UserPO user,int hotelId){
 		double birthPrice=0.00;
 		LocalDate now=LocalDate.now();
 		for(int i=0;i<database.size();i++){
@@ -156,7 +157,7 @@ public class StrategyDAOStub implements StrategyDAO{
 		return timePrice;
 	}//酒店策略--特定日期减少价
 	
-	public double getRoomPrice(OrderVO order,int hotelId){
+	public double getRoomPrice(OrderPO order,int hotelId){
 		double roomPrice=0.00;
 		for(int i=0;i<database.size();i++){
 			if(order.getRoomNum()>=3&&database.get(i).getStrategyType()==StrategyType.TRIPLEROOM&&database.get(i).getHotelId()==hotelId)
@@ -165,13 +166,13 @@ public class StrategyDAOStub implements StrategyDAO{
 		return roomPrice;
 	}//酒店策略--三间房减少价
 	
-	public double getVipPrice(UserVO user){
+	public double getVipPrice(UserPO user){
 		double vipPrice=0.00;
 		
 		return vipPrice;
 	}
 	
-	public double getCooperationPrice(UserVO user,int hotelId){
+	public double getCooperationPrice(UserPO user,int hotelId){
 		double cooperationPrice=0.00;
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getStrategyType()==StrategyType.CO_OPERATION&&user.getType()==UserType.COMPANY_CUSTOMER&&database.get(i).getHotelId()==hotelId)

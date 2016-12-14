@@ -2,8 +2,7 @@ package dao.strategy_dao;
 
 import po.strategyPO.*;
 import po.*;
-import po.hotelPO.*;
-
+import po.hotelPO.RoomPO;
 import java.rmi.RemoteException;
 import java.util.*;
 import tools.*;
@@ -30,7 +29,7 @@ public interface StrategyDAO {
 	
 	public double getFinalPriceInWeb(UserPO user) throws RemoteException;
 	
-	public double getLowestPrice(UserPO user,RoomVO room,int hotelId) throws RemoteException;
+	public double getLowestPrice(UserPO user,RoomPO room,int hotelId) throws RemoteException;
 	
 	public double getBirthPrice(UserPO user,int hotelId);
 	

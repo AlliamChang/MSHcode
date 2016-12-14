@@ -47,7 +47,10 @@ public class StrategyBL implements StrategyBLService{
 	public ArrayList<StrategyVO> getStrategyInHotel(int hotelId){
 		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
 		try{
-			ret=strategy.getStrategyInHotel(hotelId);
+			ArrayList<StrategyPO> list=strategy.getStrategyInHotel(hotelId);
+			for(int i=0;i<list.size();i++){
+			    ret.add(new StrategyVO(list.get(i)));
+			}    
 		} catch (RemoteException e){
 			e.printStackTrace();
 		}
@@ -57,7 +60,10 @@ public class StrategyBL implements StrategyBLService{
 	public ArrayList<StrategyVO> getStrategyInWeb(){
 		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
 		try{
-			ret=strategy.getStrategyInWeb();
+			ArrayList<StrategyPO> list=strategy.getStrategyInWeb();
+			for(int i=0;i<list.size();i++){
+				ret.add(new StrategyVO(list.get(i)));
+			}
 		} catch (RemoteException e){
 			e.printStackTrace();
 		}
@@ -67,7 +73,7 @@ public class StrategyBL implements StrategyBLService{
 	public double getFinalPriceInHotel(UserVO user,OrderVO order,RoomVO room,int hotelId){
 		double finalPrice=0.00;
 		try{
-			finalPrice=strategy.getFinalPriceInHotel(user, room, order, hotelId);
+			finalPrice=strategy.getFinalPriceInHotel(user.toPO(), room.toPO(), order.toPO(), hotelId);
 		} catch (RemoteException e){
 			e.printStackTrace();
 		}
@@ -77,7 +83,7 @@ public class StrategyBL implements StrategyBLService{
 	public double getFinalPriceInWeb(UserVO user){
 		double finalPrice=0.00;
 		try{
-			finalPrice=strategy.getFinalPriceInWeb(user);
+			finalPrice=strategy.getFinalPriceInWeb(user.toPO());
 		} catch (RemoteException e){
 			e.printStackTrace();
 		}
