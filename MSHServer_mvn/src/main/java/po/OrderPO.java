@@ -2,6 +2,7 @@ package po;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 import tools.OrderState;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orderForm")
 public class OrderPO implements Serializable{
 	/**
 	 * 
@@ -46,11 +47,11 @@ public class OrderPO implements Serializable{
 	/**
 	 * 入住客人姓名
 	 */
-	private String[] booker;
+	private String booker;
 	/**
 	 * 入住客人电话
 	 */
-	private String[] bookerPhone;
+	private String bookerPhone;
 	/**
 	 * 入住天数
 	 */
@@ -92,11 +93,10 @@ public class OrderPO implements Serializable{
 		
 	}
 	
-	public OrderPO(long id, int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
-			String[] booker, String[] bookerPhone, int days, String preCheckin, int latestCheckin, String checkin,
+	public OrderPO(int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
+			String booker, String bookerPhone, int days, String preCheckin, int latestCheckin, String checkin,
 			String checkout, boolean hasChild, double price, OrderState state, boolean isEvaluated) {
 		super();
-		this.id = id;
 		this.userID = userID;
 		this.userAccount = userAccount;
 		this.hotelId = hotelId;
@@ -117,6 +117,7 @@ public class OrderPO implements Serializable{
 	}
 
 	@Id
+	@Column(name = "id")
 	public long getId() {
 		return id;
 	}
@@ -125,6 +126,7 @@ public class OrderPO implements Serializable{
 		this.id = id;
 	}
 
+	@Column(name = "userID")
 	public int getUserID() {
 		return userID;
 	}
@@ -133,6 +135,7 @@ public class OrderPO implements Serializable{
 		this.userID = userID;
 	}
 
+	@Column(name = "userAccount")
 	public String getUserAccount() {
 		return userAccount;
 	}
@@ -141,6 +144,7 @@ public class OrderPO implements Serializable{
 		this.userAccount = userAccount;
 	}
 
+	@Column(name = "hotelId")
 	public int getHotelId() {
 		return hotelId;
 	}
@@ -149,6 +153,7 @@ public class OrderPO implements Serializable{
 		this.hotelId = hotelId;
 	}
 
+	@Column(name = "hotel")
 	public String getHotel() {
 		return hotel;
 	}
@@ -157,6 +162,7 @@ public class OrderPO implements Serializable{
 		this.hotel = hotel;
 	}
 
+	@Column(name = "roomStyle")
 	public String getRoomStyle() {
 		return roomStyle;
 	}
@@ -165,6 +171,7 @@ public class OrderPO implements Serializable{
 		this.roomStyle = roomStyle;
 	}
 
+	@Column(name = "roomNum")
 	public int getRoomNum() {
 		return roomNum;
 	}
@@ -173,22 +180,25 @@ public class OrderPO implements Serializable{
 		this.roomNum = roomNum;
 	}
 
-	public String[] getBooker() {
+	@Column(name = "booker")
+	public String getBooker() {
 		return booker;
 	}
 
-	public void setBooker(String[] booker) {
+	public void setBooker(String booker) {
 		this.booker = booker;
 	}
 
-	public String[] getBookerPhone() {
+	@Column(name = "bookerPhone")
+	public String getBookerPhone() {
 		return bookerPhone;
 	}
 
-	public void setBookerPhone(String[] bookerPhone) {
+	public void setBookerPhone(String bookerPhone) {
 		this.bookerPhone = bookerPhone;
 	}
 
+	@Column(name = "days")
 	public int getDays() {
 		return days;
 	}
@@ -197,6 +207,7 @@ public class OrderPO implements Serializable{
 		this.days = days;
 	}
 
+	@Column(name = "preCheckin")
 	public String getPreCheckin() {
 		return preCheckin;
 	}
@@ -205,6 +216,7 @@ public class OrderPO implements Serializable{
 		this.preCheckin = preCheckin;
 	}
 
+	@Column(name = "latestCheckin")
 	public int getLatestCheckin() {
 		return latestCheckin;
 	}
@@ -213,6 +225,7 @@ public class OrderPO implements Serializable{
 		this.latestCheckin = latestCheckin;
 	}
 
+	@Column(name = "checkin")
 	public String getCheckin() {
 		return checkin;
 	}
@@ -221,6 +234,7 @@ public class OrderPO implements Serializable{
 		this.checkin = checkin;
 	}
 
+	@Column(name = "checkout")
 	public String getCheckout() {
 		return checkout;
 	}
@@ -229,6 +243,7 @@ public class OrderPO implements Serializable{
 		this.checkout = checkout;
 	}
 
+	@Column(name = "hasChild")
 	public boolean isHasChild() {
 		return hasChild;
 	}
@@ -237,6 +252,7 @@ public class OrderPO implements Serializable{
 		this.hasChild = hasChild;
 	}
 
+	@Column(name = "price")
 	public double getPrice() {
 		return price;
 	}
@@ -245,6 +261,7 @@ public class OrderPO implements Serializable{
 		this.price = price;
 	}
 
+	@Column(name = "state")
 	public OrderState getState() {
 		return state;
 	}
@@ -253,6 +270,7 @@ public class OrderPO implements Serializable{
 		this.state = state;
 	}
 
+	@Column(name = "isEvaluated")
 	public boolean isEvaluated() {
 		return isEvaluated;
 	}
@@ -261,8 +279,6 @@ public class OrderPO implements Serializable{
 		this.isEvaluated = isEvaluated;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	
 }

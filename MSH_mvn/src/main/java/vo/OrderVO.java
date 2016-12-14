@@ -113,8 +113,8 @@ public class OrderVO {
 		this.hotel = po.getHotel();
 		this.roomStyle = po.getRoomStyle();
 		this.roomNum = po.getRoomNum();
-		this.booker = po.getBooker();
-		this.bookerPhone = po.getBookerPhone();
+		this.booker = po.getBooker().split("、");
+		this.bookerPhone = po.getBookerPhone().split("、");
 		this.days = po.getDays();
 		this.preCheckin = new Date(po.getPreCheckin(),false);
 		this.latestCheckin = po.getLatestCheckin();
@@ -135,8 +135,20 @@ public class OrderVO {
 		po.setHotel(hotel);
 		po.setRoomStyle(roomStyle);
 		po.setRoomNum(roomNum);
-		po.setBooker(booker);
-		po.setBookerPhone(bookerPhone);
+		StringBuilder temp = new StringBuilder();
+		for(int i = 0; i < booker.length; i ++){
+			temp.append(booker[i]);
+			if(i < booker.length - 1)
+				temp.append("、");
+		}
+		po.setBooker(temp.toString());
+		temp = new StringBuilder();
+		for(int i = 0; i < bookerPhone.length; i ++){
+			temp.append(bookerPhone[i]);
+			if(i < bookerPhone.length - 1)
+				temp.append("、");
+		}
+		po.setBookerPhone(temp.toString());
 		po.setDays(days);
 		po.setPreCheckin(preCheckin.getDate());
 		po.setLatestCheckin(latestCheckin);

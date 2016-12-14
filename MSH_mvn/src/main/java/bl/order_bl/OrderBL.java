@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -207,6 +208,36 @@ public class OrderBL implements OrderBLService{
 		}catch(RemoteException e){
 			e.printStackTrace();
 			return ResultMessage.FAIL;
+		}
+	}
+
+	@Override
+	public List<OrderVO> getAbnormityOrder() {
+		try{
+			Iterator<OrderPO> itr = this.orderDataBase.orderStateShow(OrderState.ABNORMITY, null).iterator();
+			List<OrderVO> list = new ArrayList<OrderVO>();
+			while(itr.hasNext()){
+				list.add(new OrderVO(itr.next()));
+			}
+			return list;
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public List<OrderVO> getTodayUnexecutedOrder() {
+		try{
+			Iterator<OrderPO> itr = this.orderDataBase.orderStateShow(OrderState.UNEXECUTED, LocalDate.now().format(format)).iterator();
+			List<OrderVO> list = new ArrayList<OrderVO>();
+			while(itr.hasNext()){
+				list.add(new OrderVO(itr.next()));
+			}
+			return list;
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return null;
 		}
 	}
 

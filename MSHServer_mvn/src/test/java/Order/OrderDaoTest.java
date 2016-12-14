@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import dao.order_dao.OrderDao;
+import dao.order_dao.OrderDAO;
 
 public class OrderDaoTest {
-	private OrderDao orderDao;
+	private OrderDAO orderDao;
 	@Before
 	public void setUp(){
 		

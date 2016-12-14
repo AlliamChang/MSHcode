@@ -1,4 +1,4 @@
-package ui.hotelStuff;
+package ui.hotelStuff.control;
 
 
 import javafx.beans.value.ObservableValue;
@@ -8,6 +8,12 @@ import tools.BedStyle;
 import tools.CostType;
 import tools.Date;
 import tools.HotelStrategyType;
+import tools.ResultMessage;
+import ui.hotelStuff.AddRoomPane;
+import ui.hotelStuff.CheckInListPane;
+import ui.hotelStuff.HotelInfoPane;
+import ui.hotelStuff.HotelStrategyPane;
+import ui.hotelStuff.OrderListPane;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.CheckInVO;
@@ -33,9 +39,10 @@ public class HotelPaneController {
 	private OrderBLService orderBL;
 	private List<OrderVO> orderList;
 	private List<String> roomStyle;
-	private long id;
+	private int id;
 	private String hotel;
 	
+	//导航栏
 	private final List<String> naviInfo = Arrays.asList("订单列表","客房列表","入住信息","促销策略","基本信息");
 	
 	private HotelPaneController(){
@@ -50,7 +57,7 @@ public class HotelPaneController {
 		return controller;
 	}
 	
-	public void hotelStuffLogin(long id,String hotel,Image scul){
+	public void hotelStuffLogin(int id,String hotel,Image scul){
 
 		this.roomStyle = Arrays.asList(new String[]{"温暖大床房","经济标准间","难民六人间"});
 		this.id = id;
@@ -157,10 +164,17 @@ public class HotelPaneController {
 		return this.id;
 	}
 	
+	public ResultMessage delay(long id,Date date){
+		return this.orderBL.delayAbnormity(id, date);
+	}
+	
+	public ResultMessage checkin(long id,Date date){
+		return this.orderBL.execute(id, date);
+	}
+	
 	public List<OrderVO> getTodayOrder(){
 		
-		orderList = orderBL.getTodayHotelOrder(id, hotel);
-		return orderList;
+		return this.orderBL.getTodayHotelOrder(id, hotel);
 	}
 	
 	public List<OrderVO> getAllOrder(){

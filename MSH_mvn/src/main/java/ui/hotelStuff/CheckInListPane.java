@@ -15,6 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import ui.hotelStuff.control.HotelPaneController;
 import ui.hotelStuff.subgroup.CheckinTable;
 import ui.utility.MainPane;
 import vo.CheckInVO;

@@ -1,13 +1,18 @@
 package runner;
 
+import java.rmi.Naming;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ui.hotelStuff.HotelPaneController;
+import rmi.RemoteHelper;
+import ui.hotelStuff.control.HotelPaneController;
 import ui.utility.MainPane;
 
 public class HotelStuffRunner extends Application{
 
+	private RemoteHelper remoteHelper;
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
@@ -18,6 +23,17 @@ public class HotelStuffRunner extends Application{
 
 	public static void main(String[] args){
 		HotelPaneController.getInstance().hotelStuffLogin(1000, "七天", null);
+		new HotelStuffRunner().linkToServer();
 		launch(args);
+	}
+	
+	private void linkToServer() {
+		try {
+			remoteHelper = RemoteHelper.getInstance();
+			remoteHelper.setRemote(Naming.lookup("rmi://127.0.0.1:8888/RemoteImpl"));
+			System.out.println("linked");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

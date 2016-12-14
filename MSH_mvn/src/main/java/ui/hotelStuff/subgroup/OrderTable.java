@@ -1,5 +1,7 @@
 package ui.hotelStuff.subgroup;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -33,8 +35,10 @@ import javafx.util.Callback;
 import javafx.util.StringConverter;
 import tools.Date;
 import tools.OrderState;
+import tools.ResultMessage;
 import ui.hotelStuff.CheckinInfoPane;
 import ui.hotelStuff.OrderListPane;
+import ui.hotelStuff.control.HotelPaneController;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import vo.OrderVO;
@@ -42,6 +46,7 @@ import vo.OrderVO;
 public class OrderTable extends TableView{
 	
 	protected final ObservableList<OrderVO> data;
+	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
 	private OrderListPane parent;
 	
 	/**
@@ -174,7 +179,7 @@ public class OrderTable extends TableView{
 			boolean isId = String.valueOf(o.getId()).equals(id) || id == null || id.equals("");
 			boolean isFirstBooker = o.getFirstBooker().equals(fb) || fb == null || fb.equals("");
 			boolean isIn = (o.getCheckin() == null?false:o.getCheckin().getDate().split(" ")[0].equals(in) ) || in == null || in.equals("");
-			boolean isPreIn = o.getPreCheckOut().equals(preIn) || preIn == null || preIn.equals("");
+			boolean isPreIn = o.getPreCheckin().getDate().equals(preIn) || preIn == null || preIn.equals("");
 			boolean isState = o.orderStateProperty().getValue().equals(state) || state == null || state.equals("");
 			
 			if( isId && isFirstBooker && isIn && isPreIn && isState){
@@ -264,13 +269,17 @@ public class OrderTable extends TableView{
 	    	    			a.setContentText("尚未选择日期");
 	    	    			a.show();
 	    				}else{
-	    					o.setPreCheckInProperty(temp.getEditor().getText());
+	    					o.setPreCheckin(new Date(temp.getEditor().getText(),false));
 	    					o.setState(OrderState.UNEXECUTED);
-	    					data.set(i, o);
 	    	        		Alert a = new Alert(AlertType.INFORMATION);
 	    	    			a.initModality(Modality.APPLICATION_MODAL);
 	    	    			a.getDialogPane().setHeaderText(null);
-	    	    			a.setContentText("已成功延期");
+	    	    			if(ResultMessage.SUCCESS == HotelPaneController.getInstance().delay(o.getId(), o.getPreCheckin())){
+		    					data.set(i, o);
+		    	    			a.setContentText("已成功延期");
+	    	    			}else{
+	    	    				a.setContentText("延期失败");
+	    	    			}
 	    	    			a.show();
 	    				}
 	    			});
@@ -287,7 +296,12 @@ public class OrderTable extends TableView{
 	    				if(response == ButtonType.OK){
 	    					int i = this.getTableRow().getIndex();
 	    					OrderVO o = (OrderVO)table.getItems().get(i);
-	    					MainPane.getInstance().setRightPane(new CheckinInfoPane(parent,o.getBooker()[0],o.getRoomStyle(),o.getPreCheckin().getLocalDate(),o.getPreCheckin().getLocalDate().plusDays(o.getDays()),o.getId()));
+	    					o.setCheckin(new Date(LocalDateTime.now().format(format),true));
+	    					o.setState(OrderState.EXECUTED);
+	    					if( ResultMessage.SUCCESS == HotelPaneController.getInstance().checkin(o.getId(), o.getCheckin())){
+	    						data.set(i, o);
+	    					}
+	    					//MainPane.getInstance().setRightPane(new CheckinInfoPane(parent,o.getBooker()[0],o.getRoomStyle(),o.getPreCheckin().getLocalDate(),o.getPreCheckin().getLocalDate().plusDays(o.getDays()),o.getId()));
 	    				}
 	    			});
 	        	});

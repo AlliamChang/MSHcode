@@ -5,6 +5,7 @@ import java.rmi.*;
 
 import po.*;
 import po.hotelPO.HotelPO;
+import tools.OrderState;
 import tools.ResultMessage;
 
 public interface OrderDAO extends Remote{
@@ -40,6 +41,15 @@ public interface OrderDAO extends Remote{
 	 * @throws RemoteException
 	 */
 	public List<OrderPO> hotelShowAll(int hotelId) throws RemoteException;
+	
+	/**
+	 * 得到某个日期某个状态的所有订单
+	 * @param state 所需查找的状态
+	 * @param date 所需查找的日期(如：2016/06/06)，null值等于查找所有时间
+	 * @return 返回所查状态和日期的订单的List
+	 * @throws RemoteException
+	 */
+	public List<OrderPO> orderStateShow(OrderState state,String date) throws RemoteException;
 
 	/**
 	 * 更新一个订单信息

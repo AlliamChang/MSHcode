@@ -21,6 +21,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import tools.BedStyle;
+import ui.hotelStuff.control.HotelPaneController;
 import ui.hotelStuff.subgroup.RoomListTable;
 import ui.utility.MainPane;
 import vo.RoomVO;

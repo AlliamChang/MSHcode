@@ -42,11 +42,11 @@ public class OrderPO implements Serializable {
 	/**
 	 * 入住客人姓名
 	 */
-	private String[] booker;
+	private String booker;
 	/**
 	 * 入住客人电话
 	 */
-	private String[] bookerPhone;
+	private String bookerPhone;
 	/**
 	 * 入住天数
 	 */
@@ -88,11 +88,10 @@ public class OrderPO implements Serializable {
 		
 	}
 	
-	public OrderPO(long id, int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
-			String[] booker, String[] bookerPhone, int days, String preCheckin, int latestCheckin, String checkin,
+	public OrderPO(int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
+			String booker, String bookerPhone, int days, String preCheckin, int latestCheckin, String checkin,
 			String checkout, boolean hasChild, double price, OrderState state, boolean isEvaluated) {
 		super();
-		this.id = id;
 		this.userID = userID;
 		this.userAccount = userAccount;
 		this.hotelId = hotelId;
@@ -168,19 +167,19 @@ public class OrderPO implements Serializable {
 		this.roomNum = roomNum;
 	}
 
-	public String[] getBooker() {
+	public String getBooker() {
 		return booker;
 	}
 
-	public void setBooker(String[] booker) {
+	public void setBooker(String booker) {
 		this.booker = booker;
 	}
 
-	public String[] getBookerPhone() {
+	public String getBookerPhone() {
 		return bookerPhone;
 	}
 
-	public void setBookerPhone(String[] bookerPhone) {
+	public void setBookerPhone(String bookerPhone) {
 		this.bookerPhone = bookerPhone;
 	}
 

@@ -20,7 +20,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.util.Callback;
-import ui.hotelStuff.HotelPaneController;
+import ui.hotelStuff.control.HotelPaneController;
 import vo.CheckInVO;
 import vo.OrderVO;
 import vo.RoomVO;
