@@ -1,32 +1,30 @@
 package daoImpl.orderDaoImpl;
 
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import dao.order_dao.OrderDao;
+import dao.order_dao.OrderDAO;
 import daoImpl.HibernateUtil;
 import po.OrderPO;
+import tools.OrderState;
 import tools.ResultMessage;
 
-public class OrderDaoImpl extends UnicastRemoteObject implements OrderDao{
+public class OrderDAOImpl implements OrderDAO{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	
 	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	
-	protected OrderDaoImpl() throws RemoteException {
-		super();
-	}
-
+	
 	@Override
 	public ResultMessage add(OrderPO order) throws RemoteException {
 		Session session = HibernateUtil.getSession();
@@ -39,20 +37,32 @@ public class OrderDaoImpl extends UnicastRemoteObject implements OrderDao{
 
 	@Override
 	public List<OrderPO> userShow(int userId) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from OrderPO where userID = '" + userId + "'");
+		List<OrderPO> list = query.list();
+		session.close();
+		return list;
 	}
 
 	@Override
 	public List<OrderPO> hotelShowToday(int hotelId) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from OrderPO where hotelId = '" + hotelId + "' and preCheckin = '" + LocalDate.now().format(format) + "'");
+		List<OrderPO> list = query.list();
+		session.close();
+		return list;
 	}
 
 	@Override
 	public List<OrderPO> hotelShowAll(int hotelId) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from OrderPO where hotelId = '" + hotelId + "'");
+		List<OrderPO> list = query.list();
+		session.close();
+		return list;
 	}
 
 	@Override
@@ -76,6 +86,22 @@ public class OrderDaoImpl extends UnicastRemoteObject implements OrderDao{
 			return null;
 		else
 			return list.get(0);
+	}
+
+	@Override
+	public List<OrderPO> orderStateShow(OrderState state, String date) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query;
+		if(date == null)
+			query = session.createQuery("from OrderPO where state = '" + state + "'");
+		else{
+			query = session.createQuery("from OrderPO where state = '" + state + "' and preCheckin = '" + date + "'");
+			date = date.trim();
+		}
+		List<OrderPO> list = query.list();
+		session.close();
+		return list;
 	}
 	
 	
