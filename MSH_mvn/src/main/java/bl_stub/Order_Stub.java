@@ -7,7 +7,6 @@ import blservice.order_blservice.OrderBLService;
 import tools.Date;
 import tools.OrderState;
 import tools.ResultMessage;
-import vo.HotelVO;
 import vo.OrderVO;
 import vo.UserVO;
 

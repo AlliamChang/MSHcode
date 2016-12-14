@@ -2,7 +2,7 @@ package vo;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import po.OrderPO;
+import po.orderPO.OrderPO;
 import tools.Date;
 import tools.OrderState;
 

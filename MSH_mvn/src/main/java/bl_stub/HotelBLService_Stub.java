@@ -13,7 +13,6 @@ import tools.ResultMessage;
 import ui.customer.PersonInfoPane;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
-import vo.HotelVO;
 import vo.RoomVO;
 
 public class HotelBLService_Stub implements HotelBLService {
@@ -79,8 +78,8 @@ public class HotelBLService_Stub implements HotelBLService {
 	@Override
 	public List<EvaluateVO> getEvaluate(int hotel_id) {
 		// TODO Auto-generated method stub
-		return  Arrays.asList(new EvaluateVO("环境很不错，交通很方便，价格也挺合适，体验不错","Aven","2016/11/01,14:35",4.8),
-				new EvaluateVO("房间很干净舒适,设施也很完善","晓风残月","2016/11/01,14:32",4.9));
+		return  Arrays.asList(new EvaluateVO("环境很不错，交通很方便，价格也挺合适，体验不错","Aven",1,"2016/11/01,14:35",4.8),
+				new EvaluateVO("房间很干净舒适,设施也很完善","晓风残月",1,"2016/11/01,14:32",4.9));
 	}
 
 	@Override
@@ -115,14 +114,56 @@ public class HotelBLService_Stub implements HotelBLService {
 
 
 	@Override
-	public double CalRoomPrice(StrategyBLService strategy) {
+	public List<Integer> search(String province, String city, String tradeArea) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
 
 
 	@Override
-	public List<Integer> search(String province, String city, String tradeArea) {
+	public List<HotelInfoVO> sortByHighPrice(List<HotelInfoVO> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HotelInfoVO> sortByHighStar(List<HotelInfoVO> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HotelInfoVO> sortByHighScore(List<HotelInfoVO> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HotelInfoVO> sortByLowPrice(List<HotelInfoVO> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HotelInfoVO> sortByLowStar(List<HotelInfoVO> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HotelInfoVO> sortByLowScore(List<HotelInfoVO> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<HotelInfoVO> historyHotel(List<HotelInfoVO> list) {
 		// TODO Auto-generated method stub
 		return null;
 	}

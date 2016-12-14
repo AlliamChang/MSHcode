@@ -3,23 +3,32 @@ package po;
 import vo.EvaluateVO;
 
 public class EvaluatePO {
-	private String[]content;
+	private String content;
 	private int user_id;
-	private String date;
+	private String date,name;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private double score;
 	
-	public EvaluatePO(String[]content,int user_id,String date,double score){
+	public EvaluatePO(String content,String name,int user_id,String date,double score){
 		this.content=content;
 		this.user_id=user_id;
 		this.date=date;
+		this.name=name;
 		this.score=score;
 	}
 
-	public String[] getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	public void setContent(String[] content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
@@ -48,6 +57,6 @@ public class EvaluatePO {
 	}
 	
 	public EvaluateVO tovo(){
-		return new EvaluateVO(content,user_id,date,score);
+		return new EvaluateVO(content,name,user_id,date,score);
 	}
 }

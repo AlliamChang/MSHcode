@@ -33,6 +33,12 @@ public class HotelPO {
 		
 		//this.room=room;
 	}
+	public Image getScul() {
+		return scul;
+	}
+	public void setScul(Image scul) {
+		this.scul = scul;
+	}
 	public String getProvince(){
 		return this.province;
 	}

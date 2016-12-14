@@ -1,5 +1,6 @@
 package vo;
 
+import po.hotelPO.HotelPO;
 import javafx.scene.image.Image;
 
 public class HotelInfoVO {
@@ -17,6 +18,7 @@ public class HotelInfoVO {
 	private Image scul;
 	private int star;
 	private double score;
+	private int lowest_price;
 	
 	public HotelInfoVO(String hotel, String adress,String phone, String[] facility, String introduction, String province,
 			String tradingArea,int year,Image scul,int star,double score,int hotel_id,int stuff_id,String city) {
@@ -34,6 +36,28 @@ public class HotelInfoVO {
 		this.hotel_id=hotel_id;
 		this.stuff_id=stuff_id;
 		this.city=city;
+	}
+	public HotelInfoVO(HotelPO po){
+		this.hotel=po.getname();
+		this.adress=po.getaddress();
+		this.phone=po.getPhone();
+		this.facility=po.getfaci();
+		this.introduction=po.getIntro();
+		this.province=po.getProvince();
+		this.tradingArea=po.gettrade_area();
+		this.year=po.getYear();
+		this.scul=po.getScul();
+		this.star=po.getstar_level();
+		this.score=po.getscore();
+		this.hotel_id=po.getid();
+		this.stuff_id=po.getStuff_id();
+		this.city=po.getcity();
+	}
+	public int getLowest_price() {
+		return lowest_price;
+	}
+	public void setLowest_price(int lowest_price) {
+		this.lowest_price = lowest_price;
 	}
 	public String getCity() {
 		return city;
