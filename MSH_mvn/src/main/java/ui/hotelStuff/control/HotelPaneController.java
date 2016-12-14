@@ -47,7 +47,7 @@ public class HotelPaneController {
 	
 	private HotelPaneController(){
 		orderBL = new OrderBL();
-		hotelBL = new HotelBL();
+//		hotelBL = new HotelBL();
 	}
 	
 	public static HotelPaneController getInstance(){

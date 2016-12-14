@@ -1,11 +1,12 @@
 package runner;
 
-import dao.order_dao.OrderDAO;
 import daoImpl.orderDaoImpl.OrderDAOImpl;
 import po.OrderPO;
 import tools.OrderState;
 
 import java.rmi.RemoteException;
+
+import dao.order.OrderDAO;
 
 public class OrderTest {
 

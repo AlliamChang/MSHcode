@@ -1,4 +1,4 @@
-package dao.order_ddao;
+package dao.order;
 
 import java.util.*;
 import java.rmi.*;

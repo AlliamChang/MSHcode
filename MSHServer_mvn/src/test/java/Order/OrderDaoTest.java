@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import dao.order_dao.OrderDAO;
+import dao.order.OrderDAO;
 
 public class OrderDaoTest {
 	private OrderDAO orderDao;

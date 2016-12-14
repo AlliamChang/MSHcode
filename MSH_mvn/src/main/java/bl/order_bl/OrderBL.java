@@ -12,9 +12,10 @@ import bl.user_bl.UserBLServiceImpl;
 import blservice.order_blservice.OrderBLService;
 import blservice.strategy_blservice.StrategyBLService;
 import blservice.user_blservice.UserBLService;
-import dao.order_ddao.OrderDAO;
+import dao.order.OrderDAO;
 import data_stub.OrderDAOStub;
 import po.OrderPO;
+import rmi.RemoteHelper;
 import tools.Date;
 import tools.OrderState;
 import tools.ResultMessage;
@@ -27,10 +28,12 @@ public class OrderBL implements OrderBLService{
 	private OrderDAO orderDataBase;
 	private UserBLService user;
 	private StrategyBLService strategy;
+	private RemoteHelper remoteHelper;
 	
 	public OrderBL(){
+		remoteHelper = RemoteHelper.getInstance();
 		user = new UserBLServiceImpl();
-		orderDataBase = new OrderDAOStub();
+		orderDataBase = remoteHelper.getOrderDAO();
 	}
 
 	/*
@@ -60,6 +63,7 @@ public class OrderBL implements OrderBLService{
 	@Override
 	public List<OrderVO> getTodayHotelOrder(int hotelId, String hotel) {
 		try{
+			
 			Iterator<OrderPO> itr = this.orderDataBase.hotelShowToday(hotelId).iterator();
 			List<OrderVO> hotelOrder = new ArrayList<OrderVO>();
 			

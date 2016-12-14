@@ -9,7 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import dao.order_dao.OrderDAO;
+import dao.order.OrderDAO;
 import daoImpl.HibernateUtil;
 import po.OrderPO;
 import tools.OrderState;

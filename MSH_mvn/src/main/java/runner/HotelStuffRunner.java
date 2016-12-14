@@ -22,15 +22,15 @@ public class HotelStuffRunner extends Application{
 	}
 
 	public static void main(String[] args){
-		HotelPaneController.getInstance().hotelStuffLogin(1000, "七天", null);
 		new HotelStuffRunner().linkToServer();
+		HotelPaneController.getInstance().hotelStuffLogin(1, "七天连锁", null);
 		launch(args);
 	}
 	
 	private void linkToServer() {
 		try {
 			remoteHelper = RemoteHelper.getInstance();
-			remoteHelper.setRemote(Naming.lookup("rmi://127.0.0.1:8888/RemoteImpl"));
+			remoteHelper.setRemote(Naming.lookup("rmi://localhost:8888/RemoteImpl"));
 			System.out.println("linked");
 		} catch (Exception e) {
 			e.printStackTrace();
