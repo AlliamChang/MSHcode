@@ -1,9 +1,10 @@
-package dao.hotel_dao;
+package dao.hotel;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import po.RoomPO;
 import po.hotelPO.*;
 import tools.ResultMessage;
 

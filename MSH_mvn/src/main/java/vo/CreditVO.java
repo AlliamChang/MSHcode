@@ -4,6 +4,7 @@ import tools.ChangeReason;
 import tools.Date;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import po.CreditPO;
 
 public class CreditVO {
 	private Date change_date;
@@ -20,6 +21,10 @@ public class CreditVO {
 		//this.date=new SimpleStringProperty(date.getDate());
 	}
 	
+	public CreditVO(CreditPO po) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Date getdate(){
 		return this.change_date;
 	}

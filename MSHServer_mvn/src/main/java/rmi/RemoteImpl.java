@@ -6,8 +6,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-import dao.user_dao.UserDAO;
-import daoImpl.user_dao_Impl.UserDAOImpl;
+import dao.user.UserDAO;
+import daoImpl.user.UserDAOImpl;
 import po.UserPO;
 import tools.ResultMessage;
 

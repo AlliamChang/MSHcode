@@ -39,5 +39,5 @@ public interface UserBLService {
 	
 	public int updateLevel(int credit);
 	
-	public List<String> getReservationHistory(int ID);
+	public List<Integer> getReservationHistory(int ID);
 }

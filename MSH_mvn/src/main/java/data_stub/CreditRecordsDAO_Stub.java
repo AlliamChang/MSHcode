@@ -11,7 +11,7 @@ import dao.user_dao.CreditRecordsDAO;
 public class CreditRecordsDAO_Stub implements CreditRecordsDAO{
 
 	@Override
-	public List<CreditVO> getRecords(int UserID) throws RemoteException {
+	public List<CreditPO> getRecords(int UserID) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,4 +1,4 @@
-package daoImpl.user_dao_Impl;
+package daoImpl.user;
 
 import java.rmi.RemoteException;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import dao.user_dao.UserDAO;
+import dao.user.UserDAO;
 import daoImpl.HibernateUtil;
 import po.UserPO;
 import tools.ResultMessage;

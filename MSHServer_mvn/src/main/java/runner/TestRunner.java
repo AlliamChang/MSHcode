@@ -9,8 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.rmi.RemoteException;
 
-import dao.user_dao.UserDAO;
-import daoImpl.user_dao_Impl.UserDAOImpl;
+import dao.user.UserDAO;
+import daoImpl.user.UserDAOImpl;
 import po.UserPO;
 import tools.UserType;
 

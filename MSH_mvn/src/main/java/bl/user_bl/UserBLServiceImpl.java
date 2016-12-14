@@ -98,7 +98,11 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public List<CreditVO> getCredit(int ID) {
 		try {
-			return crd.getRecords(ID);
+			List<CreditPO> temp = crd.getRecords(ID);
+			ArrayList<CreditVO> ret = new ArrayList<CreditVO>();
+			for (CreditPO po: temp)
+				ret.add(new CreditVO(po));
+			return ret;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -106,7 +110,7 @@ public class UserBLServiceImpl implements UserBLService{
 	}
 
 	@Override
-	public List<String> getReservationHistory(int ID) {
+	public List<Integer> getReservationHistory(int ID) {
 		try {
 			return hd.getHistory(ID);
 		} catch (RemoteException e) {

@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface HistorDAO {
 	
-	public List<String> getHistory(int ID) throws RemoteException;
+	public List<Integer> getHistory(int ID) throws RemoteException;
 	
 }
