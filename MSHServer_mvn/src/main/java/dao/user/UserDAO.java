@@ -23,7 +23,7 @@ public interface UserDAO extends Remote {
 	 */
 	public int addUser(UserPO userPO) throws RemoteException;
 	
-	public ResultMessage modifyUser(UserPO userPO) throws RemoteException;
+	public ResultMessage updateUser(UserPO userPO) throws RemoteException;
 
 	public ResultMessage deleteUser(int ID) throws RemoteException;
 }

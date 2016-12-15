@@ -23,15 +23,21 @@ public class CreditVO {
 	}
 	
 	public CreditVO(CreditPO po){
-		this.change_date=po.getChange_date();
+		this.change_date=new Date(po.getChange_date(), true);
 		this.change_reason=po.getChange_reason();
 		this.last_value=po.getLast_value();
 		this.current_value=po.getCurrent_value();
 		this.user_id=po.getUser_id();
 	}
 	
-	public CreditPO topo(){
-		return new CreditPO(change_date,change_reason,last_value,current_value,user_id);
+	public CreditPO toPO(){
+		CreditPO po = new CreditPO();
+		po.setChange_date(this.change_date.getDate());
+		po.setChange_reason(change_reason);
+		po.setCurrent_value(current_value);
+		po.setLast_value(last_value);
+		po.setUser_id(user_id);
+		return po;
 	}
 	
 	public int getUser_id() {

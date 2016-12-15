@@ -17,7 +17,7 @@ public class CreditRecordsDAO_Stub implements CreditRecordsDAO{
 	}
 
 	@Override
-	public ResultMessage addRecord(int ID, CreditPO po) throws RemoteException {
+	public ResultMessage createRecord(int ID, CreditPO po) throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}

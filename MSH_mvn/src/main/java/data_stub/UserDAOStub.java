@@ -54,7 +54,7 @@ public class UserDAOStub implements UserDAO {
 	}
 
 	@Override
-	public ResultMessage modifyUser(UserPO userPO) throws RemoteException {
+	public ResultMessage updateUser(UserPO userPO) throws RemoteException {
 		for (int i = 0; i < dataBase.size(); i++)
 			if (dataBase.get(i).getID() == userPO.getID()){
 				dataBase.set(i, userPO);

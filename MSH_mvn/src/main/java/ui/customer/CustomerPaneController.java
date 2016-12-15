@@ -91,7 +91,7 @@ public class CustomerPaneController {
 	//得到信用记录
 	public List<CreditVO> getcredit(){
 		UserBL=new UserBLService_Stub();
-		List <CreditVO>credit_list=UserBL.getCredit(1);
+		List <CreditVO>credit_list=UserBL.getCreditRecords(1);
 		return credit_list;
 	}
 	//得到订单记录

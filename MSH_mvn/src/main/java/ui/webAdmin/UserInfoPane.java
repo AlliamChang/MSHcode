@@ -20,10 +20,10 @@ import javafx.stage.Modality;
 
 public class UserInfoPane extends AnchorPane{
 	
-	private VBox detailBox, imageNameBox, creditChangeBox;
+	private VBox detailBox, imageNameBox, creditRecordsBox;
 	private HBox hBox;
 	private ScrollPane sp;
-	private Label typeLabel, nameLabel, genderLabel, phoneNumberLabel, levelLabel, creditLabel, creditChangeLabel, accountLabel;
+	private Label typeLabel, nameLabel, genderLabel, phoneNumberLabel, levelLabel, creditLabel, creditRecordsLabel, accountLabel;
 	private Button modifyButton, deleteButton;
 	private Parent lastPane;
 	private BackButton backButton;
@@ -57,17 +57,17 @@ public class UserInfoPane extends AnchorPane{
 		if (user.getType() == UserType.CUSTOMER || user.getType() == UserType.COMPANY_CUSTOMER){
 			levelLabel = new Label("会员等级：" + String.valueOf(user.getLevel()));
 			creditLabel = new Label("信用值：" + String.valueOf(user.getCredit()));
-			creditChangeLabel = new Label("信用记录：");
-			creditChangeBox = new VBox();
-			sp = new ScrollPane(creditChangeBox);
+			creditRecordsLabel = new Label("信用记录：");
+			creditRecordsBox = new VBox();
+			sp = new ScrollPane(creditRecordsBox);
 			sp.setStyle("-fx-border-color: gray");
 			sp.setPrefSize(500, 200);
 			sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-			creditChangeBox.setPadding(new Insets(10, 10, 10, 10));
-			creditChangeBox.setSpacing(10);
-			creditChangeBox.setPrefWidth(472);
-			creditChangeBox.getChildren().addAll(Record.makeRecords((WebAdminController.getInstance().getCredit(user))));
-			detailBox.getChildren().addAll(levelLabel, creditLabel, creditChangeLabel, sp);
+			creditRecordsBox.setPadding(new Insets(10, 10, 10, 10));
+			creditRecordsBox.setSpacing(10);
+			creditRecordsBox.setPrefWidth(472);
+			creditRecordsBox.getChildren().addAll(Record.makeRecords((WebAdminController.getInstance().getCreditRecords(user))));
+			detailBox.getChildren().addAll(levelLabel, creditLabel, creditRecordsLabel, sp);
 		}
 		MyImageView userImage = new MyImageView(user.getImage());
 		userImage.setFitWidth(200); userImage.setFitHeight(200);

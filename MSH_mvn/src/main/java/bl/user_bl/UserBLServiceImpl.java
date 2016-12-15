@@ -9,9 +9,6 @@ import dao.user.*;
 import po.CreditPO;
 import po.UserPO;
 import rmi.RemoteHelper;
-import data_stub.CreditRecordsDAO_Stub;
-import data_stub.HistoryDAO_Stub;
-import data_stub.UserDAOStub;
 import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
@@ -19,14 +16,12 @@ import vo.UserVO;
 public class UserBLServiceImpl implements UserBLService{
 	private UserDAO ud;
 	private CreditRecordsDAO crd;
-	private HistorDAO hd;
 	private RemoteHelper helper;
 
 	public UserBLServiceImpl(){
 		helper = RemoteHelper.getInstance();
 		ud = helper.getUserDAO();
-		crd = new CreditRecordsDAO_Stub();
-		hd = new HistoryDAO_Stub();
+		crd = helper.getCreditRecordsDAO();
 	}
 	
 	@Override
@@ -76,9 +71,9 @@ public class UserBLServiceImpl implements UserBLService{
 	}
 
 	@Override
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage update(UserVO userVO) {
 		try {
-			return ud.modifyUser(userVO.toPO());
+			return ud.updateUser(userVO.toPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -96,23 +91,13 @@ public class UserBLServiceImpl implements UserBLService{
 	}
 
 	@Override
-	public List<CreditVO> getCredit(int ID) {
+	public List<CreditVO> getCreditRecords(int ID) {
 		try {
 			List<CreditPO> temp = crd.getRecords(ID);
 			ArrayList<CreditVO> ret = new ArrayList<CreditVO>();
 			for (CreditPO po: temp)
 				ret.add(new CreditVO(po));
 			return ret;
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	@Override
-	public List<Integer> getReservationHistory(int ID) {
-		try {
-			return hd.getHistory(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return null;
@@ -127,7 +112,7 @@ public class UserBLServiceImpl implements UserBLService{
 				return ResultMessage.NOT_EXIST;
 			po.setCredit(po.getCredit() + val);
 			po.setLevel(updateLevel(po.getCredit()));
-			ud.modifyUser(po);
+			ud.updateUser(po);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -143,7 +128,7 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public ResultMessage addCreditRecord(int ID, CreditVO creditVO) {
 		try {
-			return crd.addRecord(ID, new CreditPO(creditVO));
+			return crd.createRecord(ID, creditVO.toPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;

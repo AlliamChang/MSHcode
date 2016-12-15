@@ -1,6 +1,9 @@
 package vo;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import javafx.scene.image.Image;
 import po.UserPO;
@@ -11,6 +14,7 @@ public class UserVO{
 	public static final String INIT_PASSWORD = "123456";
 	private String name, account, password, gender, number, company, imagePath;
 	private int level, credit, ID, hotelID, year, month, day;
+	private ArrayList<Integer> history;
 	private UserType type;
 
 	public UserVO(String account, String password, String name, String gender, String number, 
@@ -26,6 +30,7 @@ public class UserVO{
 		this.month = month;
 		this.day = day;
 		this.type = type;
+		this.history = new ArrayList<Integer>();
 	}
 	
 	public UserVO(UserPO po){
@@ -50,6 +55,12 @@ public class UserVO{
 		this.month = po.getMonth();
 		this.day = po.getDay();
 		this.type = po.getType();
+		this.history = new ArrayList<Integer>();
+		if (po.getHistory() != null) {
+			String[] tmp = po.getHistory().split(",");
+			for (String record: tmp)
+				history.add(Integer.parseInt(record));
+		}
 	}
 	
 	public UserPO toPO(){
@@ -72,6 +83,12 @@ public class UserVO{
 		po.setMonth(month);
 		po.setDay(day);
 		po.setType(type);
+		po.setHistory(String.join(",", new LinkedList<String>(){
+			{
+				for (Integer i: UserVO.this.history)
+					add(String.valueOf(i));
+			}
+		}));
 		return po;
 	}
 	
@@ -197,7 +214,17 @@ public class UserVO{
 	 * 
 	 * @param imagePath 图片路径
 	 */
-	public void setImage(String imagePath){
+	public void setImage(String imagePath) {
 		this.imagePath = imagePath;
+	}
+	
+	public List<Integer> getHistory() {
+		return this.history;
+	}
+	
+	public void addHistory(int hotelID) {
+		this.history.add(hotelID);
+		if (this.history.size() > 5)
+			this.history.remove(0);
 	}
 }

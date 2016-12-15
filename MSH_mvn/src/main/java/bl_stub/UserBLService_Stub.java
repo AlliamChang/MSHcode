@@ -27,7 +27,7 @@ public class UserBLService_Stub implements UserBLService {
 		return 0;
 	}
 
-	public ResultMessage modify(UserVO userVO) {
+	public ResultMessage update(UserVO userVO) {
 		System.out.println("修改成功！");
 		return ResultMessage.SUCCESS;
 	}
@@ -38,7 +38,7 @@ public class UserBLService_Stub implements UserBLService {
 	}
 
 	@Override
-	public List<CreditVO> getCredit(int ID) {
+	public List<CreditVO> getCreditRecords(int ID) {
 		return Arrays.asList(new CreditVO(new Date("2016/09/01",false),ChangeReason.OFFLINE_RECHARGE,500,100),
 			new CreditVO(new Date("2016/09/28",false),ChangeReason.OFFLINE_RECHARGE,500,1500),
 			new CreditVO(new Date("2016/10/22",false),ChangeReason.ABNORMAL_ORDER,1500,1200));

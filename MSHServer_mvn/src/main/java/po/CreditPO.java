@@ -2,8 +2,15 @@ package po;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import tools.ChangeReason;
 
+@Entity
+@Table(name = "creditrecord")
 public class CreditPO implements Serializable{
 	/**
 	 * 
@@ -15,6 +22,8 @@ public class CreditPO implements Serializable{
 
 	public CreditPO(){}
 	
+	@Id
+	@Column(name = "Id")
 	public int getId() {
 		return Id;
 	}
@@ -22,7 +31,8 @@ public class CreditPO implements Serializable{
 	public void setId(int id) {
 		Id = id;
 	}
-	
+
+	@Column(name = "userID")
 	public int getUser_id() {
 		return user_id;
 	}
@@ -31,6 +41,7 @@ public class CreditPO implements Serializable{
 		this.user_id = user_id;
 	}
 
+	@Column(name = "changeDate")
 	public String getChange_date() {
 		return change_date;
 	}
@@ -39,6 +50,7 @@ public class CreditPO implements Serializable{
 		this.change_date = change_date;
 	}
 
+	@Column(name = "reason")
 	public ChangeReason getChange_reason() {
 		return change_reason;
 	}
@@ -47,6 +59,7 @@ public class CreditPO implements Serializable{
 		this.change_reason = change_reason;
 	}
 
+	@Column(name = "lastValue")
 	public int getLast_value() {
 		return last_value;
 	}
@@ -55,6 +68,7 @@ public class CreditPO implements Serializable{
 		this.last_value = last_value;
 	}
 
+	@Column(name = "currentValue")
 	public int getCurrent_value() {
 		return current_value;
 	}

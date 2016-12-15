@@ -2,7 +2,9 @@ package rmi;
 
 import java.rmi.Remote;
 
+import dao.hotel.HotelDAO;
 import dao.order.OrderDAO;
+import dao.user.CreditRecordsDAO;
 import dao.user.UserDAO;
 
 public class RemoteHelper {
@@ -12,17 +14,25 @@ public class RemoteHelper {
 		return instance == null ? (instance = new RemoteHelper()) : instance;
 	}
 	
-	private RemoteHelper(){}
+	private RemoteHelper() {}
 	
-	public void setRemote(Remote remote){
+	public void setRemote(Remote remote) {
 		this.remote = remote;
 	}
 	
-	public UserDAO getUserDAO(){
+	public UserDAO getUserDAO() {
 		return (UserDAO)remote;
 	}
 	
-	public OrderDAO getOrderDAO(){
+	public OrderDAO getOrderDAO() {
 		return (OrderDAO)remote;
+	}
+	
+	public HotelDAO getHotelDAO() {
+		return (HotelDAO)remote;
+	}
+	
+	public CreditRecordsDAO getCreditRecordsDAO() {
+		return (CreditRecordsDAO)remote;
 	}
 }

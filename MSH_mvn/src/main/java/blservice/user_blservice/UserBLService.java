@@ -21,11 +21,11 @@ public interface UserBLService {
 	 */
 	public int add(UserVO userVO);
 
-	public ResultMessage modify(UserVO userVO);
+	public ResultMessage update(UserVO userVO);
 
 	public ResultMessage delete(int ID);
 	
-	public List<CreditVO> getCredit(int ID);
+	public List<CreditVO> getCreditRecords(int ID);
 	
 	public ResultMessage addCreditRecord(int ID, CreditVO creditVO);
 	
@@ -38,6 +38,4 @@ public interface UserBLService {
 	public ResultMessage updateCredit(int ID, int val);
 	
 	public int updateLevel(int credit);
-	
-	public List<Integer> getReservationHistory(int ID);
 }

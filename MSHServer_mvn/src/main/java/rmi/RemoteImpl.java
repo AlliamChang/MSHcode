@@ -1,6 +1,5 @@
 package rmi;
 
-import java.rmi.Naming;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -8,18 +7,18 @@ import java.util.List;
 
 import dao.hotel.HotelDAO;
 import dao.order.OrderDAO;
+import dao.user.CreditRecordsDAO;
 import dao.user.UserDAO;
 import daoImpl.hotel.HotelDAOImpl;
 import daoImpl.orderDaoImpl.OrderDAOImpl;
+import daoImpl.user.CreditRecordsDAOImpl;
 import daoImpl.user.UserDAOImpl;
-import po.OrderPO;
-import po.RoomPO;
-import po.UserPO;
+import po.*;
 import po.hotelPO.HotelPO;
 import tools.OrderState;
 import tools.ResultMessage;
 
-public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO {
+public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO, CreditRecordsDAO {
 	
 	/**
 	 * 
@@ -28,11 +27,13 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	private UserDAO userDAO;
 	private HotelDAO hotelDAO;
 	private OrderDAO orderDAO;
+	private CreditRecordsDAO creditRecordsDAO;
 	
 	public RemoteImpl() throws RemoteException{
 		userDAO = new UserDAOImpl();
 		hotelDAO = new HotelDAOImpl();
 		orderDAO = new OrderDAOImpl();
+		creditRecordsDAO = new CreditRecordsDAOImpl();
 	}
 
 	@Override
@@ -56,8 +57,8 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	}
 
 	@Override
-	public ResultMessage modifyUser(UserPO userPO) throws RemoteException {
-		return userDAO.modifyUser(userPO);
+	public ResultMessage updateUser(UserPO userPO) throws RemoteException {
+		return userDAO.updateUser(userPO);
 	}
 
 	@Override
@@ -135,45 +136,49 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	}
 	
 	//order的方法
-		@Override
-		public ResultMessage add(OrderPO order) throws RemoteException {
-			return orderDAO.add(order);
-		}
+	@Override
+	public ResultMessage add(OrderPO order) throws RemoteException {
+		return orderDAO.add(order);
+	}
 
-		@Override
-		public List<OrderPO> userShow(int userId) throws RemoteException {
-			// TODO Auto-generated method stub
-			return orderDAO.userShow(userId);
-		}
+	@Override
+	public List<OrderPO> userShow(int userId) throws RemoteException {
+		return orderDAO.userShow(userId);
+	}
+	
+	@Override
+	public List<OrderPO> hotelShowToday(int hotelId) throws RemoteException {
+		return orderDAO.hotelShowToday(hotelId);
+	}
+	
+	@Override
+	public List<OrderPO> hotelShowAll(int hotelId) throws RemoteException {
+		return orderDAO.hotelShowAll(hotelId);
+	}
+	
+	@Override
+	public List<OrderPO> orderStateShow(OrderState state, String date) throws RemoteException {
+		return orderDAO.orderStateShow(state, date);
+	}
+	
+	@Override
+	public ResultMessage update(OrderPO order) throws RemoteException {
+		return orderDAO.update(order);
+	}
 
-		@Override
-		public List<OrderPO> hotelShowToday(int hotelId) throws RemoteException {
-			// TODO Auto-generated method stub
-			return orderDAO.hotelShowToday(hotelId);
-		}
+	@Override
+	public OrderPO find(long id) throws RemoteException {
+		return orderDAO.find(id);
+	}
 
-		@Override
-		public List<OrderPO> hotelShowAll(int hotelId) throws RemoteException {
-			// TODO Auto-generated method stub
-			return orderDAO.hotelShowAll(hotelId);
-		}
+	@Override
+	public List<CreditPO> getRecords(int userID) throws RemoteException {
+		return creditRecordsDAO.getRecords(userID);
+	}
 
-		@Override
-		public List<OrderPO> orderStateShow(OrderState state, String date) throws RemoteException {
-			// TODO Auto-generated method stub
-			return orderDAO.orderStateShow(state, date);
-		}
-
-		@Override
-		public ResultMessage update(OrderPO order) throws RemoteException {
-			// TODO Auto-generated method stub
-			return orderDAO.update(order);
-		}
-
-		@Override
-		public OrderPO find(long id) throws RemoteException {
-			// TODO Auto-generated method stub
-			return orderDAO.find(id);
-		}
+	@Override
+	public ResultMessage createRecord(int ID, CreditPO po) throws RemoteException {
+		return creditRecordsDAO.createRecord(ID, po);
+	}
 
 }

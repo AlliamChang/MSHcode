@@ -15,10 +15,10 @@ public class LoginBLImpl implements LoginBLService {
 		UserVO user = null;
 		try {
 			int id = Integer.parseInt(account);
-			user = new UserVO(userDAO.get(id));	
+			user = new UserVO(userDAO.getUser(id));	
 		} catch (NumberFormatException e){
 			try {
-				user = new UserVO(userDAO.get(account));
+				user = new UserVO(userDAO.getUser(account));
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
