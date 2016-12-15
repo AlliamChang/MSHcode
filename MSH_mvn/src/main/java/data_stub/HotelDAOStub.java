@@ -21,9 +21,9 @@ public class HotelDAOStub implements HotelDAO {
 			100,100,false,false);
 	public HotelDAOStub(){
 		dataBase=new ArrayList<HotelPO>();
-		dataBase.add(new HotelPO(new HotelInfoVO("渡口客栈","南京市中山北路10号","8008208820",null,null,"江苏省","鼓楼区",10,image,4,4.5,1,1,"南京市")));
+		dataBase.add(new HotelPO("南京市中山北路10号","鼓楼区","南京市","江苏省","渡口客栈","8008208820",null,100,4,101,10,4.2,image,null));
 		room_data=new ArrayList<RoomPO>();
-		room_data.add(new RoomPO(new RoomVO("大床房", BedStyle.DOUBLE_BEDS, 486, 30, 3, 1)));
+		room_data.add(new RoomPO("大床房", BedStyle.DOUBLE_BEDS, 486, 30, 3, 1));
 		
 	}
 	public HotelPO find(int id) throws RemoteException {
@@ -58,10 +58,6 @@ public class HotelDAOStub implements HotelDAO {
 		
 	}
 
-	public void update(HotelPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		System.out.println("update Succeed");
-	}
 
 	public ResultMessage modify(HotelPO po) throws RemoteException {
 		for (int i = 0; i < dataBase.size(); i++)

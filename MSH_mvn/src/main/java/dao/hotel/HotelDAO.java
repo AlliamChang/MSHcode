@@ -16,8 +16,6 @@ public interface HotelDAO extends Remote {
 
 	public ResultMessage delete(int id) throws RemoteException;
 
-	public void update(HotelPO po) throws RemoteException;
-
 	public ResultMessage modify(HotelPO po) throws RemoteException;
 
 	public void init() throws RemoteException;

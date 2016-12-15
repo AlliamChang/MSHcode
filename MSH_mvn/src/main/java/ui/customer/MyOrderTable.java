@@ -47,7 +47,7 @@ public class MyOrderTable extends TableView{
 		
 		TableColumn check_out_time=new TableColumn("退房时间");
 		check_out_time.setMinWidth(width-10);
-		check_out_time.setCellValueFactory(new PropertyValueFactory("preCheckOut"));
+		check_out_time.setCellValueFactory(new PropertyValueFactory("CheckOut"));
 		
 		TableColumn room_type=new TableColumn("房间类型");
 		room_type.setMinWidth(width);

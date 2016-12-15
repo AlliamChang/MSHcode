@@ -2,7 +2,7 @@ package vo;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import po.orderPO.OrderPO;
+import po.OrderPO;
 import tools.Date;
 import tools.OrderState;
 
@@ -113,8 +113,8 @@ public class OrderVO {
 		this.hotel = po.getHotel();
 		this.roomStyle = po.getRoomStyle();
 		this.roomNum = po.getRoomNum();
-		this.booker = po.getBooker().split("、");
-		this.bookerPhone = po.getBookerPhone().split("、");
+		this.booker = po.getBooker();
+		this.bookerPhone = po.getBookerPhone();
 		this.days = po.getDays();
 		this.preCheckin = new Date(po.getPreCheckin(),false);
 		this.latestCheckin = po.getLatestCheckin();
@@ -136,7 +136,7 @@ public class OrderVO {
 		po.setRoomStyle(roomStyle);
 		po.setRoomNum(roomNum);
 		StringBuilder temp = new StringBuilder();
-		for(int i = 0; i < booker.length; i ++){
+		for(int i = 0; i < booker.length(); i ++){
 			temp.append(booker[i]);
 			if(i < booker.length - 1)
 				temp.append("、");
