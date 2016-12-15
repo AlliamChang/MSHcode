@@ -59,7 +59,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public ResultMessage modifyUser(UserPO userPO) throws RemoteException {
+	public ResultMessage updateUser(UserPO userPO) throws RemoteException {
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 		session.update(userPO);

@@ -12,11 +12,12 @@ import tools.UserType;
 @Entity
 @Table(name = "user")
 public class UserPO implements Serializable{
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -991412794071048850L;
-	private String name, account, password, gender, number, company, imageExtension;
+	private static final long serialVersionUID = 8961415443390938361L;
+	private String name, account, password, gender, number, company, imageExtension, history;
 	private int level, credit, ID, hotelID, year, month, day;
 	private UserType type;
 	private byte[] image;
@@ -166,5 +167,14 @@ public class UserPO implements Serializable{
 
 	public void setImageExtension(String imageExtension) {
 		this.imageExtension = imageExtension;
+	}
+
+	@Column(name = "history")
+	public String getHistory() {
+		return history;
+	}
+
+	public void setHistory(String history) {
+		this.history = history;
 	}
 }

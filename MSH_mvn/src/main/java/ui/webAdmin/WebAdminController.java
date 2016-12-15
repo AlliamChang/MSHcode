@@ -98,10 +98,8 @@ public class WebAdminController {
 			try {
 				MainPane.getInstance().setRightPane(pane.getClass().newInstance());
 			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	}
@@ -151,7 +149,7 @@ public class WebAdminController {
 	}
 	
 	public void modifyUser(UserVO user){
-		userBLService.modify(user);
+		userBLService.update(user);
 	}
 	
 	public void addHotel(HotelInfoVO hotel){
@@ -162,8 +160,8 @@ public class WebAdminController {
 		hotelBLService.delete(hotel.get_hotel_id());
 	}
 	
-	public List<CreditVO> getCredit(UserVO user){
-		return userBLService.getCredit(user.getID());
+	public List<CreditVO> getCreditRecords(UserVO user){
+		return userBLService.getCreditRecords(user.getID());
 	}
 	
 	public ObservableList<UserVO> getAllMarketers(){
