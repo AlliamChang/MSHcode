@@ -131,10 +131,10 @@ public class OrderBL implements OrderBLService{
 			po.setState(OrderState.EXECUTED);
 			
 			//添加信用
-			if(ResultMessage.SUCCESS == this.user.updateCredit(po.getUserID(), (int)po.getPrice()))	
+//			if(ResultMessage.SUCCESS == this.user.updateCredit(po.getUserID(), (int)po.getPrice()))	
 				return this.orderDataBase.update(po);
-			else
-				return ResultMessage.FAIL;
+//			else
+//				return ResultMessage.FAIL;
 		}catch(RemoteException e){
 			e.printStackTrace();
 			return ResultMessage.FAIL;

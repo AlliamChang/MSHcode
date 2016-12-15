@@ -45,8 +45,8 @@ import vo.OrderVO;
 
 public class OrderTable extends TableView{
 	
-	protected final ObservableList<OrderVO> data;
-	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
+	private final ObservableList<OrderVO> data;
+	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
 	private OrderListPane parent;
 	
 	/**
@@ -61,6 +61,13 @@ public class OrderTable extends TableView{
 		}
 		this.parent = parent;
 		this.init();
+	}
+	
+	public void updateOrder(List<OrderVO> orderList){
+		data.remove(0, data.size());
+		for(int i = 0; i < orderList.size(); i ++){
+			data.add(orderList.get(i));
+		}
 	}
 	
 	public void init(){
@@ -178,7 +185,7 @@ public class OrderTable extends TableView{
 		for(OrderVO o: data){
 			boolean isId = String.valueOf(o.getId()).equals(id) || id == null || id.equals("");
 			boolean isFirstBooker = o.getFirstBooker().equals(fb) || fb == null || fb.equals("");
-			boolean isIn = (o.getCheckin() == null?false:o.getCheckin().getDate().split(" ")[0].equals(in) ) || in == null || in.equals("");
+			boolean isIn = (o.getCheckin().getDate() == null? false : o.getCheckin().getDate().split(" ")[0].equals(in) ) || in == null || in.equals("");
 			boolean isPreIn = o.getPreCheckin().getDate().equals(preIn) || preIn == null || preIn.equals("");
 			boolean isState = o.orderStateProperty().getValue().equals(state) || state == null || state.equals("");
 			
@@ -222,7 +229,7 @@ public class OrderTable extends TableView{
 		// a button for adding a new person.
 	    final Button addButton       = new Button();
 	    // pads and centers the add button in the cell.
-	    final HBox paddedButton = new HBox();
+	    HBox paddedButton;
 	    final Button moreButton = new Button("详情");
 	    final OrderTable table;
 	    Tooltip tip = null;
@@ -238,97 +245,94 @@ public class OrderTable extends TableView{
 	    protected void updateItem(String item, boolean empty) {
 	      super.updateItem(item, empty);
 	      if (!empty) {
-	    	OrderTable.this.addTooltipToRows(this.getTableRow());
-	        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-	        setGraphic(paddedButton);
-	        if(paddedButton.getChildren().size() > 0){
-	        	paddedButton.getChildren().remove(0);
-	        	paddedButton.getChildren().remove(1);
-	        }
-	        if(item.equals("异常订单")){
-	        	addButton.setText("延期");
-	        	addButton.setOnAction(event -> {
-//	        		System.out.println("处理");
-	        		TextInputDialog alert = new TextInputDialog();
-	        		alert.setHeaderText("延迟入住");
-	        		Label l = new Label("选择延迟入住日期：");
-					int i = this.getTableRow().getIndex();
-					OrderVO o =(OrderVO)(table.getItems().get(i));
-	    			MyDatePicker temp = new MyDatePicker(o.preCheckInProperty().get());
-	    			temp.setMaxWidth(150);
-	    			HBox hb = new HBox(5);
-	    			hb.setAlignment(Pos.CENTER);
-	    			hb.getChildren().addAll(l,temp);
-	    			alert.getDialogPane().setContent(hb);
-	    			
-	    			alert.showAndWait().ifPresent(response -> {
-	    				if(temp.getEditor().getText().equals("") || temp.getEditor().getText() == null){
-	    					Alert a = new Alert(AlertType.ERROR);
-	    	    			a.initModality(Modality.APPLICATION_MODAL);
-	    	    			a.getDialogPane().setHeaderText(null);
-	    	    			a.setContentText("尚未选择日期");
-	    	    			a.show();
-	    				}else{
-	    					o.setPreCheckin(new Date(temp.getEditor().getText(),false));
-	    					o.setState(OrderState.UNEXECUTED);
-	    	        		Alert a = new Alert(AlertType.INFORMATION);
-	    	    			a.initModality(Modality.APPLICATION_MODAL);
-	    	    			a.getDialogPane().setHeaderText(null);
-	    	    			if(ResultMessage.SUCCESS == HotelPaneController.getInstance().delay(o.getId(), o.getPreCheckin())){
-		    					data.set(i, o);
-		    	    			a.setContentText("已成功延期");
-	    	    			}else{
-	    	    				a.setContentText("延期失败");
-	    	    			}
-	    	    			a.show();
-	    				}
-	    			});
-	        	});
-	            paddedButton.getChildren().add(addButton);
-	        }else if(item.equals("未执行")){
-	        	addButton.setText("入住");
-	        	addButton.setOnAction(e -> {
-	        		Alert alert = new Alert(AlertType.CONFIRMATION);
-	    			alert.initModality(Modality.APPLICATION_MODAL);
-	    			alert.getDialogPane().setHeaderText(null);
-	    			alert.setContentText("确定要入住吗？");
-	    			alert.showAndWait().ifPresent(response -> {
-	    				if(response == ButtonType.OK){
-	    					int i = this.getTableRow().getIndex();
-	    					OrderVO o = (OrderVO)table.getItems().get(i);
-	    					o.setCheckin(new Date(LocalDateTime.now().format(format),true));
-	    					o.setState(OrderState.EXECUTED);
-	    					if( ResultMessage.SUCCESS == HotelPaneController.getInstance().checkin(o.getId(), o.getCheckin())){
-	    						data.set(i, o);
-	    					}
-	    					//MainPane.getInstance().setRightPane(new CheckinInfoPane(parent,o.getBooker()[0],o.getRoomStyle(),o.getPreCheckin().getLocalDate(),o.getPreCheckin().getLocalDate().plusDays(o.getDays()),o.getId()));
-	    				}
-	    			});
-	        	});
-	        	
-	            paddedButton.getChildren().add(addButton);
-	        }
-	        
-	        moreButton.setOnMouseClicked(e -> {
-	        	if(moreButton.getText().equals("详情")){
-	        		tip = this.getTableRow().getTooltip();
-	        		tip.show(this.getTableRow(), e.getScreenX()-200, e.getScreenY());
-//	        		this.getTableRow().getTooltip().setConsumeAutoHidingEvents(true);
-	        		this.getTableRow().setTooltip(null);
-	        		moreButton.setText("收起");
-	        	}else{
-	        		tip.hide();
-	        		this.getTableRow().setTooltip(tip);
-	        		tip = null;
-	        		moreButton.setText("详情");
-	        	}
-	        });
-	        
-	        paddedButton.getChildren().add(moreButton);
+	    	  this.paddedButton = new HBox();
+		    	OrderTable.this.addTooltipToRows(this.getTableRow());
+		        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		        setGraphic(paddedButton);
+		        if(item.equals("异常订单")){
+		        	addButton.setText("延期");
+		        	addButton.setOnAction(event -> {
+	//	        		System.out.println("处理");
+		        		TextInputDialog alert = new TextInputDialog();
+		        		alert.setHeaderText("延迟入住");
+		        		Label l = new Label("选择延迟入住日期：");
+						int i = this.getTableRow().getIndex();
+						OrderVO o =(OrderVO)(table.getItems().get(i));
+		    			MyDatePicker temp = new MyDatePicker(o.preCheckInProperty().get());
+		    			temp.setMaxWidth(150);
+		    			HBox hb = new HBox(5);
+		    			hb.setAlignment(Pos.CENTER);
+		    			hb.getChildren().addAll(l,temp);
+		    			alert.getDialogPane().setContent(hb);
+		    			
+		    			alert.showAndWait().ifPresent(response -> {
+		    				if(temp.getEditor().getText().equals("") || temp.getEditor().getText() == null){
+		    					Alert a = new Alert(AlertType.ERROR);
+		    	    			a.initModality(Modality.APPLICATION_MODAL);
+		    	    			a.getDialogPane().setHeaderText(null);
+		    	    			a.setContentText("尚未选择日期");
+		    	    			a.show();
+		    				}else{
+		    					o.setPreCheckin(new Date(temp.getEditor().getText(),false));
+		    					o.setState(OrderState.UNEXECUTED);
+		    	        		Alert a = new Alert(AlertType.INFORMATION);
+		    	    			a.initModality(Modality.APPLICATION_MODAL);
+		    	    			a.getDialogPane().setHeaderText(null);
+		    	    			if(ResultMessage.SUCCESS == HotelPaneController.getInstance().delay(o.getId(), o.getPreCheckin())){
+			    					data.set(i, o);
+			    	    			a.setContentText("已成功延期");
+		    	    			}else{
+		    	    				a.setContentText("延期失败");
+		    	    			}
+		    	    			a.show();
+		    				}
+		    			});
+		        	});
+		            paddedButton.getChildren().add(addButton);
+		        }else if(item.equals("未执行")){
+		        	addButton.setText("入住");
+		        	addButton.setOnAction(e -> {
+		        		Alert alert = new Alert(AlertType.CONFIRMATION);
+		    			alert.initModality(Modality.APPLICATION_MODAL);
+		    			alert.getDialogPane().setHeaderText(null);
+		    			alert.setContentText("确定要入住吗？");
+		    			alert.showAndWait().ifPresent(response -> {
+		    				if(response == ButtonType.OK){
+		    					int i = this.getTableRow().getIndex();
+		    					OrderVO o = (OrderVO)table.getItems().get(i);
+		    					o.setCheckin(new Date(LocalDateTime.now().format(format),true));
+		    					o.setState(OrderState.EXECUTED);
+		    					if( ResultMessage.SUCCESS == HotelPaneController.getInstance().checkin(o.getId(), o.getCheckin())){
+		    						data.set(i, o);
+		    					}
+		    					//MainPane.getInstance().setRightPane(new CheckinInfoPane(parent,o.getBooker()[0],o.getRoomStyle(),o.getPreCheckin().getLocalDate(),o.getPreCheckin().getLocalDate().plusDays(o.getDays()),o.getId()));
+		    				}
+		    			});
+		        	});
+		        	
+		            paddedButton.getChildren().add(addButton);
+		        }
+		        
+		        moreButton.setOnMouseClicked(e -> {
+		        	if(moreButton.getText().equals("详情")){
+		        		tip = this.getTableRow().getTooltip();
+		        		tip.show(this.getTableRow(), e.getScreenX()-200, e.getScreenY());
+	//	        		this.getTableRow().getTooltip().setConsumeAutoHidingEvents(true);
+		        		this.getTableRow().setTooltip(null);
+		        		moreButton.setText("收起");
+		        	}else{
+		        		tip.hide();
+		        		this.getTableRow().setTooltip(tip);
+		        		tip = null;
+		        		moreButton.setText("详情");
+		        	}
+		        });
+		        
+		        paddedButton.getChildren().add(moreButton);
 	        
 	        
 	      }else{
-	    	  
+	    	  this.getTableRow().setTooltip(null);
 	    	  this.setGraphic(null);
 	      }
 	    }

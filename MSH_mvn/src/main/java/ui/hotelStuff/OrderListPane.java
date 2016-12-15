@@ -59,7 +59,7 @@ public class OrderListPane extends TabPane{
 		this.allOrderTab = new Tab();
 		this.allOrderTab.setText("所有订单");
 		this.allOrderTable = new OrderTable(HotelPaneController.getInstance().getAllOrder(),this);
-
+		
 		this.initAllOrderPane();
 		
 		
@@ -150,6 +150,19 @@ public class OrderListPane extends TabPane{
 		this.allOrderTab.setContent(allOrderPane);
 		
 		this.getTabs().addAll(this.todayOrderTab,this.allOrderTab);
+		
+		this.selectionModelProperty().addListener((listener,oldVal,newVal) -> {
+			if(newVal != null){
+				System.out.println(newVal);
+			}
+		});
+		this.getSelectionModel().selectedIndexProperty().addListener(listener -> {
+			if(this.getSelectionModel().getSelectedIndex() == 0){
+				this.todayOrderTable.updateOrder(HotelPaneController.getInstance().getTodayOrder());
+			}else{
+				this.allOrderTable.updateOrder(HotelPaneController.getInstance().getAllOrder());
+			}
+		});
 	}
 	
 	private void initAllOrderPane(){
