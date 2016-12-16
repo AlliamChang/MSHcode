@@ -44,10 +44,10 @@ public class StrategyBL implements StrategyBLService{
 		}
 	}
    
-	public ArrayList<StrategyVO> getStrategyInHotel(int hotelId){
-		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+	public List<StrategyVO> getStrategyInHotel(int hotelId){
+		List<StrategyVO> ret=new ArrayList<StrategyVO>();
 		try{
-			ArrayList<StrategyPO> list=strategy.getStrategyInHotel(hotelId);
+			List<StrategyPO> list=strategy.getStrategyInHotel(hotelId);
 			for(int i=0;i<list.size();i++){
 			    ret.add(new StrategyVO(list.get(i)));
 			}    
@@ -55,12 +55,12 @@ public class StrategyBL implements StrategyBLService{
 			e.printStackTrace();
 		}
 		return ret;
-	}
+	}//获取酒店策略列表
 	
-	public ArrayList<StrategyVO> getStrategyInWeb(){
-		ArrayList<StrategyVO> ret=new ArrayList<StrategyVO>();
+	public List<StrategyVO> getStrategyInWeb(){
+		List<StrategyVO> ret=new ArrayList<StrategyVO>();
 		try{
-			ArrayList<StrategyPO> list=strategy.getStrategyInWeb();
+			List<StrategyPO> list=strategy.getStrategyInWeb();
 			for(int i=0;i<list.size();i++){
 				ret.add(new StrategyVO(list.get(i)));
 			}
@@ -68,7 +68,7 @@ public class StrategyBL implements StrategyBLService{
 			e.printStackTrace();
 		}
 		return ret;
-	}
+	}//获取网站策略列表
 	
 	public double getFinalPriceInHotel(UserVO user,OrderVO order,RoomVO room,int hotelId){
 		double finalPrice=0.00;
@@ -78,7 +78,7 @@ public class StrategyBL implements StrategyBLService{
 			e.printStackTrace();
 		}
 		return finalPrice;
-	}
+	}//下完单后，最终综合折扣减少的价格
 	
 	public double getFinalPriceInWeb(UserVO user){
 		double finalPrice=0.00;
@@ -89,4 +89,14 @@ public class StrategyBL implements StrategyBLService{
 		}
 		return finalPrice;
 	}
+	
+	public double getLowestPrice(UserVO user,RoomVO room,int hotelId){
+		double lowestPrice=0.00;
+		try{
+			lowestPrice=strategy.getLowestPrice(user.toPO(), room.toPO(), hotelId);
+		} catch (RemoteException e){
+			e.printStackTrace();
+		}
+		return lowestPrice;
+	}//未下单时，综合折扣减少的价格
 }

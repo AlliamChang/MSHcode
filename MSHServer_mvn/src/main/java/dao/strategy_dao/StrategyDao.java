@@ -2,30 +2,30 @@ package dao.strategy_dao;
 
 import java.rmi.*;
 import po.*;
-import java.util.ArrayList;
+import java.util.*;
 
 import po.strategyPO.*;
 import tools.ResultMessage;
 import po.UserPO;
 
 public interface StrategyDao extends Remote{
-public StrategyPO findStrategy(String name) throws RemoteException;
+    public StrategyPO findStrategy(String name) throws RemoteException;
     
     public ResultMessage addStrategy(StrategyPO po) throws RemoteException;
     
     public ResultMessage deleteStrategy(String name) throws RemoteException;
 
-	public void updateStrategy(StrategyPO po) throws RemoteException;
+	//public void updateStrategy(StrategyPO po) throws RemoteException;
 	
 	public ResultMessage modifyStrategy(StrategyPO po) throws RemoteException;
 	
-	public void initStrategy() throws RemoteException;
+	//public void initStrategy() throws RemoteException;
 	
-	public ArrayList<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException;
+	public List<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException;
 	
-	public ArrayList<StrategyPO> getStrategyInWeb() throws RemoteException;
+	public List<StrategyPO> getStrategyInWeb() throws RemoteException;
 	
-	public double getFinalPriceInHotel(UserPO user,RoomPO room,OrderPO order,int hotelId) throws RemoteException;
+	/*public double getFinalPriceInHotel(UserPO user,RoomPO room,OrderPO order,int hotelId) throws RemoteException;
 	
 	public double getFinalPriceInWeb(UserPO user) throws RemoteException;
 	
@@ -39,6 +39,6 @@ public StrategyPO findStrategy(String name) throws RemoteException;
 	
 	public double getVipPrice(UserPO user);
 	
-	public double getCooperationPrice(UserPO user,int hotelId);
+	public double getCooperationPrice(UserPO user,int hotelId);*/
 
 }

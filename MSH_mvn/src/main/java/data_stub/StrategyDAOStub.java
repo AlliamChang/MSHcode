@@ -93,7 +93,7 @@ public class StrategyDAOStub implements StrategyDAO{
 		double finalPrice=0.00;
 		finalPrice+=getLowestPrice(user,room,hotelId)+getRoomPrice(order,hotelId);
 		return finalPrice;
-	}
+	}//下完单后酒店中显示的最低价
 	
 	public double getFinalPriceInWeb(UserPO user) throws RemoteException{
 		double finalPrice=0.00;

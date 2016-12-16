@@ -16,9 +16,11 @@ public interface StrategyBLService {
 	
 	public double getFinalPriceInWeb(UserVO user);
 	
-	public ArrayList<StrategyVO> getStrategyInHotel(int hotelId);
+	public double getLowestPrice(UserVO user,RoomVO room,int hotelId);
 	
-	public ArrayList<StrategyVO> getStrategyInWeb();
+	public List<StrategyVO> getStrategyInHotel(int hotelId);
+	
+	public List<StrategyVO> getStrategyInWeb();
 	/*public String getName();
 	
 	public void setName(String name);
