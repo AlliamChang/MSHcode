@@ -108,26 +108,33 @@ public class OrderDAOImpl implements OrderDAO{
 		return list;
 	}
 	
+	/**
+	 * 订单监听器
+	 * @author 53068
+	 *
+	 */
 	private class OrderMonitor extends Thread{
 		public void run(){
 			LocalTime timeNow;
 			while(true){
 				timeNow = LocalTime.now();
-				if(timeNow.getMinute() == 59 && timeNow.getSecond() > 55){
-					System.out.println("call");
+				if(timeNow.getMinute() == 59 && timeNow.getSecond() > 57){
 					Session session = HibernateUtil.getSession();
 					session.beginTransaction();
 					Query query = session.createQuery("from OrderPO where preCheckin = '" + LocalDate.now().format(format) + "'"
-							+ " and state = '" + OrderState.UNEXECUTED + "' and latestCheckin = '" + (timeNow.getHour()-1) + "'");
+							+ " and state = '" + OrderState.UNEXECUTED + "' and latestCheckin = '" + (timeNow.getHour()+1) + "'");
 					List<OrderPO> list = query.list();
 					session.close();
+
+					
 					
 					for(OrderPO o:list){
 						o.setState(OrderState.ABNORMITY);
-							
 						Session session2 = HibernateUtil.getSession();
-						session2.beginTransaction();
+						Transaction transaction = session2.beginTransaction();
 						session2.update(o);
+						transaction.commit();
+						session2.close();
 					}
 					
 					try{
@@ -137,7 +144,7 @@ public class OrderDAOImpl implements OrderDAO{
 					}
 				}else{
 					try{
-						System.out.println(timeNow.toString());
+//						System.out.println(timeNow.toString());
 						Thread.sleep(1000);
 					}catch(InterruptedException e){
 						e.printStackTrace();

@@ -25,10 +25,10 @@ public class HotelStuffRunner extends Application{
 	}
 
 	public static void main(String[] args){
-//		new HotelStuffRunner().linkToServer();
-//		HotelPaneController.getInstance().hotelStuffLogin(1, "七天连锁", null);
-//		launch(args);
-		System.out.println((new Date("2016/02/12 12:12:12",true)).getLocalDateTime().toString());
+		new HotelStuffRunner().linkToServer();
+		HotelPaneController.getInstance().hotelStuffLogin(1, "七天连锁", null);
+		launch(args);
+//		System.out.println((new Date("2016/02/12 12:12:12",true)).getLocalDateTime().toString());
 	}
 	
 	private void linkToServer() {

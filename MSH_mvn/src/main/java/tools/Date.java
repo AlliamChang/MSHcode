@@ -16,26 +16,28 @@ public class Date {
 		this.date = date;
 		this.hasTime = hasTime;
 		String dateTemp;
-		if(hasTime){
-			String[] temp2 = date.split(" ");
-			dateTemp = temp2[0];
-			if(temp2.length == 2){
-				String[] time = temp2[1].split(":");
-				hour = Integer.valueOf(time[0]);
-				minute = Integer.valueOf(time[1]);
-				second = Integer.valueOf(time[2]);
+		if(date != null){
+			if(hasTime){
+				String[] temp2 = date.split(" ");
+				dateTemp = temp2[0];
+				if(temp2.length == 2){
+					String[] time = temp2[1].split(":");
+					hour = Integer.valueOf(time[0]);
+					minute = Integer.valueOf(time[1]);
+					second = Integer.valueOf(time[2]);
+				}
+			}else{
+				dateTemp = date.trim();
 			}
-		}else{
-			dateTemp = date.trim();
+			String[] temp = dateTemp.split("/");
+			year = Integer.valueOf(temp[0]);
+			month = Integer.valueOf(temp[1]);
+			day = Integer.valueOf(temp[2]);
 		}
-		String[] temp = dateTemp.split("/");
-		year = Integer.valueOf(temp[0]);
-		month = Integer.valueOf(temp[1]);
-		day = Integer.valueOf(temp[2]);
 	}
 
 	public String getDate(){
-		return hasTime?date.split(" ")[0]:date;
+		return date==null?null:(hasTime?date.split(" ")[0]:date);
 	}
 	
 	public String getDateTime(){

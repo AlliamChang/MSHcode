@@ -25,7 +25,7 @@ public class OrderTest {
 			po.setBookerPhone("1234567890");
 			po.setDays(1);
 			po.setPreCheckin("2016/12/16");
-			po.setLatestCheckin(12);
+			po.setLatestCheckin(14);
 			po.setHasChild(false);
 			po.setState(OrderState.UNEXECUTED);
 			daoTest.add(po);
