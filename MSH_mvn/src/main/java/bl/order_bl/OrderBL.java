@@ -19,6 +19,7 @@ import rmi.RemoteHelper;
 import tools.Date;
 import tools.OrderState;
 import tools.ResultMessage;
+import vo.CreditVO;
 import vo.OrderVO;
 
 public class OrderBL implements OrderBLService{
@@ -150,7 +151,7 @@ public class OrderBL implements OrderBLService{
 			po.setState(OrderState.UNEXECUTED);
 			
 			//返回信用值
-			if(ResultMessage.SUCCESS == this.user.updateCredit(po.getUserID(), (int)po.getPrice()))	
+			if(ResultMessage.SUCCESS == this.user.addCreditRecord(po.getUserID(), new CreditVO()))	
 				return this.orderDataBase.update(po);
 			else
 				return ResultMessage.FAIL;
@@ -166,7 +167,7 @@ public class OrderBL implements OrderBLService{
 			
 			OrderPO po = this.orderDataBase.find(orderID);
 			Date preCheckin = new Date(po.getPreCheckin(),false);
-			if(LocalDateTime.now().getHour() < po.getLatestCheckin()){
+			if(LocalDateTime.now().getHour() + 6 <= po.getLatestCheckin() && preCheckin.getLocalDate().equals(LocalDate.now())){
 				
 			}
 			return ResultMessage.SUCCESS;

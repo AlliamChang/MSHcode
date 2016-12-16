@@ -10,7 +10,7 @@ public class Date {
 	private int year,month,day;
 	private int hour,minute,second;
 	private LocalDate l;
-	private final DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+	private static final DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	
 	public Date(String date,boolean hasTime){
 		this.date = date;
@@ -36,11 +36,15 @@ public class Date {
 		}
 	}
 
-	public String getDate(){
-		return date==null?null:(hasTime?date.split(" ")[0]:date);
+	public static String now(){
+		return LocalDate.now().format(f);
 	}
 	
-	public String getDateTime(){
+	public String getDate(){
+		return date;
+	}
+	
+	public String getTime(){
 		return hasTime?date:null;
 	}
 	

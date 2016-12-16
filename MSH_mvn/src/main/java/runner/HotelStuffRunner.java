@@ -1,6 +1,7 @@
 package runner;
 
 import java.rmi.Naming;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -28,7 +29,8 @@ public class HotelStuffRunner extends Application{
 		new HotelStuffRunner().linkToServer();
 		HotelPaneController.getInstance().hotelStuffLogin(1, "七天连锁", null);
 		launch(args);
-//		System.out.println((new Date("2016/02/12 12:12:12",true)).getLocalDateTime().toString());
+//		Date d = new Date("2016/12/16",false);
+//		System.out.println(d.getLocalDate().equals(LocalDate.now()));
 	}
 	
 	private void linkToServer() {

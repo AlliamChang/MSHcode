@@ -1,5 +1,6 @@
 package ui.utility;
 
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -21,6 +22,7 @@ public class MyRetreatButton extends Button{
 	public MyRetreatButton(Parent lastPane){
 		super(null,VIEW);
 		this.setStyle("-fx-background-color:null;");
+		this.setCursor(Cursor.HAND);
 		this.setPrefSize(50, 50);
 		this.setMinSize(MyRetreatButton.USE_PREF_SIZE, Button.USE_PREF_SIZE);
 		this.setMaxSize(MyRetreatButton.USE_PREF_SIZE, Button.USE_PREF_SIZE);
