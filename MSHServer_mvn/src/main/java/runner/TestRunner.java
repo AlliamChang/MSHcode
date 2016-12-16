@@ -10,21 +10,30 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 import dao.hotel.HotelDAO;
+import dao.user.CreditRecordsDAO;
 import dao.user.UserDAO;
 import daoImpl.hotel.HotelDAOImpl;
+import daoImpl.user.CreditRecordsDAOImpl;
 import daoImpl.user.UserDAOImpl;
+import po.CreditPO;
 import po.UserPO;
+import tools.ChangeReason;
 import tools.UserType;
 
 public class TestRunner {
 	public static void main(String[] args){
 		UserDAO daoTest = new UserDAOImpl();
 		HotelDAO hotelDAO = new HotelDAOImpl();
+		CreditRecordsDAO cd = new CreditRecordsDAOImpl();
 		TestRunner test = new TestRunner();
 		try {
-			System.out.println(hotelDAO.getAreas("山东省", "济南市"));
+			CreditPO po = new CreditPO();
+			po.setChange_date("2016/12/16 11:00:00");
+			po.setChange_reason(ChangeReason.OFFLINE_RECHARGE);
+			po.setchangeValue(4000);
+			po.setUser_id(2);
+			cd.createRecord(po);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 //		String readPath = "C:/Users/I Like Milk/Desktop/1.jpg";

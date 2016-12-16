@@ -27,15 +27,12 @@ public interface UserBLService {
 	
 	public List<CreditVO> getCreditRecords(int ID);
 	
-	public ResultMessage addCreditRecord(int ID, CreditVO creditVO);
-	
 	/**
-	 * 更改信用值，包括增加、减少、返还
-	 * @param ID 用户ID
-	 * @param val 改变值
-	 * @return 执行结果
+	 * 增加信用记录，系统自动更新用户信用值和会员等级
+	 * @param ID
+	 * @param creditVO
+	 * @return
 	 */
-	public ResultMessage updateCredit(int ID, int val);
+	public ResultMessage addCreditRecord(CreditVO creditVO);
 	
-	public int updateLevel(int credit);
 }

@@ -104,31 +104,19 @@ public class UserBLServiceImpl implements UserBLService{
 		}
 	}
 
-	@Override
-	public ResultMessage updateCredit(int ID, int val) {
-		try {
-			UserPO po = ud.getUser(ID);
-			if (null == po)
-				return ResultMessage.NOT_EXIST;
-			po.setCredit(po.getCredit() + val);
-			po.setLevel(updateLevel(po.getCredit()));
-			ud.updateUser(po);
-			return ResultMessage.SUCCESS;
-		} catch (RemoteException e) {
-			e.printStackTrace();
-			return ResultMessage.FAIL;
-		}
-	}
-
-	@Override
-	public int updateLevel(int credit) {
+	private int updateLevel(int credit) {
 		return credit / 1000 > 0 ? credit / 1000 : 1;
 	}
 	
 	@Override
-	public ResultMessage addCreditRecord(int ID, CreditVO creditVO) {
+	public ResultMessage addCreditRecord(CreditVO creditVO) {
 		try {
-			return crd.createRecord(ID, creditVO.toPO());
+			crd.createRecord(creditVO.toPO());
+			UserPO userPO = ud.getUser(creditVO.getUser_id());
+			userPO.setCredit(userPO.getCredit() + creditVO.getChangeValue());
+			userPO.setLevel(updateLevel(userPO.getCredit()));
+			ud.updateUser(userPO);
+			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;

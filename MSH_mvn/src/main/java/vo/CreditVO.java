@@ -9,15 +9,14 @@ import javafx.beans.property.StringProperty;
 public class CreditVO {
 	private Date change_date;
 	private ChangeReason change_reason;
-	private int last_value,current_value,user_id;
+	private int changeValue, user_id;
 	private StringProperty date;
 	private StringProperty reason;
 	private StringProperty change;
-	public CreditVO(Date date,ChangeReason reason,int last,int current,int user_id){
+	public CreditVO(Date date,ChangeReason reason,int changeValue, int user_id){
 		this.change_date=date;
 		this.change_reason=reason;
-		this.last_value=last;
-		this.current_value=current;
+		this.changeValue = changeValue;
 		this.user_id=user_id;
 		//this.date=new SimpleStringProperty(date.getDate());
 	}
@@ -25,8 +24,7 @@ public class CreditVO {
 	public CreditVO(CreditPO po){
 		this.change_date=new Date(po.getChange_date(), true);
 		this.change_reason=po.getChange_reason();
-		this.last_value=po.getLast_value();
-		this.current_value=po.getCurrent_value();
+		this.changeValue = po.getchangeValue();
 		this.user_id=po.getUser_id();
 	}
 	
@@ -34,8 +32,7 @@ public class CreditVO {
 		CreditPO po = new CreditPO();
 		po.setChange_date(this.change_date.getDate());
 		po.setChange_reason(change_reason);
-		po.setCurrent_value(current_value);
-		po.setLast_value(last_value);
+		po.setchangeValue(changeValue);
 		po.setUser_id(user_id);
 		return po;
 	}
@@ -73,15 +70,8 @@ public class CreditVO {
 	}
 	
 	public StringProperty changeProperty(){
-		change= new SimpleStringProperty(last_value+"-"+current_value);
+		change= new SimpleStringProperty((this.changeValue > 0 ? "+" : "") + String.valueOf(changeValue));
 		return change;
-	}
-	public int getlast(){
-		return this.last_value;
-	}
-	
-	public int getcurrent(){
-		return this.current_value;
 	}
 	
 	public void setdate(Date date){
@@ -91,12 +81,13 @@ public class CreditVO {
 	public void setreason(ChangeReason reason){
 		this.change_reason=reason;
 	}
-	
-	public void setlast(int last){
-		this.last_value=last;
+
+	public int getChangeValue() {
+		return changeValue;
 	}
-	
-	public void setcurrent(int current){
-		this.current_value=current;
+
+	public void setChangeValue(int changeValue) {
+		this.changeValue = changeValue;
 	}
+
 }

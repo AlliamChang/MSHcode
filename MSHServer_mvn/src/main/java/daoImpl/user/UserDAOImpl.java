@@ -18,9 +18,10 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public UserPO getUser(String account) throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("from UserPO where account = '" + account + "'");
 		List<UserPO> list = query.list();
+		transaction.commit();
 		session.close();
 		if (list.size() == 0)
 			return null;
@@ -31,8 +32,9 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public UserPO getUser(int ID) throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 		UserPO result = (UserPO) session.get(UserPO.class, ID);
+		transaction.commit();
 		session.close();
 		return result;
 	}
@@ -40,9 +42,10 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public List<UserPO> getAllMarketers() throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("from UserPO where type = '" + 4 + "'");
 		List<UserPO> list = query.list();
+		transaction.commit();
 		session.close();
 		return list;
 	}

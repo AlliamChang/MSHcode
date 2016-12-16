@@ -177,8 +177,8 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	}
 
 	@Override
-	public ResultMessage createRecord(int ID, CreditPO po) throws RemoteException {
-		return creditRecordsDAO.createRecord(ID, po);
+	public ResultMessage createRecord(CreditPO po) throws RemoteException {
+		return creditRecordsDAO.createRecord(po);
 	}
 
 }

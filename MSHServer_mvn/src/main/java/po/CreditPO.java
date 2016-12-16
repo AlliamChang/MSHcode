@@ -15,10 +15,10 @@ public class CreditPO implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7231641345089065830L;
+	private static final long serialVersionUID = -2750505292836257473L;
 	private String change_date;
 	private ChangeReason change_reason;
-	private int last_value,current_value,user_id, Id;
+	private int changeValue, user_id, Id;
 
 	public CreditPO(){}
 	
@@ -59,21 +59,13 @@ public class CreditPO implements Serializable{
 		this.change_reason = change_reason;
 	}
 
-	@Column(name = "lastValue")
-	public int getLast_value() {
-		return last_value;
+	@Column(name = "changeValue")
+	public int getchangeValue() {
+		return changeValue;
 	}
 
-	public void setLast_value(int last_value) {
-		this.last_value = last_value;
+	public void setchangeValue(int changeValue) {
+		this.changeValue = changeValue;
 	}
 
-	@Column(name = "currentValue")
-	public int getCurrent_value() {
-		return current_value;
-	}
-
-	public void setCurrent_value(int current_value) {
-		this.current_value = current_value;
-	}
 }

@@ -17,15 +17,16 @@ public class CreditRecordsDAOImpl implements CreditRecordsDAO {
 	@Override
 	public List<CreditPO> getRecords(int userID) throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("from CreditPO where userID = '" + userID + "'");
 		List<CreditPO> list = query.list();
 		session.close();
+		transaction.commit();
 		return list;
 	}
 
 	@Override
-	public ResultMessage createRecord(int ID, CreditPO po) throws RemoteException {
+	public ResultMessage createRecord(CreditPO po) throws RemoteException {
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(po);

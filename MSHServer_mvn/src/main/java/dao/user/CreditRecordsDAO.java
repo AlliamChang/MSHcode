@@ -10,6 +10,6 @@ import tools.ResultMessage;
 public interface CreditRecordsDAO extends Remote {
 	public List<CreditPO> getRecords(int userID) throws RemoteException;
 	
-	public ResultMessage createRecord(int ID, CreditPO po) throws RemoteException;
+	public ResultMessage createRecord(CreditPO po) throws RemoteException;
 	
 }

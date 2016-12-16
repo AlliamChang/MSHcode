@@ -56,7 +56,7 @@ public class UserVO{
 		this.day = po.getDay();
 		this.type = po.getType();
 		this.history = new ArrayList<Integer>();
-		if (po.getHistory() != null) {
+		if (po.getHistory() != null && !po.getHistory().isEmpty()) {
 			String[] tmp = po.getHistory().split(",");
 			for (String record: tmp)
 				history.add(Integer.parseInt(record));
