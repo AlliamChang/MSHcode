@@ -15,8 +15,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import org.hibernate.ObjectNotFoundException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import dao.hotel.HotelDAO;
+import daoImpl.HibernateUtil;
+import po.OrderPO;
 import po.RoomPO;
+import po.UserPO;
 import po.hotelPO.HotelPO;
 import tools.ResultMessage;
 
@@ -62,50 +70,71 @@ public class HotelDAOImpl implements HotelDAO{
 
 	@Override
 	public HotelPO find(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		HotelPO result=(HotelPO)session.get(HotelPO.class,id);
+		session.close();
+		return result;
 	}
 
 	@Override
 	public ResultMessage add(HotelPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.save(po);
+		transaction.commit();
+		System.out.println("succeed");
+		return ResultMessage.SUCCESS;
+		
 	}
 
 	@Override
 	public ResultMessage addRoom(RoomPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.save(po);
+		transaction.commit();
+		return ResultMessage.SUCCESS;
 	}
 
 	@Override
 	public ResultMessage delete(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		try{
+			Session session = HibernateUtil.getSession();
+			Transaction transaction = session.beginTransaction();
+			session.delete(session.load(UserPO.class, id));
+			transaction.commit();
+			session.close();
+			return ResultMessage.SUCCESS;
+		} catch (ObjectNotFoundException e) {
+			return ResultMessage.FAIL;
+		}
 	}
 
 	@Override
-	public void update(HotelPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		
+	public ResultMessage update(HotelPO po) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(po);
+		transaction.commit();
+		session.close();
+		return ResultMessage.SUCCESS;
 	}
 
-	@Override
-	public ResultMessage modify(HotelPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void init() throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<HotelPO> get(String province, String city, String tradeArea, String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query;
+		if(name == null)
+			query = session.createQuery("from HotelPO where province = '" + province + "' and city='"+city+"' and trade_area='"+tradeArea+"'");
+		else{
+			query = session.createQuery("from HotelPO where province = '" + province + "' and city='"+city+"' and trade_area='"+tradeArea+"' and name="+name+"'");
+		}
+		List<HotelPO> list = query.list();
+		session.close();
+		return list;
 	}
 
 	@Override
@@ -121,8 +150,12 @@ public class HotelDAOImpl implements HotelDAO{
 
 	@Override
 	public List<RoomPO> getRoom(int hotel_id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		Query query = session.createQuery("from RoomPO where hotel_id = '" + hotel_id + "'");
+		List<RoomPO> list = query.list();
+		session.close();
+		return list;
 
+}
 }

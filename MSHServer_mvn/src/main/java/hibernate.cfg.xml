@@ -19,5 +19,6 @@
 		<mapping class="po.UserPO"/>
 		<mapping class="po.OrderPO"/>
 		<mapping class="po.CreditPO"/>
+		<mapping class="po.hotelPO.HotelPO"/>
 	</session-factory>
 </hibernate-configuration>

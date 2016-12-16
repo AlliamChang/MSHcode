@@ -3,9 +3,11 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
+import po.EvaluatePO;
 import po.UserPO;
 import po.hotelPO.HotelPO;
 import po.hotelPO.RoomPO;
+import data_stub.EvaluateDAO_Stub;
 import data_stub.HotelDAOStub;
 import bl.user_bl.UserBLServiceImpl;
 import blservice.hotel_blservice.*;
@@ -17,9 +19,12 @@ import vo.RoomVO;
 public class HotelBL implements HotelBLService{
 	private HotelDAOStub hotel;
 	private UserBLServiceImpl user;
+	private EvaluateDAO_Stub evaluate;
 	public HotelBL(){
 		hotel=new HotelDAOStub();
 		user=new UserBLServiceImpl();
+		evaluate=new EvaluateDAO_Stub();
+		
 	}
 
 	@Override
@@ -123,8 +128,17 @@ public class HotelBL implements HotelBLService{
 
 	@Override
 	public List<EvaluateVO> getEvaluate(int hotel_id) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<EvaluateVO> ret=new ArrayList<EvaluateVO>();
+		try{
+			List<EvaluatePO>list= evaluate.getEvaluate(hotel_id);
+			for(int i=0;i<list.size();i++){
+				ret.add(list.get(i).tovo());
+			}
+			return ret;
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
