@@ -134,6 +134,13 @@ public class MyNavigationBar extends VBox {
 			list[i].setTextAlignment(TextAlignment.CENTER);
 			infoBox.getChildren().add(list[i]);
 		}
+		
+		Button logout = new Button("注销");
+		logout.setOnAction(e -> {
+			
+		});
+		
+		infoBox.getChildren().add(logout);
 	}
 	
 	public ToggleGroup getToggle(){

@@ -80,6 +80,38 @@ public class OrderVO {
 	 */
 	private boolean isEvaluated;
 	
+	/**
+	 * 建立订单所需要的信息
+	 * @param userID
+	 * @param userAccount
+	 * @param hotelId
+	 * @param hotel
+	 * @param roomStyle
+	 * @param roomNum
+	 * @param booker
+	 * @param bookerPhone
+	 * @param days
+	 * @param preCheckin
+	 * @param latestCheckin
+	 * @param hasChild
+	 */
+	public OrderVO(int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
+			String[] booker, String[] bookerPhone, int days, Date preCheckin, int latestCheckin, boolean hasChild) {
+		super();
+		this.userID = userID;
+		this.userAccount = userAccount;
+		this.hotelId = hotelId;
+		this.hotel = hotel;
+		this.roomStyle = roomStyle;
+		this.roomNum = roomNum;
+		this.booker = booker;
+		this.bookerPhone = bookerPhone;
+		this.days = days;
+		this.preCheckin = preCheckin;
+		this.latestCheckin = latestCheckin;
+		this.hasChild = hasChild;
+	}
+
 	public OrderVO(long id, int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
 			String[] booker, String[] bookerPhone, int days, Date preCheckin, int latestCheckin, Date checkin,
 			Date checkout, boolean hasChild, double price, OrderState state, boolean isEvaluated) {

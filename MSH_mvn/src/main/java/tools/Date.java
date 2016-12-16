@@ -8,22 +8,42 @@ public class Date {
 	private boolean hasTime;
 	private String date;
 	private int year,month,day;
+	private int hour,minute,second;
 	private LocalDate l;
 	private final DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	
 	public Date(String date,boolean hasTime){
 		this.date = date;
 		this.hasTime = hasTime;
-		if(!hasTime){
-			String[] temp = date.split("/");
-			year = Integer.valueOf(temp[0]);
-			month = Integer.valueOf(temp[1]);
-			day = Integer.valueOf(temp[2]);
+		String dateTemp;
+		if(hasTime){
+			String[] temp2 = date.split(" ");
+			dateTemp = temp2[0];
+			if(temp2.length == 2){
+				String[] time = temp2[1].split(":");
+				hour = Integer.valueOf(time[0]);
+				minute = Integer.valueOf(time[1]);
+				second = Integer.valueOf(time[2]);
+			}
+		}else{
+			dateTemp = date.trim();
 		}
+		String[] temp = dateTemp.split("/");
+		year = Integer.valueOf(temp[0]);
+		month = Integer.valueOf(temp[1]);
+		day = Integer.valueOf(temp[2]);
 	}
 
 	public String getDate(){
-		return date;
+		return hasTime?date.split(" ")[0]:date;
+	}
+	
+	public String getDateTime(){
+		return hasTime?date:null;
+	}
+	
+	public LocalDateTime getLocalDateTime(){
+		return hasTime?LocalDateTime.of(year, month, day, hour, minute, second):null;
 	}
 	
 	public LocalDate getLocalDate(){

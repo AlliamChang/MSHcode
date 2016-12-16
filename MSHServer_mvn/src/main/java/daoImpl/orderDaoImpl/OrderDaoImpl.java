@@ -3,6 +3,7 @@ package daoImpl.orderDaoImpl;
 import java.rmi.RemoteException;
 import java.util.List;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import org.hibernate.Query;
@@ -24,6 +25,9 @@ public class OrderDAOImpl implements OrderDAO{
 	
 	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	
+	public OrderDAOImpl(){
+		new OrderMonitor().start();;
+	}
 	
 	@Override
 	public ResultMessage add(OrderPO order) throws RemoteException {
@@ -96,13 +100,50 @@ public class OrderDAOImpl implements OrderDAO{
 		if(date == null)
 			query = session.createQuery("from OrderPO where state = '" + state + "'");
 		else{
-			query = session.createQuery("from OrderPO where state = '" + state + "' and preCheckin = '" + date + "'");
 			date = date.trim();
+			query = session.createQuery("from OrderPO where state = '" + state + "' and preCheckin = '" + date + "'");
 		}
 		List<OrderPO> list = query.list();
 		session.close();
 		return list;
 	}
 	
-	
+	private class OrderMonitor extends Thread{
+		public void run(){
+			LocalTime timeNow;
+			while(true){
+				timeNow = LocalTime.now();
+				if(timeNow.getMinute() == 59 && timeNow.getSecond() > 55){
+					System.out.println("call");
+					Session session = HibernateUtil.getSession();
+					session.beginTransaction();
+					Query query = session.createQuery("from OrderPO where preCheckin = '" + LocalDate.now().format(format) + "'"
+							+ " and state = '" + OrderState.UNEXECUTED + "' and latestCheckin = '" + (timeNow.getHour()-1) + "'");
+					List<OrderPO> list = query.list();
+					session.close();
+					
+					for(OrderPO o:list){
+						o.setState(OrderState.ABNORMITY);
+							
+						Session session2 = HibernateUtil.getSession();
+						session2.beginTransaction();
+						session2.update(o);
+					}
+					
+					try{
+						Thread.sleep(3600000);
+					}catch(InterruptedException e){
+						e.printStackTrace();
+					}
+				}else{
+					try{
+						System.out.println(timeNow.toString());
+						Thread.sleep(1000);
+					}catch(InterruptedException e){
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 }

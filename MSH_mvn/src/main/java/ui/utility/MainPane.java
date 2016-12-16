@@ -8,9 +8,11 @@ public class MainPane extends HBox{
 	
 	private static MainPane mainPane;
 	public static final double MINWIDTH = 655,MINHEIGHT = 610;
+	private boolean isLogin;
 	
 	private MainPane(){
 		super(5);
+		isLogin = false;
 	}
 	
 	public static MainPane getInstance(){
@@ -19,6 +21,18 @@ public class MainPane extends HBox{
 			mainPane.setStyle("-fx-background-color:white;");
 		}
 		return mainPane;
+	}
+	
+	public void login(){
+		isLogin = true;
+	}
+	
+	public boolean isLogin(){
+		return isLogin;
+	}
+	
+	public void logout(){
+		isLogin = false;
 	}
 	
 	public void setNavigationBar(MyNavigationBar bar){
