@@ -122,4 +122,25 @@ public class UserBLServiceImpl implements UserBLService{
 			return ResultMessage.FAIL;
 		}
 	}
+
+	@Override
+	public ResultMessage login(String account, String password) {
+		try {
+			return ud.login(account, password);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+
+	@Override
+	public ResultMessage logout(int id) {
+		try {
+			return ud.logout(id);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+
 }

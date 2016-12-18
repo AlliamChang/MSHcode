@@ -1,5 +1,5 @@
 package tools;
 
 public enum ResultMessage {
-	SUCCESS,FAIL
+	SUCCESS, FAIL, EXIST, NOT_EXIST, LOGGED
 }

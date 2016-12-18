@@ -20,8 +20,8 @@ public class CreditRecordsDAOImpl implements CreditRecordsDAO {
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("from CreditPO where userID = '" + userID + "'");
 		List<CreditPO> list = query.list();
-		session.close();
 		transaction.commit();
+		session.close();
 		return list;
 	}
 

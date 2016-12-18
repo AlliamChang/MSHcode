@@ -35,4 +35,8 @@ public interface UserBLService {
 	 */
 	public ResultMessage addCreditRecord(CreditVO creditVO);
 	
+	public ResultMessage login(String account, String password);
+	
+	public ResultMessage logout(int id);
+	
 }

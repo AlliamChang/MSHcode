@@ -1,6 +1,7 @@
 package daoImpl.user;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.ObjectNotFoundException;
@@ -14,6 +15,12 @@ import po.UserPO;
 import tools.ResultMessage;
 
 public class UserDAOImpl implements UserDAO{
+	
+	private ArrayList<Integer> logged;
+	
+	public UserDAOImpl(){
+		logged = new ArrayList<Integer>();
+	}
 
 	@Override
 	public UserPO getUser(String account) throws RemoteException {
@@ -83,6 +90,31 @@ public class UserDAOImpl implements UserDAO{
 		} catch (ObjectNotFoundException e) {
 			return ResultMessage.FAIL;
 		}
+	}
+
+	@Override
+	public ResultMessage login(String account, String password) throws RemoteException {
+		UserPO po;
+		try {
+			int id = Integer.parseInt(account);
+			po = getUser(id);
+		} catch (NumberFormatException e) {
+			po = getUser(account);
+		}
+		if (po == null)
+			return ResultMessage.NOT_EXIST;
+		if (!po.getPassword().equals(password))
+			return ResultMessage.FAIL;
+		if (logged.contains((Integer)po.getID()))
+			return ResultMessage.LOGGED;
+		logged.add((Integer)po.getID());
+		return ResultMessage.SUCCESS;
+	}
+	
+	@Override
+	public ResultMessage logout(int id) throws RemoteException {
+		logged.remove((Integer)id);
+		return ResultMessage.SUCCESS;
 	}
 
 }

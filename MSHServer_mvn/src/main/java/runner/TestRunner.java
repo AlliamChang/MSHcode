@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import dao.hotel.HotelDAO;
 import dao.user.CreditRecordsDAO;
@@ -27,12 +28,9 @@ public class TestRunner {
 		CreditRecordsDAO cd = new CreditRecordsDAOImpl();
 		TestRunner test = new TestRunner();
 		try {
-			CreditPO po = new CreditPO();
-			po.setChange_date("2016/12/16 11:00:00");
-			po.setChange_reason(ChangeReason.OFFLINE_RECHARGE);
-			po.setchangeValue(4000);
-			po.setUser_id(2);
-			cd.createRecord(po);
+			List<CreditPO> list = cd.getRecords(2);
+			System.out.println(list.get(0).getChange_date());
+			
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}

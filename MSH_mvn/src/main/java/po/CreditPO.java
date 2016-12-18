@@ -22,7 +22,7 @@ public class CreditPO implements Serializable{
 	public void setId(int id) {
 		Id = id;
 	}
-	
+
 	public int getUser_id() {
 		return user_id;
 	}
@@ -46,7 +46,7 @@ public class CreditPO implements Serializable{
 	public void setChange_reason(ChangeReason change_reason) {
 		this.change_reason = change_reason;
 	}
-	
+
 	public int getchangeValue() {
 		return changeValue;
 	}
