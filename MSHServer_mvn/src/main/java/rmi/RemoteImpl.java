@@ -1,8 +1,10 @@
 package rmi;
 
 import java.rmi.Remote;
+
 import dao.strategy_dao.*;
 import daoImpl.strategyDaoImpl.*;
+
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -198,5 +200,26 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	@Override
 	public List<StrategyPO> getStrategyInWeb() throws RemoteException{
 		return strategyDAO.getStrategyInWeb();
+	}
+
+	@Override
+	public List<HotelPO> getHotel(String province, String city, String area,
+			String name, String enter_time, String out_time, String price,
+			String score, int star) throws RemoteException {
+		return hotelDAO.getHotel(province, city, area, name, enter_time, out_time, price, score, star);
+	}
+
+
+	@Override
+	public ResultMessage login(String account, String password)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage logout(int id) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
