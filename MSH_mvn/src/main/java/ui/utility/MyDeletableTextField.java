@@ -11,13 +11,13 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
-public class MyDeletableButton extends StackPane{
+public class MyDeletableTextField extends StackPane{
 
 	private Button delete;
 	private TextField edit;
-	private ImageView view = new ImageView(new Image(MyDeletableButton.class.getResourceAsStream("/image/search-clear-over.png"),12,12,false,false));
+	private ImageView view = new ImageView(new Image(MyDeletableTextField.class.getResourceAsStream("/image/search-clear-over.png"),12,12,false,false));
 	
-	public MyDeletableButton(Pane p){
+	public MyDeletableTextField(Pane p){
 		delete = new Button(null,view);
 		delete.setVisible(false);
 		delete.setStyle("-fx-background-color:white;");
@@ -50,7 +50,7 @@ public class MyDeletableButton extends StackPane{
 		this.getChildren().addAll(edit,delete);
 	}
 	
-	public MyDeletableButton(Pane p,String text){
+	public MyDeletableTextField(Pane p,String text){
 		this(p);
 		this.edit.setText(text);
 	}

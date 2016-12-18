@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import bl.strategy_bl.StrategyBL;
 import bl.user_bl.UserBLServiceImpl;
 import blservice.order_blservice.OrderBLService;
 import blservice.strategy_blservice.StrategyBLService;
@@ -16,6 +17,7 @@ import dao.order.OrderDAO;
 import data_stub.OrderDAOStub;
 import po.OrderPO;
 import rmi.RemoteHelper;
+import tools.ChangeReason;
 import tools.Date;
 import tools.OrderState;
 import tools.ResultMessage;
@@ -34,6 +36,7 @@ public class OrderBL implements OrderBLService{
 	public OrderBL(){
 		remoteHelper = RemoteHelper.getInstance();
 		user = new UserBLServiceImpl();
+		strategy = new StrategyBL();
 		orderDataBase = remoteHelper.getOrderDAO();
 	}
 
@@ -49,7 +52,7 @@ public class OrderBL implements OrderBLService{
 			//设置是否被评价
 			order.setEvaluated(false);
 			//设置价格
-			//order.setPrice();
+//			order.setPrice(strategy.getFinalPriceInHotel(user, order, room, hotelId));
 			
 			if(ResultMessage.SUCCESS == orderDataBase.add(order.toPO()))
 				return order;
@@ -132,10 +135,10 @@ public class OrderBL implements OrderBLService{
 			po.setState(OrderState.EXECUTED);
 			
 			//添加信用
-//			if(ResultMessage.SUCCESS == this.user.updateCredit(po.getUserID(), (int)po.getPrice()))	
+			if(ResultMessage.SUCCESS == this.user.addCreditRecord(new CreditVO(new Date(Date.now(),false),ChangeReason.NORMAL_EXE,(int)po.getPrice(),po.getUserID())))	
 				return this.orderDataBase.update(po);
-//			else
-//				return ResultMessage.FAIL;
+			else
+				return ResultMessage.FAIL;
 		}catch(RemoteException e){
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -151,7 +154,7 @@ public class OrderBL implements OrderBLService{
 			po.setState(OrderState.UNEXECUTED);
 			
 			//返回信用值
-			if(ResultMessage.SUCCESS == this.user.addCreditRecord(po.getUserID(), new CreditVO()))	
+			if(ResultMessage.SUCCESS == this.user.addCreditRecord(new CreditVO(new Date(Date.now(),false),ChangeReason.ABNORMAL_ORDER,(int)po.getPrice(),po.getUserID())))	
 				return this.orderDataBase.update(po);
 			else
 				return ResultMessage.FAIL;
@@ -167,9 +170,18 @@ public class OrderBL implements OrderBLService{
 			
 			OrderPO po = this.orderDataBase.find(orderID);
 			Date preCheckin = new Date(po.getPreCheckin(),false);
-			if(LocalDateTime.now().getHour() + 6 <= po.getLatestCheckin() && preCheckin.getLocalDate().equals(LocalDate.now())){
-				
+			po.setState(OrderState.CANCELED);
+			
+			if(ResultMessage.SUCCESS == this.orderDataBase.update(po)){
+				//撤销时间距最晚执行时间不足6小时，扣除一半信用
+				if(LocalDateTime.now().getHour() + 6 <= po.getLatestCheckin() && preCheckin.getLocalDate().equals(LocalDate.now())){
+					int temp = (int)po.getPrice() / 2;
+					user.addCreditRecord(new CreditVO(new Date(Date.now(),false),ChangeReason.WITHDRAW_CREDIT, -temp, po.getUserID()));
+				}
+			}else{
+				return ResultMessage.FAIL;
 			}
+			
 			return ResultMessage.SUCCESS;
 		}catch(RemoteException e){
 			e.printStackTrace();
@@ -188,7 +200,7 @@ public class OrderBL implements OrderBLService{
 				temp = (int)this.orderDataBase.find(orderID).getPrice();
 			else
 				temp = (int)this.orderDataBase.find(orderID).getPrice() / 2;
-			user.updateCredit(po.getUserID(), temp);
+			user.addCreditRecord(new CreditVO(new Date(Date.now(),false),ChangeReason.WITHDRAW_CREDIT,temp,po.getUserID()));
 			
 			//更新订单
 			po.setState(OrderState.CANCELED);

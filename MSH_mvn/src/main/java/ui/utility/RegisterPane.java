@@ -21,6 +21,10 @@ public class RegisterPane extends GridPane{
 		
 		Label vipKind = new Label("会员类型：");
 		
+		Label sex = new Label("性别：");
+		
+		
+		
 		TextField accountInput = new TextField();
 		accountInput.setPromptText("<-6~18位由字母和数字组成的账号名->");
 		

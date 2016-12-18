@@ -26,7 +26,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import ui.utility.MainPane;
-import ui.utility.MyDeletableButton;
+import ui.utility.MyDeletableTextField;
 import ui.utility.MyRetreatButton;
 import vo.HotelInfoVO;
 
@@ -132,9 +132,9 @@ public class HotelInfoRevisePane extends AnchorPane{
 		
 		FlowPane flow = new FlowPane(Orientation.HORIZONTAL,3,4);
 		flow.setPrefWrapLength(350);
-		List<MyDeletableButton> faciText = new ArrayList<MyDeletableButton>();
+		List<MyDeletableTextField> faciText = new ArrayList<MyDeletableTextField>();
 		for(int i = 0; i < hotelInfo.getFacility().length; i ++){
-			MyDeletableButton temp = new MyDeletableButton(flow,hotelInfo.getFacility()[i]);
+			MyDeletableTextField temp = new MyDeletableTextField(flow,hotelInfo.getFacility()[i]);
 			temp.setMaxWidth(100);
 			faciText.add(temp);
 			flow.getChildren().add(temp);
@@ -143,7 +143,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		addFaci.setMinWidth(20);
 		addFaci.setStyle("-fx-background-color:white");
 		addFaci.setOnAction(e -> {
-			MyDeletableButton temp = new MyDeletableButton(flow);
+			MyDeletableTextField temp = new MyDeletableTextField(flow);
 			temp.setMaxWidth(100);
 			faciText.add(temp);
 			flow.getChildren().add(flow.getChildren().size()-1, temp);

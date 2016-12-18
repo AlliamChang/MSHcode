@@ -28,7 +28,8 @@ public class OrderTest {
 			po.setLatestCheckin(14);
 			po.setHasChild(false);
 			po.setState(OrderState.UNEXECUTED);
-			daoTest.add(po);
+//			daoTest.add(po);
+//			daoTest.find(100000001);
 		System.out.println(daoTest.orderStateShow(OrderState.UNEXECUTED, null).size());	
 		}catch(RemoteException e){
 			e.printStackTrace();
