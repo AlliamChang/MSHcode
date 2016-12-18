@@ -25,15 +25,15 @@ public interface StrategyBLService {
 	
 	public List<StrategyVO> getStrategyInWeb();
 	
-	public double getBirthPrice(UserPO user,int hotelId);
+	public double getBirthPrice(UserVO user,int hotelId);
 	
 	public double getTimePrice(int hotelId);
 	
-	public double getRoomPrice(OrderPO order,int hotelId);
+	public double getRoomPrice(OrderVO order,int hotelId);
 	
-	public double getVipPrice(UserPO user);
+	public double getVipPrice(UserVO user);
 	
-	public double getCooperationPrice(UserPO user,int hotelId);
+	public double getCooperationPrice(UserVO user,int hotelId);
 	/*public String getName();
 	
 	public void setName(String name);
