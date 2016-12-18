@@ -7,7 +7,7 @@ import java.util.*;
 import po.strategyPO.*;
 import tools.ResultMessage;
 
-public interface StrategyDao extends Remote{
+public interface StrategyDAO extends Remote{
     public StrategyPO findStrategy(String name) throws RemoteException;
     /*查找一个策略*/
     
