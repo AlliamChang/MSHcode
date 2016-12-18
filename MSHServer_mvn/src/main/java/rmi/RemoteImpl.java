@@ -72,6 +72,16 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	public ResultMessage deleteUser(int ID) throws RemoteException {
 		return userDAO.deleteUser(ID);
 	}
+	
+	@Override
+	public ResultMessage login(String account, String password)	throws RemoteException {
+		return userDAO.login(account, password);
+	}
+
+	@Override
+	public ResultMessage logout(int id) throws RemoteException {
+		return userDAO.logout(id);
+	}
 
 	@Override
 	public HotelPO find(int id) throws RemoteException {
@@ -209,17 +219,4 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 		return hotelDAO.getHotel(province, city, area, name, enter_time, out_time, price, score, star);
 	}
 
-
-	@Override
-	public ResultMessage login(String account, String password)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultMessage logout(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -46,11 +46,11 @@ public class InitialPane extends GridPane{
 		add(searchButton, 1, 1);
 		
 		searchButton.setOnAction(e -> {
-//			WebAdminController.getInstance().search(searchBox.getContent());
-			LoginDialog ss = new LoginDialog();
-			ss.showAndWait().ifPresent(info -> {
-				System.out.println(info.getKey() + " " + info.getValue());
-			});
+			WebAdminController.getInstance().search(searchBox.getContent());
+//			LoginDialog ss = new LoginDialog();
+//			ss.showAndWait().ifPresent(info -> {
+//				System.out.println(info.getKey() + " " + info.getValue());
+//			});
 		});
 		
 		Platform.runLater(() -> searchBox.requestFocus());

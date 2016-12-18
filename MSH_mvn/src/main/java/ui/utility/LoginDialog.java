@@ -49,7 +49,10 @@ public class LoginDialog extends Dialog<Pair<String, String> >{
 		Platform.runLater(() -> accountField.requestFocus());
 		
 		setResultConverter(dialogButton -> {
-			return new Pair<>(accountField.getText(), passwordField.getText());
+			if (dialogButton != null)
+				return new Pair<>(accountField.getText(), passwordField.getText());
+			else
+				return null;
 		});
 	}
 }

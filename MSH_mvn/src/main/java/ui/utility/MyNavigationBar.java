@@ -1,21 +1,30 @@
 package ui.utility;
 
+import java.rmi.RemoteException;
 import java.util.List;
 import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
+import po.UserPO;
+import rmi.RemoteHelper;
+import tools.ResultMessage;
+import vo.UserVO;
 
 public class MyNavigationBar extends VBox {
 	
@@ -46,11 +55,47 @@ public class MyNavigationBar extends VBox {
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(100);
 		Button login=new Button("登录");
-		login.setOnMouseClicked((MouseEvent me)->{
-			
+		login.setOnAction(event -> {
+			LoginDialog loginDialog = new LoginDialog();
+			loginDialog.showAndWait().filter(r -> r != null).ifPresent(info -> {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.getDialogPane().setHeaderText(null);
+				try {
+					ResultMessage message = RemoteHelper.getInstance().getUserDAO().login(info.getKey(), info.getValue());
+					if (message == ResultMessage.SUCCESS) {
+						alert.setAlertType(AlertType.INFORMATION);
+						UserPO po;
+						try {
+							int id = Integer.parseInt(info.getKey());
+							po = RemoteHelper.getInstance().getUserDAO().getUser(id);
+						} catch (NumberFormatException e){
+							po = RemoteHelper.getInstance().getUserDAO().getUser(info.getKey());
+						}
+						UserVO vo = new UserVO(po);
+						switch (vo.getType()) {
+						
+						}
+					} else {
+						if (message == ResultMessage.FAIL)
+							alert.getDialogPane().setContentText("密码错误！");
+						if (message == ResultMessage.NOT_EXIST)
+							alert.getDialogPane().setContentText("账号不存在！");
+						if (message == ResultMessage.LOGGED)
+							alert.getDialogPane().setContentText("已在别处登录！");
+						alert.showAndWait();
+						login.fire();
+					}
+				} catch (RemoteException e) {
+					alert.getDialogPane().setContentText("未知错误！");
+					alert.showAndWait();
+					login.fire();
+					e.printStackTrace();
+				}
+			});
 		});
 		Button register=new Button("注册");
-		register.setOnMouseClicked((MouseEvent me)->{
+		register.setOnAction(event -> {
 			
 		});
 		this.getChildren().addAll(login,register);
