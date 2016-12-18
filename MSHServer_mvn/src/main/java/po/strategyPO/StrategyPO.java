@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import tools.*;
 
 @Entity
-@Table(name = "strategy")
+@Table(name = "strategy2")
 public class StrategyPO {
 	private StrategyType strategyType;
 	private String name;//名称
