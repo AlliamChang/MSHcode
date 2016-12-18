@@ -15,7 +15,7 @@ public class StrategyDAOStub implements StrategyDAO{
 	public StrategyDAOStub(){
 		database=new ArrayList<StrategyPO>();
 		database.add(new StrategyPO("double11",StrategyType.BIRTHDAY,"Nanjing","Qixia"
-				,new Date("2016/11/11",false),new Date("2016/11/12",false),99.00,CostType.RMB,PeopleType.VIP));
+				,new Date("2016/11/11",false),new Date("2016/11/12",false),99.00,PeopleType.VIP));
 	}
 	
 	public StrategyPO findStrategy(String name) throws RemoteException{

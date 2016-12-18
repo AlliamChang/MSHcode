@@ -1,6 +1,8 @@
 package rmi;
 
 import java.rmi.Remote;
+import dao.strategy_dao.*;
+import daoImpl.strategyDaoImpl.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -15,10 +17,11 @@ import daoImpl.user.CreditRecordsDAOImpl;
 import daoImpl.user.UserDAOImpl;
 import po.*;
 import po.hotelPO.HotelPO;
+import po.strategyPO.StrategyPO;
 import tools.OrderState;
 import tools.ResultMessage;
 
-public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO, CreditRecordsDAO {
+public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO, CreditRecordsDAO, StrategyDao {
 	
 	/**
 	 * 
@@ -28,12 +31,14 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	private HotelDAO hotelDAO;
 	private OrderDAO orderDAO;
 	private CreditRecordsDAO creditRecordsDAO;
+	private StrategyDao strategyDAO;
 	
 	public RemoteImpl() throws RemoteException{
 		userDAO = new UserDAOImpl();
 		hotelDAO = new HotelDAOImpl();
 		orderDAO = new OrderDAOImpl();
 		creditRecordsDAO = new CreditRecordsDAOImpl();
+		strategyDAO=new StrategyDAOImpl();
 	}
 
 	@Override
@@ -180,5 +185,35 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	public ResultMessage createRecord(CreditPO po) throws RemoteException {
 		return creditRecordsDAO.createRecord(po);
 	}
-
+    	
+	//strategy↓↓
+	@Override
+	public StrategyPO findStrategy(String name) throws RemoteException{
+		return strategyDAO.findStrategy(name);
+	}
+    
+	@Override
+	public ResultMessage addStrategy(StrategyPO po) throws RemoteException{
+		return strategyDAO.addStrategy(po);
+	}
+	
+	@Override
+	public ResultMessage deleteStrategy(String name) throws RemoteException{
+		return strategyDAO.deleteStrategy(name);
+	}
+	
+	@Override
+	public ResultMessage modifyStrategy(StrategyPO po) throws RemoteException{
+		return strategyDAO.modifyStrategy(po);
+	}
+	
+	@Override	
+	public List<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException{
+		return strategyDAO.getStrategyInHotel(hotelId);
+	}
+	
+	@Override
+	public List<StrategyPO> getStrategyInWeb() throws RemoteException{
+		return strategyDAO.getStrategyInWeb();
+	}
 }

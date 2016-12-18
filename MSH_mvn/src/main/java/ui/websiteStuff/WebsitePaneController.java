@@ -32,9 +32,9 @@ public class WebsitePaneController {
 		    2,new Date("2016/11/13",false),new Date("2016/11/13",false),false,500,OrderState.EXECUTED,false);
 	private List<OrderVO> order=Arrays.asList(o1,o2);
 	private final StrategyVO s1=new StrategyVO("11",StrategyType.VIP,"南京市","栖霞区",new Date("2016/11/11",false)
-			,new Date("2016/11/12",false),99.00,CostType.PERCENT,PeopleType.NORMAL);
+			,new Date("2016/11/12",false),99.00,PeopleType.NORMAL);
 	private final StrategyVO s2=new StrategyVO("11",StrategyType.CO_OPERATION,"南京市","栖霞区",new Date("2016/11/11",false)
-			,new Date("2016/11/12",false),99.00,CostType.RMB,PeopleType.VIP);
+			,new Date("2016/11/12",false),99.00,PeopleType.VIP);
 	private List<StrategyVO> strategy=Arrays.asList(s1,s2);
 	public UserVO u1=new UserVO("zhr123","123","zhr","666","333","ASUS","imagePath",1,2,3,UserType.CUSTOMER);
 	private MyNavigationBar navi;

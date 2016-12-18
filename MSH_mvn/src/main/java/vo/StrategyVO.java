@@ -11,12 +11,11 @@ public class StrategyVO {
 	private Date startTime;  //策略开始时间
     private Date endTime;  //策略结束时间
     private double cost;  //策略折扣
-    private CostType costType;  //策略折扣单位
     private PeopleType people;  //策略面向人群
     private int hotelId;  //酒店id
     
     public StrategyVO(String name,StrategyType strategyType,String city,String area
-    		,Date startTime,Date endTime,double cost,CostType costType,PeopleType people){
+    		,Date startTime,Date endTime,double cost,PeopleType people){
     	this.name=name;
     	this.strategyType=strategyType;
     	this.city=city;
@@ -24,14 +23,13 @@ public class StrategyVO {
     	this.startTime=startTime;
     	this.endTime=endTime;
     	this.cost=cost;
-    	this.costType=costType;
     	this.people=people;
     }
     
     public StrategyVO(String name,StrategyType staretgyType,String city,String area
     		,Date startTime,Date endTime,double cost,CostType costType,PeopleType people,int hotelId){
     	this(name,staretgyType,city,area
-    		,startTime,endTime,cost,costType,people);
+    		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
     }
     
@@ -43,7 +41,6 @@ public class StrategyVO {
 		this.city=po.getCity();
 		this.area=po.getArea();
 		this.cost=po.getCost();
-		this.costType=po.getCostType();
 		this.people=po.getPeople();
 		if(po.getHotelId()!=0)
 		    this.hotelId=po.getHotelId();
@@ -104,14 +101,6 @@ public class StrategyVO {
     public void setCost(double cost){
     	this.cost=cost;
     }
-    
-    public CostType getCostType(){
-    	return costType;
-    }
-    
-    public void setCostType(CostType costType){
-    	this.costType=costType;
-    }
 
     public PeopleType getPeople(){
     	return people;
@@ -131,8 +120,8 @@ public class StrategyVO {
     
     public StrategyPO toPO(){
     	if(hotelId!=0)
-    		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,costType,people,hotelId);
+    		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,people,hotelId);
     	else
-    		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,costType,people);
+    		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,people);
     }
 }

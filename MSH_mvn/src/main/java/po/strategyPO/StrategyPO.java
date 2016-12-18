@@ -11,12 +11,11 @@ public class StrategyPO {
 	private Date startTime;
 	private Date endTime;
 	private double cost;
-	private CostType costType;
 	private PeopleType people;
 	private int hotelId;
 	
 	public StrategyPO(String name,StrategyType strategyType,String city,String area
-    		,Date startTime,Date endTime,double cost,CostType costType,PeopleType people){
+    		,Date startTime,Date endTime,double cost,PeopleType people){
 		this.name=name;
     	this.strategyType=strategyType;
     	this.city=city;
@@ -24,14 +23,13 @@ public class StrategyPO {
     	this.startTime=startTime;
     	this.endTime=endTime;
     	this.cost=cost;
-    	this.costType=costType;
     	this.people=people;
 	}
 	
 	public StrategyPO(String name,StrategyType staretgyType,String city,String area
-    		,Date startTime,Date endTime,double cost,CostType costType,PeopleType people,int hotelId){
+    		,Date startTime,Date endTime,double cost,PeopleType people,int hotelId){
     	this(name,staretgyType,city,area
-    		,startTime,endTime,cost,costType,people);
+    		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
     }
 	
@@ -61,10 +59,6 @@ public class StrategyPO {
 	
 	public double getCost(){
 		return cost;
-	}
-	
-	public CostType getCostType(){
-		return costType;
 	}
 	
 	public PeopleType getPeople(){
@@ -101,10 +95,6 @@ public class StrategyPO {
 	
 	public void setCost(double cost){
 		this.cost=cost;
-	}
-	
-	public void setCostType(CostType costType){
-		this.costType=costType;
 	}
 	
 	public void setPeople(PeopleType people){
