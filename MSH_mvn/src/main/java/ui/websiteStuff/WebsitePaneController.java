@@ -9,6 +9,7 @@ import tools.OrderState;
 import tools.PeopleType;
 import tools.StrategyType;
 import tools.UserType;
+import tools.ResultMessage;
 import blservice.order_blservice.*;
 import bl_stub.*;
 import java.util.Arrays;
@@ -102,6 +103,10 @@ public class WebsitePaneController {
 	
 	public void createCreditPane(){
 		MainPane.getInstance().setRightPane(new CreditPane(u1));
+	}
+	
+	public ResultMessage addStrategy(StrategyVO strategy){
+		return this.strategyBL.addStrategy(strategy);
 	}
 	
 	public List<StrategyVO> getStrategyInWeb(){
