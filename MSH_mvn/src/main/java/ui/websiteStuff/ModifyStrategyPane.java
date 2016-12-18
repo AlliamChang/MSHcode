@@ -1,8 +1,10 @@
 package ui.websiteStuff;
 
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import tools.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 
 import java.time.LocalDate;
@@ -37,7 +39,7 @@ public class ModifyStrategyPane extends GridPane{
     private TextField costText;
     private ChoiceBox<String> cityBox;
     private ChoiceBox<String> areaBox;
-    private ChoiceBox<String> costBox;
+    private Label costTypeLabel;
     private ChoiceBox<String> peopleBox;
 	
     private StrategyVO strategy;
@@ -111,20 +113,20 @@ public class ModifyStrategyPane extends GridPane{
 	    
 		ObservableList cityList=FXCollections.observableArrayList("南京市","北京市");
 		ObservableList areaList=FXCollections.observableArrayList("栖霞区");
-		ObservableList costList=FXCollections.observableArrayList("元","%");
+		//ObservableList costList=FXCollections.observableArrayList("元","%");
 		ObservableList peopleList=FXCollections.observableArrayList(normalPeople,vipPeople);
 		
 		cityBox=new ChoiceBox();
 		cityBox.setStyle(FONT_STYLE);
 		areaBox=new ChoiceBox();
 		areaBox.setStyle(FONT_STYLE);
-		costBox=new ChoiceBox();
-		costBox.setStyle(FONT_STYLE);
+		costTypeLabel=new Label("元");
+		costTypeLabel.setStyle(FONT_STYLE);
 		peopleBox=new ChoiceBox();
 		peopleBox.setStyle(FONT_STYLE);
 		cityBox.setItems(cityList);
 		areaBox.setItems(areaList);
-		costBox.setItems(costList);
+		//costBox.setItems(costList);
 		peopleBox.setItems(peopleList);
 		modifyButton=new Button("修改");
 		modifyButton.setFont(normalFont);
@@ -132,8 +134,8 @@ public class ModifyStrategyPane extends GridPane{
 		this.setValignment(cityBox, VPos.CENTER);
 		this.setHalignment(areaBox, HPos.RIGHT);
 		this.setValignment(areaBox, VPos.CENTER);
-		this.setHalignment(costBox, HPos.RIGHT);
-		this.setValignment(costBox, VPos.CENTER);
+		this.setHalignment(costTypeLabel, HPos.RIGHT);
+		this.setValignment(costTypeLabel, VPos.CENTER);
 		this.setHalignment(peopleBox, HPos.RIGHT);
 		this.setValignment(peopleBox, VPos.CENTER);
 		this.setHalignment(modifyButton, HPos.RIGHT);
@@ -157,7 +159,7 @@ public class ModifyStrategyPane extends GridPane{
 	    this.add(startDate, 3, 4);
 	    this.add(endDate, 5, 4);
 	    this.add(costText, 3, 5);
-	    this.add(costBox, 5, 5);
+	    this.add(costTypeLabel, 5, 5);
 	    this.add(peopleBox, 5, 6,3,1);
 	    this.add(modifyButton, 3, 7);
 		
@@ -179,11 +181,11 @@ public class ModifyStrategyPane extends GridPane{
 		cityBox.getSelectionModel().select(strategy.getCity());
 		areaBox.getSelectionModel().select(strategy.getArea());
 		System.out.println(strategy.getName());
-        if(strategy.getCostType().equals(CostType.PERCENT)){
-        	costBox.getSelectionModel().select("%");
-        }
-        else
-        	costBox.getSelectionModel().select("元");
+        //if(strategy.getCostType().equals(CostType.PERCENT)){
+        	//costBox.getSelectionModel().select("%");
+       // }
+        //else
+        	//costBox.getSelectionModel().select("元");
         if(strategy.getPeople().equals(PeopleType.NORMAL)){
         	peopleBox.getSelectionModel().select(normalPeople);
         }
@@ -196,6 +198,16 @@ public class ModifyStrategyPane extends GridPane{
 		
 		modifyButton.setOnAction(e ->{
 			//修改策略信息
+			Alert alert=new Alert(AlertType.CONFIRMATION);
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.getDialogPane().setHeaderText(null);
+			alert.getDialogPane().setContentText("确定要修改吗？");
+			alert.showAndWait().ifPresent(response ->{
+				if(response==ButtonType.OK){
+					System.out.println("modify");
+					//服务器修改策略
+				}
+			});
 		});
     }
     

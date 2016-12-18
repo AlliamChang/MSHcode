@@ -104,5 +104,13 @@ public class WebsitePaneController {
 	public void createCreditPane(){
 		MainPane.getInstance().setRightPane(new CreditPane(u1));
 	}
+	
+	public List<StrategyVO> getStrategyInWeb(){
+		return this.strategyBL.getStrategyInWeb();
+	}
+	
+	public List<OrderVO> getAbnormityOrder(){
+		return this.orderBL.getAbnormityOrder();
+	}
 
 }

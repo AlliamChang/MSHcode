@@ -1,7 +1,9 @@
 package ui.websiteStuff;
 
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import java.util.*;
 import vo.*;
@@ -91,6 +93,16 @@ public class CancelSurePane extends GridPane{
 		
 		cancelButton.setOnAction(e ->{
 			//撤销后事件
+			Alert alert=new Alert(AlertType.CONFIRMATION);
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.getDialogPane().setHeaderText(null);
+			alert.getDialogPane().setContentText("确定要撤销吗?");
+			alert.showAndWait().ifPresent(response ->{
+				if(response==ButtonType.OK){
+					//fwq撤销
+					System.out.println("撤销");
+				}
+			});
 		});
 	}
 

@@ -1,8 +1,10 @@
 package ui.websiteStuff;
 
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import tools.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import java.util.List;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import ui.utility.*;
 import javafx.scene.image.*;
 import javafx.geometry.*;
 import javafx.scene.text.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.*;
 
 public class DealPane extends GridPane{
@@ -28,6 +31,7 @@ public class DealPane extends GridPane{
 	private Label endTimeLabel;
 	private Button cancelButton;
 	private ToggleGroup group;
+	RadioButton[] button=new RadioButton[9];
 	
 	private Text numberText;
 	private Text nameText;
@@ -72,16 +76,8 @@ public class DealPane extends GridPane{
 		
 		this.cancelButton=new Button("撤销");
 		
-		RadioButton[] button=new RadioButton[9];
-		RadioButton button1=new RadioButton();
-		RadioButton button2=new RadioButton();
-		RadioButton button3=new RadioButton();
-		RadioButton button4=new RadioButton();
-		RadioButton button5=new RadioButton();
-		RadioButton button6=new RadioButton();
-		RadioButton button7=new RadioButton();
-		RadioButton button8=new RadioButton();
-		RadioButton button9=new RadioButton();
+		
+
 		group=new ToggleGroup();
 		for(int i=0;i<button.length;i++){
 			button[i]=new RadioButton();
@@ -175,6 +171,40 @@ public class DealPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(120));
+		
+		group.selectedToggleProperty().addListener(
+				(ObservableValue<? extends Toggle> observable,Toggle oldValue,Toggle newValue)->{
+					if(group.getSelectedToggle()!=null){
+						cancelButton.setOnAction(e ->{
+							int i=0;
+							while(!button[i].isSelected()){
+								i++;
+							}
+							Alert alert=new Alert(AlertType.CONFIRMATION);
+							alert.initModality(Modality.APPLICATION_MODAL);
+							alert.getDialogPane().setHeaderText(null);
+							alert.getDialogPane().setContentText("确认要撤销吗？");
+							alert.showAndWait().ifPresent(response ->{
+								if(response==ButtonType.OK){
+									System.out.println("cancelOrder");
+									//fwq撤销异常订单
+								}
+							});
+						});
+					}
+				});
+		
+		cancelButton.setOnAction(e ->{
+			if(group.getSelectedToggle()==null){
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.setHeaderText(null);
+				alert.setContentText("异常订单不存在或没有选中一个异常订单!");
+				alert.showAndWait();
+			}
+		});
 	}
+	
+	
 
 }

@@ -1,7 +1,9 @@
 package ui.websiteStuff;
 
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +45,7 @@ public class CreateStrategyPane extends GridPane{
 	private ChoiceBox areaBox;
 	private MyDatePicker startDate;
 	private MyDatePicker endDate;
-	private ChoiceBox costBox;
+	private Label costTypeLabel;
 	private ChoiceBox peopleBox;
 	private Button createButton;
 	
@@ -118,11 +120,12 @@ public class CreateStrategyPane extends GridPane{
 	    
 	    this.endDate=new MyDatePicker();
 	    
-	    this.costBox=new ChoiceBox();
-	    ObservableList costList=FXCollections.observableArrayList("元","%");
-	    costBox.setItems(costList);
-	    this.setHalignment(costBox, HPos.RIGHT);
-		this.setValignment(costBox, VPos.CENTER);
+	    this.costTypeLabel=new Label("元");
+	    //ObservableList costList=FXCollections.observableArrayList("元","%");
+	    //costBox.setItems(costList);
+	    costTypeLabel.setFont(normalFont);
+	    this.setHalignment(costTypeLabel, HPos.RIGHT);
+		this.setValignment(costTypeLabel, VPos.CENTER);
 	    
 	    this.peopleBox=new ChoiceBox();
 	    ObservableList peopleList=FXCollections.observableArrayList(normalPeople,vipPeople);
@@ -148,7 +151,7 @@ public class CreateStrategyPane extends GridPane{
 	    this.add(startDate, 3, 4);
 	    this.add(endDate, 5, 4);
 	    this.add(costText, 3, 5);
-	    this.add(costBox, 5, 5);
+	    this.add(costTypeLabel, 5, 5);
 	    this.add(peopleBox, 5, 6,3,1);
 	    this.add(createButton, 3, 7);
 	    
@@ -166,6 +169,19 @@ public class CreateStrategyPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(90));
 		this.getColumnConstraints().add(new ColumnConstraints(150));
 		
+		createButton.setOnAction(e ->{
+			//创建策略事件
+			Alert alert=new Alert(AlertType.CONFIRMATION);
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.getDialogPane().setHeaderText(null);
+			alert.getDialogPane().setContentText("确认要新增吗?");
+			alert.showAndWait().ifPresent(response ->{
+				if(response==ButtonType.OK){
+					System.out.println("create");
+					//fwq新建
+				}
+			});
+		});
 	}
 
 }

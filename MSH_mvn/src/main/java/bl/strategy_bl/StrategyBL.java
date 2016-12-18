@@ -2,7 +2,9 @@ package bl.strategy_bl;
 
 //<<<<<<< HEAD
 import tools.*;
+import rmi.RemoteHelper;
 import data_stub.*;
+import dao.strategy_dao.*;
 import java.rmi.*;
 import java.util.*;
 import vo.*;
@@ -14,7 +16,14 @@ import blservice.strategy_blservice.StrategyBLService;
 //>>>>>>> origin/master
 
 public class StrategyBL implements StrategyBLService{
-	private StrategyDAOStub strategy;
+	private StrategyDAO strategy;
+	private RemoteHelper helper;
+	
+	public StrategyBL(){
+		helper=RemoteHelper.getInstance();
+		strategy=helper.getStrategyDAO();
+		
+	}
 
 	
 	public ResultMessage addStrategy(StrategyVO vo){
