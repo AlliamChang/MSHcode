@@ -68,50 +68,34 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 
 	@Override
 	public HotelPO find(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return hotelDAO.find(id);
 	}
 
 	@Override
 	public ResultMessage add(HotelPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return hotelDAO.add(po);
 	}
 
 	@Override
 	public ResultMessage addRoom(RoomPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return hotelDAO.addRoom(po);
 	}
 
 	@Override
 	public ResultMessage delete(int id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return hotelDAO.delete(id);
 	}
 
 	@Override
-	public void update(HotelPO po) throws RemoteException {
-		// TODO Auto-generated method stub
+	public ResultMessage update(HotelPO po) throws RemoteException {
+		return hotelDAO.update(po);
 		
 	}
 
-	@Override
-	public ResultMessage modify(HotelPO po) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void init() throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<HotelPO> get(String province, String city, String tradeArea, String name) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return hotelDAO.get(province, city, tradeArea, name);
 	}
 
 	@Override
@@ -131,8 +115,7 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 
 	@Override
 	public List<RoomPO> getRoom(int hotel_id) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		return hotelDAO.getRoom(hotel_id);
 	}
 	
 	//order的方法

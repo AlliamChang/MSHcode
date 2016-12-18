@@ -30,13 +30,14 @@ import javafx.scene.text.FontWeight;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
+import ui.webAdmin.WebAdminController;
 import vo.RoomVO;
 
 public class HotelSearchPane extends Pane{
 	private static final String user_name="angel"; 
 	private GridPane pane;
 	private int row=10;
-	private int column=0;
+	private int column=2;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
 	public HotelSearchPane(){
@@ -47,50 +48,85 @@ public class HotelSearchPane extends Pane{
 	private void initPane(){
 		pane=new GridPane();
 		pane.setPadding(new Insets(10, 10, 10, 0));
-		pane.setHgap(20);
+		pane.setHgap(1);
 		pane.setVgap(20);
 		pane.setAlignment(Pos.TOP_LEFT);
 		//pane.setGridLinesVisible(true);
 		
 		Label title=new Label("酒店预订系统");
 		title.setFont(Font.font("Tahoma", FontWeight.MEDIUM, 32));
-		pane.add(title,column+1,row-3,3,2);
+		pane.add(title,column-1,row-3,3,2);
 		pane.setHalignment(title, HPos.CENTER);
 		
-		 ColumnConstraints colInfo = new ColumnConstraints();
-	        colInfo.setPercentWidth(20);
+		 ColumnConstraints col0 = new ColumnConstraints(90);
+		 ColumnConstraints col1 = new ColumnConstraints(125);
+		 ColumnConstraints col2 = new ColumnConstraints(100);
+		 ColumnConstraints col3 = new ColumnConstraints(125);
+		 ColumnConstraints col4 = new ColumnConstraints(50);
+		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
 	        
-	        for(int i = 0; i < 100/colInfo.getPercentWidth(); i ++){
-	        	this.pane.getColumnConstraints().add(colInfo);
-	        }
 	        
-		Label City=new Label("城市:");
-		City.setFont(f);
-		pane.add(City,column,row);
-		pane.setHalignment(City, HPos.RIGHT);
+	        Label province=new Label("省份:");
+	        province.setFont(f);
+	        pane.add(province, column-2, row);
+	        pane.setHalignment(province, HPos.LEFT);
+	        
+	        ChoiceBox<String> P=new ChoiceBox<String>();
+	        P.getItems().addAll(CustomerPaneController.getInstance().getProvince());
+			P.getSelectionModel().selectFirst();
+			pane.add(P,column-1,row);
+			
+			Label City=new Label("城市:");
+			City.setFont(f);
+			pane.add(City,column,row);
+			pane.setHalignment(City, HPos.LEFT);
+			
+			ChoiceBox<String> city=new ChoiceBox<String>();
+			//city.getItems().addAll(c)
+			pane.add(city,column+1,row);
+			
+			Label trade_area=new Label("商圈:");
+			trade_area.setFont(f);
+			pane.add(trade_area,column+2,row);
+			pane.setHalignment(trade_area, HPos.LEFT);
+			
+			ChoiceBox<String> TradeArea=new ChoiceBox<String>();
+			pane.add(TradeArea,column+3,row);
+	        
+			P.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+				city.getItems().clear();
+				List<String> cities = CustomerPaneController.getInstance().getCity((String)new_val);
+				if (cities != null){
+					city.setDisable(false);;
+					city.getItems().addAll(cities);
+				} else
+					city.setDisable(true);
+				city.getSelectionModel().selectFirst();
+			});
+			
+			city.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+				TradeArea.getItems().clear();
+				List<String> areas = CustomerPaneController.getInstance().getareas(P.getValue(), (String)new_val);
+				if (areas != null){
+					TradeArea.setDisable(false);
+					TradeArea.getItems().addAll(areas);
+				} else
+					TradeArea.setDisable(true);	
+				TradeArea.getSelectionModel().selectFirst();
+			});
 		
-		ChoiceBox city=new ChoiceBox(FXCollections.observableArrayList("南京","北京","上海"));
-		city.getSelectionModel().selectFirst();
-		pane.add(city,column+1,row);
 		
-		Label trade_area=new Label("商圈:");
-		trade_area.setFont(f);
-		pane.add(trade_area,column+2,row);
-		pane.setHalignment(trade_area, HPos.RIGHT);
 		
-		ChoiceBox TradeArea=new ChoiceBox(FXCollections.observableArrayList("栖霞区","鼓楼区","江宁区"));
-		TradeArea.getSelectionModel().selectFirst();
-		pane.add(TradeArea,column+3,row);
 		
 		Label key=new Label("关键词:");
 		key.setFont(f);
-		pane.add(key,column,row+1);
-		pane.setHalignment(key, HPos.RIGHT);
+		pane.add(key,column-2,row+1);
+		pane.setHalignment(key, HPos.LEFT);
 		
 		TextField keyword=new TextField();
 		keyword.setFont(f);
 		keyword.setMinWidth(200);
-		pane.add(keyword, column+1, row+1,3,1);
+		pane.add(keyword, column-1, row+1,5,1);
 		
 		Button search=new Button("搜索");
 		search.setFont(f);
@@ -102,21 +138,22 @@ public class HotelSearchPane extends Pane{
 		
 		Label enter_time=new Label("入住时间:");
 		enter_time.setFont(f);
-		pane.add(enter_time, column, row+2);
-		pane.setHalignment(enter_time, HPos.RIGHT);
+		pane.add(enter_time, column-2, row+2);
+		pane.setHalignment(enter_time, HPos.LEFT);
 		
 		DatePicker enter=new MyDatePicker();
 		enter.setMaxWidth(140);
-		pane.add(enter, column+1, row+2);
+		pane.add(enter, column-1, row+2);
 		
 		Label out_time=new Label("退房时间:");
 		out_time.setFont(f);
-		pane.add(out_time,column+2,row+2);
-		pane.setHalignment(out_time, HPos.RIGHT);
+		pane.add(out_time,column,row+2);
+		pane.setHalignment(out_time, HPos.LEFT);
 		
-		DatePicker out=new MyDatePicker();
+		MyDatePicker out=new MyDatePicker();
 		out.setMaxWidth(140);
-		pane.add(out,column+3,row+2);
+		out.setBeforeDisable(enter);
+		pane.add(out,column+1,row+2);
 		
 		this.getChildren().add(pane);
 	}

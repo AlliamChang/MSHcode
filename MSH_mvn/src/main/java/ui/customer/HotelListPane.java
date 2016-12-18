@@ -1,6 +1,7 @@
 package ui.customer;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
@@ -25,6 +26,7 @@ import ui.utility.MyNavigationBar;
 
 public class HotelListPane extends Pane{
 	private GridPane pane;
+	private Label province=new Label("省份");
 	private Label City=new Label("城市");
 	private Label trade_area=new Label("商圈");
 	private Label enter_time=new Label("入住时间");
@@ -52,63 +54,92 @@ public class HotelListPane extends Pane{
 		pane.setAlignment(Pos.TOP_LEFT);
 		//pane.setGridLinesVisible(true);
 		
-		 ColumnConstraints col0 = new ColumnConstraints(100);
+		 ColumnConstraints col0 = new ColumnConstraints(130);
 		 ColumnConstraints col1 = new ColumnConstraints(100);
-		 ColumnConstraints col2 = new ColumnConstraints(130);
+		 ColumnConstraints col2 = new ColumnConstraints(100);
 		 ColumnConstraints col3 = new ColumnConstraints(130);
 		 ColumnConstraints col4 = new ColumnConstraints(100);
 		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
 		
-		 //Button back=new MyRetreatButton()
-		City.setFont(f);
-		pane.add(City, column, row);
+		 province.setFont(f);
+		 pane.add(province, column, row);
+		 
+		 ChoiceBox<String> P=new ChoiceBox<String>();
+	        P.getItems().addAll(CustomerPaneController.getInstance().getProvince());
+			P.getSelectionModel().selectFirst();
+			pane.add(P, column, row+1);
+			
+		 City.setFont(f);
+		pane.add(City, column+1, row);
 		
-		ChoiceBox city=new ChoiceBox(FXCollections.observableArrayList("南京","北京","上海"));
+		ChoiceBox<String> city=new ChoiceBox<String>();
 		city.getSelectionModel().selectFirst();
-		pane.add(city,column,row+1);
+		pane.add(city,column+1,row+1);
 		
 		trade_area.setFont(f);
-		pane.add(trade_area,column+1,row);
+		pane.add(trade_area,column+2,row);
 		
-		ChoiceBox TradeArea=new ChoiceBox(FXCollections.observableArrayList("栖霞区","鼓楼区","江宁区"));
+		ChoiceBox<String> TradeArea=new ChoiceBox<String>();
 		TradeArea.getSelectionModel().selectFirst();
-		pane.add(TradeArea, column+1, row+1);
+		pane.add(TradeArea, column+2, row+1);
+		
+		P.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+			city.getItems().clear();
+			List<String> cities = CustomerPaneController.getInstance().getCity((String)new_val);
+			if (cities != null){
+				city.setDisable(false);;
+				city.getItems().addAll(cities);
+			} else
+				city.setDisable(true);
+			city.getSelectionModel().selectFirst();
+		});
+		
+		city.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+			TradeArea.getItems().clear();
+			List<String> areas = CustomerPaneController.getInstance().getareas(P.getValue(), (String)new_val);
+			if (areas != null){
+				TradeArea.setDisable(false);
+				TradeArea.getItems().addAll(areas);
+			} else
+				TradeArea.setDisable(true);	
+			TradeArea.getSelectionModel().selectFirst();
+		});
 		
 		enter_time.setFont(f);
-		pane.add(enter_time,column+2,row);
+		pane.add(enter_time,column+3,row);
 		
 		MyDatePicker enter=new MyDatePicker();
 		enter.setMaxWidth(130);
-		pane.add(enter,column+2,row+1);
+		pane.add(enter,column+3,row+1);
 		
 		out_time.setFont(f);
-		pane.add(out_time, column+3, row);
+		pane.add(out_time, column, row+3);
 		
 		MyDatePicker out=new MyDatePicker();
 		out.setMaxWidth(130);
 		out.setBeforeDisable(enter);
-		pane.add(out,column+3,row+1);
+		pane.add(out,column,row+4);
 		
 		price_range.setFont(f);
-		pane.add(price_range,column,row+3);
+		pane.add(price_range,column+1,row+3);
 		
 		ChoiceBox price=new ChoiceBox(FXCollections.observableArrayList("200-499","500-999","1000以上"));
 		price.getSelectionModel().selectFirst();
-		pane.add(price, column, row+4);
+		pane.add(price, column+1, row+4);
 		
 		score_range.setFont(f);
-		pane.add(score_range,column+1,row+3);
+		pane.add(score_range,column+2,row+3);
 		
 		ChoiceBox score=new ChoiceBox(FXCollections.observableArrayList("4.1-5.0","3.1-4.0","0.1-3.0"));
 		score.getSelectionModel().selectFirst();
-		pane.add(score, column+1, row+4);
+		pane.add(score, column+2, row+4);
 		
 		star.setFont(f);
-		pane.add(star,column+2,row+3);
+		pane.add(star,column+3,row+3);
 		
 		ChoiceBox star_level=new ChoiceBox(FXCollections.observableArrayList("5","4","3","2","1"));
 		star_level.getSelectionModel().selectFirst();
-		pane.add(star_level,column+2,row+4);
+		pane.add(star_level,column+3,row+4);
 		
 		Button search=new Button("搜索");
 		search.setFont(f);

@@ -7,6 +7,8 @@ import po.EvaluatePO;
 import po.UserPO;
 import po.hotelPO.HotelPO;
 import po.hotelPO.RoomPO;
+import rmi.RemoteHelper;
+import dao.hotel.HotelDAO;
 import data_stub.EvaluateDAO_Stub;
 import data_stub.HotelDAOStub;
 import bl.user_bl.UserBLServiceImpl;
@@ -17,11 +19,14 @@ import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.RoomVO;
 public class HotelBL implements HotelBLService{
-	private HotelDAOStub hotel;
+	private HotelDAO hotel;
 	private UserBLServiceImpl user;
+	private RemoteHelper help;
 	private EvaluateDAO_Stub evaluate;
 	public HotelBL(){
-		hotel=new HotelDAOStub();
+		help=RemoteHelper.getInstance();
+		hotel=help.getHotelDAO();
+		System.out.println(hotel);
 		user=new UserBLServiceImpl();
 		evaluate=new EvaluateDAO_Stub();
 		
@@ -40,7 +45,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public ResultMessage modify(HotelInfoVO hotel) {
 		try {
-			return this.hotel.modify(new HotelPO(hotel.getAdress(),hotel.getTradingArea(),hotel.getCity(),hotel.getProvince(),hotel.getHotel(),hotel.getPhone(),hotel.getIntroduction(),hotel.getHotel_id(),hotel.getStar(),hotel.get_stuff_id(),hotel.getYear(),hotel.getScore(),hotel.getScul(),hotel.getFacility()));
+			return this.hotel.update(new HotelPO(hotel.getAdress(),hotel.getTradingArea(),hotel.getCity(),hotel.getProvince(),hotel.getHotel(),hotel.getPhone(),hotel.getIntroduction(),hotel.getHotel_id(),hotel.getStar(),hotel.get_stuff_id(),hotel.getYear(),hotel.getScore(),hotel.getScul(),hotel.getFacility()));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
