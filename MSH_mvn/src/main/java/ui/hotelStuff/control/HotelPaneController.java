@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import tools.BedStyle;
-import tools.CostType;
 import tools.Date;
 import tools.HotelStrategyType;
 import tools.ResultMessage;
@@ -105,7 +104,7 @@ public class HotelPaneController {
 	 */
 	public HotelStrategyPane createHotelStrategyPane(){
 		return new HotelStrategyPane(Arrays.asList(
-				new HotelStrategyVO("双十一促销", HotelStrategyType.FESTIVAL, CostType.PERCENT,10, new Date("2016/11/10",false), new Date("2016/11/12",false)),
+				new HotelStrategyVO("双十一促销", HotelStrategyType.FESTIVAL, 10, new Date("2016/11/10",false), new Date("2016/11/12",false)),
 				new HotelStrategyVO("腾讯公司合作优惠", HotelStrategyType.BUSINESS, CostType.RMB,50, new Date("2016/11/10",false), new Date("2016/12/12",false))
 				));
 	}
