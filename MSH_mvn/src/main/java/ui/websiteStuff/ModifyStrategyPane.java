@@ -51,7 +51,6 @@ public class ModifyStrategyPane extends GridPane{
 	private Date startTime;
     private Date endTime;
     private double cost;
-    private CostType costType;
     private PeopleType people;
 
     

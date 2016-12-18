@@ -9,7 +9,6 @@ import tools.OrderState;
 import tools.PeopleType;
 import tools.StrategyType;
 import tools.UserType;
-import tools.CostType;
 import blservice.order_blservice.*;
 import bl_stub.*;
 import java.util.Arrays;
@@ -31,10 +30,10 @@ public class WebsitePaneController {
 	private final OrderVO o2=new OrderVO(100,12,"u",999,"rs","大床房",3,new String[]{"liuqin"},new String[]{"1"},3,new Date("2016/11/11",false),
 		    2,new Date("2016/11/13",false),new Date("2016/11/13",false),false,500,OrderState.EXECUTED,false);
 	private List<OrderVO> order=Arrays.asList(o1,o2);
-	private final StrategyVO s1=new StrategyVO("11",StrategyType.VIP,"南京市","栖霞区",new Date("2016/11/11",false)
-			,new Date("2016/11/12",false),99.00,PeopleType.NORMAL);
-	private final StrategyVO s2=new StrategyVO("11",StrategyType.CO_OPERATION,"南京市","栖霞区",new Date("2016/11/11",false)
-			,new Date("2016/11/12",false),99.00,PeopleType.VIP);
+	private final StrategyVO s1=new StrategyVO("11",StrategyType.VIP,"南京市","栖霞区","2016/11/11"
+			,"2016/11/12",99.00,PeopleType.NORMAL);
+	private final StrategyVO s2=new StrategyVO("11",StrategyType.CO_OPERATION,"南京市","栖霞区","2016/11/11",
+			"2016/11/12",99.00,PeopleType.VIP);
 	private List<StrategyVO> strategy=Arrays.asList(s1,s2);
 	public UserVO u1=new UserVO("zhr123","123","zhr","666","333","ASUS","imagePath",1,2,3,UserType.CUSTOMER);
 	private MyNavigationBar navi;

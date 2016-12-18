@@ -27,7 +27,6 @@ public class CreateStrategyPane extends GridPane{
 	private double cost;
 	private Date startTime;
 	private Date endTime;
-	private CostType costType;
 	private PeopleType people;
 	private List<String> stuffName;
 	private List<String> stuffId;

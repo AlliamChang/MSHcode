@@ -165,12 +165,12 @@ public class StrategyListPane extends GridPane{
 			this.setValignment(costText, VPos.CENTER);
 			this.add(costText, 4, i+3);
 			Text startTimeText=new Text();
-			startTimeText.setText(strategy.get(i).getStartTime().getDate());
+			startTimeText.setText(strategy.get(i).getStartTime());
 			this.setHalignment(startTimeText,HPos.CENTER);
 			this.setValignment(startTimeText, VPos.CENTER);
 			this.add(startTimeText, 5, i+3);
 			Text endTimeText=new Text();
-			endTimeText.setText(strategy.get(i).getEndTime().getDate());
+			endTimeText.setText(strategy.get(i).getEndTime());
 			this.setHalignment(endTimeText,HPos.CENTER);
 			this.setValignment(endTimeText, VPos.CENTER);
 			this.add(endTimeText, 6, i+3);
