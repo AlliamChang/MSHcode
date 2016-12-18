@@ -1,21 +1,27 @@
 package po.strategyPO;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import tools.*;
 
-
+@Entity
+@Table(name = "strategy")
 public class StrategyPO {
 	private StrategyType strategyType;
-	private String name;
-	private String city;
-	private String area;
-	private Date startTime;
-	private Date endTime;
-	private String cost;
-	private PeopleType people;
-	private int hotelId;
+	private String name;//名称
+	private String city;//城市
+	private String area;//地区
+	private String startTime;//开始时间
+	private String endTime;//结束时间
+	private String cost;//折扣量
+	private PeopleType people;//面向人群
+	private int hotelId;//酒店ID
 	
 	public StrategyPO(String name,StrategyType strategyType,String city,String area
-    		,Date startTime,Date endTime,String cost,PeopleType people){
+    		,String startTime,String endTime,String cost,PeopleType people){
 		this.name=name;
     	this.strategyType=strategyType;
     	this.city=city;
@@ -27,78 +33,87 @@ public class StrategyPO {
 	}
 	
 	public StrategyPO(String name,StrategyType staretgyType,String city,String area
-    		,Date startTime,Date endTime,String cost,PeopleType people,int hotelId){
+    		,String startTime,String endTime,String cost,PeopleType people,int hotelId){
     	this(name,staretgyType,city,area
     		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
     }
-	
+
+@Column(name="strategyType")
 	public StrategyType getStrategyType(){
 		return strategyType;
 	}
-	
+
+    public void setStrategyType(StrategyType strategyType){
+	    this.strategyType=strategyType;
+    }
+
+@Column(name="name")    
 	public String getName(){
 		return name;
 	}
-	
-	public Date getStartTime(){
+
+    public void setName(String name){
+	    this.name=name;
+    }
+    
+@Column(name="startTime")	
+	public String getStartTime(){
 		return startTime;
 	}
-	
-	public Date getEndTime(){
+
+    public void setStartTime(String startTime){
+	    this.startTime=startTime;
+    }
+    
+@Column(name="endTime")	
+	public String getEndTime(){
 		return endTime;
 	}
+
+    public void setEndTime(String endTime){
+	    this.endTime=endTime;
+    }
 	
+@Column(name="city")    
 	public String getCity(){
 		return city;
 	}
+
+    public void setCity(String city){
+	    this.city=city;
+    }
 	
+@Column(name="area")    
 	public String getArea(){
 		return area;
-	}
-	
-	public String getCost(){
-		return cost;
-	}
-	
-	public PeopleType getPeople(){
-		return people;
-	}
-	
-	public int getHotelId(){
-		return hotelId;
-	}
-	
-	public void setName(String name){
-		this.name=name;
-	}
-	
-	public void setStrategyType(StrategyType strategyType){
-		this.strategyType=strategyType;
-	}
-	
-	public void setCity(String city){
-		this.city=city;
 	}
 	
 	public void setArea(String area){
 		this.area=area;
 	}
 	
-	public void setStartTime(Date startTime){
-		this.startTime=startTime;
-	}
-	
-	public void setEndTime(Date endTime){
-		this.endTime=endTime;
+@Column(name="cost")	
+	public String getCost(){
+		return cost;
 	}
 	
 	public void setCost(String cost){
 		this.cost=cost;
 	}
 	
+@Column(name="peopleType")	
+	public PeopleType getPeople(){
+		return people;
+	}
+	
 	public void setPeople(PeopleType people){
 		this.people=people;
+	}
+@Id	
+@Column(name="hotelId")	
+	public int getHotelId(){
+		return hotelId;
 	}
 	
 	public void setHotelId(int hotelId){

@@ -8,14 +8,14 @@ public class StrategyVO {
 	private StrategyType strategyType; //策略类型
 	private String city;  //策略城市
 	private String area;  //策略商圈
-	private Date startTime;  //策略开始时间
-    private Date endTime;  //策略结束时间
+	private String startTime;  //策略开始时间
+    private String endTime;  //策略结束时间
     private double cost;  //策略折扣
     private PeopleType people;  //策略面向人群
     private int hotelId;  //酒店id
     
     public StrategyVO(String name,StrategyType strategyType,String city,String area
-    		,Date startTime,Date endTime,double cost,PeopleType people){
+    		,String startTime,String endTime,double cost,PeopleType people){
     	this.name=name;
     	this.strategyType=strategyType;
     	this.city=city;
@@ -27,7 +27,7 @@ public class StrategyVO {
     }
     
     public StrategyVO(String name,StrategyType staretgyType,String city,String area
-    		,Date startTime,Date endTime,double cost,CostType costType,PeopleType people,int hotelId){
+    		,String startTime,String endTime,double cost,PeopleType people,int hotelId){
     	this(name,staretgyType,city,area
     		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
@@ -78,19 +78,19 @@ public class StrategyVO {
     	this.area=area;
     }
     
-    public Date getStartTime(){
+    public String getStartTime(){
     	return startTime;
     }
     
-    public void setStartTime(Date startTime){
+    public void setStartTime(String startTime){
     	this.startTime=startTime;
     }
     
-    public Date getEndTime(){
+    public String getEndTime(){
     	return endTime;
     }
     
-    public void setEndTime(Date endTime){
+    public void setEndTime(String endTime){
     	this.endTime=endTime;
     }
     

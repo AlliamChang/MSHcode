@@ -8,14 +8,14 @@ public class StrategyPO {
 	private String name;
 	private String city;
 	private String area;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private double cost;
 	private PeopleType people;
 	private int hotelId;
 	
 	public StrategyPO(String name,StrategyType strategyType,String city,String area
-    		,Date startTime,Date endTime,double cost,PeopleType people){
+    		,String startTime,String endTime,double cost,PeopleType people){
 		this.name=name;
     	this.strategyType=strategyType;
     	this.city=city;
@@ -27,7 +27,7 @@ public class StrategyPO {
 	}
 	
 	public StrategyPO(String name,StrategyType staretgyType,String city,String area
-    		,Date startTime,Date endTime,double cost,PeopleType people,int hotelId){
+    		,String startTime,String endTime,double cost,PeopleType people,int hotelId){
     	this(name,staretgyType,city,area
     		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
@@ -41,11 +41,11 @@ public class StrategyPO {
 		return name;
 	}
 	
-	public Date getStartTime(){
+	public String getStartTime(){
 		return startTime;
 	}
 	
-	public Date getEndTime(){
+	public String getEndTime(){
 		return endTime;
 	}
 	
@@ -85,11 +85,11 @@ public class StrategyPO {
 		this.area=area;
 	}
 	
-	public void setStartTime(Date startTime){
+	public void setStartTime(String startTime){
 		this.startTime=startTime;
 	}
 	
-	public void setEndTime(Date endTime){
+	public void setEndTime(String endTime){
 		this.endTime=endTime;
 	}
 	

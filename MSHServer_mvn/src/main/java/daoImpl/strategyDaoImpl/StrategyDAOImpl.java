@@ -16,8 +16,14 @@ public class StrategyDAOImpl implements StrategyDao{
 	
 	public StrategyPO findStrategy(String name) throws RemoteException{
 		Session session=HibernateUtil.getSession();
-		Transaction transaction=session.beginTransaction();
-		return null;
+		session.beginTransaction();
+		Query query=session.createQuery("from StrategyPO where name= '"+name+"'");
+		session.close();
+		List<StrategyPO> list=query.list();
+		if(list.size()==0)
+			return null;
+		else
+			return list.get(0);
 	}
 	
 	public ResultMessage addStrategy(StrategyPO strategy) throws RemoteException{
@@ -25,6 +31,7 @@ public class StrategyDAOImpl implements StrategyDao{
 		Transaction transaction=session.beginTransaction();
 		session.save(strategy);
 		transaction.commit();
+		System.out.println("addSucceed");
 		session.close();
 		return ResultMessage.SUCCESS;
 	}
