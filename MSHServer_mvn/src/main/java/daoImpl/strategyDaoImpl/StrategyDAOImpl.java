@@ -12,7 +12,7 @@ import daoImpl.HibernateUtil;
 import po.strategyPO.*;
 import tools.*;
 
-public class StrategyDAOImpl implements StrategyDao{
+public class StrategyDAOImpl implements StrategyDAO{
 	
 	public StrategyPO findStrategy(String name) throws RemoteException{
 		Session session=HibernateUtil.getSession();

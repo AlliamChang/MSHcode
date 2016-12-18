@@ -21,7 +21,7 @@ import po.strategyPO.StrategyPO;
 import tools.OrderState;
 import tools.ResultMessage;
 
-public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO, CreditRecordsDAO, StrategyDao {
+public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO, CreditRecordsDAO, StrategyDAO {
 	
 	/**
 	 * 
@@ -31,7 +31,7 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	private HotelDAO hotelDAO;
 	private OrderDAO orderDAO;
 	private CreditRecordsDAO creditRecordsDAO;
-	private StrategyDao strategyDAO;
+	private StrategyDAO strategyDAO;
 	
 	public RemoteImpl() throws RemoteException{
 		userDAO = new UserDAOImpl();

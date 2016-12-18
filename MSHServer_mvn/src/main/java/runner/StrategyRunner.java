@@ -11,7 +11,7 @@ import tools.*;
 
 public class StrategyRunner {
 	public static void main(String[] args){
-		StrategyDao daoTest = new StrategyDAOImpl();
+		StrategyDAO daoTest = new StrategyDAOImpl();
 		try{
 			StrategyPO po = new StrategyPO("double13",StrategyType.BIRTHDAY,"南京市","栖霞区",
 					"2016/11/11","2016/11/12","99.00",PeopleType.VIP);
