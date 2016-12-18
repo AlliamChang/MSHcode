@@ -158,4 +158,41 @@ public class HotelDAOImpl implements HotelDAO{
 		return list;
 
 }
+
+	@Override
+	public List<HotelPO> getHotel(String province, String city, String area,
+			String name, String enter_time, String out_time, String price,
+			String score,int star) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		session.beginTransaction();
+		StringBuilder find = new StringBuilder();
+		find.append("from HotelPO where province = '" + province + "'");
+		find.append(" and city = '" + city + "'");
+		find.append(" and trade_area = '" + area + "'");
+		if(name != null)
+			find.append(" and name like '%" + name + "%'");
+		if(enter_time != null)
+			find.append("");
+		if(out_time != null)
+			find.append("");
+		if(price != null){
+			price = price.trim();
+			String[] temp = price.split("-");
+			find.append(" and lowest_price >= '" + Integer.valueOf(temp[0]) + "' and lowest_price <= '" + Integer.valueOf(temp[1]) + "'");
+		}
+		if(score != null){
+			score = score.trim();
+			String[] temp = score.split("-");
+			find.append(" and score >= '" + Integer.valueOf(temp[0]) + "' and score <= '" + Integer.valueOf(temp[1]) + "'");
+			
+		}
+		if(star != -1){
+			find.append(" and star_level = '" + star + "'");
+		}
+		
+		Query query = session.createQuery(find.toString());
+		List<HotelPO> list = query.list();
+		session.close();
+		return list;
+	}
 }

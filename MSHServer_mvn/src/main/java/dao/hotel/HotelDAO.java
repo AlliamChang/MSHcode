@@ -22,6 +22,8 @@ public interface HotelDAO extends Remote {
 	public List<HotelPO> get(String province, String city, String tradeArea,
 			String name) throws RemoteException;
 	
+	public List<HotelPO> getHotel(String province,String city,String area,String name,String enter_time,String out_time,String price,String score,int star)throws RemoteException;
+	
 	public List<String> getProvinces()throws RemoteException;
 	
 	public List<String> getCities(String province)throws RemoteException;

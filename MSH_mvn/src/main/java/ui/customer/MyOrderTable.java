@@ -26,6 +26,7 @@ import javafx.util.Callback;
 public class MyOrderTable extends TableView{
 	private final ObservableList<OrderVO> data;
 	private static List<String> order_info;
+	private boolean isCanceled=false;
 	private  List<OrderVO> list;
 	private int width=80;
 	
@@ -93,7 +94,7 @@ public class MyOrderTable extends TableView{
 								int row=this.getTableRow().getIndex();
 								OrderVO this_row=MyOrderTable.this.list.get(row);
 								list.add(this_row.getPreCheckin().getDate());
-								list.add(this_row.getCheckout().getDate());
+								list.add(this_row.getLatestCheckin()+"");
 								list.add(this_row.getRoomStyle());
 								list.add(this_row.getRoomNum()+"");
 								list.add(this_row.getPrice()+"");
@@ -104,6 +105,13 @@ public class MyOrderTable extends TableView{
 						}
 						else if(item.equals("撤销")){
 							Button bn=new Button("撤销");
+							bn.setOnMouseClicked((MouseEvent me)->{
+								int row=this.getTableRow().getIndex();
+								MyOrderTable.this.list.get(row).setState(OrderState.CANCELED);
+								MyOrderTable.this.isCanceled=true;
+							});
+							if(isCanceled)
+								bn=null;
 							setGraphic(bn);
 						}
 						else 

@@ -22,13 +22,13 @@ public class CustomerPaneController {
 	private String user_name;
 	private String type="普通会员";
 	private boolean isRegistered=true;
-	private boolean isLog=true;
+	private boolean isLog=false;
 	private HotelBLService HotelBL;
 	private UserBLService_Stub UserBL;
 	private Order_Stub OrderBL;
 	private final List<String> naviInfo = Arrays.asList("搜索","个人信息","我的订单");
 	private CustomerPaneController(){
-		HotelBL=new HotelBLService_Stub();
+		HotelBL=new bl.hotel_bl.HotelBL();
 	}
 	
 	public static CustomerPaneController getInstance(){
@@ -102,8 +102,19 @@ public class CustomerPaneController {
 	}
 	//得到酒店房间信息
 	public List<RoomVO> getRoom(int id){
-		HotelBL=new HotelBLService_Stub();
 		List<RoomVO> room_list=HotelBL.getRoom(id);
 		return room_list;
+	}
+	
+	public List<String> getProvince(){
+		return HotelBL.getProvinces();
+	}
+	
+	public List<String> getCity(String pro){
+		return HotelBL.getCities(pro);
+	}
+	
+	public List<String> getareas(String pro,String city){
+		return HotelBL.getAreas(pro, city);
 	}
 }
