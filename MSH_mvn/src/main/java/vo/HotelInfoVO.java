@@ -1,11 +1,15 @@
 package vo;
 
+import java.io.File;
+
 import po.hotelPO.HotelPO;
+import tools.ImageConverter;
 import javafx.scene.image.Image;
 
 public class HotelInfoVO {
 	private int hotel_id;
 	private int stuff_id;
+	private String imagePath;
 	private String adress;
 	private String hotel;
 	private String phone;
@@ -15,13 +19,13 @@ public class HotelInfoVO {
 	private String tradingArea;
 	private String city;
 	private int year;
-	private Image scul;
+	private byte[] scul;
 	private int star;
 	private double score;
 	private int lowest_price;
 	
 	public HotelInfoVO(String hotel, String adress,String phone, String[] facility, String introduction, String province,
-			String tradingArea,int year,Image scul,int star,double score,int hotel_id,int stuff_id,String city) {
+			String tradingArea,int year,String imagePath,int star,double score,int hotel_id,int stuff_id,String city) {
 		this.hotel = hotel;
 		this.adress = adress;
 		this.phone = phone;
@@ -30,7 +34,7 @@ public class HotelInfoVO {
 		this.province = province;
 		this.tradingArea = tradingArea;
 		this.year = year;
-		this.scul = scul;
+		this.imagePath=imagePath;
 		this.star=star;
 		this.score=score;
 		this.hotel_id=hotel_id;
@@ -38,20 +42,49 @@ public class HotelInfoVO {
 		this.city=city;
 	}
 	public HotelInfoVO(HotelPO po){
-		this.hotel=po.getname();
-		this.adress=po.getaddress();
+		this.hotel=po.getName();
+		this.adress=po.getAddress();
 		this.phone=po.getPhone();
-		this.facility=po.getfaci();
-		this.introduction=po.getIntro();
+		this.facility=po.getFacility();
+		this.introduction=po.getIntroduction();
 		this.province=po.getProvince();
-		this.tradingArea=po.gettrade_area();
+		this.tradingArea=po.getTrade_area();
 		this.year=po.getYear();
-		this.scul=po.getScul();
-		this.star=po.getstar_level();
-		this.score=po.getscore();
-		this.hotel_id=po.getid();
+		if (po.getScul() != null) {
+			File path = new File("image/hotel");
+			if (!path.exists())
+				path.mkdirs();
+			this.imagePath = "image/hotel/" + po.getId() + "." + po.getImageExtension();
+			ImageConverter.byteToFile(po.getScul(), imagePath);
+		}
+		this.star=po.getStar_level();
+		this.score=po.getScore();
+		this.hotel_id=po.getId();
 		this.stuff_id=po.getStuff_id();
-		this.city=po.getcity();
+		this.city=po.getCity();
+	}
+	
+	public HotelPO toPO(){
+		HotelPO po=new HotelPO();
+		po.setProvince(province);
+		po.setCity(city);
+		po.setTrade_area( tradingArea);
+		po.setAddress(adress);
+		po.setFacility(facility);
+		po.setId(hotel_id);
+		po.setIntroduction(introduction);
+		po.setLowest_price(lowest_price);
+		po.setName(hotel);
+		po.setPhone(phone);
+		po.setScore(score);
+		po.setStar_level(star);
+		po.setStuff_id(stuff_id);
+		po.setYear(year);
+		if (imagePath != null) {
+			po.setScul(ImageConverter.fileToByte(imagePath));
+			po.setImageExtension(new File(imagePath).getName().split("\\.")[1]);
+		}
+		return po;
 	}
 	public int getLowest_price() {
 		return lowest_price;
@@ -80,11 +113,17 @@ public class HotelInfoVO {
 		this.stuff_id=id;
 	}
 	public Image getScul() {
-		return scul;
+		if (imagePath == null || !new File(imagePath).exists())
+			return new Image("/image/default.png");
+		return new Image("file:" + imagePath);
 	}
-
-	public void setScul(Image scul) {
-		this.scul = scul;
+	
+	/**
+	 * 
+	 * @param imagePath 图片路径
+	 */
+	public void setScul(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	public String getAdress() {

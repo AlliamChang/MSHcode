@@ -155,11 +155,20 @@ public class HotelBL implements HotelBLService{
 			return ResultMessage.FAIL;
 		}
 	}
-
 	@Override
-	public List<Integer> search(String province, String city, String tradeArea) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<HotelInfoVO> search(String province,String city,String area,String name,String enter_time,String out_time,String price,String score,int star) {
+		List<HotelInfoVO>ret=new ArrayList<HotelInfoVO>();
+		try{
+			System.out.print(1);
+			List<HotelPO>po=this.hotel.getHotel(province, city, area, name, enter_time, out_time, price, score, star);
+			for(HotelPO item:po){
+				ret.add(new HotelInfoVO(item));
+			}
+			return ret;
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 //由高到低
 	@Override

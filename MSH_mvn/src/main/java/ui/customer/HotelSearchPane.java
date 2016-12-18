@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import bl.hotel_bl.HotelBL;
 import bl_stub.HotelBLService_Stub;
+import blservice.hotel_blservice.HotelBLService;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -31,10 +33,17 @@ import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
 import ui.webAdmin.WebAdminController;
+import vo.HotelInfoVO;
 import vo.RoomVO;
 
 public class HotelSearchPane extends Pane{
 	private static final String user_name="angel"; 
+	private ChoiceBox<String> P;
+	private ChoiceBox<String> city;
+	private ChoiceBox<String> TradeArea;
+	private TextField keyword;
+	private  DatePicker enter;
+	private MyDatePicker out;
 	private GridPane pane;
 	private int row=10;
 	private int column=2;
@@ -71,7 +80,7 @@ public class HotelSearchPane extends Pane{
 	        pane.add(province, column-2, row);
 	        pane.setHalignment(province, HPos.LEFT);
 	        
-	        ChoiceBox<String> P=new ChoiceBox<String>();
+	         P=new ChoiceBox<String>();
 	        P.getItems().addAll(CustomerPaneController.getInstance().getProvince());
 			P.getSelectionModel().selectFirst();
 			pane.add(P,column-1,row);
@@ -81,7 +90,7 @@ public class HotelSearchPane extends Pane{
 			pane.add(City,column,row);
 			pane.setHalignment(City, HPos.LEFT);
 			
-			ChoiceBox<String> city=new ChoiceBox<String>();
+			 city=new ChoiceBox<String>();
 			//city.getItems().addAll(c)
 			pane.add(city,column+1,row);
 			
@@ -90,7 +99,7 @@ public class HotelSearchPane extends Pane{
 			pane.add(trade_area,column+2,row);
 			pane.setHalignment(trade_area, HPos.LEFT);
 			
-			ChoiceBox<String> TradeArea=new ChoiceBox<String>();
+			 TradeArea=new ChoiceBox<String>();
 			pane.add(TradeArea,column+3,row);
 	        
 			P.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
@@ -123,7 +132,7 @@ public class HotelSearchPane extends Pane{
 		pane.add(key,column-2,row+1);
 		pane.setHalignment(key, HPos.LEFT);
 		
-		TextField keyword=new TextField();
+		 keyword=new TextField();
 		keyword.setFont(f);
 		keyword.setMinWidth(200);
 		pane.add(keyword, column-1, row+1,5,1);
@@ -141,7 +150,7 @@ public class HotelSearchPane extends Pane{
 		pane.add(enter_time, column-2, row+2);
 		pane.setHalignment(enter_time, HPos.LEFT);
 		
-		DatePicker enter=new MyDatePicker();
+		 enter=new MyDatePicker();
 		enter.setMaxWidth(140);
 		pane.add(enter, column-1, row+2);
 		
@@ -150,7 +159,7 @@ public class HotelSearchPane extends Pane{
 		pane.add(out_time,column,row+2);
 		pane.setHalignment(out_time, HPos.LEFT);
 		
-		MyDatePicker out=new MyDatePicker();
+		 out=new MyDatePicker();
 		out.setMaxWidth(140);
 		out.setBeforeDisable(enter);
 		pane.add(out,column+1,row+2);
@@ -171,9 +180,21 @@ public class HotelSearchPane extends Pane{
 		vb.setMinWidth(510);
 		vb.setPadding(new Insets(10, 10, 10, 10));
 		vb.setSpacing(10);
-		HotelBLService_Stub stub=new HotelBLService_Stub();
+		HotelBLService hotel=new HotelBL();
 		vb.getChildren().add(hb);
-		vb.getChildren().addAll(content.makeList(stub.search("南京市", "鼓楼区")));
+		/*System.out.println(HotelSearchPane.this.P.getValue());
+		System.out.println(HotelSearchPane.this.city.getValue());
+		System.out.println(HotelSearchPane.this.TradeArea.getValue());
+		System.out.println(HotelSearchPane.this.keyword.getText());
+		System.out.println(HotelSearchPane.this.enter.getValue());
+		System.out.println(HotelSearchPane.this.out.getValue());
+		System.out.println(hotel.search(HotelSearchPane.this.P.getValue(), HotelSearchPane.this.city.getValue(), 
+				HotelSearchPane.this.TradeArea.getValue(), HotelSearchPane.this.keyword.getText(),
+				null, null, null, null, -1));*/
+		vb.getChildren().addAll(content.makeList(
+				hotel.search(HotelSearchPane.this.P.getValue(), HotelSearchPane.this.city.getValue(), 
+						HotelSearchPane.this.TradeArea.getValue(), HotelSearchPane.this.keyword.getText(),
+						null, null, null, null, -1)));
 		sp.setMinWidth(648);
 		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		return sp;
@@ -187,21 +208,23 @@ public class HotelSearchPane extends Pane{
 		Image image; 
 		Button bn=new Button("查看");
 		HotelRoomTable table;
-		content(String hotel_name){
+		content(HotelInfoVO vo){
 			super();
 			 ColumnConstraints colInfo = new ColumnConstraints();
 		        colInfo.setPercentWidth(20);
 		        for(int i=0;i<5;i++){
 		        	this.getColumnConstraints().add(colInfo);
 		        }
-			name=new Label(hotel_name);
-			HotelBLService_Stub stub=new HotelBLService_Stub();
-			score=new Label(stub.getHotel(hotel_name).getScore()+"");
-			lowest_price=new Label("¥"+"500"+"起");
-			this.image=stub.getHotel(hotel_name).getScul();
+		        HotelBLService stub=new HotelBLService_Stub();
+			name=new Label(vo.getHotel());
+			score=new Label(vo.getScore()+"");
+			lowest_price=new Label("¥"+vo.getLowest_price()+"起");
+			this.image=vo.getScul();
 			this.list=stub.getRoom(1);
 			 table=new HotelRoomTable(list);
 			 ImageView im=new ImageView(image);
+			 im.setFitHeight(50);
+			 im.setFitWidth(50);
 			 bn.setOnMouseClicked((MouseEvent me)->{
 				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane());
 			 });
@@ -213,9 +236,9 @@ public class HotelSearchPane extends Pane{
 			this.add(table,0,1,5,1);
 			
 		}
-		static List<content> makeList(List<String> hotel_name){
+		static List<content> makeList(List<HotelInfoVO> list2){
 			ArrayList<content> ret = new ArrayList<content>();
-			for(String item:hotel_name)
+			for(HotelInfoVO item:list2)
 				ret.add(new content(item));
 			return ret;
 		}
