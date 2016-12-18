@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 public class HotelPO implements Serializable{
 	
 		private static final long serialVersionUID = 8961415443390938361L;
-		private String address,trade_area,city,name,phone,introduction,province;
+		private String address,trade_area,city,name,phone,introduction,province,imageExtension;
 		private int id,lowest_price,star_level,stuff_id,year;
 		private double score;
 		private String[]facility;
@@ -22,6 +22,7 @@ public class HotelPO implements Serializable{
 		public HotelPO(){
 			
 		}
+		
 @Column(name="address")
 		public String getAddress() {
 			return address;
@@ -142,6 +143,14 @@ public class HotelPO implements Serializable{
 
 		public void setScul(byte[] scul) {
 			this.scul = scul;
+		}
+		@Column(name="image_extension")
+		public String getImageExtension() {
+			return imageExtension;
+		}
+
+		public void setImageExtension(String imageExtension) {
+			this.imageExtension = imageExtension;
 		}
 		
 		

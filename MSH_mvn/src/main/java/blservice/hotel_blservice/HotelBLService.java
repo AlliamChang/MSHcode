@@ -18,7 +18,7 @@ public interface HotelBLService {
 	//修改酒店信息
 	public ResultMessage modify(HotelInfoVO hotelinfo);
 	//搜索
-	public List<Integer> search(String province,String city,String tradeArea );
+	public List<HotelInfoVO> search(String province,String city,String area,String name,String enter_time,String out_time,String price,String score,int star );
 	//
 	public List<HotelInfoVO> search(String province, String city,String tradeArea,String name);
 	//录入客房
