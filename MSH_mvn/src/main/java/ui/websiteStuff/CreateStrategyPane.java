@@ -171,16 +171,26 @@ public class CreateStrategyPane extends GridPane{
 		
 		createButton.setOnAction(e ->{
 			//创建策略事件
-			Alert alert=new Alert(AlertType.CONFIRMATION);
-			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.getDialogPane().setHeaderText(null);
-			alert.getDialogPane().setContentText("确认要新增吗?");
-			alert.showAndWait().ifPresent(response ->{
-				if(response==ButtonType.OK){
-					System.out.println("create");
-					//fwq新建
-				}
-			});
+			if(nameText.getText()==null||costText.getText()==null||cityBox.getItems()==null||areaBox.getItems()==null
+					||peopleBox.getItems()==null){
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.getDialogPane().setHeaderText(null);
+				alert.getDialogPane().setContentText("请填写完整的策略信息！");
+				alert.showAndWait();
+			}
+			else{
+			    Alert alert=new Alert(AlertType.CONFIRMATION);
+			    alert.initModality(Modality.APPLICATION_MODAL);
+			    alert.getDialogPane().setHeaderText(null);
+			    alert.getDialogPane().setContentText("确认要新增吗?");
+			    alert.showAndWait().ifPresent(response ->{
+				    if(response==ButtonType.OK){
+					    System.out.println("create");
+					    //fwq新建
+				    }
+			    });
+			}
 		});
 	}
 

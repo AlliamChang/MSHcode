@@ -104,6 +104,19 @@ public class CancelSurePane extends GridPane{
 				}
 			});
 		});
+		
+		backButton.setOnAction(e ->{
+			Alert alert=new Alert(AlertType.CONFIRMATION);
+			alert.initModality(Modality.APPLICATION_MODAL);
+			alert.getDialogPane().setHeaderText(null);
+			alert.getDialogPane().setContentText("确定要取消，返回上一个界面吗？");
+			alert.showAndWait().ifPresent(response ->{
+				if(response==ButtonType.OK){
+					System.out.println("取消并返回");
+					WebsitePaneController.getInstance().createDealPane();
+				}
+			});
+		});
 	}
 
 }

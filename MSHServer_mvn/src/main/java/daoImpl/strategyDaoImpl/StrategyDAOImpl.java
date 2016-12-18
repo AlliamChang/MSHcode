@@ -53,7 +53,8 @@ public class StrategyDAOImpl implements StrategyDao{
 	
 	public List<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException{
 		Session session=HibernateUtil.getSession();
-		Transaction transaction=session.beginTransaction();
+		//Transaction transaction=session.beginTransaction();
+		session.beginTransaction();
 		Query query=session.createQuery("from StrategyPO where hotelId = '"+hotelId+"'");
 		List<StrategyPO> list=query.list();
 		session.close();
@@ -62,8 +63,9 @@ public class StrategyDAOImpl implements StrategyDao{
 	
 	public List<StrategyPO> getStrategyInWeb() throws RemoteException{
 		Session session=HibernateUtil.getSession();
-		Transaction transaction=session.beginTransaction();
-		Query query=session.createQuery("from StrategyPO which belongs to Web");
+		//Transaction transaction=session.beginTransaction();
+		session.beginTransaction();
+		Query query=session.createQuery("from StrategyPO where hotelId = '"+0+"'");
 		List<StrategyPO> list=query.list();
 		session.close();
 		return list;

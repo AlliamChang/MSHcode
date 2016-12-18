@@ -180,16 +180,7 @@ public class DealPane extends GridPane{
 							while(!button[i].isSelected()){
 								i++;
 							}
-							Alert alert=new Alert(AlertType.CONFIRMATION);
-							alert.initModality(Modality.APPLICATION_MODAL);
-							alert.getDialogPane().setHeaderText(null);
-							alert.getDialogPane().setContentText("确认要撤销吗？");
-							alert.showAndWait().ifPresent(response ->{
-								if(response==ButtonType.OK){
-									System.out.println("cancelOrder");
-									//fwq撤销异常订单
-								}
-							});
+							WebsitePaneController.getInstance().createCancelSurePane();
 						});
 					}
 				});
