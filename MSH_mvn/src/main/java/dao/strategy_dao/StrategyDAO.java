@@ -14,32 +14,13 @@ public interface StrategyDAO {
     public ResultMessage addStrategy(StrategyPO po) throws RemoteException;
     
     public ResultMessage deleteStrategy(String name) throws RemoteException;
-
-	public void updateStrategy(StrategyPO po) throws RemoteException;
 	
 	public ResultMessage modifyStrategy(StrategyPO po) throws RemoteException;
 	
-	public void initStrategy() throws RemoteException;
+	public List<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException;
 	
-	public ArrayList<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException;
-	
-	public ArrayList<StrategyPO> getStrategyInWeb() throws RemoteException;
-	
-	public double getFinalPriceInHotel(UserPO user,OrderPO order,int hotelId) throws RemoteException;
-	
-	public double getFinalPriceInWeb(UserPO user) throws RemoteException;
-	
-	public double getLowestPrice(UserPO user,int hotelId) throws RemoteException;
-	
-	public double getBirthPrice(UserPO user,int hotelId);
-	
-	public double getTimePrice(int hotelId);
-	
-	public double getRoomPrice(OrderPO order,int hotelId);
-	
-	public double getVipPrice(UserPO user);
-	
-	public double getCooperationPrice(UserPO user,int hotelId);
+	public List<StrategyPO> getStrategyInWeb() throws RemoteException;
+
 	
 //<<<<<<< HEAD
 	

@@ -6,7 +6,6 @@ import java.util.*;
 
 import po.strategyPO.*;
 import tools.ResultMessage;
-import po.UserPO;
 
 public interface StrategyDao extends Remote{
     public StrategyPO findStrategy(String name) throws RemoteException;
@@ -29,7 +28,6 @@ public interface StrategyDao extends Remote{
 	
 	public List<StrategyPO> getStrategyInWeb() throws RemoteException;
 	/*获得网站策略列表*/
-	
 	
 	
 	/*public double getFinalPriceInHotel(UserPO user,RoomPO room,OrderPO order,int hotelId) throws RemoteException;
