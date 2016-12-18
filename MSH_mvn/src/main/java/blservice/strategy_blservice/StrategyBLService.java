@@ -12,11 +12,11 @@ public interface StrategyBLService {
 	
 	public ResultMessage modifyStrategy(StrategyVO vo);
 	
-	public double getFinalPriceInHotel(UserVO user,OrderVO order,RoomVO room,int hotelId);
+	public double getFinalPriceInHotel(UserVO user,OrderVO order,int hotelId);
 	
 	public double getFinalPriceInWeb(UserVO user);
 	
-	public double getLowestPrice(UserVO user,RoomVO room,int hotelId);
+	public double getLowestPrice(UserVO user,int hotelId);
 	
 	public List<StrategyVO> getStrategyInHotel(int hotelId);
 	

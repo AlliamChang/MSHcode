@@ -89,9 +89,9 @@ public class StrategyDAOStub implements StrategyDAO{
 		return ret;
 	}
 	
-	public double getFinalPriceInHotel(UserPO user,RoomPO room,OrderPO order,int hotelId) throws RemoteException{
+	public double getFinalPriceInHotel(UserPO user,OrderPO order,int hotelId) throws RemoteException{
 		double finalPrice=0.00;
-		finalPrice+=getLowestPrice(user,room,hotelId)+getRoomPrice(order,hotelId);
+		finalPrice+=getLowestPrice(user,hotelId)+getRoomPrice(order,hotelId);
 		return finalPrice;
 	}//下完单后酒店中显示的最低价
 	
@@ -100,7 +100,7 @@ public class StrategyDAOStub implements StrategyDAO{
 		return finalPrice;
 	}
 	
-	public double getLowestPrice(UserPO user,RoomPO room,int hotelId) throws RemoteException{
+	public double getLowestPrice(UserPO user,int hotelId) throws RemoteException{
 		double lowestPrice=0.00;
 		lowestPrice+=getBirthPrice(user,hotelId)+getTimePrice(hotelId)+getVipPrice(user)+getCooperationPrice(user,hotelId);
 		return lowestPrice;

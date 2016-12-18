@@ -79,10 +79,10 @@ public class StrategyBL implements StrategyBLService{
 		return ret;
 	}//获取网站策略列表
 	
-	public double getFinalPriceInHotel(UserVO user,OrderVO order,RoomVO room,int hotelId){
+	public double getFinalPriceInHotel(UserVO user,OrderVO order,int hotelId){
 		double finalPrice=0.00;
 		try{
-			finalPrice=strategy.getFinalPriceInHotel(user.toPO(), room.toPO(), order.toPO(), hotelId);
+			finalPrice=strategy.getFinalPriceInHotel(user.toPO(), order.toPO(), hotelId);
 		} catch (RemoteException e){
 			e.printStackTrace();
 		}
@@ -99,10 +99,10 @@ public class StrategyBL implements StrategyBLService{
 		return finalPrice;
 	}
 	
-	public double getLowestPrice(UserVO user,RoomVO room,int hotelId){
+	public double getLowestPrice(UserVO user,int hotelId){
 		double lowestPrice=0.00;
 		try{
-			lowestPrice=strategy.getLowestPrice(user.toPO(), room.toPO(), hotelId);
+			lowestPrice=strategy.getLowestPrice(user.toPO(), hotelId);
 		} catch (RemoteException e){
 			e.printStackTrace();
 		}

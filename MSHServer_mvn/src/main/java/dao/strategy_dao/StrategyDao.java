@@ -30,6 +30,8 @@ public interface StrategyDao extends Remote{
 	public List<StrategyPO> getStrategyInWeb() throws RemoteException;
 	/*获得网站策略列表*/
 	
+	
+	
 	/*public double getFinalPriceInHotel(UserPO user,RoomPO room,OrderPO order,int hotelId) throws RemoteException;
 	
 	public double getFinalPriceInWeb(UserPO user) throws RemoteException;

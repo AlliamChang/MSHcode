@@ -12,7 +12,6 @@ public class Strategy_Stub implements StrategyBLService {
 	private Date startTime;
 	private Date endTime;
 	private String cost;
-	private CostType costType;
 	private PeopleType people;
 	
 	public String getName(){
@@ -71,13 +70,6 @@ public class Strategy_Stub implements StrategyBLService {
 		this.cost=cost;
 	}
 	
-	public CostType getCostType(){
-		return CostType.RMB;
-	}
-	
-	public void setCostType(CostType ct){
-		this.costType=ct;
-	}
 	
 	public PeopleType getPeople(){
 		return PeopleType.VIP;

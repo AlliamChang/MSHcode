@@ -25,11 +25,11 @@ public interface StrategyDAO {
 	
 	public ArrayList<StrategyPO> getStrategyInWeb() throws RemoteException;
 	
-	public double getFinalPriceInHotel(UserPO user,RoomPO room,OrderPO order,int hotelId) throws RemoteException;
+	public double getFinalPriceInHotel(UserPO user,OrderPO order,int hotelId) throws RemoteException;
 	
 	public double getFinalPriceInWeb(UserPO user) throws RemoteException;
 	
-	public double getLowestPrice(UserPO user,RoomPO room,int hotelId) throws RemoteException;
+	public double getLowestPrice(UserPO user,int hotelId) throws RemoteException;
 	
 	public double getBirthPrice(UserPO user,int hotelId);
 	
