@@ -1,6 +1,7 @@
 package ui.websiteStuff;
 
 import ui.utility.*;
+import blservice.user_blservice.*;
 import blservice.strategy_blservice.*;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Toggle;
@@ -19,6 +20,7 @@ import vo.*;
 public class WebsitePaneController {
 	private static WebsitePaneController controller;
 	private StrategyBLService strategyBL;
+	private UserBLService userBL;
 	private OrderBLService orderBL;
 	private List<OrderVO> orderVO;
 	private List<StrategyVO> strategyVO;
@@ -42,6 +44,7 @@ public class WebsitePaneController {
 	private WebsitePaneController(){
 		strategyBL=new Strategy_Stub();
 		orderBL=new Order_Stub();
+		userBL=new UserBLService_Stub();
 	}
 	
 	public static WebsitePaneController getInstance(){
@@ -94,11 +97,11 @@ public class WebsitePaneController {
 	}
 	
 	public void createDealPane(){
-		MainPane.getInstance().setRightPane(new DealPane(order));
+		MainPane.getInstance().setRightPane(new DealPane(this.getAbnormityOrder()));
 	}
 	
-	public void createCancelSurePane(){
-		MainPane.getInstance().setRightPane(new CancelSurePane(o1,u1));
+	public void createCancelSurePane(OrderVO order,int userId){
+		MainPane.getInstance().setRightPane(new CancelSurePane(order));
 	}
 	
 	public void createCreditPane(){
@@ -107,6 +110,14 @@ public class WebsitePaneController {
 	
 	public ResultMessage addStrategy(StrategyVO strategy){
 		return this.strategyBL.addStrategy(strategy);
+	}
+	
+	public ResultMessage deteleStrategy(String name){
+		return this.strategyBL.deleteStrategy(name);
+	}
+	
+	public ResultMessage modifyStrategy(StrategyVO vo){
+		return this.strategyBL.modifyStrategy(vo);
 	}
 	
 	public List<StrategyVO> getStrategyInWeb(){
@@ -119,6 +130,14 @@ public class WebsitePaneController {
 	
 	public List<OrderVO> getTodayUnexecutedOrder(){
 		return this.orderBL.getTodayUnexecutedOrder();
+	}
+	
+	public ResultMessage cancelAbnormity(long orderID,boolean isReturnAll){
+		return this.orderBL.cancelAbnormity(orderID, isReturnAll);
+	}
+	
+	public ResultMessage addCreditRecord(CreditVO credit){
+		return this.userBL.addCreditRecord(credit);
 	}
 
 }

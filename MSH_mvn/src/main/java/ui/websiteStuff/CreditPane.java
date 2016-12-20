@@ -1,11 +1,16 @@
 package ui.websiteStuff;
 
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
+
+import java.time.LocalDate;
 import java.util.*;
 import vo.*;
 import tools.*;
+import tools.Date;
 import ui.utility.*;
 import javafx.scene.image.*;
 import javafx.geometry.*;
@@ -83,7 +88,28 @@ public class CreditPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		
 		chargeButton.setOnAction(e ->{
-			//充值事件
+			if(nameField.getText()==""||creditField.getText()==""){
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.setHeaderText(null);
+				alert.setContentText("用户ID和信用值不能为空！");
+				alert.showAndWait();
+			}
+			else{
+				Alert alert=new Alert(AlertType.CONFIRMATION);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.setHeaderText(null);
+				alert.setContentText("确认要进行充值吗？");
+				alert.showAndWait().ifPresent(response ->{
+					if(response==ButtonType.OK){
+						LocalDate now=LocalDate.now();
+						String dateS=now.toString().replaceAll("-", "/");
+						Date date=new Date(dateS,false);
+						CreditVO credit=new CreditVO(date,ChangeReason.WITHDRAW_CREDIT,Integer.parseInt(creditField.getText()),user.getID());
+						WebsitePaneController.getInstance().addCreditRecord(credit);
+					}
+				});
+			}
 		});
 	}
 

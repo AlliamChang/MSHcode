@@ -10,6 +10,7 @@ import vo.*;
 import tools.*;
 import ui.utility.*;
 import javafx.scene.image.*;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.*;
 import javafx.scene.text.*;
 
@@ -18,7 +19,7 @@ public class CancelSurePane extends GridPane{
 	private static final Font normalFont=new Font("方正幼圆",20);
 	
 	private OrderVO order;
-	private UserVO user;
+	private int userId;
 	
 	private Label startLabel;
 	private Label sureLabel;
@@ -29,10 +30,11 @@ public class CancelSurePane extends GridPane{
 	private Button cancelButton;
 	private Button backButton;
 	private ToggleGroup group;
+	private boolean isReturnAll;
 	
-	public CancelSurePane(OrderVO order,UserVO user){
+	public CancelSurePane(OrderVO order){
         this.order=order;
-        this.user=user;
+        this.userId=userId;
 		this.start();
 	}
 	
@@ -91,18 +93,28 @@ public class CancelSurePane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(100));
 		
+		group.selectedToggleProperty().addListener(
+				(ObservableValue<? extends Toggle> observable,Toggle oldValue,Toggle newValue)->{
+					if(group.getSelectedToggle()!=null){
+						cancelButton.setOnAction(e ->{
+							if(allButton.isSelected()){
+								isReturnAll=true;
+							}
+							else{
+								isReturnAll=false;
+							}
+							WebsitePaneController.getInstance().cancelAbnormity(order.getId(), isReturnAll);	
+						});
+					}
+				});
 		cancelButton.setOnAction(e ->{
-			//撤销后事件
-			Alert alert=new Alert(AlertType.CONFIRMATION);
-			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.getDialogPane().setHeaderText(null);
-			alert.getDialogPane().setContentText("确定要撤销吗?");
-			alert.showAndWait().ifPresent(response ->{
-				if(response==ButtonType.OK){
-					//fwq撤销
-					System.out.println("撤销");
-				}
-			});
+			if(group.getSelectedToggle()==null){
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.setHeaderText(null);
+				alert.setContentText("请选择恢复的信用值数量！");
+				alert.showAndWait();
+			}
 		});
 		
 		backButton.setOnAction(e ->{

@@ -20,6 +20,9 @@ public class CreateStrategyPane extends GridPane{
 	private static final Font normalFont=new Font("方正幼圆",20);
 	private static final String normalPeople="普通及会员";
 	private static final String vipPeople="仅限会员";
+	private static final String holiday="特定期间活动策略";
+	private static final String vip="VIP会员专属策略";
+	private static final String FONT_STYLE="-fx-font-size:20";
 	
 	private String name;
 	private String city;
@@ -38,6 +41,7 @@ public class CreateStrategyPane extends GridPane{
 	private Label toLabel;
 	private Label costLabel;
 	private Label peopleLabel;
+	private Label strategyTypeLabel;
 	private TextField nameText;
 	private TextField costText;
 	private ChoiceBox cityBox;
@@ -47,6 +51,7 @@ public class CreateStrategyPane extends GridPane{
 	private Label costTypeLabel;
 	private ChoiceBox peopleBox;
 	private Button createButton;
+	private ChoiceBox strategyTypeBox;
 	
 	public CreateStrategyPane(){
 	    super();
@@ -116,7 +121,8 @@ public class CreateStrategyPane extends GridPane{
 		this.setValignment(areaBox, VPos.CENTER);
 	    
 	    this.startDate=new MyDatePicker();
-	    
+	    startDate.setStyle(FONT_STYLE);
+	    endDate.setStyle(FONT_STYLE);
 	    this.endDate=new MyDatePicker();
 	    
 	    this.costTypeLabel=new Label("元");
@@ -131,6 +137,17 @@ public class CreateStrategyPane extends GridPane{
 	    peopleBox.setItems(peopleList);
 	    this.setHalignment(peopleBox, HPos.RIGHT);
 		this.setValignment(peopleBox, VPos.CENTER);
+		
+		this.strategyTypeLabel=new Label("设置策略类型");
+		strategyTypeLabel.setFont(normalFont);
+		this.setHalignment(strategyTypeLabel, HPos.LEFT);
+		this.setValignment(strategyTypeLabel, VPos.CENTER);
+		
+		this.strategyTypeBox=new ChoiceBox();
+		ObservableList strategyTypeList=FXCollections.observableArrayList(holiday,vip);
+		strategyTypeBox.setItems(strategyTypeList);
+	    this.setHalignment(strategyTypeBox, HPos.RIGHT);
+		this.setValignment(strategyTypeBox, VPos.CENTER);
 	    
 	    this.createButton=new Button("新增");
 	    createButton.setFont(normalFont);
@@ -144,6 +161,7 @@ public class CreateStrategyPane extends GridPane{
 	    this.add(toLabel, 4, 4);
 	    this.add(costLabel, 2, 5,2,1);
 	    this.add(peopleLabel,2,6,2,1);
+	    this.add(strategyTypeLabel,2,7,2,1);
 	    this.add(nameText,3,2,4,1);
 	    this.add(cityBox, 3, 3,2,1);
 	    this.add(areaBox, 5, 3,2,1);
@@ -152,15 +170,17 @@ public class CreateStrategyPane extends GridPane{
 	    this.add(costText, 3, 5);
 	    this.add(costTypeLabel, 5, 5);
 	    this.add(peopleBox, 5, 6,3,1);
-	    this.add(createButton, 3, 7);
+	    this.add(strategyTypeBox,5,7,2,1);
+	    this.add(createButton, 3, 8);
 	    
 	    this.getRowConstraints().add(new RowConstraints(20));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
 		this.getColumnConstraints().add(new ColumnConstraints(20));
 		this.getColumnConstraints().add(new ColumnConstraints(50));
 		this.getColumnConstraints().add(new ColumnConstraints(150));
@@ -170,8 +190,8 @@ public class CreateStrategyPane extends GridPane{
 		
 		createButton.setOnAction(e ->{
 			//创建策略事件
-			if(nameText.getText()==null||costText.getText()==null||cityBox.getItems()==null||areaBox.getItems()==null
-					||peopleBox.getItems()==null){
+			if(nameText.getText().equals("")||costText.getText().equals("")||cityBox.getSelectionModel()==null||areaBox.getSelectionModel()==null
+					||peopleBox.getSelectionModel()==null){
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.getDialogPane().setHeaderText(null);
@@ -186,7 +206,25 @@ public class CreateStrategyPane extends GridPane{
 			    alert.showAndWait().ifPresent(response ->{
 				    if(response==ButtonType.OK){
 					    System.out.println("create");
-					    //fwq新建
+					    String name=nameText.getText();
+					    double cost=Double.parseDouble(costText.getText());
+					    String city=cityBox.getSelectionModel().getSelectedItem().toString();
+					    String area=areaBox.getSelectionModel().getSelectedItem().toString();
+					    String startTime=startDate.getEditor().getText();
+					    String endTime=endDate.getEditor().getText();
+					    PeopleType pt;
+					    StrategyType st;
+					    if(peopleBox.getSelectionModel().getSelectedItem().toString().equals(normalPeople))
+					    	pt=PeopleType.NORMAL;
+					    else
+					    	pt=PeopleType.VIP;
+					    if(strategyTypeBox.getSelectionModel().getSelectedItem().toString().equals(holiday))
+					    	st=StrategyType.HOLIDAY;
+					    else
+					    	st=StrategyType.VIP;
+					    StrategyVO strategy=new StrategyVO(name,st,city,area,startTime,endTime,cost,pt);
+					    WebsitePaneController.getInstance().addStrategy(strategy);
+					    System.out.println(city);
 				    }
 			    });
 			}

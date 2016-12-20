@@ -23,15 +23,15 @@ import javafx.beans.value.*;
 public class StrategyListPane extends GridPane{
 	private static final Font startFont=new Font("方正幼圆",30);
 	private static final Font normalFont=new Font("方正幼圆",15);
-	private static final String normalPeople="普通及会员";
-	private static final String vipPeople="仅限会员";
+	private static final String holiday="特定期间活动策略";
+	private static final String vip="VIP会员专属策略";
 	
 	private Button modifyButton;
 	private Button createButton;
 	private Button cancelButton;
 	private Label startLabel;
 	private Label strategyNameLabel;
-	private Label peopleLabel;
+	private Label strategyTypeLabel;
 	private Label costLabel;
 	private Label startTimeLabel;
 	private Label endTimeLabel;
@@ -74,10 +74,10 @@ public class StrategyListPane extends GridPane{
 		this.setHalignment(strategyNameLabel, HPos.CENTER);
 		this.setValignment(strategyNameLabel, VPos.CENTER);
 		
-		this.peopleLabel=new Label("面向人群");
-		peopleLabel.setFont(normalFont);
-		this.setHalignment(peopleLabel, HPos.CENTER);
-		this.setValignment(peopleLabel, VPos.CENTER);
+		this.strategyTypeLabel=new Label("策略类型");
+		strategyTypeLabel.setFont(normalFont);
+		this.setHalignment(strategyTypeLabel, HPos.CENTER);
+		this.setValignment(strategyTypeLabel, VPos.CENTER);
 		
 		this.costLabel=new Label("折扣");
 		costLabel.setFont(normalFont);
@@ -116,7 +116,7 @@ public class StrategyListPane extends GridPane{
 		
 		this.add(startLabel,1,1,5,1);
 		this.add(strategyNameLabel, 2, 2);
-		this.add(peopleLabel, 3, 2);
+		this.add(strategyTypeLabel, 3, 2);
 		this.add(costLabel, 4, 2);
 		this.add(startTimeLabel, 5, 2);
 		this.add(endTimeLabel, 6, 2);
@@ -151,14 +151,14 @@ public class StrategyListPane extends GridPane{
 			this.setHalignment(nameText,HPos.CENTER);
 			this.setValignment(nameText, VPos.CENTER);
 			this.add(nameText, 2, i+3);
-			Text peopleText=new Text();
-			if(strategy.get(i).getPeople().equals(PeopleType.NORMAL))
-				peopleText.setText(normalPeople);
+			Text strategyTypeText=new Text();
+			if(strategy.get(i).getStrategyType()==StrategyType.HOLIDAY)
+				strategyTypeText.setText(holiday);
 			else
-				peopleText.setText(vipPeople);
-			this.setHalignment(peopleText,HPos.CENTER);
-			this.setValignment(peopleText, VPos.CENTER);
-			this.add(peopleText, 3, i+3);
+				strategyTypeText.setText(vip);
+			this.setHalignment(strategyTypeText,HPos.CENTER);
+			this.setValignment(strategyTypeText, VPos.CENTER);
+			this.add(strategyTypeText, 3, i+3);
 			Text costText=new Text();
 			costText.setText("￥"+strategy.get(i).getCost());
 			this.setHalignment(costText,HPos.CENTER);
@@ -199,7 +199,11 @@ public class StrategyListPane extends GridPane{
 							alert.setContentText("确定要撤销选中的营销策略吗");
 							alert.showAndWait().ifPresent(response ->{
 								if(response==ButtonType.OK){
-									//数据库中撤销策略
+									int i=0;
+									while(!button[i].isSelected()){
+										i++;
+									}
+									WebsitePaneController.getInstance().deteleStrategy(strategy.get(i).getName());
 								}
 							});
 						});

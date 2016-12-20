@@ -22,6 +22,8 @@ public class ModifyStrategyPane extends GridPane{
 	private static final Font normalFont=new Font("方正幼圆",20);
 	private static final String normalPeople="普通及会员";
 	private static final String vipPeople="仅限会员";
+	private static final String holiday="特定期间活动策略";
+	private static final String vip="VIP会员专属策略";
 	private static final String FONT_STYLE="-fx-font-size:20";
 	
 	private Label startLabel;
@@ -31,6 +33,7 @@ public class ModifyStrategyPane extends GridPane{
 	private Label toLabel;
 	private Label costLabel;
 	private Label peopleLabel;
+	private Label strategyTypeLabel;
 	private Button modifyButton;
     private MyNavigationBar navi;
     private MyDatePicker startDate;
@@ -41,6 +44,7 @@ public class ModifyStrategyPane extends GridPane{
     private ChoiceBox<String> areaBox;
     private Label costTypeLabel;
     private ChoiceBox<String> peopleBox;
+    private ChoiceBox strategyTypeBox;
 	
     private StrategyVO strategy;
 	private List<String> stuffName;
@@ -101,6 +105,11 @@ public class ModifyStrategyPane extends GridPane{
 		this.setHalignment(peopleLabel, HPos.LEFT);
 		this.setValignment(peopleLabel, VPos.CENTER);
 		
+		this.strategyTypeLabel=new Label("策略类型");
+		strategyTypeLabel.setFont(normalFont);
+		this.setHalignment(strategyTypeLabel, HPos.LEFT);
+		this.setValignment(strategyTypeLabel, VPos.CENTER);
+		
 		this.nameText=new TextField();
 		nameText.setFont(normalFont);
 		this.setHalignment(nameText, HPos.RIGHT);
@@ -114,6 +123,7 @@ public class ModifyStrategyPane extends GridPane{
 		ObservableList areaList=FXCollections.observableArrayList("栖霞区");
 		//ObservableList costList=FXCollections.observableArrayList("元","%");
 		ObservableList peopleList=FXCollections.observableArrayList(normalPeople,vipPeople);
+		ObservableList strategyTypeList=FXCollections.observableArrayList(holiday,vip);
 		
 		cityBox=new ChoiceBox();
 		cityBox.setStyle(FONT_STYLE);
@@ -123,10 +133,13 @@ public class ModifyStrategyPane extends GridPane{
 		costTypeLabel.setStyle(FONT_STYLE);
 		peopleBox=new ChoiceBox();
 		peopleBox.setStyle(FONT_STYLE);
+		strategyTypeBox=new ChoiceBox();
+		strategyTypeBox.setStyle(FONT_STYLE);
 		cityBox.setItems(cityList);
 		areaBox.setItems(areaList);
 		//costBox.setItems(costList);
 		peopleBox.setItems(peopleList);
+		strategyTypeBox.setItems(strategyTypeList);
 		modifyButton=new Button("修改");
 		modifyButton.setFont(normalFont);
 		this.setHalignment(cityBox, HPos.RIGHT);
@@ -152,6 +165,7 @@ public class ModifyStrategyPane extends GridPane{
 	    this.add(toLabel, 4, 4);
 	    this.add(costLabel, 2, 5,2,1);
 	    this.add(peopleLabel,2,6,2,1);
+	    this.add(strategyTypeLabel,2,7,2,1);
 	    this.add(nameText,3,2,4,1);
 	    this.add(cityBox, 3, 3,2,1);
 	    this.add(areaBox, 5, 3,2,1);
@@ -160,15 +174,16 @@ public class ModifyStrategyPane extends GridPane{
 	    this.add(costText, 3, 5);
 	    this.add(costTypeLabel, 5, 5);
 	    this.add(peopleBox, 5, 6,3,1);
-	    this.add(modifyButton, 3, 7);
+	    this.add(strategyTypeBox, 5, 7,3,1);
+	    this.add(modifyButton, 3, 8);
 		
 	    this.getRowConstraints().add(new RowConstraints(20));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
-	    this.getRowConstraints().add(new RowConstraints(80));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
+	    this.getRowConstraints().add(new RowConstraints(70));
 		this.getColumnConstraints().add(new ColumnConstraints(20));
 		this.getColumnConstraints().add(new ColumnConstraints(50));
 		this.getColumnConstraints().add(new ColumnConstraints(150));
@@ -197,16 +212,44 @@ public class ModifyStrategyPane extends GridPane{
 		
 		modifyButton.setOnAction(e ->{
 			//修改策略信息
-			Alert alert=new Alert(AlertType.CONFIRMATION);
-			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.getDialogPane().setHeaderText(null);
-			alert.getDialogPane().setContentText("确定要修改吗？");
-			alert.showAndWait().ifPresent(response ->{
-				if(response==ButtonType.OK){
-					System.out.println("modify");
+			if(nameText.getText().equals("")||costText.getText().equals("")||cityBox.getSelectionModel()==null||areaBox.getSelectionModel()==null
+					||peopleBox.getSelectionModel()==null){
+				Alert alert=new Alert(AlertType.ERROR);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.getDialogPane().setHeaderText(null);
+				alert.getDialogPane().setContentText("请填写完整的策略信息！");
+				alert.showAndWait();
+			}
+			else{
+			    Alert alert=new Alert(AlertType.CONFIRMATION);
+			    alert.initModality(Modality.APPLICATION_MODAL);
+			    alert.getDialogPane().setHeaderText(null);
+			    alert.getDialogPane().setContentText("确定要修改吗？");
+			    alert.showAndWait().ifPresent(response ->{
+				    if(response==ButtonType.OK){
+					    System.out.println("modify");
+					    String name=nameText.getText();
+					    double cost=Double.parseDouble(costText.getText());
+					    String city=cityBox.getSelectionModel().getSelectedItem().toString();
+					    String area=areaBox.getSelectionModel().getSelectedItem().toString();
+					    String startTime=startDate.getEditor().getText();
+					    String endTime=endDate.getEditor().getText();
+					    PeopleType pt;
+					    StrategyType st;
+					    if(peopleBox.getSelectionModel().getSelectedItem().toString().equals(normalPeople))
+					    	pt=PeopleType.NORMAL;
+					    else
+					    	pt=PeopleType.VIP;
+					    if(strategyTypeBox.getSelectionModel().getSelectedItem().toString().equals(holiday))
+					    	st=StrategyType.HOLIDAY;
+					    else
+					    	st=StrategyType.VIP;
+					    StrategyVO newStrategy=new StrategyVO(name,st,city,area,startTime,endTime,cost,pt);
+					    WebsitePaneController.getInstance().modifyStrategy(newStrategy);
 					//服务器修改策略
-				}
-			});
+				}	    
+			    });
+			}    
 		});
     }
     
