@@ -122,8 +122,8 @@ public class CreateStrategyPane extends GridPane{
 	    
 	    this.startDate=new MyDatePicker();
 	    startDate.setStyle(FONT_STYLE);
-	    endDate.setStyle(FONT_STYLE);
 	    this.endDate=new MyDatePicker();
+	    endDate.setStyle(FONT_STYLE);
 	    
 	    this.costTypeLabel=new Label("元");
 	    //ObservableList costList=FXCollections.observableArrayList("元","%");

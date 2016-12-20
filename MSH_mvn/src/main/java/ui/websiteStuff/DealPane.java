@@ -124,34 +124,37 @@ public class DealPane extends GridPane{
 		this.add(startTimeLabel, 4, 2);
 		this.add(endTimeLabel, 5, 2);
 		this.add(cancelButton, 3, 13);
-
-		for(int i=0;i<order.size();i++){
-			Text numberText=new Text();
-			numberText.setFont(normalFont);
-			this.setHalignment(numberText, HPos.CENTER);
-			this.setValignment(numberText, VPos.CENTER);
-			numberText.setText(String.valueOf(order.get(i).getId()));
-			this.add(numberText, 2, i+3);
-			Text nameText=new Text();
-			nameText.setFont(normalFont);
-			this.setHalignment(nameText, HPos.CENTER);
-			this.setValignment(nameText, VPos.CENTER);
-			nameText.setText("用户姓名");
-			this.add(nameText, 3, i+3);
-			Text startTimeText=new Text();
-			startTimeText.setFont(normalFont);
-			this.setHalignment(startTimeText, HPos.CENTER);
-			this.setValignment(startTimeText, VPos.CENTER);
-			startTimeText.setText(order.get(i).getPreCheckin().getDate());
-			this.add(startTimeText, 4, i+3);
-			Text endTimeText=new Text();
-			endTimeText.setFont(normalFont);
-			this.setHalignment(endTimeText, HPos.CENTER);
-			this.setValignment(endTimeText, VPos.CENTER);
-			endTimeText.setText(order.get(i).getCheckin().getDate());
-			this.add(endTimeText, 5, i+3);
-			button[i].setVisible(true);
+        
+		if(order.get(0)!=null){
+		    for(int i=0;i<order.size();i++){
+			    Text numberText=new Text();
+			    numberText.setFont(normalFont);
+			    this.setHalignment(numberText, HPos.CENTER);
+			    this.setValignment(numberText, VPos.CENTER);
+			    numberText.setText(String.valueOf(order.get(i).getId()));
+			    this.add(numberText, 2, i+3);
+			    Text nameText=new Text();
+			    nameText.setFont(normalFont);
+			    this.setHalignment(nameText, HPos.CENTER);
+			    this.setValignment(nameText, VPos.CENTER);
+			    nameText.setText("用户姓名");
+			    this.add(nameText, 3, i+3);
+			    Text startTimeText=new Text();
+			    startTimeText.setFont(normalFont);
+			    this.setHalignment(startTimeText, HPos.CENTER);
+			    this.setValignment(startTimeText, VPos.CENTER);
+			    startTimeText.setText(order.get(i).getPreCheckin().getDate());
+			    this.add(startTimeText, 4, i+3);
+			    Text endTimeText=new Text();
+			    endTimeText.setFont(normalFont);
+			    this.setHalignment(endTimeText, HPos.CENTER);
+			    this.setValignment(endTimeText, VPos.CENTER);
+			    endTimeText.setText(order.get(i).getCheckin().getDate());
+			    this.add(endTimeText, 5, i+3);
+			    button[i].setVisible(true);
+		    }
 		}
+		
 		this.getRowConstraints().add(new RowConstraints(40));
 		this.getRowConstraints().add(new RowConstraints(40));
 		this.getRowConstraints().add(new RowConstraints(40));

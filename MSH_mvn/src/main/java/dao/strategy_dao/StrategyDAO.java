@@ -3,11 +3,12 @@ package dao.strategy_dao;
 import po.strategyPO.*;
 import po.*;
 import po.hotelPO.RoomPO;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.*;
 import tools.*;
 
-public interface StrategyDAO {
+public interface StrategyDAO extends Remote{
 
     public StrategyPO findStrategy(String name) throws RemoteException;
     

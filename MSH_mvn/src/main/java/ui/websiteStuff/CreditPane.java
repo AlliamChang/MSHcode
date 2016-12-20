@@ -88,7 +88,7 @@ public class CreditPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		
 		chargeButton.setOnAction(e ->{
-			if(nameField.getText()==""||creditField.getText()==""){
+			if(nameField.getText().equals("")||creditField.getText().equals("")){
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.setHeaderText(null);

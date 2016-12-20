@@ -13,7 +13,10 @@ import tools.UserType;
 import tools.ResultMessage;
 import blservice.order_blservice.*;
 import bl_stub.*;
+import bl.order_bl.*;
+import bl.strategy_bl.*;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import vo.*;
 
@@ -42,7 +45,7 @@ public class WebsitePaneController {
 	private MyNavigationBar navi;
 	
 	private WebsitePaneController(){
-		strategyBL=new Strategy_Stub();
+		strategyBL=new StrategyBL();
 		orderBL=new Order_Stub();
 		userBL=new UserBLService_Stub();
 	}
@@ -97,7 +100,11 @@ public class WebsitePaneController {
 	}
 	
 	public void createDealPane(){
-		MainPane.getInstance().setRightPane(new DealPane(this.getAbnormityOrder()));
+		if(this.getAbnormityOrder()!=null){
+		    MainPane.getInstance().setRightPane(new DealPane(this.orderBL.getAbnormityOrder()));
+		}
+		else
+			MainPane.getInstance().setRightPane(new DealPane(order));
 	}
 	
 	public void createCancelSurePane(OrderVO order,int userId){
