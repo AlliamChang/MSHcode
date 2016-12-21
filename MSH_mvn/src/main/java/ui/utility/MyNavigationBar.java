@@ -91,7 +91,7 @@ public class MyNavigationBar extends VBox {
 							WebAdminController.getInstance().init();
 							break;
 						case MARKETER:
-							WebsitePaneController.getInstance().init();
+							WebsitePaneController.getInstance().init(vo.getID(), vo.getName());
 							break;
 						}
 					} else {

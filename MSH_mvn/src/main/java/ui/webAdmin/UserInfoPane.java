@@ -49,6 +49,9 @@ public class UserInfoPane extends AnchorPane{
 		typeFlow.getChildren().add(typeLabel);
 		if (user.getType() == UserType.COMPANY_CUSTOMER)
 			typeFlow.getChildren().add(new Text(" (" + user.getCompany() + ")"){{setStyle("-fx-fill: gray");}});
+		if (user.getType() == UserType.HOTEL_STAFF)
+			typeFlow.getChildren().add(new Text(
+					" (" + WebAdminController.getInstance().getHotelName(user.getHotelID()) + ")"){{setStyle("-fx-fill: gray");}});
 		detailBox = new VBox();
 		detailBox.setSpacing(20);
 		

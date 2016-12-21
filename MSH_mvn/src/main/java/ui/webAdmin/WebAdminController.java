@@ -34,7 +34,7 @@ public class WebAdminController {
 	
 	private WebAdminController(){
 		userBLService = new UserBLServiceImpl();
-		hotelBLService = new HotelBLService_Stub();
+		hotelBLService = new HotelBL();
 	}
 	
 	public void init(){
@@ -182,7 +182,10 @@ public class WebAdminController {
 
 	public List<HotelInfoVO> filterHotel(String province, String city, String area,
 			String name) {
-		return hotelBLService.search(province, city, area, name);
+		return hotelBLService.search(province, city, area, name, null, null, null, null, -1);
 	}
 	
+	public String getHotelName(int ID) {
+		return hotelBLService.getHotel(ID).getHotel();
+	}
 }
