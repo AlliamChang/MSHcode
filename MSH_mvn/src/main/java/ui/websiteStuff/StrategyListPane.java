@@ -203,7 +203,10 @@ public class StrategyListPane extends GridPane{
 									while(!button[i].isSelected()){
 										i++;
 									}
-									WebsitePaneController.getInstance().deteleStrategy(strategy.get(i).getName());
+									StrategyVO vo=strategy.get(i);
+									vo.setFuckId(strategy.get(i).getFuckId());
+									WebsitePaneController.getInstance().deteleStrategy(vo);
+									WebsitePaneController.getInstance().createStrategyListPane();
 								}
 							});
 						});

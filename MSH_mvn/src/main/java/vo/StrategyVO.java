@@ -13,6 +13,7 @@ public class StrategyVO {
     private double cost;  //策略折扣
     private PeopleType people;  //策略面向人群
     private int hotelId;  //酒店id
+    private int fuckId;
     
     public StrategyVO(String name,StrategyType strategyType,String city,String area
     		,String startTime,String endTime,double cost,PeopleType people){
@@ -33,6 +34,8 @@ public class StrategyVO {
     	this.hotelId=hotelId;
     }
     
+    
+    
     public StrategyVO(StrategyPO po){
     	this.strategyType=po.getStrategyType();
 		this.name=po.getName();
@@ -44,6 +47,7 @@ public class StrategyVO {
 		this.people=po.getPeople();
 		if(po.getHotelId()!=0)
 		    this.hotelId=po.getHotelId();
+		this.fuckId=po.getFuckId();
     }
     
     public String getName(){
@@ -123,5 +127,13 @@ public class StrategyVO {
     		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,people,hotelId);
     	else
     		return new StrategyPO(name,strategyType,city,area,startTime,endTime,cost,people);
+    }
+    
+    public int getFuckId(){
+    	return this.fuckId;
+    }
+    
+    public void setFuckId(int fuckId){
+    	this.fuckId=fuckId;
     }
 }

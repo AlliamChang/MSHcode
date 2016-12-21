@@ -237,8 +237,9 @@ public class CreateStrategyPane extends GridPane{
 					    	strategyType=StrategyType.VIP;
 					    StrategyVO strategy=new StrategyVO(name,strategyType,city,area,startTime,endTime,cost,people);
 					    WebsitePaneController.getInstance().addStrategy(strategy);
-					    System.out.println(city);
-					    System.out.println(name+"\n"+cost+"\n"+city+"\n"+area+"\n"+startTime+"\n"+endTime+"\n"+strategy.getArea());
+					    //System.out.println(city);
+					    //System.out.println(name+"\n"+cost+"\n"+city+"\n"+area+"\n"+startTime+"\n"+endTime+"\n"+strategy.getArea());
+					    WebsitePaneController.getInstance().createStrategyListPane();
 				    }
 			    });
 			}

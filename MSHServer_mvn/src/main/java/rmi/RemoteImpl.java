@@ -187,8 +187,8 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	}
 	
 	@Override
-	public ResultMessage deleteStrategy(String name) throws RemoteException{
-		return strategyDAO.deleteStrategy(name);
+	public ResultMessage deleteStrategy(StrategyPO po) throws RemoteException{
+		return strategyDAO.deleteStrategy(po);
 	}
 	
 	@Override

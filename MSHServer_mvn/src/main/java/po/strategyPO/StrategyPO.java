@@ -1,5 +1,7 @@
 package po.strategyPO;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,19 +11,24 @@ import tools.*;
 
 @Entity
 @Table(name = "strategy2")
-public class StrategyPO {
+public class StrategyPO implements Serializable{
 	private StrategyType strategyType;
 	private String name;//名称
 	private String city;//城市
 	private String area;//地区
 	private String startTime;//开始时间
 	private String endTime;//结束时间
-	private String cost;//折扣量
+	private double cost;//折扣量
 	private PeopleType people;//面向人群
 	private int hotelId;//酒店ID
+	private int fuckId;
+	
+	public StrategyPO(){
+		
+	}
 	
 	public StrategyPO(String name,StrategyType strategyType,String city,String area
-    		,String startTime,String endTime,String cost,PeopleType people){
+    		,String startTime,String endTime,double cost,PeopleType people){
 		this.name=name;
     	this.strategyType=strategyType;
     	this.city=city;
@@ -33,7 +40,7 @@ public class StrategyPO {
 	}
 	
 	public StrategyPO(String name,StrategyType staretgyType,String city,String area
-    		,String startTime,String endTime,String cost,PeopleType people,int hotelId){
+    		,String startTime,String endTime,double cost,PeopleType people,int hotelId){
     	this(name,staretgyType,city,area
     		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
@@ -47,6 +54,7 @@ public class StrategyPO {
     public void setStrategyType(StrategyType strategyType){
 	    this.strategyType=strategyType;
     }
+
 
 @Column(name="name")    
 	public String getName(){
@@ -94,11 +102,11 @@ public class StrategyPO {
 	}
 	
 @Column(name="cost")	
-	public String getCost(){
+	public double getCost(){
 		return cost;
 	}
 	
-	public void setCost(String cost){
+	public void setCost(double cost){
 		this.cost=cost;
 	}
 	
@@ -110,7 +118,7 @@ public class StrategyPO {
 	public void setPeople(PeopleType people){
 		this.people=people;
 	}
-@Id	
+
 @Column(name="hotelId")	
 	public int getHotelId(){
 		return hotelId;
@@ -118,6 +126,17 @@ public class StrategyPO {
 	
 	public void setHotelId(int hotelId){
 		this.hotelId=hotelId;
+	}
+	
+@Id
+@Column(name="fuckId")
+	
+	public int getFuckId(){
+		return fuckId;
+	}
+	
+	public void setFuckId(int fuckId){
+		this.fuckId=fuckId;
 	}
 	
 	/*public StrategyVO toVO(){

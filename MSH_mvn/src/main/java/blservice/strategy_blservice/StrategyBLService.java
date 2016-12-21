@@ -11,7 +11,7 @@ public interface StrategyBLService {
 	
 	public ResultMessage addStrategy(StrategyVO strategy);
 	
-	public ResultMessage deleteStrategy(String name);
+	public ResultMessage deleteStrategy(StrategyVO vo);
 	
 	public ResultMessage modifyStrategy(StrategyVO vo);
 	

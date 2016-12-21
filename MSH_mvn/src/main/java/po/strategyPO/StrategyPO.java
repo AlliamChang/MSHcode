@@ -1,9 +1,11 @@
 package po.strategyPO;
 
+import java.io.Serializable;
+
 import tools.*;
 import vo.StrategyVO;
 
-public class StrategyPO {
+public class StrategyPO implements Serializable{
 	private StrategyType strategyType;
 	private String name;
 	private String city;
@@ -13,6 +15,11 @@ public class StrategyPO {
 	private double cost;
 	private PeopleType people;
 	private int hotelId;
+	private int fuckId;
+	
+    public StrategyPO(){
+		
+	}
 	
 	public StrategyPO(String name,StrategyType strategyType,String city,String area
     		,String startTime,String endTime,double cost,PeopleType people){
@@ -103,6 +110,14 @@ public class StrategyPO {
 	
 	public void setHotelId(int hotelId){
 		this.hotelId=hotelId;
+	}
+	
+	public int getFuckId(){
+		return fuckId;
+	}
+	
+	public void setFuckId(int fuckId){
+		this.fuckId=fuckId;
 	}
 	
 	/*public StrategyVO toVO(){

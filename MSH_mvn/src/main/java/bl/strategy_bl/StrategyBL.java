@@ -30,16 +30,19 @@ public class StrategyBL implements StrategyBLService{
 	
 	public ResultMessage addStrategy(StrategyVO vo){
 		try{
+			System.out.println(vo.getName());
 			return strategy.addStrategy(vo.toPO());
 		} catch (RemoteException e){
 			e.printStackTrace();
+			return ResultMessage.FAIL;
 		}
-		return ResultMessage.FAIL;
 	}
 	
-	public ResultMessage deleteStrategy(String name){
+	public ResultMessage deleteStrategy(StrategyVO vo){
 		try{
-			return strategy.deleteStrategy(name);
+			StrategyPO po=vo.toPO();
+			po.setFuckId(vo.getFuckId());
+			return strategy.deleteStrategy(po);
 		} catch (RemoteException e){
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -48,7 +51,9 @@ public class StrategyBL implements StrategyBLService{
 	
 	public ResultMessage modifyStrategy(StrategyVO vo){
 		try{
-			return strategy.modifyStrategy(vo.toPO());
+			StrategyPO po=vo.toPO();
+			po.setFuckId(vo.getFuckId());
+			return strategy.modifyStrategy(po);
 		} catch (RemoteException e){
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -72,6 +77,7 @@ public class StrategyBL implements StrategyBLService{
 		List<StrategyVO> ret=new ArrayList<StrategyVO>();
 		try{
 			List<StrategyPO> list=strategy.getStrategyInWeb();
+			System.out.println(list.size());
 			for(int i=0;i<list.size();i++){
 				ret.add(new StrategyVO(list.get(i)));
 			}

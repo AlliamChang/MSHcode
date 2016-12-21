@@ -88,7 +88,7 @@ public class WebsitePaneController {
 	}
 	
 	public void createStrategyListPane(){
-		MainPane.getInstance().setRightPane(new StrategyListPane(strategy));
+		MainPane.getInstance().setRightPane(new StrategyListPane(this.getStrategyInWeb()));
 	}
 	
 	public void createCreateStrategyPane(){
@@ -119,8 +119,8 @@ public class WebsitePaneController {
 		return this.strategyBL.addStrategy(strategy);
 	}
 	
-	public ResultMessage deteleStrategy(String name){
-		return this.strategyBL.deleteStrategy(name);
+	public ResultMessage deteleStrategy(StrategyVO vo){
+		return this.strategyBL.deleteStrategy(vo);
 	}
 	
 	public ResultMessage modifyStrategy(StrategyVO vo){

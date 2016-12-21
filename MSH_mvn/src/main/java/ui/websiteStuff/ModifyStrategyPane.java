@@ -38,7 +38,7 @@ public class ModifyStrategyPane extends GridPane{
     private MyNavigationBar navi;
     private MyDatePicker startDate;
     private MyDatePicker endDate;
-    private TextField nameText;
+    private Text nameText;
     private TextField costText;
     private ChoiceBox<String> cityBox;
     private ChoiceBox<String> areaBox;
@@ -47,13 +47,12 @@ public class ModifyStrategyPane extends GridPane{
     private ChoiceBox strategyTypeBox;
 	
     private StrategyVO strategy;
-	private List<String> stuffName;
-	private List<String> stuffId;
+    private StrategyType strategyType;
 	private String name;
 	private String city;
 	private String area;
-	private Date startTime;
-    private Date endTime;
+	private String startTime;
+    private String endTime;
     private double cost;
     private PeopleType people;
 
@@ -110,7 +109,7 @@ public class ModifyStrategyPane extends GridPane{
 		this.setHalignment(strategyTypeLabel, HPos.LEFT);
 		this.setValignment(strategyTypeLabel, VPos.CENTER);
 		
-		this.nameText=new TextField();
+		this.nameText=new Text();
 		nameText.setFont(normalFont);
 		this.setHalignment(nameText, HPos.RIGHT);
 		this.setValignment(nameText, VPos.CENTER);
@@ -126,15 +125,15 @@ public class ModifyStrategyPane extends GridPane{
 		ObservableList strategyTypeList=FXCollections.observableArrayList(holiday,vip);
 		
 		cityBox=new ChoiceBox();
-		cityBox.setStyle(FONT_STYLE);
+		//cityBox.setStyle(FONT_STYLE);
 		areaBox=new ChoiceBox();
-		areaBox.setStyle(FONT_STYLE);
+		//areaBox.setStyle(FONT_STYLE);
 		costTypeLabel=new Label("元");
 		costTypeLabel.setStyle(FONT_STYLE);
 		peopleBox=new ChoiceBox();
-		peopleBox.setStyle(FONT_STYLE);
+		//peopleBox.setStyle(FONT_STYLE);
 		strategyTypeBox=new ChoiceBox();
-		strategyTypeBox.setStyle(FONT_STYLE);
+		//strategyTypeBox.setStyle(FONT_STYLE);
 		cityBox.setItems(cityList);
 		areaBox.setItems(areaList);
 		//costBox.setItems(costList);
@@ -154,9 +153,9 @@ public class ModifyStrategyPane extends GridPane{
 		this.setValignment(modifyButton, VPos.CENTER);
 		
 		startDate=new MyDatePicker();
-		startDate.setStyle(FONT_STYLE);
+		//startDate.setStyle(FONT_STYLE);
 		endDate=new MyDatePicker(); 
-		endDate.setStyle(FONT_STYLE);
+		//endDate.setStyle(FONT_STYLE);
 		
 		this.add(startLabel, 1, 1,5,1);
 	    this.add(nameLabel, 2, 2,2,1);
@@ -205,6 +204,11 @@ public class ModifyStrategyPane extends GridPane{
         }
         else
         	peopleBox.getSelectionModel().select(vipPeople);
+        if(strategy.getStrategyType().equals(StrategyType.HOLIDAY)){
+        	strategyTypeBox.getSelectionModel().select(holiday);
+        }
+        else
+        	strategyTypeBox.getSelectionModel().select(vip);
 		nameText.setText(strategy.getName());
 		costText.setText(String.valueOf(strategy.getCost()));
 		startDate.setValue(LocalDate.of(2016, 1, 1));//获得年月日，需要增加
@@ -228,24 +232,26 @@ public class ModifyStrategyPane extends GridPane{
 			    alert.showAndWait().ifPresent(response ->{
 				    if(response==ButtonType.OK){
 					    System.out.println("modify");
-					    String name=nameText.getText();
-					    double cost=Double.parseDouble(costText.getText());
-					    String city=cityBox.getSelectionModel().getSelectedItem().toString();
-					    String area=areaBox.getSelectionModel().getSelectedItem().toString();
-					    String startTime=startDate.getEditor().getText();
-					    String endTime=endDate.getEditor().getText();
-					    PeopleType pt;
-					    StrategyType st;
+					    //name=nameText.getText();
+					    cost=(Double.parseDouble(costText.getText()));
+					    city=(cityBox.getSelectionModel().getSelectedItem().toString());
+					    area=(areaBox.getSelectionModel().getSelectedItem().toString());
+					    startTime=(startDate.getEditor().getText());
+					    endTime=(endDate.getEditor().getText());
 					    if(peopleBox.getSelectionModel().getSelectedItem().toString().equals(normalPeople))
-					    	pt=PeopleType.NORMAL;
+					    	people=PeopleType.NORMAL;
 					    else
-					    	pt=PeopleType.VIP;
+					    	people=PeopleType.VIP;
+					    
 					    if(strategyTypeBox.getSelectionModel().getSelectedItem().toString().equals(holiday))
-					    	st=StrategyType.HOLIDAY;
+					    	strategyType=StrategyType.HOLIDAY;
 					    else
-					    	st=StrategyType.VIP;
-					    StrategyVO newStrategy=new StrategyVO(name,st,city,area,startTime,endTime,cost,pt);
+					    	strategyType=StrategyType.VIP;
+					    int fuckId=strategy.getFuckId();
+					    StrategyVO newStrategy=new StrategyVO(strategy.getName(),strategyType,city,area,startTime,endTime,cost,people);
+					    newStrategy.setFuckId(fuckId);
 					    WebsitePaneController.getInstance().modifyStrategy(newStrategy);
+					    WebsitePaneController.getInstance().createStrategyListPane();
 					//服务器修改策略
 				}	    
 			    });

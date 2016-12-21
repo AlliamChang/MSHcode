@@ -1,7 +1,6 @@
 package dao.strategy_dao;
 
 import java.rmi.*;
-import po.*;
 import java.util.*;
 
 import po.strategyPO.*;
@@ -14,7 +13,7 @@ public interface StrategyDAO extends Remote{
     public ResultMessage addStrategy(StrategyPO po) throws RemoteException;
     /*添加一个策略*/
     
-    public ResultMessage deleteStrategy(String name) throws RemoteException;
+    public ResultMessage deleteStrategy(StrategyPO po) throws RemoteException;
     /*删除一个策略*/
 
 	//public void updateStrategy(StrategyPO po) throws RemoteException;

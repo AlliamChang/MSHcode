@@ -36,15 +36,19 @@ public class StrategyDAOImpl implements StrategyDAO{
 		return ResultMessage.SUCCESS;
 	}
 	
-	public ResultMessage deleteStrategy(String name) throws RemoteException{
+	public ResultMessage deleteStrategy(StrategyPO po) throws RemoteException{
 		try{
 			Session session=HibernateUtil.getSession();
 			Transaction transaction=session.beginTransaction();
-			session.delete(session.load(StrategyPO.class, name));
+			//StrategyPO po=this.findStrategy(name);
+			int fuckId=po.getFuckId();
+			System.out.println(fuckId);
+			session.delete(session.load(StrategyPO.class, fuckId));
 			transaction.commit();
 			session.close();
 			return ResultMessage.SUCCESS;
 		} catch(ObjectNotFoundException e){
+			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
 	}
@@ -72,8 +76,11 @@ public class StrategyDAOImpl implements StrategyDAO{
 		Session session=HibernateUtil.getSession();
 		//Transaction transaction=session.beginTransaction();
 		session.beginTransaction();
-		Query query=session.createQuery("from StrategyPO where hotelId = '"+0+"'");
+		int hotelId=0;
+		System.out.println(1);
+		Query query=session.createQuery("from StrategyPO where hotelId = '"+hotelId+"'");
 		List<StrategyPO> list=query.list();
+		System.out.println(list.size());
 		session.close();
 		return list;
 	}
