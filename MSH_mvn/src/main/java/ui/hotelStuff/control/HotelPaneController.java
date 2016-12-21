@@ -24,13 +24,16 @@ import vo.OrderVO;
 import vo.RoomVO;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.*;
+import blservice.strategy_blservice.StrategyBLService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 import bl.hotel_bl.HotelBL;
 import bl.order_bl.OrderBL;
+import bl.strategy_bl.StrategyBL;
 import bl_stub.Order_Stub;
 
 public class HotelPaneController {
@@ -38,8 +41,10 @@ public class HotelPaneController {
 	private static HotelPaneController controller;
 	private HotelBLService hotelBL;
 	private OrderBLService orderBL;
+	
 	private List<OrderVO> orderList;
 	private List<String> roomStyle;
+	
 	private int id;
 	private String hotel;
 	
@@ -48,7 +53,7 @@ public class HotelPaneController {
 	
 	private HotelPaneController(){
 		orderBL = new OrderBL();
-//		hotelBL = new HotelBL();
+		hotelBL = new HotelBL();
 	}
 	
 	public static HotelPaneController getInstance(){
@@ -105,8 +110,10 @@ public class HotelPaneController {
 	public HotelStrategyPane createHotelStrategyPane(){
 		return new HotelStrategyPane(Arrays.asList(
 				new HotelStrategyVO("双十一促销", HotelStrategyType.FESTIVAL, 10, new Date("2016/11/10",false), new Date("2016/11/12",false)),
-				new HotelStrategyVO("腾讯公司合作优惠", HotelStrategyType.BUSINESS, CostType.RMB,50, new Date("2016/11/10",false), new Date("2016/12/12",false))
+				new HotelStrategyVO("腾讯公司合作优惠", HotelStrategyType.BUSINESS, 50, new Date("2016/11/10",false), new Date("2016/12/12",false))
 				));
+//		StrategyBLService strategy = new StrategyBL();
+//		return new HotelStrategyPane(strategy.getStrategyInHotel(id));
 	}
 	
 	/**
@@ -124,6 +131,7 @@ public class HotelPaneController {
 						new Date("2016/12/06",false)
 						,1000000001,true,new String[]{"503"},1));
 		return new CheckInListPane(roomStyle,stub.iterator());
+//		return new CheckInListPane(this.getRoomStyle(),this.hotelBL.);
 	}
 	
 	public Iterator<RoomVO> getRoomList(){
@@ -131,6 +139,7 @@ public class HotelPaneController {
 				new RoomVO("温暖大床房", BedStyle.KING_SIZE_BED, 320.00, 2, 2,id),
 				new RoomVO("经济标准间",BedStyle.DOUBLE_BEDS,349.00,50,2,id),
 				new RoomVO("难民六人间", BedStyle.BUNK_BED, 99.00, 90, 6,id)).iterator();
+//		return this.hotelBL.getRoom(id).iterator();
 	}
 	
 	public HotelInfoVO getHotelInfo(){
@@ -164,6 +173,12 @@ public class HotelPaneController {
 	}
 	
 	public List<String> getRoomStyle(){
+		if(this.roomStyle == null){
+			roomStyle = new ArrayList<String>();
+			for(RoomVO vo:this.hotelBL.getRoom(id)){
+				roomStyle.add(vo.getRoomStyle());
+			}
+		}
 		return this.roomStyle;
 	}
 	

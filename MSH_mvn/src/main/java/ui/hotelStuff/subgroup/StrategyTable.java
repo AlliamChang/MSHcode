@@ -16,19 +16,17 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.util.Callback;
 import tools.Date;
-import vo.CheckInVO;
 import vo.HotelStrategyVO;
-import vo.OrderVO;
+import vo.StrategyVO;
 
 public class StrategyTable extends TableView{
 
-	private final ObservableList<HotelStrategyVO> data;
+	private final ObservableList<StrategyVO> data;
 	
-	public StrategyTable(Iterator<HotelStrategyVO> list){
+	public StrategyTable(Iterator<StrategyVO> list){
 		data = FXCollections.observableArrayList();
 		
 		while(list.hasNext()){
@@ -52,20 +50,19 @@ public class StrategyTable extends TableView{
 		discont.setStyle("-fx-alignment:center");
 		discont.setMinWidth(80);
 		
-		TableColumn<HotelStrategyVO,String> begin = new TableColumn<>("开始时间");
-		begin.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<HotelStrategyVO, String>, ObservableValue<String>>() {
+		TableColumn<StrategyVO,String> begin = new TableColumn<>("开始时间");
+		begin.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StrategyVO, String>, ObservableValue<String>>() {
 
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<HotelStrategyVO, String> param) {
+			public ObservableValue<String> call(CellDataFeatures<StrategyVO, String> param) {
 				// TODO Auto-generated method stub
-				String temp = param.getValue().getBegin().getDate();
-				return new SimpleStringProperty(temp);
+				return new SimpleStringProperty(param.getValue().getStartTime());
 			}
 	    });
-		begin.setCellFactory(new Callback<TableColumn<HotelStrategyVO, String>, TableCell<HotelStrategyVO, String>>() {
+		begin.setCellFactory(new Callback<TableColumn<StrategyVO, String>, TableCell<StrategyVO, String>>() {
 		      @Override 
-		      public TableCell<HotelStrategyVO, String> call(TableColumn<HotelStrategyVO, String> param) {
-		        return new TableCell<HotelStrategyVO,String>(){
+		      public TableCell<StrategyVO, String> call(TableColumn<StrategyVO, String> param) {
+		        return new TableCell<StrategyVO,String>(){
 		        	
 		        	protected void updateItem(String item,boolean empty){
 		        		if(!empty){
@@ -81,22 +78,21 @@ public class StrategyTable extends TableView{
 		begin.setStyle("-fx-alignment:center");
 		begin.setMinWidth(115);
 		
-		TableColumn<HotelStrategyVO,String> end = new TableColumn<>("结束时间");
-		end.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<HotelStrategyVO, String>, ObservableValue<String>>() {
+		TableColumn<StrategyVO,String> end = new TableColumn<>("结束时间");
+		end.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StrategyVO, String>, ObservableValue<String>>() {
 
 			@Override
-			public ObservableValue<String> call(CellDataFeatures<HotelStrategyVO, String> param) {
+			public ObservableValue<String> call(CellDataFeatures<StrategyVO, String> param) {
 				// TODO Auto-generated method stub
 
-				Date temp = param.getValue().getEnd();
-				return new SimpleStringProperty(temp.getDate());
+				return new SimpleStringProperty(param.getValue().getEndTime());
 //				return new SimpleStringProperty(param.getValue().getEnd().getDate());
 			}
 	    });
-		end.setCellFactory(new Callback<TableColumn<HotelStrategyVO, String>, TableCell<HotelStrategyVO, String>>() {
+		end.setCellFactory(new Callback<TableColumn<StrategyVO, String>, TableCell<StrategyVO, String>>() {
 		      @Override 
-		      public TableCell<HotelStrategyVO, String> call(TableColumn<HotelStrategyVO, String> param) {
-		        return new TableCell<HotelStrategyVO,String>(){
+		      public TableCell<StrategyVO, String> call(TableColumn<StrategyVO, String> param) {
+		        return new TableCell<StrategyVO,String>(){
 		        	
 		        	protected void updateItem(String item,boolean empty){
 		        		if(!empty){

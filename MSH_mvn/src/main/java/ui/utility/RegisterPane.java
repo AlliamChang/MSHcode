@@ -23,7 +23,7 @@ public class RegisterPane extends GridPane{
 		
 		Label sex = new Label("性别：");
 		
-		
+		Label name = new Label("名字：");
 		
 		TextField accountInput = new TextField();
 		accountInput.setPromptText("<-6~18位由字母和数字组成的账号名->");

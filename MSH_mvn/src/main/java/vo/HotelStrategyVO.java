@@ -2,7 +2,6 @@ package vo;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import tools.CostType;
 import tools.Date;
 import tools.HotelStrategyType;
 
@@ -10,16 +9,14 @@ public class HotelStrategyVO {
 
 	private String name;
 	private HotelStrategyType type;
-	private CostType discountType;
 	private double discount;
 	private Date begin;
 	private Date end;
 	
-	public HotelStrategyVO(String name, HotelStrategyType type,CostType discontType, double discont, Date begin, Date end) {
+	public HotelStrategyVO(String name, HotelStrategyType type, double discont, Date begin, Date end) {
 		super();
 		this.name = name;
 		this.type = type;
-		this.discountType = discontType;
 		this.discount = discont;
 		this.begin = begin;
 		this.end = end;
@@ -64,13 +61,7 @@ public class HotelStrategyVO {
 		this.type = type;
 	}
 
-	public CostType getDiscontType() {
-		return discountType;
-	}
-
-	public void setDiscontType(CostType discontType) {
-		this.discountType = discontType;
-	}
+	
 
 	public double getDiscont() {
 		return discount;

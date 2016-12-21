@@ -36,7 +36,7 @@ public class MainPane extends StackPane{
         AnchorPane.setLeftAnchor(p1, 375.0);
         AnchorPane.setTopAnchor(p1, 275.0);
         frontPane.getChildren().add(p1);
-//        frontPane.setVisible(false);
+        frontPane.setVisible(false);
         this.getChildren().add(frontPane);
 	}
 	
@@ -69,9 +69,7 @@ public class MainPane extends StackPane{
 	
 	public void setRightPane(Parent rightPane){
 
-		Task<Boolean> task = new WaitingTask();
-		mainPane.frontPane.visibleProperty().bind(task.runningProperty());
-		new Thread(task).start();
+		
 		
 		if(mainPane.bottomPane.getChildren().size() >= 2){
 			mainPane.bottomPane.getChildren().remove(1);
