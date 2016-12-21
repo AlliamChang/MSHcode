@@ -86,7 +86,7 @@ public class CustomerPaneController {
 	}
 	//搜索界面
 	public void createHotelSearchPane(){
-		MainPane.getInstance().setRightPane(new HotelSearchPane());
+		MainPane.getInstance().setRightPane(HotelSearchPane.getInstance());
 	}
 	//得到信用记录
 	public List<CreditVO> getcredit(){

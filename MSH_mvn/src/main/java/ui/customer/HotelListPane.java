@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -32,10 +33,12 @@ import javafx.scene.text.FontWeight;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
+import ui.utility.MyRetreatButton;
 import vo.HotelInfoVO;
 import vo.RoomVO;
 
 public class HotelListPane extends Pane{
+	private static HotelListPane instance;
 	private GridPane pane;
 	private Button search;
 	private ChoiceBox<String> P;
@@ -47,6 +50,7 @@ public class HotelListPane extends Pane{
 	private MyDatePicker enter;
 	private MyDatePicker out;
 	private TextField key;
+	private MyRetreatButton ret=new MyRetreatButton(HotelSearchPane.getInstance());
 	private Label province=new Label("省份");
 	private Label City=new Label("城市");
 	private Label trade_area=new Label("商圈");
@@ -57,15 +61,21 @@ public class HotelListPane extends Pane{
 	private Label star=new Label("星级");
 	//private Label HotelName=new Label("酒店名称");
 	private int column=0;
-	private int row=0;
+	private int row=1;
 	private static final String user_name="angel"; 
-	private ScrollPane sp;
+	private static ScrollPane sp;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
 	private HotelBLService hotel=new HotelBL();
-	public HotelListPane(ScrollPane s){
+	public HotelListPane(){
 		super();
-		this.setList(s);
-		initPane();
+	}
+	
+	public static HotelListPane getInstance(){
+		if(instance==null){
+			instance=new HotelListPane();
+			instance.initPane();
+		}
+		return instance;
 	}
 	
 	private void initPane(){
@@ -83,6 +93,7 @@ public class HotelListPane extends Pane{
 		 ColumnConstraints col4 = new ColumnConstraints(100);
 		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
 		
+		 pane.add(ret, 0, 0);
 		 province.setFont(f);
 		 pane.add(province, column, row);
 		 
@@ -178,8 +189,9 @@ public class HotelListPane extends Pane{
 		
 		search.setOnMouseClicked((MouseEvent e)->{
 			List<HotelInfoVO> ret=hotel.search(P.getValue(), city.getValue(),TradeArea.getValue(), key.getText(), null, null, price.getValue(), score.getValue(), -1);
-			HotelListPane next=new HotelListPane(this.getSPane(ret));
-			MainPane.getInstance().setRightPane(next);
+			sp=HotelListPane.this.getSPane(ret);
+			instance.getChildren().remove(pane);
+			instance.initPane();
 		});
 		
 		pane.setHalignment(City, HPos.CENTER);
@@ -192,13 +204,14 @@ public class HotelListPane extends Pane{
 		pane.setHalignment(star_level, HPos.CENTER);
 		
 		pane.add(sp, column, row+5);
-		this.getChildren().addAll(pane);
+		instance.getChildren().addAll(pane);
 		
 	}
 	
-	public void setList(ScrollPane  info){
-		this.sp=info;
+	public static void setList(ScrollPane  info){
+		sp=info;
 	}
+	
 	
 	private ScrollPane getSPane(List<HotelInfoVO> list2){
 		VBox vb=new VBox();

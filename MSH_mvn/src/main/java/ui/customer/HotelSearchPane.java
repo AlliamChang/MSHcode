@@ -38,6 +38,7 @@ import vo.RoomVO;
 
 public class HotelSearchPane extends Pane{
 	private static final String user_name="angel"; 
+	private static HotelSearchPane instance;
 	private ChoiceBox<String> P;
 	private ChoiceBox<String> city;
 	private ChoiceBox<String> TradeArea;
@@ -51,7 +52,14 @@ public class HotelSearchPane extends Pane{
 	
 	public HotelSearchPane(){
 		super();
-		initPane();
+	}
+	
+	public static HotelSearchPane getInstance(){
+		if(instance==null){
+			instance=new HotelSearchPane();
+			instance.initPane();
+		}
+		return instance;
 	}
 	
 	private void initPane(){
@@ -142,8 +150,8 @@ public class HotelSearchPane extends Pane{
 		Button search=new Button("搜索");
 		search.setFont(f);
 		search.setOnMouseClicked((MouseEvent me)->{
-			HotelListPane next=new HotelListPane(this.getSPane());
-			MainPane.getInstance().setRightPane(next);
+			HotelListPane.setList(this.getSPane());
+			MainPane.getInstance().setRightPane(HotelListPane.getInstance());
 		});
 		pane.add(search,column+4,row+1);
 		
@@ -166,7 +174,7 @@ public class HotelSearchPane extends Pane{
 		out.setBeforeDisable(enter);
 		pane.add(out,column+1,row+2);
 		
-		this.getChildren().add(pane);
+		instance.getChildren().add(pane);
 	}
 	
 	private ScrollPane getSPane(){

@@ -7,9 +7,11 @@ import java.util.List;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNavigationBar;
+import ui.utility.MyRetreatButton;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -25,12 +27,14 @@ public class ReservePane extends Pane {
 	private GridPane pane;
 	private List<String>room_type;
 	private static final String user_name="angel"; 
+	private MyRetreatButton ret;
 	private int row_index=1;
 	private int column_index=1;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
 	
-	public ReservePane(){
+	public ReservePane(Parent last){
 		super();
+		ret=new MyRetreatButton(last);
 		initPane();
 	}
 	
@@ -41,7 +45,7 @@ public class ReservePane extends Pane {
 		pane.setVgap(16);
 		pane.setAlignment(Pos.TOP_LEFT);
 		//pane.setGridLinesVisible(true);
-		
+		pane.add(ret, 0, 0);
 		Label reserve_info=new Label("预订信息");
 		reserve_info.setFont(Font.font("Tahoma", FontWeight.MEDIUM, 25));
 		pane.add(reserve_info,column_index,row_index);
