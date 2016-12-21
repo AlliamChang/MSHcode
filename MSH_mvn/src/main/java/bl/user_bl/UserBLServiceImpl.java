@@ -143,4 +143,15 @@ public class UserBLServiceImpl implements UserBLService{
 		}
 	}
 
+	@Override
+	public boolean isUsed(String account) {
+		try {
+			if (ud.getUser(account) == null)
+				return false;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+
 }

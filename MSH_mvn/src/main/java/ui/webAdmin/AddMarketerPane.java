@@ -2,6 +2,7 @@ package ui.webAdmin;
 
 import tools.UserType;
 import ui.utility.MainPane;
+import ui.utility.NumberField;
 import vo.UserVO;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -37,17 +38,7 @@ public class AddMarketerPane extends AnchorPane{
 		genderBox.getItems().addAll("男", "女");
 		numberLabel = new Label("电话：");
 		nameField = new TextField();
-		numberField = new TextField(){
-			public void replaceText(int start, int end, String text){
-				if (text.matches("[0-9]{0,}"))
-					super.replaceText(start, end, text);
-			}
-			
-			public void replaceSelection(String text){
-				if (text.matches("[0-9]{0,}"))
-					super.replaceSelection(text);
-			}
-		};
+		numberField = new NumberField();
 		
 		grid.setVgap(25);
 		grid.setHgap(5);

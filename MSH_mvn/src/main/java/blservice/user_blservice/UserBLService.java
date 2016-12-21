@@ -20,6 +20,13 @@ public interface UserBLService {
 	 * @return 系统为新增用户分配的ID，若添加失败返回-1。
 	 */
 	public int add(UserVO userVO);
+	
+	/**
+	 * 检查账号是否已被注册
+	 * @param account
+	 * @return
+	 */
+	public boolean isUsed(String account);
 
 	public ResultMessage update(UserVO userVO);
 

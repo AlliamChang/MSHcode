@@ -2,6 +2,7 @@ package ui.webAdmin;
 
 import ui.utility.MainPane;
 import ui.utility.MyImageView;
+import ui.utility.NumberField;
 import vo.UserVO;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
@@ -35,17 +36,7 @@ public class ModifyUserInfoPane extends AnchorPane{
 		genderBox.getSelectionModel().select(user.getGender());
 		genderBox.setFocusTraversable(false);
 		phoneNumberLabel = new Label("联系电话：");
-		numberField = new TextField(user.getNumber()){
-			public void replaceText(int start, int end, String text){
-				if (text.matches("[0-9]{0,}"))
-					super.replaceText(start, end, text);
-			}
-			
-			public void replaceSelection(String text){
-				if (text.matches("[0-9]{0,}"))
-					super.replaceSelection(text);
-			}
-		};
+		numberField = new NumberField(user.getNumber());
 		numberField.setFocusTraversable(false);
 		numberField.setMaxWidth(170);
 		grid = new GridPane();
