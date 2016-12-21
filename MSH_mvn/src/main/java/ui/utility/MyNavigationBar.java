@@ -24,6 +24,11 @@ import javafx.stage.Modality;
 import po.UserPO;
 import rmi.RemoteHelper;
 import tools.ResultMessage;
+import tools.UserType;
+import ui.customer.CustomerPaneController;
+import ui.hotelStuff.control.HotelPaneController;
+import ui.webAdmin.WebAdminController;
+import ui.websiteStuff.WebsitePaneController;
 import vo.UserVO;
 
 public class MyNavigationBar extends VBox {
@@ -74,7 +79,20 @@ public class MyNavigationBar extends VBox {
 						}
 						UserVO vo = new UserVO(po);
 						switch (vo.getType()) {
-						
+						case CUSTOMER:
+						case COMPANY_CUSTOMER:
+							CustomerPaneController.getInstance().CustomerLogin(vo.getName(), vo.getImage());
+							break;
+						case HOTEL_STAFF:
+							HotelPaneController.getInstance()
+							.hotelStuffLogin(vo.getID(), String.valueOf(vo.getHotelID()), vo.getImage());
+							break;
+						case WEB_ADMIN:
+							WebAdminController.getInstance().init();
+							break;
+						case MARKETER:
+							WebsitePaneController.getInstance().init();
+							break;
 						}
 					} else {
 						if (message == ResultMessage.FAIL)
