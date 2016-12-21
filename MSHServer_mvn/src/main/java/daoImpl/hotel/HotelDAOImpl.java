@@ -70,11 +70,16 @@ public class HotelDAOImpl implements HotelDAO{
 
 	@Override
 	public HotelPO find(int id) throws RemoteException {
+		try{
 		Session session = HibernateUtil.getSession();
 		session.beginTransaction();
 		HotelPO result=(HotelPO)session.get(HotelPO.class,id);
 		session.close();
 		return result;
+		}catch (ObjectNotFoundException e){
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -94,6 +99,7 @@ public class HotelDAOImpl implements HotelDAO{
 		Transaction transaction = session.beginTransaction();
 		session.save(po);
 		transaction.commit();
+		System.out.println("succeed");
 		return ResultMessage.SUCCESS;
 	}
 
@@ -102,11 +108,13 @@ public class HotelDAOImpl implements HotelDAO{
 		try{
 			Session session = HibernateUtil.getSession();
 			Transaction transaction = session.beginTransaction();
-			session.delete(session.load(UserPO.class, id));
+			session.delete(session.load(HotelPO.class, id));
 			transaction.commit();
 			session.close();
+			System.out.println("succeed");
 			return ResultMessage.SUCCESS;
 		} catch (ObjectNotFoundException e) {
+			System.out.println("fail");
 			return ResultMessage.FAIL;
 		}
 	}
@@ -118,6 +126,7 @@ public class HotelDAOImpl implements HotelDAO{
 		session.update(po);
 		transaction.commit();
 		session.close();
+		System.out.println("succeed");
 		return ResultMessage.SUCCESS;
 	}
 

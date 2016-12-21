@@ -45,7 +45,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public ResultMessage modify(HotelInfoVO hotel) {
 		try {
-			return this.hotel.update(new HotelPO(hotel.getAdress(),hotel.getTradingArea(),hotel.getCity(),hotel.getProvince(),hotel.getHotel(),hotel.getPhone(),hotel.getIntroduction(),hotel.getHotel_id(),hotel.getStar(),hotel.get_stuff_id(),hotel.getYear(),hotel.getScore(),hotel.getScul(),hotel.getFacility()));
+			return this.hotel.update(hotel.toPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;
@@ -70,7 +70,7 @@ public class HotelBL implements HotelBLService{
 		try{
 		List<HotelPO> list=hotel.get(province, city, tradeArea, name);
 		for(int i=0;i<list.size();i++)
-			ret.add(list.get(i).tovo());
+			ret.add(new HotelInfoVO(list.get(i)));
 		}catch(RemoteException e){
 			e.printStackTrace();
 		}
@@ -124,7 +124,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public HotelInfoVO getHotel(int hotel_id) {
 		try{
-		return hotel.find(hotel_id).tovo();
+		return new HotelInfoVO(hotel.find(hotel_id));
 		}catch (RemoteException e){
 			e.printStackTrace();
 			return null;
@@ -149,7 +149,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public ResultMessage add(HotelInfoVO hotel) {
 		try {
-			return this.hotel.add(new HotelPO(hotel.getAdress(),hotel.getTradingArea(),hotel.getCity(),hotel.getProvince(),hotel.getHotel(),hotel.getPhone(),hotel.getIntroduction(),hotel.getHotel_id(),hotel.getStar(),hotel.get_stuff_id(),hotel.getYear(),hotel.getScore(),hotel.getScul(),hotel.getFacility()));
+			return this.hotel.add(hotel.toPO());
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;

@@ -28,8 +28,11 @@ public class HotelTest {
 			po.setYear(2012);
 			po.setStuff_id(2);
 			//test.add(po);
-			List<HotelPO> tmp=test.getHotel("江苏省", "南京市", "鼓楼区", "青年", null, null, null, null, -1);
-			System.out.println(test.getHotel("江苏省", "南京市", "鼓楼区", "青年", null, null, null, null, -1).get(0).getCity());
+			//List<HotelPO> tmp=test.getHotel("江苏省", "南京市", "鼓楼区", "青年", null, null, null, null, -1);
+			//System.out.println(test.getHotel("江苏省", "南京市", "鼓楼区", "青年", null, null, null, null, -1).get(0).getCity());
+			//System.out.println(test.find(1));
+			//test.delete(1);
+			System.out.println(test.get("江苏省", "南京市", "鼓楼区", null).size());
 		}catch(RemoteException e){
 			e.printStackTrace();
 		}
