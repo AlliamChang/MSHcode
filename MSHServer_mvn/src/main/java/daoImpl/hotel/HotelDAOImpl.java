@@ -165,6 +165,7 @@ public class HotelDAOImpl implements HotelDAO{
 		session.beginTransaction();
 		StringBuilder find = new StringBuilder();
 		find.append("from HotelPO where province = '" + province + "'");
+		if(city!=null)
 		find.append(" and city = '" + city + "'");
 		find.append(" and trade_area = '" + area + "'");
 		if(name != null)
