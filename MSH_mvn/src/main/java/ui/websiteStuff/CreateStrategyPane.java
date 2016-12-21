@@ -28,11 +28,10 @@ public class CreateStrategyPane extends GridPane{
 	private String city;
 	private String area;
 	private double cost;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	private PeopleType people;
-	private List<String> stuffName;
-	private List<String> stuffId;
+	private StrategyType strategyType;
 	
 	private Label startLabel;
 	private Label nameLabel;
@@ -190,6 +189,22 @@ public class CreateStrategyPane extends GridPane{
 		
 		createButton.setOnAction(e ->{
 			//创建策略事件
+			/*String name=nameText.getText();
+		    double cost=Double.parseDouble(costText.getText());
+		    String city=cityBox.getSelectionModel().getSelectedItem().toString();
+		    String area=areaBox.getSelectionModel().getSelectedItem().toString();
+		    String startTime=startDate.getEditor().getText();
+		    String endTime=endDate.getEditor().getText();
+		    PeopleType pt;
+		    StrategyType st;
+		    if(peopleBox.getSelectionModel().getSelectedItem().toString().equals(normalPeople))
+		    	pt=PeopleType.NORMAL;
+		    else
+		    	pt=PeopleType.VIP;
+		    if(strategyTypeBox.getSelectionModel().getSelectedItem().toString().equals(holiday))
+		    	st=StrategyType.HOLIDAY;
+		    else
+		    	st=StrategyType.VIP;*/
 			if(nameText.getText().equals("")||costText.getText().equals("")||cityBox.getSelectionModel()==null||areaBox.getSelectionModel()==null
 					||peopleBox.getSelectionModel()==null){
 				Alert alert=new Alert(AlertType.ERROR);
@@ -206,25 +221,24 @@ public class CreateStrategyPane extends GridPane{
 			    alert.showAndWait().ifPresent(response ->{
 				    if(response==ButtonType.OK){
 					    System.out.println("create");
-					    String name=nameText.getText();
-					    double cost=Double.parseDouble(costText.getText());
-					    String city=cityBox.getSelectionModel().getSelectedItem().toString();
-					    String area=areaBox.getSelectionModel().getSelectedItem().toString();
-					    String startTime=startDate.getEditor().getText();
-					    String endTime=endDate.getEditor().getText();
-					    PeopleType pt;
-					    StrategyType st;
+					    name=nameText.getText();
+					    cost=Double.parseDouble(costText.getText());
+					    city=cityBox.getSelectionModel().getSelectedItem().toString();
+					    area=areaBox.getSelectionModel().getSelectedItem().toString();
+					    startTime=startDate.getEditor().getText();
+					    endTime=endDate.getEditor().getText();
 					    if(peopleBox.getSelectionModel().getSelectedItem().toString().equals(normalPeople))
-					    	pt=PeopleType.NORMAL;
+					    	people=PeopleType.NORMAL;
 					    else
-					    	pt=PeopleType.VIP;
+					    	people=PeopleType.VIP;
 					    if(strategyTypeBox.getSelectionModel().getSelectedItem().toString().equals(holiday))
-					    	st=StrategyType.HOLIDAY;
+					    	strategyType=StrategyType.HOLIDAY;
 					    else
-					    	st=StrategyType.VIP;
-					    StrategyVO strategy=new StrategyVO(name,st,city,area,startTime,endTime,cost,pt);
-					    WebsitePaneController.getInstance().addStrategy(strategy);
+					    	strategyType=StrategyType.VIP;
+					    StrategyVO strategy=new StrategyVO(name,strategyType,city,area,startTime,endTime,cost,people);
+					    //WebsitePaneController.getInstance().addStrategy(strategy);
 					    System.out.println(city);
+					    System.out.println(name+"\n"+cost+"\n"+city+"\n"+area+"\n"+startTime+"\n"+endTime+"\n"+strategy.getArea());
 				    }
 			    });
 			}
