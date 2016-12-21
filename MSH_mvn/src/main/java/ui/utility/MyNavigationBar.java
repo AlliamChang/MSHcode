@@ -70,6 +70,7 @@ public class MyNavigationBar extends VBox {
 					ResultMessage message = RemoteHelper.getInstance().getUserDAO().login(info.getKey(), info.getValue());
 					if (message == ResultMessage.SUCCESS) {
 						alert.setAlertType(AlertType.INFORMATION);
+						alert.getDialogPane().setContentText("欢迎回来！");
 						UserPO po;
 						try {
 							int id = Integer.parseInt(info.getKey());
@@ -94,6 +95,7 @@ public class MyNavigationBar extends VBox {
 							WebsitePaneController.getInstance().init(vo.getID(), vo.getName());
 							break;
 						}
+						alert.showAndWait();
 					} else {
 						if (message == ResultMessage.FAIL)
 							alert.getDialogPane().setContentText("密码错误！");

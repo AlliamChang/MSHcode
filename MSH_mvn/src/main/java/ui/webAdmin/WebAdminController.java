@@ -153,8 +153,9 @@ public class WebAdminController {
 		userBLService.update(user);
 	}
 	
-	public void addHotel(HotelInfoVO hotel){
-		hotelBLService.add(hotel);
+	public void addHotel(String name, String province, String city, String area, int staffID){
+		hotelBLService.add(new HotelInfoVO(name, null, null, null, 
+				null, province, area, 0, null, 0, 0, 0, staffID, city));
 	}
 	
 	public void delHotel(HotelInfoVO hotel){

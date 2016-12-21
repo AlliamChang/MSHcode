@@ -83,13 +83,15 @@ public class HotelDAOImpl implements HotelDAO{
 	}
 
 	@Override
-	public ResultMessage add(HotelPO po) throws RemoteException {
+	public int add(HotelPO po) throws RemoteException {
 		Session session = HibernateUtil.getSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(po);
 		transaction.commit();
+		int id = Integer.parseInt(session.createSQLQuery("select @@identity").list().get(0).toString());
+		session.close();
 		System.out.println("succeed");
-		return ResultMessage.SUCCESS;
+		return id;
 		
 	}
 
@@ -99,6 +101,7 @@ public class HotelDAOImpl implements HotelDAO{
 		Transaction transaction = session.beginTransaction();
 		session.save(po);
 		transaction.commit();
+		session.close();
 		System.out.println("succeed");
 		return ResultMessage.SUCCESS;
 	}

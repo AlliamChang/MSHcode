@@ -89,7 +89,7 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	}
 
 	@Override
-	public ResultMessage add(HotelPO po) throws RemoteException {
+	public int add(HotelPO po) throws RemoteException {
 		return hotelDAO.add(po);
 	}
 

@@ -11,7 +11,7 @@ import tools.ResultMessage;
 public interface HotelDAO extends Remote {
 	public HotelPO find(int id) throws RemoteException;
 
-	public ResultMessage add(HotelPO po) throws RemoteException;
+	public int add(HotelPO po) throws RemoteException;
 	
 	public ResultMessage addRoom(RoomPO po)throws RemoteException;
 
