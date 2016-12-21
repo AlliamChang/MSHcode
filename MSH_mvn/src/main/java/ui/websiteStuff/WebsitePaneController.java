@@ -56,8 +56,8 @@ public class WebsitePaneController {
 		return controller;
 	}
 	
-	public void init(){
-		navi=new MyNavigationBar(null,stuff,naviInfo);
+	public void init(int stuffId,String stuffName){
+		navi=new MyNavigationBar(null,Arrays.asList("ID:"+stuffId,"姓名:"+stuffName),naviInfo);
 		MainPane.getInstance().setNavigationBar(navi);
 		this.createWebStuffStartPane();
 		

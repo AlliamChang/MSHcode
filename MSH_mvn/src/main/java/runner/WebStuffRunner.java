@@ -13,7 +13,7 @@ public class WebStuffRunner extends Application{
 	}
 	
 	public static void main(String[] args){
-		WebsitePaneController.getInstance().init();
+		WebsitePaneController.getInstance().init(123,"zhr");
 		launch(args);
 	}
 
