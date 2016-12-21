@@ -131,20 +131,6 @@ public class HotelDAOImpl implements HotelDAO{
 	}
 
 
-	@Override
-	public List<HotelPO> get(String province, String city, String tradeArea, String name) throws RemoteException {
-		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
-		Query query;
-		if(name == null)
-			query = session.createQuery("from HotelPO where province = '" + province + "' and city='"+city+"' and trade_area='"+tradeArea+"'");
-		else{
-			query = session.createQuery("from HotelPO where province = '" + province + "' and city='"+city+"' and trade_area='"+tradeArea+"' and name="+name+"'");
-		}
-		List<HotelPO> list = query.list();
-		session.close();
-		return list;
-	}
 
 	@Override
 	public List<String> getProvinces() throws RemoteException {	return provinces; }
@@ -192,7 +178,7 @@ public class HotelDAOImpl implements HotelDAO{
 		if(score != null){
 			score = score.trim();
 			String[] temp = score.split("-");
-			find.append(" and score >= '" + Integer.valueOf(temp[0]) + "' and score <= '" + Integer.valueOf(temp[1]) + "'");
+			find.append(" and score >= '" + Double.parseDouble(temp[0]) + "' and score <= '" + Double.parseDouble(temp[1]) + "'");
 			
 		}
 		if(star != -1){

@@ -81,6 +81,7 @@ public class HotelSearchPane extends Pane{
 	        pane.setHalignment(province, HPos.LEFT);
 	        
 	         P=new ChoiceBox<String>();
+	         P.setPrefWidth(100);
 	        P.getItems().addAll(CustomerPaneController.getInstance().getProvince());
 			P.getSelectionModel().selectFirst();
 			pane.add(P,column-1,row);
@@ -91,7 +92,7 @@ public class HotelSearchPane extends Pane{
 			pane.setHalignment(City, HPos.LEFT);
 			
 			 city=new ChoiceBox<String>();
-			//city.getItems().addAll(c)
+			city.setPrefWidth(100);
 			pane.add(city,column+1,row);
 			
 			Label trade_area=new Label("商圈:");
@@ -100,6 +101,7 @@ public class HotelSearchPane extends Pane{
 			pane.setHalignment(trade_area, HPos.LEFT);
 			
 			 TradeArea=new ChoiceBox<String>();
+			 TradeArea.setPrefWidth(100);
 			pane.add(TradeArea,column+3,row);
 	        
 			P.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {

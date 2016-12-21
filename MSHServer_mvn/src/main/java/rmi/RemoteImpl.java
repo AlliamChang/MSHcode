@@ -109,12 +109,6 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 		
 	}
 
-
-	@Override
-	public List<HotelPO> get(String province, String city, String tradeArea, String name) throws RemoteException {
-		return hotelDAO.get(province, city, tradeArea, name);
-	}
-
 	@Override
 	public List<String> getProvinces() throws RemoteException {
 		return hotelDAO.getProvinces();

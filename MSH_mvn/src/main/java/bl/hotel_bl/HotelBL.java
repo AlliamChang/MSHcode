@@ -26,7 +26,6 @@ public class HotelBL implements HotelBLService{
 	public HotelBL(){
 		help=RemoteHelper.getInstance();
 		hotel=help.getHotelDAO();
-		System.out.println(hotel);
 		user=new UserBLServiceImpl();
 		evaluate=new EvaluateDAO_Stub();
 		
@@ -63,20 +62,6 @@ public class HotelBL implements HotelBLService{
 		}
 	}
 
-	@Override
-	public List<HotelInfoVO> search(String province, String city, String tradeArea,
-			String name) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		try{
-		List<HotelPO> list=hotel.get(province, city, tradeArea, name);
-		for(int i=0;i<list.size();i++)
-			ret.add(new HotelInfoVO(list.get(i)));
-		}catch(RemoteException e){
-			e.printStackTrace();
-		}
-		return ret;
-		
-	}
 
 	@Override
 	public List<RoomVO> getRoom(int hotel_id) {

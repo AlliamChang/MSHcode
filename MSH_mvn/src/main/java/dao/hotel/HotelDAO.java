@@ -17,9 +17,6 @@ public interface HotelDAO extends Remote {
 	public ResultMessage delete(int id) throws RemoteException;
 
 	public ResultMessage update(HotelPO po) throws RemoteException;
-
-	public List<HotelPO> get(String province, String city, String tradeArea,
-			String name) throws RemoteException;
 	
 	public List<HotelPO> getHotel(String province,String city,String area,String name,String enter_time,String out_time,String price,String score,int star)throws RemoteException;
 	
