@@ -155,4 +155,16 @@ public class UserBLServiceImpl implements UserBLService{
 		return true;
 	}
 
+	@Override
+	public ResultMessage changePassword(int id, String oldPW, String newPW) {
+		UserVO user = get(id);
+		if (user == null)
+			return ResultMessage.NOT_EXIST;
+		if (!Encryption.encrypt(oldPW).equals(user.getPassword()))
+			return ResultMessage.FAIL;
+		user.setPassword(newPW);
+		update(user);
+		return ResultMessage.SUCCESS;
+	}
+
 }

@@ -46,4 +46,5 @@ public interface UserBLService {
 	
 	public ResultMessage logout(int id);
 	
+	public ResultMessage changePassword(int id, String oldPW, String newPW);
 }
