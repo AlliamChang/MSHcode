@@ -7,12 +7,12 @@ import javafx.scene.control.TextField;
  * @author I Like Milk
  *
  */
-public class NumberField extends TextField{
-	public NumberField(){
+public class MyNumberField extends TextField{
+	public MyNumberField(){
 		super();
 	}
 	
-	public NumberField(String text) {
+	public MyNumberField(String text) {
 		super(text);
 	}
 	

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import ui.customer.CustomerPaneController;
 
 public class MainPane extends StackPane{
 	
@@ -58,6 +59,8 @@ public class MainPane extends StackPane{
 	
 	public void logout(){
 		isLogin = false;
+		this.setNavigationBar(new MyNavigationBar());
+		CustomerPaneController.getInstance().createHotelSearchPane();
 	}
 	
 	public void setNavigationBar(MyNavigationBar bar){
@@ -68,8 +71,7 @@ public class MainPane extends StackPane{
 	}
 	
 	public void setRightPane(Parent rightPane){
-
-		
+		rightPane.setStyle(rightPane.getStyle()+";-fx-border-color:black;");
 		
 		if(mainPane.bottomPane.getChildren().size() >= 2){
 			mainPane.bottomPane.getChildren().remove(1);

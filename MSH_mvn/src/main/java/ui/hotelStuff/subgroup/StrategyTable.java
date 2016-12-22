@@ -41,7 +41,7 @@ public class StrategyTable extends TableView{
 		name.setMinWidth(150);
 		
 		TableColumn type = new TableColumn("策略类型");
-		type.setCellValueFactory(new PropertyValueFactory("type"));
+		type.setCellValueFactory(new PropertyValueFactory("strategyType"));
 		type.setMinWidth(115);
 		type.setStyle("-fx-alignment:center");
 		

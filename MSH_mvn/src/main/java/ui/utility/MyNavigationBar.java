@@ -116,7 +116,7 @@ public class MyNavigationBar extends VBox {
 		});
 		Button register=new Button("注册");
 		register.setOnAction(event -> {
-			
+			MainPane.getInstance().setRightPane(new RegisterPane());
 		});
 		this.getChildren().addAll(login,register);
 		
@@ -202,7 +202,14 @@ public class MyNavigationBar extends VBox {
 		
 		Button logout = new Button("注销");
 		logout.setOnAction(e -> {
-			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setContentText("确定要注销当前账号吗？");
+			alert.getDialogPane().setHeaderText(null);
+			alert.showAndWait().ifPresent(type -> {
+				if(type.equals(ButtonType.OK)){
+					MainPane.getInstance().logout();
+				}
+			});
 		});
 		
 		infoBox.getChildren().add(logout);

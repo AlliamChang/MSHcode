@@ -2,7 +2,7 @@ package ui.webAdmin;
 
 import tools.UserType;
 import ui.utility.MainPane;
-import ui.utility.NumberField;
+import ui.utility.MyNumberField;
 import vo.UserVO;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -38,7 +38,7 @@ public class AddHotelStaffPane extends AnchorPane {
 		genderBox.getItems().addAll("男", "女");
 		numberLabel = new Label("电话：");
 		nameField = new TextField();
-		numberField = new NumberField();
+		numberField = new MyNumberField();
 		
 		grid.setVgap(25);
 		grid.setHgap(5);
