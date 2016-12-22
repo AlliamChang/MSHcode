@@ -21,5 +21,6 @@
 		<mapping class="po.CreditPO"/>
 		<mapping class="po.hotelPO.HotelPO"/>
 		<mapping class="po.strategyPO.StrategyPO"/>
+		<mapping class="po.CheckInPO"/>
 	</session-factory>
 </hibernate-configuration>

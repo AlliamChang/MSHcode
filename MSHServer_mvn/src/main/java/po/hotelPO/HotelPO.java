@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import javafx.scene.image.Image;
 @Entity
 @Table(name="hotel")
 public class HotelPO implements Serializable{
