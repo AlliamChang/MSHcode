@@ -9,6 +9,7 @@ import dao.user.*;
 import po.CreditPO;
 import po.UserPO;
 import rmi.RemoteHelper;
+import tools.Encryption;
 import tools.ResultMessage;
 import vo.CreditVO;
 import vo.UserVO;
@@ -126,7 +127,7 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public ResultMessage login(String account, String password) {
 		try {
-			return ud.login(account, password);
+			return ud.login(account, Encryption.encrypt(password));
 		} catch (RemoteException e) {
 			e.printStackTrace();
 			return ResultMessage.FAIL;

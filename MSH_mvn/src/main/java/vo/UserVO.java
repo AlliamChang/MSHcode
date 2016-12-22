@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.scene.image.Image;
 import po.UserPO;
+import tools.Encryption;
 import tools.ImageConverter;
 import tools.UserType;
 
@@ -20,7 +21,7 @@ public class UserVO{
 	public UserVO(String account, String password, String name, String gender, String number, 
 			String company, String imagePath, int year, int month, int day, UserType type){
 		this.account = account;
-		this.password = password;
+		this.password = Encryption.encrypt(password);
 		this.name = name;
 		this.gender = gender;
 		this.number = number;
@@ -161,7 +162,7 @@ public class UserVO{
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Encryption.encrypt(password);
 	}
 
 	public UserType getType() {

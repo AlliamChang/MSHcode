@@ -2,6 +2,9 @@ package ui.utility;
 
 import java.rmi.RemoteException;
 import java.util.List;
+
+import bl.user_bl.UserBLServiceImpl;
+import blservice.user_blservice.UserBLService;
 import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -49,11 +52,15 @@ public class MyNavigationBar extends VBox {
 	private ToggleButton[] naviButton;
 	private ToggleGroup group;
 	
+	private UserBLService userBL;
+	
 	/**
 	 *未登录状态下的导航栏构造方法 
 	 */
 	public MyNavigationBar(){
 		super(SPACE);
+		userBL = new UserBLServiceImpl();
+		
 		this.setPrefSize(MAX_WIDTH, MAX_HEIGHT);
 		this.setStyle(BACKGROUND_STYLE);
 		this.setStyle(BORDER_STYLE);
@@ -67,7 +74,7 @@ public class MyNavigationBar extends VBox {
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.getDialogPane().setHeaderText(null);
 				try {
-					ResultMessage message = RemoteHelper.getInstance().getUserDAO().login(info.getKey(), info.getValue());
+					ResultMessage message =userBL.login(info.getKey(), info.getValue());
 					if (message == ResultMessage.SUCCESS) {
 						alert.setAlertType(AlertType.INFORMATION);
 						alert.getDialogPane().setContentText("欢迎回来！");
