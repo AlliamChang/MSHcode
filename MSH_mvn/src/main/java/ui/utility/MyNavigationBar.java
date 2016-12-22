@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Toggle;
@@ -154,6 +155,8 @@ public class MyNavigationBar extends VBox {
 	 */
 	private void init(){
 		this.setPrefSize(MAX_WIDTH, MAX_HEIGHT);
+		this.setMaxSize(MAX_WIDTH, MAX_HEIGHT);
+		this.setMinSize(MAX_WIDTH, MAX_HEIGHT);
 		this.setStyle(BACKGROUND_STYLE);
 		if(null != infoBox)
 			this.getChildren().add(infoBox);
@@ -164,7 +167,7 @@ public class MyNavigationBar extends VBox {
 		group = new ToggleGroup();
 		naviBox = new VBox(0);
 		naviBox.setStyle(BACKGROUND_STYLE + BORDER_STYLE);
-		naviBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.625);
+		naviBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.61);
 		for(int i = 0; i < navi.size(); i ++){
 			naviButton[i] = new ToggleButton(navi.get(i));
 			naviButton[i].setMinSize(MAX_WIDTH-3,50);
@@ -190,8 +193,8 @@ public class MyNavigationBar extends VBox {
 	private void initInfo(){
 		infoBox = new VBox(SPACE);
 		infoBox.setStyle(BACKGROUND_STYLE + BORDER_STYLE);
-		infoBox.setMaxSize(MAX_WIDTH, MAX_HEIGHT * 0.382);
-		infoBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.382);
+		infoBox.setMaxSize(MAX_WIDTH, MAX_HEIGHT * 0.4);
+		infoBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.4);
 		infoBox.setAlignment(Pos.BASELINE_CENTER);
 		infoBox.setPadding(new Insets(10,10,10,10));
 		
@@ -219,7 +222,13 @@ public class MyNavigationBar extends VBox {
 			});
 		});
 		
-		infoBox.getChildren().add(logout);
+		Hyperlink modifyPassword = new Hyperlink("修改密码");
+		modifyPassword.setOnAction(e -> {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.show();
+		});
+		
+		infoBox.getChildren().addAll(logout,modifyPassword);
 	}
 	
 	public ToggleGroup getToggle(){

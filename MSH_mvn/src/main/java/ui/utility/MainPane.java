@@ -2,6 +2,7 @@ package ui.utility;
 
 import java.util.concurrent.ExecutionException;
 
+import bl.user_bl.UserBLServiceImpl;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -11,6 +12,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import ui.customer.CustomerPaneController;
 
@@ -23,6 +25,7 @@ public class MainPane extends StackPane{
 	private ProgressIndicator p1;
 	private boolean isLogin;
 	private boolean isLoad = true;
+	private int id;
 	
 	private MainPane(){
 		super();
@@ -49,8 +52,9 @@ public class MainPane extends StackPane{
 		return mainPane;
 	}
 	
-	public void login(){
+	public void login(int id){
 		isLogin = true;
+		this.id = id;
 	}
 	
 	public boolean isLogin(){
@@ -59,8 +63,10 @@ public class MainPane extends StackPane{
 	
 	public void logout(){
 		isLogin = false;
+		id = -1;
 		this.setNavigationBar(new MyNavigationBar());
 		CustomerPaneController.getInstance().createHotelSearchPane();
+		new UserBLServiceImpl().logout(id);
 	}
 	
 	public void setNavigationBar(MyNavigationBar bar){
@@ -71,8 +77,8 @@ public class MainPane extends StackPane{
 	}
 	
 	public void setRightPane(Parent rightPane){
-		rightPane.setStyle(rightPane.getStyle()+";-fx-border-color:black;");
-		
+		rightPane.setStyle(rightPane.getStyle() + ";-fx-border-color:black;");
+//		rightPane.setMaxSize(655, 610);
 		if(mainPane.bottomPane.getChildren().size() >= 2){
 			mainPane.bottomPane.getChildren().remove(1);
 			mainPane.bottomPane.getChildren().add(rightPane);
