@@ -11,12 +11,13 @@ import javafx.scene.text.Font;
 import ui.hotelStuff.subgroup.StrategyTable;
 import ui.utility.MainPane;
 import vo.HotelStrategyVO;
+import vo.StrategyVO;
 
 public class HotelStrategyPane extends VBox{
 
-	List<HotelStrategyVO> data;
+	List<StrategyVO> data;
 	
-	public HotelStrategyPane(List<HotelStrategyVO> list){
+	public HotelStrategyPane(List<StrategyVO> list){
 		super(10);
 		data = list;
 		init();

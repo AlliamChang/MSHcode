@@ -58,4 +58,9 @@ public class MyDeletableTextField extends StackPane{
 	public String getContent(){
 		return this.edit.getText();
 	}
+	
+	public TextField getEditor(){
+		return this.edit;
+	}
+
 }

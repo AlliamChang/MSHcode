@@ -125,16 +125,11 @@ public class AddRoomPane extends VBox{
 					bedStyle = BedStyle.BUNK_BED;
 					break;
 				}
-				
-				this.table.getItems().add(
-						new RoomVO(this.styleText.getText(),bedStyle,
-								Double.valueOf(this.priceText.getText()),Integer.valueOf(this.numText.getText()),
-								this.maxBox.getValue(),HotelPaneController.getInstance().getHotelId()));
-//				System.out.println(this.styleText.getText());
-//				System.out.println(this.numText.getText());
-//				System.out.println(this.priceText.getText());
-//				System.out.println(this.bedBox.getValue());
-//				System.out.println(this.maxBox.getValue());
+				RoomVO newRoom = new RoomVO(this.styleText.getText(),bedStyle,
+						Double.valueOf(this.priceText.getText()),Integer.valueOf(this.numText.getText()),
+						this.maxBox.getValue(),HotelPaneController.getInstance().getHotelId());
+				this.table.getItems().add(newRoom);
+				HotelPaneController.getInstance().addRoom(newRoom);
 			}else{
 	        	Alert alert = new Alert(AlertType.ERROR);
 				alert.initModality(Modality.APPLICATION_MODAL);

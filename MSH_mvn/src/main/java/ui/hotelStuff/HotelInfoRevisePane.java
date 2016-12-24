@@ -1,8 +1,12 @@
 package ui.hotelStuff;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import bl.hotel_bl.HotelBL;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ListChangeListener;
 import javafx.geometry.Orientation;
 import javafx.geometry.VPos;
 import javafx.scene.control.Alert;
@@ -10,29 +14,34 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import tools.ResultMessage;
+import ui.hotelStuff.control.HotelPaneController;
 import ui.utility.MainPane;
 import ui.utility.MyDeletableTextField;
+import ui.utility.MyFileChooser;
+import ui.utility.MyNumberField;
 import ui.utility.MyRetreatButton;
 import vo.HotelInfoVO;
 
 public class HotelInfoRevisePane extends AnchorPane{
 
 	private static final double LEFT_ANCHOR = 50;
+	private static final List<String> STAR = Arrays.asList("经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华");
+	private SimpleBooleanProperty hasntRevise = new SimpleBooleanProperty(true);
 	private HotelInfoVO hotelInfo;
 	private HotelInfoPane lastPane;
 	
@@ -61,12 +70,21 @@ public class HotelInfoRevisePane extends AnchorPane{
 		
 		ImageView sculView = new ImageView(hotelInfo.getScul());
 		sculView.setStyle("-fx-border-color:black");
+		sculView.setFitHeight(200);
+		sculView.setFitWidth(200);
 		sculView.setEffect(new DropShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 8, 0, 0, 2));
-		AnchorPane.setRightAnchor(sculView, LEFT_ANCHOR-10);
+		AnchorPane.setRightAnchor(sculView, LEFT_ANCHOR);
 		AnchorPane.setTopAnchor(sculView, 100.0);
 		
-		Button changeScul = new Button("修改酒店封面");
+		Button changeScul = new Button("上传图片");
 		changeScul.setFont(Font.font(15));
+		changeScul.setOnAction(e -> {
+			Image newImage;
+			if((newImage = new MyFileChooser().showOpenDialog()) != null){
+				sculView.setImage(newImage);
+				hasntRevise.set(false);
+			}
+		});
 		AnchorPane.setRightAnchor(changeScul, LEFT_ANCHOR+35);
 		AnchorPane.setTopAnchor(changeScul, 310.0);
 		
@@ -107,43 +125,47 @@ public class HotelInfoRevisePane extends AnchorPane{
 		
 		TextField adressText = new TextField(hotelInfo.getAdress());
 		adressText.setMaxWidth(200);
+		adressText.textProperty().addListener((l,o,n) -> hasntRevise.set(false));
 		infoPane.add(adressText, 1, 0);
 		
-		TextField phoneText = new TextField(hotelInfo.getPhone());
+		TextField phoneText = new MyNumberField(hotelInfo.getPhone());
 		phoneText.setMaxWidth(150);
 		infoPane.add(phoneText, 1, 1);
 		
-		TextField cityText = new TextField(hotelInfo.getProvince());
+		Label cityText = new Label(hotelInfo.getProvince() + " " + hotelInfo.getCity());
 		cityText.setMaxWidth(100);
 		infoPane.add(cityText, 1, 2);
 		
-		TextField tradAreaText = new TextField(hotelInfo.getTradingArea());
+		Label tradAreaText = new Label(hotelInfo.getTradingArea());
 		tradAreaText.setMaxWidth(100);
 		infoPane.add(tradAreaText, 1, 3);
 		
 		ChoiceBox<String> starBox = new ChoiceBox<>();
-		starBox.getItems().addAll("经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华");
+		starBox.getItems().addAll(STAR);
 		starBox.getSelectionModel().select(hotelInfo.getStar()-1);
+		starBox.valueProperty().addListener((l,o,n) -> hasntRevise.set(false));
 		infoPane.add(starBox, 1, 4);
 		
-		TextField openLabelText = new TextField(hotelInfo.getYear()+"");
+		TextField openLabelText = new MyNumberField(hotelInfo.getYear()+"");
+		openLabelText.textProperty().addListener((l,o,n) -> hasntRevise.set(false));
 		openLabelText.setMaxWidth(100);
 		infoPane.add(openLabelText, 1, 5);
 		
-		FlowPane flow = new FlowPane(Orientation.HORIZONTAL,3,4);
+		FlowPane flow = new FlowPane(Orientation.HORIZONTAL,3,6);
 		flow.setPrefWrapLength(350);
 		List<MyDeletableTextField> faciText = new ArrayList<MyDeletableTextField>();
 		for(int i = 0; i < hotelInfo.getFacility().length; i ++){
 			MyDeletableTextField temp = new MyDeletableTextField(flow,hotelInfo.getFacility()[i]);
 			temp.setMaxWidth(100);
+			temp.getEditor().textProperty().addListener((l,o,n) -> hasntRevise.set(false));
 			faciText.add(temp);
 			flow.getChildren().add(temp);
 		}
 		Button addFaci = new Button("+");
 		addFaci.setMinWidth(20);
-		addFaci.setStyle("-fx-background-color:white");
 		addFaci.setOnAction(e -> {
 			MyDeletableTextField temp = new MyDeletableTextField(flow);
+			hasntRevise.set(false);
 			temp.setMaxWidth(100);
 			faciText.add(temp);
 			flow.getChildren().add(flow.getChildren().size()-1, temp);
@@ -154,6 +176,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		
 		TextArea introText = new TextArea(hotelInfo.getIntroduction());
 		introText.setPrefSize(340, 150);
+		introText.textProperty().addListener((l,o,n) -> hasntRevise.set(false));
 		introText.setWrapText(true);
 		infoPane.add(introText, 1, 7);
 		
@@ -164,6 +187,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		AnchorPane.setTopAnchor(infoPane, 110.0);
 		
 		Button save = new Button("保存");
+		save.disableProperty().bind(hasntRevise);;
 		save.setFont(Font.font(20));
 		save.setOnAction(e -> {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -172,8 +196,27 @@ public class HotelInfoRevisePane extends AnchorPane{
 			alert.setContentText("确定要保存修改吗？");
 			alert.showAndWait().ifPresent(response -> {
 				if(response == ButtonType.OK){
-					MainPane.getInstance().setRightPane(lastPane);
-					
+					StringBuilder fac = new StringBuilder();
+					for(int i = 0; i < flow.getChildren().size()-1; i ++){
+						MyDeletableTextField temp = (MyDeletableTextField)(flow.getChildren().get(i));
+						if(temp.getContent() != null && !temp.getContent().equals("")){
+							fac.append(temp.getContent()+"%");
+						}
+					}
+					ResultMessage result = new HotelBL().modify(new HotelInfoVO(hotelInfo.getHotel(),"adress","phone",fac.toString().trim().split("%"),"intro",hotelInfo.getProvince(),
+							hotelInfo.getTradingArea(),2015,"imagePath",4,hotelInfo.getScore(),hotelInfo.getHotel_id(),
+							hotelInfo.getStuff_id(),hotelInfo.getCity()));
+					if(result == ResultMessage.SUCCESS){
+						Alert a = new Alert(AlertType.CONFIRMATION);
+						a.getDialogPane().setHeaderText(null);
+						a.setContentText("修改成功");
+						a.showAndWait().ifPresent(ok -> MainPane.getInstance().setRightPane(HotelPaneController.getInstance().createHotelInfoPane()));
+					}else{
+						Alert a = new Alert(AlertType.ERROR);
+						a.getDialogPane().setHeaderText(null);
+						a.setContentText("修改失败");
+						a.show();
+					}
 				}
 			});
 		});
@@ -183,16 +226,20 @@ public class HotelInfoRevisePane extends AnchorPane{
 		Button cancel = new Button("取消");
 		cancel.setFont(Font.font(20));
 		cancel.setOnAction(e -> {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.initModality(Modality.APPLICATION_MODAL);
-			alert.getDialogPane().setHeaderText(null);
-			alert.setContentText("确定要放弃当前操作，返回上一页面吗？");
-			alert.showAndWait().ifPresent(response -> {
-				if(response == ButtonType.OK){
-					MainPane.getInstance().setRightPane(lastPane);
-					
-				}
-			});
+			if(!hasntRevise.get()){
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.getDialogPane().setHeaderText(null);
+				alert.setContentText("确定要放弃当前操作，返回上一页面吗？");
+				alert.showAndWait().ifPresent(response -> {
+					if(response == ButtonType.OK){
+						MainPane.getInstance().setRightPane(lastPane);
+						
+					}
+				});
+			}else{
+				MainPane.getInstance().setRightPane(lastPane);
+			}
 		});
 		AnchorPane.setRightAnchor(cancel, 20.0);
 		AnchorPane.setBottomAnchor(cancel, LEFT_ANCHOR-10);

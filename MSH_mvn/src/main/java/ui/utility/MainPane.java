@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import ui.customer.CustomerPaneController;
 
 public class MainPane extends StackPane{
@@ -21,6 +22,7 @@ public class MainPane extends StackPane{
 	private static MainPane mainPane;
 	public static final double MINWIDTH = 655,MINHEIGHT = 610;
 	private HBox bottomPane;
+	private Stage stage;
 	private AnchorPane frontPane;
 	private ProgressIndicator p1;
 	private boolean isLogin;
@@ -59,6 +61,14 @@ public class MainPane extends StackPane{
 	
 	public boolean isLogin(){
 		return isLogin;
+	}
+	
+	public void setStage(Stage stage){
+		this.stage = stage;
+	}
+	
+	public Stage getStage(){
+		return stage;
 	}
 	
 	public void logout(){

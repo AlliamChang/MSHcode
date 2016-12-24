@@ -45,6 +45,8 @@ public class HotelInfoPane extends AnchorPane{
 		AnchorPane.setTopAnchor(sep, 90.0);
 		
 		ImageView sculView = new ImageView(hotelInfo.getScul());
+		sculView.setFitHeight(200);
+		sculView.setFitWidth(200);
 		sculView.setEffect(new DropShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 8, 0, 0, 2));
 		AnchorPane.setRightAnchor(sculView, LEFT_ANCHOR-10);
 		AnchorPane.setTopAnchor(sculView, 100.0);

@@ -200,6 +200,8 @@ public class MyNavigationBar extends VBox {
 		
 		
 		sculView = new ImageView(scul);
+		sculView.setFitHeight(120);
+		sculView.setFitWidth(120);
 		infoBox.getChildren().add(sculView);
 
 		Text[] list = new Text[info.size()];

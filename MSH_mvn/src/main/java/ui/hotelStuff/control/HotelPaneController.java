@@ -22,6 +22,7 @@ import vo.HotelInfoVO;
 import vo.HotelStrategyVO;
 import vo.OrderVO;
 import vo.RoomVO;
+import vo.StrategyVO;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.*;
 import blservice.strategy_blservice.StrategyBLService;
@@ -109,8 +110,8 @@ public class HotelPaneController {
 	 */
 	public HotelStrategyPane createHotelStrategyPane(){
 		return new HotelStrategyPane(Arrays.asList(
-				new HotelStrategyVO("双十一促销", HotelStrategyType.FESTIVAL, 10, new Date("2016/11/10",false), new Date("2016/11/12",false)),
-				new HotelStrategyVO("腾讯公司合作优惠", HotelStrategyType.BUSINESS, 50, new Date("2016/11/10",false), new Date("2016/12/12",false))
+				new StrategyVO("双十一促销", StrategyType.FESTIVAL, 10, new Date("2016/11/10",false), new Date("2016/11/12",false)),
+				new StrategyVO("腾讯公司合作优惠", HotelStrategyType.BUSINESS, 50, new Date("2016/11/10",false), new Date("2016/12/12",false))
 				));
 //		StrategyBLService strategy = new StrategyBL();
 //		return new HotelStrategyPane(strategy.getStrategyInHotel(id));
@@ -146,9 +147,9 @@ public class HotelPaneController {
 		return new HotelInfoVO(hotel,"南京市夫子庙路3号102","12345678910", 
 				new String[]{"24小时热水","普通分体空调","国内长途电话"}, 
 				"南京夫子庙国际青年旅舍位于南京夫子庙平江府路68号（夫子庙东大门旁）。傍依秦淮河，是一幢具有明清风格的建筑。一楼为接待处，四楼酒吧茶座，并提供简餐，立志将其打造成户外自助旅游者的主题酒吧；二楼三楼四楼为客房。酒店诚心欢迎社会各界友人前来入住。交通：从南京南站出来，乘地铁3号线到夫子庙站下车，2号口出来之后右转至平江府路，由北向南步行约100米到店，与顺发扑克和苏克快餐店相邻。", 
-				"南京", "夫子庙", 2015,
-				new Image(HotelPaneController.class.getResourceAsStream("/image/hotel_scul.png"),200,200,false,false),
-				4,4.5,1,1);
+				"江苏", "夫子庙", 2015,
+				"src/main/resources/image/hotel_scul.png",
+				4,4.5,1,1,"南京");
 	}
 	
 	public int getHotelId(){
@@ -182,6 +183,14 @@ public class HotelPaneController {
 		return this.roomStyle;
 	}
 	
+	
+	public void addRoom(RoomVO room){
+		this.hotelBL.inputRoom(room);
+	}
+	
+	public void removeRoom(RoomVO room){
+		
+	}
 	
 	private class Loading extends Task<Parent>{
 
