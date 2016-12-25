@@ -3,7 +3,9 @@ package ui.utility;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import bl.hotel_bl.HotelBL;
 import bl.user_bl.UserBLServiceImpl;
+import blservice.hotel_blservice.HotelBLService;
 import blservice.user_blservice.UserBLService;
 import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ObservableValue;
@@ -33,6 +35,7 @@ import ui.customer.CustomerPaneController;
 import ui.hotelStuff.control.HotelPaneController;
 import ui.webAdmin.WebAdminController;
 import ui.websiteStuff.WebsitePaneController;
+import vo.HotelInfoVO;
 import vo.UserVO;
 
 public class MyNavigationBar extends VBox {
@@ -54,6 +57,7 @@ public class MyNavigationBar extends VBox {
 	private ToggleGroup group;
 	
 	private UserBLService userBL;
+	private HotelBLService hotelBL;
 	
 	/**
 	 *未登录状态下的导航栏构造方法 
@@ -61,6 +65,7 @@ public class MyNavigationBar extends VBox {
 	public MyNavigationBar(){
 		super(SPACE);
 		userBL = new UserBLServiceImpl();
+		hotelBL = new HotelBL();
 		
 		this.setPrefSize(MAX_WIDTH, MAX_HEIGHT);
 		this.setStyle(BACKGROUND_STYLE);
@@ -87,14 +92,16 @@ public class MyNavigationBar extends VBox {
 							po = RemoteHelper.getInstance().getUserDAO().getUser(info.getKey());
 						}
 						UserVO vo = new UserVO(po);
+						MainPane.getInstance().login(vo.getID());
 						switch (vo.getType()) {
 						case CUSTOMER:
 						case COMPANY_CUSTOMER:
 							CustomerPaneController.getInstance().CustomerLogin(vo.getName(), vo.getImage());
 							break;
 						case HOTEL_STAFF:
+							HotelInfoVO hotel =  hotelBL.getHotel(vo.getHotelID());
 							HotelPaneController.getInstance()
-							.hotelStuffLogin(vo.getID(), String.valueOf(vo.getHotelID()), vo.getImage());
+							.hotelStuffLogin(hotel.getHotel_id(), vo.getID(), hotel.getHotel(), vo.getImage());
 							break;
 						case WEB_ADMIN:
 							WebAdminController.getInstance().init();

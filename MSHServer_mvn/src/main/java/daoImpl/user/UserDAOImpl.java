@@ -1,5 +1,6 @@
 package daoImpl.user;
 
+import java.awt.SystemTray;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;

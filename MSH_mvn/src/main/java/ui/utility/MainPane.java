@@ -32,6 +32,7 @@ public class MainPane extends StackPane{
 	private MainPane(){
 		super();
 		isLogin = false;
+		id = -1;
 		
 		bottomPane = new HBox(5);
 		this.getChildren().add(bottomPane);
@@ -72,11 +73,11 @@ public class MainPane extends StackPane{
 	}
 	
 	public void logout(){
+		new UserBLServiceImpl().logout(id);
 		isLogin = false;
 		id = -1;
 		this.setNavigationBar(new MyNavigationBar());
 		CustomerPaneController.getInstance().createHotelSearchPane();
-		new UserBLServiceImpl().logout(id);
 	}
 	
 	public void setNavigationBar(MyNavigationBar bar){
