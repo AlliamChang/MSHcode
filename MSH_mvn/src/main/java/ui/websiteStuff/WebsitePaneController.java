@@ -15,6 +15,7 @@ import blservice.order_blservice.*;
 import bl_stub.*;
 import bl.order_bl.*;
 import bl.strategy_bl.*;
+import bl.user_bl.UserBLServiceImpl;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +47,8 @@ public class WebsitePaneController {
 	
 	private WebsitePaneController(){
 		strategyBL=new StrategyBL();
-		orderBL=new Order_Stub();
-		userBL=new UserBLService_Stub();
+		orderBL=new OrderBL();
+		userBL=new UserBLServiceImpl();
 	}
 	
 	public static WebsitePaneController getInstance(){
