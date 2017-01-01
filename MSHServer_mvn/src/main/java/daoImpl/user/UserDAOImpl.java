@@ -1,6 +1,13 @@
 package daoImpl.user;
 
 import java.awt.SystemTray;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +123,35 @@ public class UserDAOImpl implements UserDAO{
 	public ResultMessage logout(int id) throws RemoteException {
 		logged.remove((Integer)id);
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage setLvUpRequest(int request) throws RemoteException {
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("info/request.info")));
+			bw.write(String.valueOf(request));
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public int getLvUpRequest() throws RemoteException {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(new File("info/request.info")));
+			int ret = Integer.parseInt(br.readLine());
+			br.close();
+			return ret;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return -1;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 }

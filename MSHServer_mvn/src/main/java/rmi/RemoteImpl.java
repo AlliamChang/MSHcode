@@ -213,4 +213,14 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 		return hotelDAO.getHotel(province, city, area, name, enter_time, out_time, price, score, star);
 	}
 
+	@Override
+	public ResultMessage setLvUpRequest(int request) throws RemoteException {
+		return userDAO.setLvUpRequest(request);
+	}
+
+	@Override
+	public int getLvUpRequest() throws RemoteException {
+		return userDAO.getLvUpRequest();
+	}
+
 }

@@ -1,23 +1,35 @@
 package vo;
 
 import java.io.File;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import javafx.scene.image.Image;
 import po.UserPO;
+import rmi.RemoteHelper;
 import tools.Encryption;
 import tools.ImageConverter;
 import tools.UserType;
 
 public class UserVO{
 	public static final String INIT_PASSWORD = "123456";
+	public static int LV_UP_REQUEST;
 	private String name, account, password, gender, number, company, imagePath;
 	private int level, credit, ID, hotelID, year, month, day;
 	private ArrayList<Integer> history;
 	private UserType type;
 
+	static {
+		try {
+			LV_UP_REQUEST = RemoteHelper.getInstance().getUserDAO().getLvUpRequest();
+			System.out.println(LV_UP_REQUEST);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public UserVO(String account, String password, String name, String gender, String number, 
 			String company, String imagePath, int year, int month, int day, UserType type){
 		this.account = account;
@@ -48,8 +60,8 @@ public class UserVO{
 			this.imagePath = "image/user/" + po.getID() + "." + po.getImageExtension();
 			ImageConverter.byteToFile(po.getImage(), imagePath);
 		}
-		this.level = po.getLevel();
 		this.credit = po.getCredit();
+		this.level = this.credit / LV_UP_REQUEST;
 		this.ID = po.getID();
 		this.hotelID = po.getHotelID();
 		this.year = po.getYear();
@@ -76,7 +88,6 @@ public class UserVO{
 			po.setImage(ImageConverter.fileToByte(imagePath));
 			po.setImageExtension(new File(imagePath).getName().split("\\.")[1]);
 		}
-		po.setLevel(level);
 		po.setCredit(credit);
 		po.setID(ID);
 		po.setHotelID(hotelID);

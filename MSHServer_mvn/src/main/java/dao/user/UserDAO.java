@@ -30,4 +30,14 @@ public interface UserDAO extends Remote {
 	public ResultMessage login(String account, String password) throws RemoteException;
 	
 	public ResultMessage logout(int id) throws RemoteException;
+	
+	/**
+	 * 设置每升一级所需的信用值
+	 * @param request
+	 * @return
+	 * @throws RemoteException
+	 */
+	public ResultMessage setLvUpRequest(int request) throws RemoteException;
+	
+	public int getLvUpRequest() throws RemoteException;
 }

@@ -28,8 +28,9 @@ public class TestRunner {
 		CreditRecordsDAO cd = new CreditRecordsDAOImpl();
 		TestRunner test = new TestRunner();
 		try {
-			List<CreditPO> list = cd.getRecords(2);
-			System.out.println(list.get(0).getChange_date());
+			System.out.println(daoTest.getLvUpRequest());
+			daoTest.setLvUpRequest(500);
+			System.out.println(daoTest.getLvUpRequest());
 			
 		} catch (RemoteException e) {
 			e.printStackTrace();

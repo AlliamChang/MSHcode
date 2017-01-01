@@ -12,7 +12,7 @@ public class UserPO implements Serializable{
 	 */
 	private static final long serialVersionUID = 8961415443390938361L;
 	private String name, account, password, gender, number, company, imageExtension, history;
-	private int level, credit, ID, hotelID, year, month, day;
+	private int credit, ID, hotelID, year, month, day;
 	private UserType type;
 	private byte[] image;
 
@@ -96,14 +96,6 @@ public class UserPO implements Serializable{
 
 	public void setType(UserType type) {
 		this.type = type;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
 	}
 
 	public int getCredit() {
