@@ -5,9 +5,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import tools.Date;
-
-
-
+import tools.ResultMessage;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.OrderBLService;
 import ui.utility.MainPane;
@@ -20,11 +18,14 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -81,7 +82,7 @@ public class ReservePane extends Pane {
 		//enter_time.setFont(f);
 		pane.add(enter_time, column_index+1, row_index+2);
 		
-		DatePicker enter=new MyDatePicker();
+		MyDatePicker enter=new MyDatePicker();
 		enter.setMaxWidth(130);
 		pane.add(enter, column_index+2, row_index+2);
 		
@@ -183,7 +184,15 @@ public class ReservePane extends Pane {
 			}
 			price=room.getData().get(index).getPrice()*Integer.parseInt(number.getText())*out.getValue().compareTo(enter.getValue());
 			order.createOrder(new OrderVO(MainPane.getInstance().getUserId(), CustomerPaneController.getInstance().getAccount(), room.getData().get(0).getid(), hotel.getHotel(room.getData().get(0).getid()).getHotel(), cb.getValue(), Integer.parseInt(number.getText()),Name.getText().split(",")
-					, phone.getText().split(","),out.getValue().compareTo(enter.getValue()), new Date(enter.getValue().toString(),false),Integer.parseInt(latestTime.getValue().split(":")[0]), hasChild,price));
+					, phone.getText().split(","),out.getValue().compareTo(enter.getValue()), new Date(enter.getFormatValue(),false),Integer.parseInt(latestTime.getValue().split(":")[0]), hasChild,price));
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setContentText("预订成功");
+			alert.getDialogPane().setHeaderText(null);
+			alert.showAndWait().ifPresent(ok -> {
+				if(ok.equals(ButtonType.OK)){
+					CustomerPaneController.getInstance().createMyOrderPane();
+				}
+			});
 		});
 		pane.add(ensure, column_index+5, row_index+10);
 		this.getChildren().add(pane);

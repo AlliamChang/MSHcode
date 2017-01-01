@@ -30,7 +30,7 @@ public class StrategyBL implements StrategyBLService{
 	
 	public ResultMessage addStrategy(StrategyVO vo){
 		try{
-			System.out.println(vo.getName());
+//			System.out.println(vo.getName());
 			return strategy.addStrategy(vo.toPO());
 		} catch (RemoteException e){
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class StrategyBL implements StrategyBLService{
 		List<StrategyVO> ret=new ArrayList<StrategyVO>();
 		try{
 			List<StrategyPO> list=strategy.getStrategyInWeb();
-			System.out.println(list.size());
+//			System.out.println(list.size());
 			for(int i=0;i<list.size();i++){
 				if(list.get(i).getName().equals("AdminVipCost"))
 					continue;

@@ -54,6 +54,9 @@ public class OrderBL implements OrderBLService{
 			//设置价格
 			double price = order.getPrice();
 			price -= strategy.getFinalPriceInHotel(user.get(order.getUserID()), order, order.getHotelId());
+			if(price < 0){
+				price = 0;
+			}
 			order.setPrice(price);
 			
 			if(ResultMessage.SUCCESS == orderDataBase.add(order.toPO()))
