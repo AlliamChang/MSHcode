@@ -38,7 +38,7 @@ import vo.HotelInfoVO;
 import vo.RoomVO;
 
 public class HotelListPane extends Pane{
-	private static HotelListPane instance;
+	//private static HotelListPane instance;
 	private GridPane pane;
 	private Button search;
 	private ChoiceBox<String> P;
@@ -68,15 +68,10 @@ public class HotelListPane extends Pane{
 	private HotelBLService hotel=new HotelBL();
 	public HotelListPane(){
 		super();
+		initPane();
 	}
 	
-	public static HotelListPane getInstance(){
-		if(instance==null){
-			instance=new HotelListPane();
-			instance.initPane();
-		}
-		return instance;
-	}
+	
 	
 	private void initPane(){
 		pane=new GridPane();
@@ -161,23 +156,23 @@ public class HotelListPane extends Pane{
 		price_range.setFont(f);
 		pane.add(price_range,column+1,row+3);
 		
-		 price=new ChoiceBox(FXCollections.observableArrayList("200-499","500-999","1000以上"));
+		 price=new ChoiceBox(FXCollections.observableArrayList("0-499","500-999","1000-2000","无"));
 		 price.setPrefWidth(100);
-		price.getSelectionModel().selectFirst();
+		price.getSelectionModel().selectLast();
 		pane.add(price, column+1, row+4);
 		
 		score_range.setFont(f);
 		pane.add(score_range,column+2,row+3);
 		
-		 score=new ChoiceBox(FXCollections.observableArrayList("4.1-5.0","3.1-4.0","0.1-3.0"));
+		 score=new ChoiceBox(FXCollections.observableArrayList("4.1-5.0","3.1-4.0","0.0-3.0","无"));
 		 score.setPrefWidth(100);
-		score.getSelectionModel().selectFirst();
+		score.getSelectionModel().selectLast();
 		pane.add(score, column+2, row+4);
 		
 		star.setFont(f);
 		pane.add(star,column+3,row+3);
 		
-		 star_level=new ChoiceBox(FXCollections.observableArrayList("5","4","3","2","1"));
+		 star_level=new ChoiceBox(FXCollections.observableArrayList("5","4","3","2","1","无"));
 		 star_level.setPrefWidth(100);
 		star_level.getSelectionModel().selectFirst();
 		pane.add(star_level,column+3,row+4);
@@ -190,10 +185,11 @@ public class HotelListPane extends Pane{
 		pane.add(search,column+4,row+2);
 		
 		search.setOnMouseClicked((MouseEvent e)->{
-			List<HotelInfoVO> ret=hotel.search(P.getValue(), city.getValue(),TradeArea.getValue(), key.getText(), null, null, price.getValue(), score.getValue(), -1);
+			
+			List<HotelInfoVO> ret=hotel.search(P.getValue(), city.getValue(),TradeArea.getValue(), key.getText(), null, null,price.getValue().equals("无")? null:price.getValue(), score.getValue().equals("无")?null:score.getValue(), star_level.getValue().equals("无")?-1:Integer.parseInt(star_level.getValue()));
+			pane.getChildren().remove(sp);
 			sp=HotelListPane.this.getSPane(ret);
-			instance.getChildren().remove(pane);
-			instance.initPane();
+			pane.add(sp, column, row+5);
 		});
 		
 		pane.setHalignment(City, HPos.CENTER);
@@ -206,7 +202,7 @@ public class HotelListPane extends Pane{
 		pane.setHalignment(star_level, HPos.CENTER);
 		
 		pane.add(sp, column, row+5);
-		instance.getChildren().addAll(pane);
+		this.getChildren().addAll(pane);
 		
 	}
 	
@@ -251,22 +247,23 @@ public class HotelListPane extends Pane{
 		Label lowest_price;
 		List<RoomVO> list;
 		Image image; 
+		Label star;
 		Button bn=new Button("查看");
 		HotelRoomTable table;
 		Cont(HotelInfoVO vo){
 			super();
 			 ColumnConstraints colInfo = new ColumnConstraints();
 		        colInfo.setPercentWidth(20);
-		        for(int i=0;i<5;i++){
+		        for(int i=0;i<6;i++){
 		        	this.getColumnConstraints().add(colInfo);
 		        }
-		        
+		        star=new Label(vo.getStar()+"");
 			name=new Label(vo.getHotel());
 			score=new Label(vo.getScore()+"");
 			lowest_price=new Label("¥"+vo.getLowest_price()+"起");
 			this.image=vo.getScul();
-			/*HotelBLService stub=new bl.hotel_bl.HotelBL();
-			this.list=stub.getRoom(vo.get_hotel_id());*/
+			HotelBLService stub=new bl.hotel_bl.HotelBL();
+			this.list=stub.getRoom(vo.getHotel_id());
 			 table=new HotelRoomTable(list);
 			 ImageView im=new ImageView(image);
 			 im.setFitHeight(50);
@@ -275,6 +272,7 @@ public class HotelListPane extends Pane{
 				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane());
 			 });*/
 			this.add(im, 0, 0);
+			this.add(star, 5, 0);
 			this.add(name,1,0);
 			this.add(bn, 2, 0);
 			this.add(score,3,0);

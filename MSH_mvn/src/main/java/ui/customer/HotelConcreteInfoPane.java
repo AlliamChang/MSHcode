@@ -87,7 +87,7 @@ public class HotelConcreteInfoPane extends Pane{
 		pane.add(image, column, 0,1,2);
 		
 		
-		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom(1));
+		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom(vo.getHotel_id()));
 		pane.add(room_info, column, 4);
 		
 		hotel_name.setFont(f);
@@ -136,7 +136,7 @@ public class HotelConcreteInfoPane extends Pane{
 		pane.setHalignment(star_level,HPos.RIGHT);
 		pane.setHalignment(score,HPos.RIGHT);
 		pane.setHalignment(hotel_name,HPos.RIGHT);
-		pane.setHalignment(lowest_price,HPos.RIGHT);
+		//pane.setHalignment(lowest_price,HPos.RIGHT);
 		this.getChildren().add(pane);
 
 	}

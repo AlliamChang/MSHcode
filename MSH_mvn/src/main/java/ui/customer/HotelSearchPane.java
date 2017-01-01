@@ -80,6 +80,7 @@ public class HotelSearchPane extends Pane{
 		 ColumnConstraints col2 = new ColumnConstraints(100);
 		 ColumnConstraints col3 = new ColumnConstraints(125);
 		 ColumnConstraints col4 = new ColumnConstraints(50);
+		// ColumnConstraints col5 = new ColumnConstraints(50);
 		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
 	        
 	        
@@ -154,7 +155,7 @@ public class HotelSearchPane extends Pane{
 		search.setFont(f);
 		search.setOnMouseClicked((MouseEvent me)->{
 			HotelListPane.setList(this.getSPane());
-			MainPane.getInstance().setRightPane(HotelListPane.getInstance());
+			MainPane.getInstance().setRightPane(new HotelListPane());
 		});
 		pane.add(search,column+4,row+1);
 		
@@ -183,9 +184,21 @@ public class HotelSearchPane extends Pane{
 	private ScrollPane getSPane(){
 		VBox vb=new VBox();
 		HBox hb=new HBox();
+		HotelBLService hotel=new HotelBL();
 		 ToggleButton tb1 = new ToggleButton("评分");
 		 ToggleButton tb2 = new ToggleButton("价格");
+		 List<HotelInfoVO> list=hotel.search(HotelSearchPane.this.P.getValue(), HotelSearchPane.this.city.getValue(), 
+					HotelSearchPane.this.TradeArea.getValue(), HotelSearchPane.this.keyword.getText(),
+					null, null, null, null, -1);
 		 ToggleButton tb3= new ToggleButton("星级");
+		 tb3.setOnMouseClicked((MouseEvent e)->{
+			 vb.getChildren().removeAll(content.makeList(
+				list));
+			 vb.getChildren().addAll(content.makeList(hotel.sortByHighStar(list)));
+			//HotelListPane.getInstance().getChildren().remove(pane);
+			
+		 });
+		
 		 ToggleButton tb4= new ToggleButton("历史酒店");
 		 hb.getChildren().addAll(tb1,tb2,tb3,tb4);
 		ScrollPane sp=new ScrollPane(vb);
@@ -193,7 +206,7 @@ public class HotelSearchPane extends Pane{
 		vb.setMinWidth(510);
 		vb.setPadding(new Insets(10, 10, 10, 10));
 		vb.setSpacing(10);
-		HotelBLService hotel=new HotelBL();
+		
 		vb.getChildren().add(hb);
 		/*System.out.println(HotelSearchPane.this.P.getValue());
 		System.out.println(HotelSearchPane.this.city.getValue());
@@ -215,6 +228,7 @@ public class HotelSearchPane extends Pane{
 }
 	 class content extends GridPane{
 		Label name;
+		Label star;
 		Label score;
 		Label lowest_price;
 		List<RoomVO> list;
@@ -225,11 +239,12 @@ public class HotelSearchPane extends Pane{
 			super();
 			 ColumnConstraints colInfo = new ColumnConstraints();
 		        colInfo.setPercentWidth(20);
-		        for(int i=0;i<5;i++){
+		        for(int i=0;i<6;i++){
 		        	this.getColumnConstraints().add(colInfo);
 		        }
 		        HotelBLService stub=new bl.hotel_bl.HotelBL();
 			name=new Label(vo.getHotel());
+			star=new Label(vo.getStar()+"星");
 			score=new Label(vo.getScore()+"");
 			double low=0;
 			this.list=stub.getRoom(vo.getHotel_id());
@@ -253,6 +268,7 @@ public class HotelSearchPane extends Pane{
 				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(vo));
 			 });
 			this.add(im, 0, 0);
+			this.add(star,5,0);
 			this.add(name,1,0);
 			this.add(bn, 2, 0);
 			this.add(score,3,0);

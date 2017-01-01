@@ -6,7 +6,7 @@ import java.util.List;
 import po.EvaluatePO;
 import po.UserPO;
 import po.hotelPO.HotelPO;
-import po.hotelPO.RoomPO;
+import po.RoomPO;
 import rmi.RemoteHelper;
 import dao.hotel.HotelDAO;
 import data_stub.EvaluateDAO_Stub;

@@ -57,7 +57,7 @@ public class HotelRoomTable extends TableView{
 						if(!empty){
 							Button bn=new Button("预订");
 							bn.setOnMouseClicked((MouseEvent me)->{
-								MainPane.getInstance().setRightPane(new ReservePane(HotelListPane.getInstance(), HotelRoomTable.this));
+								MainPane.getInstance().setRightPane(new ReservePane(HotelSearchPane.getInstance(), HotelRoomTable.this));
 							});
 							setGraphic(bn);
 						}

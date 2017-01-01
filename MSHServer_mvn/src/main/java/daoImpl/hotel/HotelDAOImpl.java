@@ -74,7 +74,7 @@ public class HotelDAOImpl implements HotelDAO{
 		Session session = HibernateUtil.getSession();
 		Transaction transaction =session.beginTransaction();
 		HotelPO result=(HotelPO)session.get(HotelPO.class,id);
-		transaction.commit();
+		//transaction.commit();
 		session.close();
 		return result;
 		}catch (ObjectNotFoundException e){
@@ -153,7 +153,7 @@ public class HotelDAOImpl implements HotelDAO{
 		Transaction transaction =session.beginTransaction();
 		Query query = session.createQuery("from RoomPO where hotel_id = '" + hotel_id + "'");
 		List<RoomPO> list = query.list();
-		transaction.commit();
+		//transaction.commit();
 		session.close();
 		return list;
 
@@ -193,7 +193,7 @@ public class HotelDAOImpl implements HotelDAO{
 		
 		Query query = session.createQuery(find.toString());
 		List<HotelPO> list = query.list();
-		transaction.commit();
+		//transaction.commit();
 		session.close();
 		return list;
 	}
