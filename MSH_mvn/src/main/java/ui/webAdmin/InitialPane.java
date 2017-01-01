@@ -33,12 +33,13 @@ public class InitialPane extends GridPane{
 		imageView.setFitWidth(250);
 		imageView.setFitHeight(250);
 		hBox.getChildren().add(imageView);
-		hBox.setAlignment(Pos.CENTER);
+		hBox.setMinHeight(300);
+		hBox.setAlignment(Pos.BOTTOM_CENTER);
 		
 		setAlignment(Pos.TOP_CENTER);
 		getStylesheets().add(getClass().getResource("/css/InitialPane.css").toExternalForm());
 		setHgap(20);
-		setVgap(50);
+		setVgap(20);
 		setPadding(new Insets(20, 20, 20, 20));
 		setPrefWidth(200);
 		setMaxWidth(Control.USE_PREF_SIZE);

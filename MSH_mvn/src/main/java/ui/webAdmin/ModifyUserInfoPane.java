@@ -4,28 +4,60 @@ import ui.utility.MainPane;
 import ui.utility.MyImageView;
 import ui.utility.MyNumberField;
 import vo.UserVO;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
+import tools.UserType;
 
 public class ModifyUserInfoPane extends AnchorPane{
-	private Label typeLabel, nameLabel, genderLabel, phoneNumberLabel, accountLabel;
-	private TextField nameField, numberField;
+	private Label typeLabel, nameLabel, genderLabel, phoneNumberLabel, accountLabel, companyLabel;
+	private TextField nameField, numberField, companyField;
 	private ChoiceBox<String> genderBox;
 	private GridPane grid;
 	private MyImageView userImage;
 	private VBox imageNameBox;
-	private HBox buttonBox;
+	private HBox buttonBox, typeBox;
 	private Button confirmButton, cancelButton;
+	private ToggleButton customerButton, companyCustomerButton;
+	private ToggleGroup group;
 	
 	public ModifyUserInfoPane(UserVO user, Parent lastPane){
 		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
-		typeLabel = new Label("账户类型：" + UserInfoPane.typeCheck(user.getType()));
+		typeLabel = new Label("账户类型：");
+		companyLabel = new Label("企业：");
+		companyField = new TextField(user.getCompany());
+		customerButton = new ToggleButton("普通会员");
+		customerButton.setStyle("-fx-background-radius: 3 0 0 3, 3 0 0 3, 2 0 0 2, 1 0 0 1;");
+		companyCustomerButton = new ToggleButton("企业会员");
+		companyCustomerButton.setStyle("-fx-background-radius: 0 3 3 0, 0 3 3 0, 0 2 2 0, 0 1 1 0;");
+		group = new ToggleGroup();
+		grid = new GridPane();
+		customerButton.setToggleGroup(group);
+		companyCustomerButton.setToggleGroup(group);
+		group.selectedToggleProperty().addListener(
+				(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) -> {
+					if (newValue == null) {
+						group.selectToggle(oldValue);
+					} else {
+						if (newValue.equals(companyCustomerButton)) {
+							grid.add(companyLabel, 0, 4);
+							grid.add(companyField, 1, 4);
+						} else {
+							grid.getChildren().remove(companyLabel);
+							grid.getChildren().remove(companyField);
+						}
+					}
+		});
+		group.selectToggle(user.getType() == UserType.CUSTOMER ? customerButton : companyCustomerButton);
+		typeBox = new HBox();
+		typeBox.getChildren().addAll(customerButton, companyCustomerButton);
+		
 		nameLabel = new Label("姓名：");
 		nameField = new TextField(user.getName());
 		nameField.setFocusTraversable(false);
@@ -39,9 +71,9 @@ public class ModifyUserInfoPane extends AnchorPane{
 		numberField = new MyNumberField(user.getNumber());
 		numberField.setFocusTraversable(false);
 		numberField.setMaxWidth(170);
-		grid = new GridPane();
 		grid.setVgap(30);
-		grid.add(typeLabel, 0, 0, 2, 1);
+		grid.add(typeLabel, 0, 0);
+		grid.add(typeBox, 1, 0);
 		grid.add(nameLabel, 0, 1);
 		grid.add(nameField, 1, 1);
 		grid.add(genderLabel, 0, 2);
@@ -51,7 +83,6 @@ public class ModifyUserInfoPane extends AnchorPane{
 		getChildren().add(grid);
 		AnchorPane.setTopAnchor(grid, 120.0);
 		AnchorPane.setLeftAnchor(grid, 70.0);
-		
 
 		userImage = new MyImageView(user.getImage());
 		userImage.setFitWidth(200); userImage.setFitHeight(200);
@@ -97,6 +128,8 @@ public class ModifyUserInfoPane extends AnchorPane{
 					user.setName(nameField.getText());
 					user.setGender(genderBox.getValue());
 					user.setNumber(numberField.getText());
+					user.setType(group.getSelectedToggle().equals(customerButton) ? UserType.CUSTOMER : UserType.COMPANY_CUSTOMER);
+					user.setCompany(user.getType() == UserType.COMPANY_CUSTOMER ? companyField.getText() : null);
 					WebAdminController.getInstance().modifyUser(user);
 					WebAdminController.getInstance().go(lastPane, user);
 				});
