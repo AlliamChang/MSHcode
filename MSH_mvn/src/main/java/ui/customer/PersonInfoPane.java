@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import vo.UserVO;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,22 +20,23 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class PersonInfoPane extends Pane {
-	private static final String user_name="angel";
-	private String name="xxx";
-	private String phone_number="18360977498";
-	private String birthday="1997-01-04";
-	private int credit_value=100,vip_level=2;
-	private String type="普通会";
-	private String sex="男";
+	private UserVO user;
+	private  String user_name=user.getAccount();
+	private String name=user.getName();
+	private String phone_number=user.getNumber();
+	private String birthday=user.getYear()+"-"+user.getMonth()+"-"+user.getDay();
+	private int credit_value=user.getCredit(),vip_level=user.getLevel();
+	private String type;
+	private String sex=user.getGender();
 	private GridPane grid;
 	private static final int column=3;
 	private static final int row=2;
-	private Image scul=new Image(PersonInfoPane.class.getResource("/default_sculpture.png").toExternalForm(),
-			100,100,false,false);
+	private Image scul=user.getImage();
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
-	public PersonInfoPane(){
+	public PersonInfoPane(UserVO vo){
 		super();
+		user=vo;
 		initgrid();
 	}
 	

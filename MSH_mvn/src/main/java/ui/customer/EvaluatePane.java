@@ -23,7 +23,6 @@ import javafx.scene.text.FontWeight;
 public class EvaluatePane extends Pane{
 	private GridPane pane;
 	private List<String> order_info=MyOrderTable.getList();
-	private static final String user_name="angel"; 
 	private static final int column_index=1;
 	private static final int row_index=8;
 	private String begin_time=order_info.get(0);

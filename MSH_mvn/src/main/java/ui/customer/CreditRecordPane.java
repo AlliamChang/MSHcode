@@ -17,7 +17,6 @@ import javafx.scene.layout.Pane;
 public class CreditRecordPane extends Pane{
 	
 	private GridPane pane;
-	private static final String user_name="angel";
 	private CreditTable credit;
 	
 	public CreditRecordPane(){

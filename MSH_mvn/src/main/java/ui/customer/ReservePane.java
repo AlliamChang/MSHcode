@@ -26,7 +26,6 @@ import javafx.scene.text.FontWeight;
 public class ReservePane extends Pane {
 	private GridPane pane;
 	private List<String>room_type;
-	private static final String user_name="angel"; 
 	private MyRetreatButton ret;
 	private int row_index=1;
 	private int column_index=1;
@@ -113,8 +112,7 @@ public class ReservePane extends Pane {
 		latest_time.setFont(f);
 		pane.add(latest_time,column_index+1,row_index+7);
 		
-		TextField latestTime=new TextField();
-		latestTime.setFont(f);
+		DatePicker latestTime=new DatePicker();
 		latestTime.setMaxWidth(130);
 		pane.add(latestTime,column_index+2,row_index+7);
 		
@@ -140,6 +138,7 @@ public class ReservePane extends Pane {
 		pane.add(cancel,column_index+5,row_index+11);
 		
 		Button ensure=new Button("确定");
+		//ensure.setonm
 		ensure.setFont(f);
 		pane.add(ensure, column_index+5, row_index+10);
 		this.getChildren().add(pane);

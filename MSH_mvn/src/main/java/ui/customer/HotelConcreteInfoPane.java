@@ -8,6 +8,7 @@ import bl_stub.HotelBLService_Stub;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.EvaluateVO;
+import vo.HotelInfoVO;
 import vo.OrderVO;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -28,6 +29,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class HotelConcreteInfoPane extends Pane{
+	private HotelInfoVO vo;
 	private Image hotel;
 	private Label hotel_name=new Label("酒店名称:");
 	private Label address=new Label("地址:");
@@ -45,8 +47,9 @@ public class HotelConcreteInfoPane extends Pane{
 	private ScrollPane evaluate;
 	private static final String user_name="angel"; 
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
-	public HotelConcreteInfoPane(){
+	public HotelConcreteInfoPane(HotelInfoVO VO){
 		super();
+		vo=VO;
 		initPane();
 	}
 	
@@ -75,7 +78,7 @@ public class HotelConcreteInfoPane extends Pane{
 		evaluate.setPrefSize(600,400);
 		pane.add(evaluate,column,5,5,1);
 		
-		hotel=stub.getHotel("1").getScul();
+		hotel=vo.getScul();
 		ImageView image=new ImageView(hotel);
 		pane.add(image, column, 0,1,2);
 		
@@ -86,39 +89,39 @@ public class HotelConcreteInfoPane extends Pane{
 		hotel_name.setFont(f);
 		pane.add(hotel_name,column+1,row);
 		
-		Text name=new Text("渡口客栈");
+		Text name=new Text(vo.getHotel());
 		name.setFont(f);
 		pane.add(name, column+2, row);
 		
 		address.setFont(f);
 		pane.add(address,column+3,row);
 		
-		Text add=new Text("南京市中山北路10号");
+		Text add=new Text(vo.getAdress());
 		pane.add(add, column+4, row);
 		
 		lowest_price.setFont(f);
 		pane.add(lowest_price, column+1, row+1);
 		
-		Text Price=new Text("456");
+		Text Price=new Text(vo.getLowest_price()+"");
 		pane.add(Price, column+2, row+1);
 		
 		trade_area.setFont(f);
 		pane.add(trade_area,column+3,row+1);
 		
-		Text TradeArea=new Text("新街口");
+		Text TradeArea=new Text(vo.getTradingArea());
 		pane.add(TradeArea,column+4,row+1);
 		
 		score.setFont(f);
 		pane.add(score,column+1,row+2);
 		
-		Text Score=new Text("4.6");
+		Text Score=new Text(vo.getScore()+"");
 		Score.setFont(f);
 		pane.add(Score, column+2, row+2);
 		
 		star_level.setFont(f);
 		pane.add(star_level, column+3, row+2);
 		
-		Text star=new Text("4");
+		Text star=new Text(vo.getStar()+"");
 		star.setFont(f);
 		pane.add(star, column+4, row+2);
 		

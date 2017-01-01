@@ -72,12 +72,12 @@ public class HotelBLService_Stub implements HotelBLService {
 	}
 
 
-	public HotelInfoVO getHotel(String hotel_id) {
+	/*public HotelInfoVO getHotel(String hotel_id) {
 		// TODO Auto-generated method stub
 		Image image=new Image(PersonInfoPane.class.getResource("/image/hotel.jpg").toExternalForm(),
 				100,100,false,false);
-		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,image,4,4.5,1,2,"南京市");
-	}
+		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2,"南京市");
+	}*/
 
 	@Override
 	public List<HotelInfoVO> search(String province, String city, String tradeArea,

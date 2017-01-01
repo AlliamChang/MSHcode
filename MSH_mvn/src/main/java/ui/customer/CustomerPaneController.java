@@ -12,20 +12,24 @@ import ui.utility.MyNavigationBar;
 import vo.CreditVO;
 import vo.OrderVO;
 import vo.RoomVO;
+import bl.user_bl.UserBLServiceImpl;
 import bl_stub.HotelBLService_Stub;
 import bl_stub.Order_Stub;
 import bl_stub.UserBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
+import blservice.order_blservice.OrderBLService;
+import blservice.user_blservice.UserBLService;
 
 public class CustomerPaneController {
 	private static CustomerPaneController controller;
+	private String account;
 	private String user_name;
 	private String type="普通会员";
 	private boolean isRegistered=true;
 	private boolean isLog=false;
 	private HotelBLService HotelBL;
-	private UserBLService_Stub UserBL;
-	private Order_Stub OrderBL;
+	private UserBLService UserBL=new UserBLServiceImpl();;
+	private OrderBLService OrderBL;
 	private final List<String> naviInfo = Arrays.asList("搜索","个人信息","我的订单");
 	private CustomerPaneController(){
 		HotelBL=new bl.hotel_bl.HotelBL();
@@ -78,7 +82,7 @@ public class CustomerPaneController {
 	}
 	//个人信息界面
 	public void createPersonInfoPane(){
-		MainPane.getInstance().setRightPane(new PersonInfoPane());
+		MainPane.getInstance().setRightPane(new PersonInfoPane(UserBL.get(MainPane.getInstance().getId())));
 	}
 	//我的订单界面
 	public void createMyOrderPane(){
@@ -90,14 +94,13 @@ public class CustomerPaneController {
 	}
 	//得到信用记录
 	public List<CreditVO> getcredit(){
-		UserBL=new UserBLService_Stub();
-		List <CreditVO>credit_list=UserBL.getCreditRecords(1);
+		List <CreditVO>credit_list=UserBL.getCreditRecords(MainPane.getInstance().getId());
 		return credit_list;
 	}
 	//得到订单记录
 	public List<OrderVO> getOrder(){
-		OrderBL=new Order_Stub();
-		List<OrderVO> order_list=OrderBL.getUserOrder(null);
+		OrderBL=new bl.order_bl.OrderBL();
+		List<OrderVO> order_list=OrderBL.getUserOrder(MainPane.getInstance().getId(), null);
 		return order_list;
 	}
 	//得到酒店房间信息

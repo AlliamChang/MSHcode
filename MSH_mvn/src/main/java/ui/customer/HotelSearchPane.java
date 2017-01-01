@@ -236,7 +236,7 @@ public class HotelSearchPane extends Pane{
 			 im.setFitHeight(50);
 			 im.setFitWidth(50);
 			 bn.setOnMouseClicked((MouseEvent me)->{
-				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane());
+				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(vo));
 			 });
 			this.add(im, 0, 0);
 			this.add(name,1,0);
