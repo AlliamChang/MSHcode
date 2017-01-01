@@ -29,6 +29,20 @@ public class UserVO{
 		}
 	}
 	
+	/**
+	 * 注意：password是原密码，即未经加密的密码。
+	 * @param account
+	 * @param password
+	 * @param name
+	 * @param gender
+	 * @param number
+	 * @param company
+	 * @param imagePath
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @param type
+	 */
 	public UserVO(String account, String password, String name, String gender, String number, 
 			String company, String imagePath, int year, int month, int day, UserType type){
 		this.account = account;
@@ -167,6 +181,10 @@ public class UserVO{
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 * @return 加密后的密码。
+	 */
 	public String getPassword() {
 		return password;
 	}
