@@ -228,7 +228,6 @@ public class HotelListPane extends Pane{
 		vb.setMinWidth(510);
 		vb.setPadding(new Insets(10, 10, 10, 10));
 		vb.setSpacing(10);
-		HotelBLService hotel=new HotelBL();
 		vb.getChildren().add(hb);
 		/*System.out.println(HotelSearchPane.this.P.getValue());
 		System.out.println(HotelSearchPane.this.city.getValue());
@@ -261,12 +260,13 @@ public class HotelListPane extends Pane{
 		        for(int i=0;i<5;i++){
 		        	this.getColumnConstraints().add(colInfo);
 		        }
-		        HotelBLService stub=new HotelBLService_Stub();
+		        
 			name=new Label(vo.getHotel());
 			score=new Label(vo.getScore()+"");
 			lowest_price=new Label("¥"+vo.getLowest_price()+"起");
 			this.image=vo.getScul();
-			this.list=stub.getRoom(1);
+			/*HotelBLService stub=new bl.hotel_bl.HotelBL();
+			this.list=stub.getRoom(vo.get_hotel_id());*/
 			 table=new HotelRoomTable(list);
 			 ImageView im=new ImageView(image);
 			 im.setFitHeight(50);

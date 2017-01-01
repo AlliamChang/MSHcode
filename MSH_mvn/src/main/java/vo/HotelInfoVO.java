@@ -45,7 +45,7 @@ public class HotelInfoVO {
 		this.hotel=po.getName();
 		this.adress=po.getAddress();
 		this.phone=po.getPhone();
-		this.facility=po.getFacility().split("%");
+		//this.facility=po.getFacility().split("%");
 		this.introduction=po.getIntroduction();
 		this.province=po.getProvince();
 		this.tradingArea=po.getTrade_area();

@@ -228,12 +228,23 @@ public class HotelSearchPane extends Pane{
 		        for(int i=0;i<5;i++){
 		        	this.getColumnConstraints().add(colInfo);
 		        }
-		        HotelBLService stub=new HotelBLService_Stub();
+		        HotelBLService stub=new bl.hotel_bl.HotelBL();
 			name=new Label(vo.getHotel());
 			score=new Label(vo.getScore()+"");
-			lowest_price=new Label("¥"+vo.getLowest_price()+"起");
+			double low=0;
+			this.list=stub.getRoom(vo.getHotel_id());
+			if(list!=null){
+			for(int i=0;i<list.size();i++){
+				if(low==0)
+					low=list.get(i).getPrice();
+				if(low>list.get(i).getPrice())
+					low=list.get(i).getPrice();
+			}
+			}
+			
+			lowest_price=new Label("¥"+low+"起");
 			this.image=vo.getScul();
-			this.list=stub.getRoom(1);
+			
 			 table=new HotelRoomTable(list);
 			 ImageView im=new ImageView(image);
 			 im.setFitHeight(50);

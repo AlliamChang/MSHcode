@@ -173,8 +173,17 @@ public class ReservePane extends Pane {
 				 hasChild=true;
 			}else 
 				hasChild=false;
+			double price;
+			int index = 0;
+			for(int i=0;i<room.getData().size();i++){
+				if(room.getData().get(i).getRoomStyle().equals(cb.getValue())){
+					index=i;
+					break;
+				}
+			}
+			price=room.getData().get(index).getPrice()*Integer.parseInt(number.getText())*out.getValue().compareTo(enter.getValue());
 			order.createOrder(new OrderVO(MainPane.getInstance().getUserId(), CustomerPaneController.getInstance().getAccount(), room.getData().get(0).getid(), hotel.getHotel(room.getData().get(0).getid()).getHotel(), cb.getValue(), Integer.parseInt(number.getText()),Name.getText().split(",")
-					, phone.getText().split(","),out.getValue().compareTo(enter.getValue()), new Date(enter.getValue().toString(),false),Integer.parseInt(latestTime.getValue().split(":")[0]), hasChild));
+					, phone.getText().split(","),out.getValue().compareTo(enter.getValue()), new Date(enter.getValue().toString(),false),Integer.parseInt(latestTime.getValue().split(":")[0]), hasChild,price));
 		});
 		pane.add(ensure, column_index+5, row_index+10);
 		this.getChildren().add(pane);

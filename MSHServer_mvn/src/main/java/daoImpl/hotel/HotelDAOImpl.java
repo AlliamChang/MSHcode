@@ -72,8 +72,9 @@ public class HotelDAOImpl implements HotelDAO{
 	public HotelPO find(int id) throws RemoteException {
 		try{
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction transaction =session.beginTransaction();
 		HotelPO result=(HotelPO)session.get(HotelPO.class,id);
+		transaction.commit();
 		session.close();
 		return result;
 		}catch (ObjectNotFoundException e){
@@ -149,9 +150,10 @@ public class HotelDAOImpl implements HotelDAO{
 	@Override
 	public List<RoomPO> getRoom(int hotel_id) throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction transaction =session.beginTransaction();
 		Query query = session.createQuery("from RoomPO where hotel_id = '" + hotel_id + "'");
 		List<RoomPO> list = query.list();
+		transaction.commit();
 		session.close();
 		return list;
 
@@ -162,7 +164,7 @@ public class HotelDAOImpl implements HotelDAO{
 			String name, String enter_time, String out_time, String price,
 			String score,int star) throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		session.beginTransaction();
+		Transaction transaction =session.beginTransaction();
 		StringBuilder find = new StringBuilder();
 		find.append("from HotelPO where province = '" + province + "'");
 		if(city!=null)
@@ -191,6 +193,7 @@ public class HotelDAOImpl implements HotelDAO{
 		
 		Query query = session.createQuery(find.toString());
 		List<HotelPO> list = query.list();
+		transaction.commit();
 		session.close();
 		return list;
 	}

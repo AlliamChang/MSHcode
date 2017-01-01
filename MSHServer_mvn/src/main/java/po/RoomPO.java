@@ -26,6 +26,9 @@ public class RoomPO implements Serializable{
 		this.hotel_id=hotel_id;
 		this.maxCustomer=maxCustomer;
 	}
+	public RoomPO(){
+		
+	}
 @Column(name="room_type")
 	public String getRoom_type() {
 		return room_type;

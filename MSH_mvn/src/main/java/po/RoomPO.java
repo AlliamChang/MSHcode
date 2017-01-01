@@ -1,9 +1,12 @@
-package po.hotelPO;
+package po;
+
+import java.io.Serializable;
 
 import tools.BedStyle;
 import vo.RoomVO;
 
-public class RoomPO {
+public class RoomPO implements Serializable {
+	private static final long serialVersionUID = 8961415443390938361L;
 	private String room_type;
 	private BedStyle bedStyle;
 	private double price;
@@ -84,3 +87,4 @@ public class RoomPO {
 	
 	
 }
+

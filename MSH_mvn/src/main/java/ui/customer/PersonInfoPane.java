@@ -5,6 +5,7 @@ import java.util.Arrays;
 import blservice.user_blservice.UserBLService;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import ui.utility.MyRetreatButton;
 import vo.UserVO;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -36,6 +37,7 @@ public class PersonInfoPane extends Pane {
 	private static final int column=8;
 	private static final int row=1;
 	private Image scul;
+	private MyRetreatButton back;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
 	public PersonInfoPane(UserVO vo){
@@ -52,6 +54,7 @@ public class PersonInfoPane extends Pane {
 		sex=user.getGender();
 		scul=user.getImage();
 		type = user.getType();
+		back=new MyRetreatButton(HotelSearchPane.getInstance());
 		initgrid();
 	}
 	
@@ -67,6 +70,7 @@ public class PersonInfoPane extends Pane {
 		title.setFont(Font.font("Tahoma", FontWeight.MEDIUM, 30));
 		this.grid.add(title,1,1);*/
 		
+		this.grid.add(back, column-6, row-1);
 		ImageView iv1 = new ImageView(scul);
 		iv1.setFitWidth(150);
 		iv1.setFitHeight(150);
