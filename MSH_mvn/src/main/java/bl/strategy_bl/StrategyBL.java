@@ -36,7 +36,7 @@ public class StrategyBL implements StrategyBLService{
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
-	}
+	}//添加新策略
 	
 	public ResultMessage deleteStrategy(StrategyVO vo){
 		try{
@@ -47,7 +47,7 @@ public class StrategyBL implements StrategyBLService{
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
-	}
+	}//删除策略
 	
 	public ResultMessage modifyStrategy(StrategyVO vo){
 		try{
@@ -58,7 +58,7 @@ public class StrategyBL implements StrategyBLService{
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
-	}
+	}//修改策略
    
 	public List<StrategyVO> getStrategyInHotel(int hotelId){
 		List<StrategyVO> ret=new ArrayList<StrategyVO>();

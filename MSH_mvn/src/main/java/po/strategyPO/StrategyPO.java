@@ -6,16 +6,16 @@ import tools.*;
 import vo.StrategyVO;
 
 public class StrategyPO implements Serializable{
-	private StrategyType strategyType;
-	private String name;
-	private String city;
-	private String area;
-	private String startTime;
-	private String endTime;
-	private double cost;
-	private PeopleType people;
-	private int hotelId;
-	private int fuckId;
+	private StrategyType strategyType;//策略类型
+	private String name;//策略名
+	private String city;//策略城市
+	private String area;//策略商圈
+	private String startTime;//策略开始时间
+	private String endTime;//策略到期时间
+	private double cost;//策略折扣
+	private PeopleType people;//策略面向人群
+	private int hotelId;//酒店ID
+	private int fuckId;//策略内部区分ID
 	
     public StrategyPO(){
 		
