@@ -104,10 +104,6 @@ public class UserBLServiceImpl implements UserBLService{
 			return null;
 		}
 	}
-
-	private int updateLevel(int credit) {
-		return credit / 1000 > 0 ? credit / 1000 : 1;
-	}
 	
 	@Override
 	public ResultMessage addCreditRecord(CreditVO creditVO) {
@@ -115,7 +111,6 @@ public class UserBLServiceImpl implements UserBLService{
 			crd.createRecord(creditVO.toPO());
 			UserPO userPO = ud.getUser(creditVO.getUser_id());
 			userPO.setCredit(userPO.getCredit() + creditVO.getChangeValue());
-			userPO.setLevel(updateLevel(userPO.getCredit()));
 			ud.updateUser(userPO);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
