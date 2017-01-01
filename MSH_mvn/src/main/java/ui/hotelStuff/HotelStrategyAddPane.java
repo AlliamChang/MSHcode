@@ -18,7 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import tools.PeopleType;
 import tools.ResultMessage;
+import tools.StrategyType;
 import ui.hotelStuff.control.HotelPaneController;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
@@ -132,7 +134,6 @@ public class HotelStrategyAddPane extends GridPane{
 		text.getChildren().addAll(moreRooms);
 		typeBox.getSelectionModel().select(0);
 		
-		
 		Button add = new Button("添加");
 		add.setFont(Font.font(20));
 		add.setOnAction(e -> {
@@ -141,8 +142,29 @@ public class HotelStrategyAddPane extends GridPane{
 			alert.getDialogPane().setHeaderText(null);
 			alert.showAndWait().ifPresent(ok -> {
 				if(ok.equals(ButtonType.OK)){
-					StrategyVO vo = new StrategyVO(null, null, null, null, null, null, 0, null);
-					if(ResultMessage.SUCCESS == new StrategyBL().addStrategy(null)){
+					StrategyType type;
+					switch(typeBox.getSelectionModel().getSelectedIndex()){
+					case 0:
+						type = StrategyType.HOLIDAY;
+						break;
+					case 1:
+						type = StrategyType.BIRTHDAY;
+						break;
+					case 2:
+						type = StrategyType.CO_OPERATION;
+						break;
+					case 3:
+						type = StrategyType.TRIPLEROOM;
+						break;
+					default:
+						type = null;	
+					}
+					String rStyle = roomStyle.getSelectionModel().getSelectedItem();
+					rStyle = rStyle.equals("所有")?null:rStyle;
+					StrategyVO vo = new StrategyVO(name.getText(), type, null, null, null,begin.getFormatValue(),
+							end.getFormatValue(), Integer.valueOf(discount.getText()), 
+							PeopleType.NORMAL,HotelPaneController.getInstance().getHotelId(),rStyle);
+					if(ResultMessage.SUCCESS == new StrategyBL().addStrategy(vo)){
 						HotelPaneController.getInstance().createHotelStrategyPane();
 					}
 				}

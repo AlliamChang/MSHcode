@@ -82,6 +82,10 @@ public class MyDatePicker extends DatePicker{
 	        this.setDayCellFactory(dayCellFactory);
 	}
 	
+	public String getFormatValue(){
+		return this.getValue().format(DateTimeFormatter.ofPattern(pattern));
+	}
+	
 	public void setBeforeDisable(DatePicker checkInPicker){
 		final Callback<DatePicker, DateCell> dayCellFactory = 
 	            new Callback<DatePicker, DateCell>() {

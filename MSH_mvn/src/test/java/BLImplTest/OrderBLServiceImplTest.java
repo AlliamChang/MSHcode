@@ -1,6 +1,7 @@
 package BLImplTest;
 
 import java.rmi.RemoteException;
+import java.util.List;
 
 import org.junit.*;
 
@@ -9,6 +10,7 @@ import blservice.order_blservice.OrderBLService;
 import dao.order.OrderDAO;
 import po.OrderPO;
 import tools.OrderState;
+import vo.OrderVO;
 
 public class OrderBLServiceImplTest {
 
@@ -84,6 +86,7 @@ public class OrderBLServiceImplTest {
 	
 	@Test
 	public void testGetUserOrder(){
+		List<OrderVO> list = order.getUserOrder(1, "啊");
 		
 	}
 	

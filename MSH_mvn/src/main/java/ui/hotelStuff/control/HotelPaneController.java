@@ -110,8 +110,8 @@ public class HotelPaneController {
 	 */
 	public HotelStrategyPane createHotelStrategyPane(){
 		return new HotelStrategyPane(Arrays.asList(
-				new StrategyVO("双十一促销", StrategyType.HOLIDAY,null,null, "2016/11/10","2016/11/12",10,PeopleType.NORMAL),
-				new StrategyVO("腾讯公司合作优惠", StrategyType.CO_OPERATION,null,null, "2016/11/10","2016/12/12",50, PeopleType.NORMAL)
+				new StrategyVO("双十一促销", StrategyType.HOLIDAY,null,null,null, "2016/11/10","2016/11/12",10,PeopleType.NORMAL),
+				new StrategyVO("腾讯公司合作优惠", StrategyType.CO_OPERATION,null,null,null, "2016/11/10","2016/12/12",50, PeopleType.NORMAL)
 				));
 //		return new HotelStrategyPane(new StrategyBL().getStrategyInHotel(id));
 	}
