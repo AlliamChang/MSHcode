@@ -1,6 +1,8 @@
 package bl.hotel_bl;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import po.EvaluatePO;
@@ -185,25 +187,15 @@ public class HotelBL implements HotelBLService{
 		return ret;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<HotelInfoVO> sortByHighStar(List<HotelInfoVO> list) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		int temp;
-		int count=list.size();
-		int max=0;
-		for(int j=1;j<count;j++){
-			temp=0;
-			for(int i=0;i<list.size();i++){
-				if(list.get(i).getStar()>temp){
-				temp=list.get(i).getStar();
-				max=i;
-			}
-				ret.add(list.get(max));
-				list.remove(max);
-		}
-	}
-		ret.add(list.get(0));
-		return ret;
+		Collections.sort(list, new Comparator(){
+			@Override
+			public int compare(Object arg0, Object arg1) {
+				return ((HotelInfoVO)arg1).getStar() - ((HotelInfoVO)arg0).getStar();
+			}});
+		return list;
 	}
 
 	@Override

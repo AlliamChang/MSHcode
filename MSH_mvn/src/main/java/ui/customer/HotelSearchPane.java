@@ -36,22 +36,20 @@ import ui.webAdmin.WebAdminController;
 import vo.HotelInfoVO;
 import vo.RoomVO;
 
-public class HotelSearchPane extends Pane{
-	private static final String user_name="angel"; 
+public class HotelSearchPane extends GridPane{
 	private static HotelSearchPane instance;
 	private ChoiceBox<String> P;
 	private ChoiceBox<String> city;
 	private ChoiceBox<String> TradeArea;
 	private TextField keyword;
-	private  DatePicker enter;
-	private MyDatePicker out;
-	private GridPane pane;
-	private int row=10;
-	private int column=2;
-	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
+//	private int row=10;
+//	private int column=2;
 	
 	public HotelSearchPane(){
 		super();
+		setStyle("-fx-border-color: black; -fx-font-size: 18px;");
+		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 	}
 	
 	public static HotelSearchPane getInstance(){
@@ -63,54 +61,51 @@ public class HotelSearchPane extends Pane{
 	}
 	
 	private void initPane(){
-		pane=new GridPane();
-		pane.setPadding(new Insets(10, 10, 10, 0));
-		pane.setHgap(1);
-		pane.setVgap(20);
-		pane.setAlignment(Pos.TOP_LEFT);
+//		this.setPadding(new Insets(10, 10, 10, 0));
+		this.setAlignment(Pos.CENTER);
+		this.setHgap(20);
+		this.setVgap(20);
 		//pane.setGridLinesVisible(true);
 		
 		Label title=new Label("酒店预订系统");
-		title.setFont(Font.font("Tahoma", FontWeight.MEDIUM, 32));
-		pane.add(title,column-1,row-3,3,2);
-		pane.setHalignment(title, HPos.CENTER);
+		HBox titleBox = new HBox();
+		titleBox.setAlignment(Pos.TOP_CENTER);
+		titleBox.getChildren().add(title);
+		titleBox.setMinHeight(120);
 		
-		 ColumnConstraints col0 = new ColumnConstraints(90);
-		 ColumnConstraints col1 = new ColumnConstraints(125);
-		 ColumnConstraints col2 = new ColumnConstraints(100);
-		 ColumnConstraints col3 = new ColumnConstraints(125);
-		 ColumnConstraints col4 = new ColumnConstraints(50);
-		// ColumnConstraints col5 = new ColumnConstraints(50);
-		 this.pane.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
+		title.setFont(Font.font(60));
+		this.add(titleBox,0,0,6,1);
+		
+//		 ColumnConstraints col0 = new ColumnConstraints(50);
+//		 ColumnConstraints col1 = new ColumnConstraints(120);
+//		 ColumnConstraints col2 = new ColumnConstraints(80);
+//		 ColumnConstraints col3 = new ColumnConstraints(120);
+//		 ColumnConstraints col4 = new ColumnConstraints(50);
+//		// ColumnConstraints col5 = new ColumnConstraints(50);
+//		 this.getColumnConstraints().addAll(col0,col1,col2,col3,col4);
 	        
 	        
 	        Label province=new Label("省份:");
-	        province.setFont(f);
-	        pane.add(province, column-2, row);
-	        pane.setHalignment(province, HPos.LEFT);
+	        this.add(province, 0, 1);
 	        
 	         P=new ChoiceBox<String>();
-	         P.setPrefWidth(100);
+	         P.setPrefWidth(120);
 	        P.getItems().addAll(CustomerPaneController.getInstance().getProvince());
-			pane.add(P,column-1,row);
+			this.add(P, 1, 1);
 			
 			Label City=new Label("城市:");
-			City.setFont(f);
-			pane.add(City,column,row);
-			pane.setHalignment(City, HPos.LEFT);
+			this.add(City, 2, 1);
 			
 			 city=new ChoiceBox<String>();
-			city.setPrefWidth(100);
-			pane.add(city,column+1,row);
+			city.setPrefWidth(120);
+			this.add(city,3,1);
 			
 			Label trade_area=new Label("商圈:");
-			trade_area.setFont(f);
-			pane.add(trade_area,column+2,row);
-			pane.setHalignment(trade_area, HPos.LEFT);
+			this.add(trade_area,4,1);
 			
 			 TradeArea=new ChoiceBox<String>();
-			 TradeArea.setPrefWidth(100);
-			pane.add(TradeArea,column+3,row);
+			 TradeArea.setPrefWidth(120);
+			this.add(TradeArea,5,1);
 	        
 			P.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
 				city.getItems().clear();
@@ -141,147 +136,23 @@ public class HotelSearchPane extends Pane{
 		
 		
 		
-		Label key=new Label("关键词:");
-		key.setFont(f);
-		pane.add(key,column-2,row+1);
-		pane.setHalignment(key, HPos.LEFT);
+		Label key=new Label("名称:");
+		this.add(key,0,2);
 		
 		 keyword=new TextField();
-		keyword.setFont(f);
-		keyword.setMinWidth(200);
-		pane.add(keyword, column-1, row+1,5,1);
+		this.add(keyword, 1, 2, 4, 1);
 		
 		Button search=new Button("搜索");
-		search.setFont(f);
 		search.setOnMouseClicked((MouseEvent me)->{
-			HotelListPane.setList(this.getSPane());
-			MainPane.getInstance().setRightPane(new HotelListPane());
+			MainPane.getInstance().setRightPane(new HotelListPane(P.getValue(), city.getValue(), TradeArea.getValue(), keyword.getText()));
 		});
-		pane.add(search,column+4,row+1);
-		
-		Label enter_time=new Label("入住时间:");
-		enter_time.setFont(f);
-		pane.add(enter_time, column-2, row+2);
-		pane.setHalignment(enter_time, HPos.LEFT);
-		
-		 enter=new MyDatePicker();
-		enter.setMaxWidth(140);
-		pane.add(enter, column-1, row+2);
-		
-		Label out_time=new Label("退房时间:");
-		out_time.setFont(f);
-		pane.add(out_time,column,row+2);
-		pane.setHalignment(out_time, HPos.LEFT);
-		
-		 out=new MyDatePicker();
-		out.setMaxWidth(140);
-		out.setBeforeDisable(enter);
-		pane.add(out,column+1,row+2);
-		
-		instance.getChildren().add(pane);
-	}
-	
-	private ScrollPane getSPane(){
-		VBox vb=new VBox();
-		HBox hb=new HBox();
-		HotelBLService hotel=new HotelBL();
-		 ToggleButton tb1 = new ToggleButton("评分");
-		 ToggleButton tb2 = new ToggleButton("价格");
-		 List<HotelInfoVO> list=hotel.search(HotelSearchPane.this.P.getValue(), HotelSearchPane.this.city.getValue(), 
-					HotelSearchPane.this.TradeArea.getValue(), HotelSearchPane.this.keyword.getText(),
-					null, null, null, null, -1);
-		 ToggleButton tb3= new ToggleButton("星级");
-		 tb3.setOnMouseClicked((MouseEvent e)->{
-			 vb.getChildren().removeAll(content.makeList(
-				list));
-			 vb.getChildren().addAll(content.makeList(hotel.sortByHighStar(list)));
-			//HotelListPane.getInstance().getChildren().remove(pane);
-			
-		 });
-		
-		 ToggleButton tb4= new ToggleButton("历史酒店");
-		 hb.getChildren().addAll(tb1,tb2,tb3,tb4);
-		ScrollPane sp=new ScrollPane(vb);
-		sp.setPrefSize(520,400);
-		vb.setMinWidth(510);
-		vb.setPadding(new Insets(10, 10, 10, 10));
-		vb.setSpacing(10);
-		
-		vb.getChildren().add(hb);
-		/*System.out.println(HotelSearchPane.this.P.getValue());
-		System.out.println(HotelSearchPane.this.city.getValue());
-		System.out.println(HotelSearchPane.this.TradeArea.getValue());
-		System.out.println(HotelSearchPane.this.keyword.getText());
-		System.out.println(HotelSearchPane.this.enter.getValue());
-		System.out.println(HotelSearchPane.this.out.getValue());
-		System.out.println(hotel.search(HotelSearchPane.this.P.getValue(), HotelSearchPane.this.city.getValue(), 
-				HotelSearchPane.this.TradeArea.getValue(), HotelSearchPane.this.keyword.getText(),
-				null, null, null, null, -1));*/
-		vb.getChildren().addAll(content.makeList(
-				hotel.search(HotelSearchPane.this.P.getValue(), HotelSearchPane.this.city.getValue(), 
-						HotelSearchPane.this.TradeArea.getValue(), HotelSearchPane.this.keyword.getText(),
-						null, null, null, null, -1)));
-		sp.setMinWidth(648);
-		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		return sp;
+		search.setPrefSize(90, 35);
+		HBox searchBox = new HBox();
+		searchBox.setAlignment(Pos.BOTTOM_RIGHT);
+		searchBox.getChildren().add(search);
+		this.add(searchBox, 5, 2);
 	}
 }
-	 class content extends GridPane{
-		Label name;
-		Label star;
-		Label score;
-		Label lowest_price;
-		List<RoomVO> list;
-		Image image; 
-		Button bn=new Button("查看");
-		HotelRoomTable table;
-		content(HotelInfoVO vo){
-			super();
-			 ColumnConstraints colInfo = new ColumnConstraints();
-		        colInfo.setPercentWidth(20);
-		        for(int i=0;i<6;i++){
-		        	this.getColumnConstraints().add(colInfo);
-		        }
-		        HotelBLService stub=new bl.hotel_bl.HotelBL();
-			name=new Label(vo.getHotel());
-			star=new Label(vo.getStar()+"星");
-			score=new Label(vo.getScore()+"");
-			double low=0;
-			this.list=stub.getRoom(vo.getHotel_id());
-			if(list!=null){
-			for(int i=0;i<list.size();i++){
-				if(low==0)
-					low=list.get(i).getPrice();
-				if(low>list.get(i).getPrice())
-					low=list.get(i).getPrice();
-			}
-			}
-			
-			lowest_price=new Label("¥"+low+"起");
-			this.image=vo.getScul();
-			
-			 table=new HotelRoomTable(list);
-			 ImageView im=new ImageView(image);
-			 im.setFitHeight(50);
-			 im.setFitWidth(50);
-			 bn.setOnMouseClicked((MouseEvent me)->{
-				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(vo));
-			 });
-			this.add(im, 0, 0);
-			this.add(star,5,0);
-			this.add(name,1,0);
-			this.add(bn, 2, 0);
-			this.add(score,3,0);
-			this.add(lowest_price, 4, 0);
-			this.add(table,0,1,5,1);
-			
-		}
-		static List<content> makeList(List<HotelInfoVO> list2){
-			ArrayList<content> ret = new ArrayList<content>();
-			for(HotelInfoVO item:list2)
-				ret.add(new content(item));
-			return ret;
-		}
-	}
+
 	
 

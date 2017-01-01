@@ -28,35 +28,40 @@ public class ModifyUserInfoPane extends AnchorPane{
 		setStyle("-fx-border-color: black");
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
-		
+
 		typeLabel = new Label("账户类型：");
-		companyLabel = new Label("企业：");
-		companyField = new TextField(user.getCompany());
-		customerButton = new ToggleButton("普通会员");
-		customerButton.setStyle("-fx-background-radius: 3 0 0 3, 3 0 0 3, 2 0 0 2, 1 0 0 1;");
-		companyCustomerButton = new ToggleButton("企业会员");
-		companyCustomerButton.setStyle("-fx-background-radius: 0 3 3 0, 0 3 3 0, 0 2 2 0, 0 1 1 0;");
-		group = new ToggleGroup();
 		grid = new GridPane();
-		customerButton.setToggleGroup(group);
-		companyCustomerButton.setToggleGroup(group);
-		group.selectedToggleProperty().addListener(
-				(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) -> {
-					if (newValue == null) {
-						group.selectToggle(oldValue);
-					} else {
-						if (newValue.equals(companyCustomerButton)) {
-							grid.add(companyLabel, 0, 4);
-							grid.add(companyField, 1, 4);
+		if (user.getType() != UserType.CUSTOMER && user.getType() != UserType.COMPANY_CUSTOMER)
+			grid.add(new Label(UserInfoPane.typeCheck(user.getType())), 1, 0);
+		else {
+			companyLabel = new Label("企业：");
+			companyField = new TextField(user.getCompany());
+			customerButton = new ToggleButton("普通会员");
+			customerButton.setStyle("-fx-background-radius: 3 0 0 3, 3 0 0 3, 2 0 0 2, 1 0 0 1;");
+			companyCustomerButton = new ToggleButton("企业会员");
+			companyCustomerButton.setStyle("-fx-background-radius: 0 3 3 0, 0 3 3 0, 0 2 2 0, 0 1 1 0;");
+			group = new ToggleGroup();
+			customerButton.setToggleGroup(group);
+			companyCustomerButton.setToggleGroup(group);
+			group.selectedToggleProperty().addListener(
+					(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) -> {
+						if (newValue == null) {
+							group.selectToggle(oldValue);
 						} else {
-							grid.getChildren().remove(companyLabel);
-							grid.getChildren().remove(companyField);
+							if (newValue.equals(companyCustomerButton)) {
+								grid.add(companyLabel, 0, 4);
+								grid.add(companyField, 1, 4);
+							} else {
+								grid.getChildren().remove(companyLabel);
+								grid.getChildren().remove(companyField);
+							}
 						}
-					}
-		});
-		group.selectToggle(user.getType() == UserType.CUSTOMER ? customerButton : companyCustomerButton);
-		typeBox = new HBox();
-		typeBox.getChildren().addAll(customerButton, companyCustomerButton);
+			});
+			group.selectToggle(user.getType() == UserType.CUSTOMER ? customerButton : companyCustomerButton);
+			typeBox = new HBox();
+			typeBox.getChildren().addAll(customerButton, companyCustomerButton);
+			grid.add(typeBox, 1, 0);
+		}
 		
 		nameLabel = new Label("姓名：");
 		nameField = new TextField(user.getName());
@@ -73,7 +78,6 @@ public class ModifyUserInfoPane extends AnchorPane{
 		numberField.setMaxWidth(170);
 		grid.setVgap(30);
 		grid.add(typeLabel, 0, 0);
-		grid.add(typeBox, 1, 0);
 		grid.add(nameLabel, 0, 1);
 		grid.add(nameField, 1, 1);
 		grid.add(genderLabel, 0, 2);
