@@ -177,7 +177,13 @@ public class StrategyBL implements StrategyBLService{
 	
 	public double getVipPrice(UserVO user){
 		double vipPrice=0.00;
-		
+		List<StrategyVO> list=this.getStrategyInWeb();
+		if(user.getLevel()>0){
+			for(int i=0;i<list.size();i++){
+				if(list.get(i).getStrategyType()==StrategyType.VIP)
+					vipPrice+=list.get(i).getCost();	
+			}
+		}
 		return vipPrice;
 	}//网站策略--vip折扣
 	
