@@ -155,13 +155,14 @@ public class HotelInfoRevisePane extends AnchorPane{
 		FlowPane flow = new FlowPane(Orientation.HORIZONTAL,3,6);
 		flow.setPrefWrapLength(350);
 		List<MyDeletableTextField> faciText = new ArrayList<MyDeletableTextField>();
-		for(int i = 0; i < hotelInfo.getFacility().length; i ++){
-			MyDeletableTextField temp = new MyDeletableTextField(flow,hotelInfo.getFacility()[i]);
-			temp.setMaxWidth(100);
-			temp.getEditor().textProperty().addListener((l,o,n) -> hasntRevise.set(false));
-			faciText.add(temp);
-			flow.getChildren().add(temp);
-		}
+		if (hotelInfo.getFacility() != null)
+			for(int i = 0; i < hotelInfo.getFacility().length; i ++){
+				MyDeletableTextField temp = new MyDeletableTextField(flow,hotelInfo.getFacility()[i]);
+				temp.setMaxWidth(100);
+				temp.getEditor().textProperty().addListener((l,o,n) -> hasntRevise.set(false));
+				faciText.add(temp);
+				flow.getChildren().add(temp);
+			}
 		Button addFaci = new Button("+");
 		addFaci.setMinWidth(20);
 		addFaci.setOnAction(e -> {

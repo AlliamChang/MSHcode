@@ -106,11 +106,12 @@ public class HotelInfoPane extends AnchorPane{
 		
 		Text faciText = new Text();
 		StringBuilder temp = new StringBuilder();
-		for(int i = 0; i < hotelInfo.getFacility().length; i ++){
-			temp.append(hotelInfo.getFacility()[i]);
-			if(i < hotelInfo.getFacility().length - 1)
-				temp.append("、");
-		}
+		if (hotelInfo.getFacility() != null)
+			for(int i = 0; i < hotelInfo.getFacility().length; i ++){
+				temp.append(hotelInfo.getFacility()[i]);
+				if(i < hotelInfo.getFacility().length - 1)
+					temp.append("、");
+			}
 		faciText.setText(temp.toString());
 		faciText.setWrappingWidth(250);
 		infoPane.add(faciText, 1, 6);

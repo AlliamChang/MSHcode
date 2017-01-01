@@ -18,25 +18,37 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import tools.UserType;
 
 public class PersonInfoPane extends Pane {
 	private UserVO user;
-	private  String user_name=user.getAccount();
-	private String name=user.getName();
-	private String phone_number=user.getNumber();
-	private String birthday=user.getYear()+"-"+user.getMonth()+"-"+user.getDay();
-	private int credit_value=user.getCredit(),vip_level=user.getLevel();
-	private String type;
-	private String sex=user.getGender();
+	private  String user_name;
+	private String name;
+	private String phone_number;
+	private String birthday;
+	private int credit_value,vip_level;
+	private UserType type;
+	private String sex;
 	private GridPane grid;
 	private static final int column=3;
 	private static final int row=2;
-	private Image scul=user.getImage();
+	private Image scul;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
 	public PersonInfoPane(UserVO vo){
 		super();
+		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		user=vo;
+		user_name=user.getAccount();
+		name=user.getName();
+		phone_number=user.getNumber();
+		birthday=user.getYear()+"-"+user.getMonth()+"-"+user.getDay();
+		credit_value=user.getCredit();
+		vip_level=user.getLevel();
+		sex=user.getGender();
+		scul=user.getImage();
+		type = user.getType();
 		initgrid();
 	}
 	
@@ -53,6 +65,8 @@ public class PersonInfoPane extends Pane {
 		this.grid.add(title,1,1);
 		
 		ImageView iv1 = new ImageView(scul);
+		iv1.setFitWidth(150);
+		iv1.setFitHeight(150);
 		this.grid.add(iv1,column,row);
 				
 		Text uncontent=new Text(this.user_name);
@@ -102,8 +116,8 @@ public class PersonInfoPane extends Pane {
 	    member.setFont(f);
 	    this.grid.add(member, column, row+5);
 	    Text membercontent;
-	    if(type.equals("普通会员")||type.equals("企业会员")){
-	    	membercontent=new Text(type);
+	    if(type == UserType.CUSTOMER ||type == UserType.COMPANY_CUSTOMER){
+	    	membercontent=new Text(type == UserType.CUSTOMER ? "普通会员" : "企业会员");
 	     	membercontent.setFont(f);
 		    this.grid.add(membercontent, column+1, row+5);
 
