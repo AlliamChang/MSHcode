@@ -86,7 +86,7 @@ public class UserInfoPane extends AnchorPane{
 		AnchorPane.setLeftAnchor(detailBox, 70.0);
 		getChildren().add(imageNameBox);
 		AnchorPane.setRightAnchor(imageNameBox, 70.0);
-		AnchorPane.setTopAnchor(imageNameBox, 90.0);
+		AnchorPane.setTopAnchor(imageNameBox, 70.0);
 		
 		hBox = new HBox();
 		hBox.setSpacing(30);
