@@ -6,35 +6,55 @@ import java.util.List;
 
 import blservice.user_blservice.UserBLService;
 import javafx.scene.image.Image;
+import po.UserPO;
 import tools.ChangeReason;
 import tools.Date;
+import tools.Encryption;
 import tools.ResultMessage;
 import tools.UserType;
 import vo.CreditVO;
 import vo.UserVO;
 
 public class UserBLService_Stub implements UserBLService {
-
+	private ArrayList<UserVO> database;
+	private ArrayList<Integer> logged;
+	private int idNow;
+	
+	public UserBLService_Stub() {
+		logged = new ArrayList<Integer>();
+		database = new ArrayList<UserVO>();
+		idNow = -1;
+	}
+	
 	public UserVO get(String account) {
-		// TODO Auto-generated method stub
-		return "123".equals(account) 
-				? new UserVO( "123", "456" , "小红", "女", "18360977498", "南京大学教育超市北边收银台", 0, 0, 0, UserType.COMPANY_CUSTOMER, null) 
-				: null;
+		for (UserVO user: database)
+			if (user.getAccount().equals(account))
+				return user;
+		return null;
 	}
 
 	public int add(UserVO userVO) {
-		System.out.println("成功添加 ");
-		return 0;
+		userVO.setID(++idNow);
+		database.add(userVO);
+		return idNow;
 	}
 
 	public ResultMessage update(UserVO userVO) {
-		System.out.println("修改成功！");
-		return ResultMessage.SUCCESS;
+		for (int i = 0; i < database.size(); i++)
+			if (database.get(i).getID() == userVO.getID()) {
+				database.set(i, userVO);
+				return ResultMessage.SUCCESS;
+			}
+		return ResultMessage.FAIL;
 	}
 
 	public ResultMessage delete(int ID) {
-		System.out.println("删除成功！");
-		return ResultMessage.SUCCESS;
+		for (UserVO vo: database) 
+			if (vo.getID() == ID) {
+				database.remove(vo);
+				return ResultMessage.SUCCESS;
+			}
+		return ResultMessage.FAIL;
 	}
 
 	@Override
@@ -46,26 +66,74 @@ public class UserBLService_Stub implements UserBLService {
 
 	@Override
 	public List<UserVO> getAllMarketers() {
-		return Arrays.asList(new UserVO("123", "郑晓峰", "男", "15050582962", UserType.MARKETER){{setID(1);}},
-				new UserVO("123", "郑皓铭", "男", "15011112962", UserType.MARKETER){{setID(2);}});
-	}
-
-	@Override
-	public List<String> getReservationHistory(int ID) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<UserVO> marketers = new ArrayList<UserVO>();
+		for (UserVO vo: database)
+			if (vo.getType() == UserType.MARKETER)
+				marketers.add(vo);
+		return marketers;
 	}
 
 	@Override
 	public UserVO get(int ID) {
-		// TODO Auto-generated method stub
-		return ID == 1 ? new UserVO("456" , "angel", "女", "18360977498", UserType.HOTEL_STAFF) : null;
+		for (UserVO vo: database)
+			if (vo.getID() == ID)
+				return vo;
+		return null;
 	}
 
 	@Override
-	public ResultMessage updateCredit(int ID, int val) {
-		// TODO Auto-generated method stub
+	public boolean isUsed(String account) {
+		if (account == null)
+			return false;
+		for (UserVO vo: database)
+			if (account.equals(vo.getAccount()))
+				return true;
+		return false;
+	}
+
+	@Override
+	public ResultMessage addCreditRecord(CreditVO creditVO) {
 		return null;
 	}
+
+	@Override
+	public ResultMessage login(String account, String password) {
+		UserVO vo;
+		String md5 = Encryption.encrypt(password);
+		try {
+			int id = Integer.parseInt(account);
+			vo = get(id);
+		} catch (NumberFormatException e) {
+			vo = get(account);
+		}
+		if (vo == null)
+			return ResultMessage.NOT_EXIST;
+		if (!vo.getPassword().equals(md5))
+			return ResultMessage.FAIL;
+		if (logged.contains((Integer)vo.getID()))
+			return ResultMessage.LOGGED;
+		logged.add((Integer)vo.getID());
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage logout(int id) {
+		logged.remove((Integer)id);
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage changePassword(int id, String oldPW, String newPW) {
+		UserVO user = get(id);
+		if (user == null)
+			return ResultMessage.NOT_EXIST;
+		if (!Encryption.encrypt(oldPW).equals(user.getPassword()))
+			return ResultMessage.FAIL;
+		user.setPassword(newPW);
+		update(user);
+		return ResultMessage.SUCCESS;
+	}
+
+
 	
 }

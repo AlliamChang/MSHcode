@@ -13,11 +13,15 @@ import vo.UserVO;
 public class UserDAOStub implements UserDAO {
 
 	private ArrayList<UserPO> dataBase;
-	private static int maxID;
+	private ArrayList<Integer> logged;
+	private int maxID;
+	private int request; 
 	
 	public UserDAOStub(){
 		dataBase = new ArrayList<UserPO>();
+		logged = new ArrayList<Integer>();
 		maxID = 0;
+		request = 100;
 	}
 	
 	@Override
@@ -68,6 +72,42 @@ public class UserDAOStub implements UserDAO {
 			if (dataBase.get(i).getID() == ID)
 				dataBase.remove(i);
 		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage login(String account, String password) throws RemoteException {
+		UserPO po;
+		try {
+			int id = Integer.parseInt(account);
+			po = getUser(id);
+		} catch (NumberFormatException e) {
+			po = getUser(account);
+		}
+		if (po == null)
+			return ResultMessage.NOT_EXIST;
+		if (!po.getPassword().equals(password))
+			return ResultMessage.FAIL;
+		if (logged.contains((Integer)po.getID()))
+			return ResultMessage.LOGGED;
+		logged.add((Integer)po.getID());
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage logout(int id) throws RemoteException {
+		logged.remove((Integer)id);
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public ResultMessage setLvUpRequest(int request) throws RemoteException {
+		this.request = request;
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public int getLvUpRequest() throws RemoteException {
+		return request;
 	}
 
 }
