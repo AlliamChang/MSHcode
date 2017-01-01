@@ -8,6 +8,7 @@ import po.UserPO;
 import po.hotelPO.HotelPO;
 import po.RoomPO;
 import rmi.RemoteHelper;
+import dao.hotel.EvaluateDAO;
 import dao.hotel.HotelDAO;
 import data_stub.EvaluateDAO_Stub;
 import data_stub.HotelDAOStub;
@@ -23,12 +24,12 @@ public class HotelBL implements HotelBLService{
 	private HotelDAO hotel;
 	private UserBLServiceImpl user;
 	private RemoteHelper help;
-	private EvaluateDAO_Stub evaluate;
+	private EvaluateDAO evaluate;
 	public HotelBL(){
 		help=RemoteHelper.getInstance();
 		hotel=help.getHotelDAO();
 		user=new UserBLServiceImpl();
-		evaluate=new EvaluateDAO_Stub();
+		evaluate=help.getEvaluateDAO();
 		
 	}
 
@@ -124,7 +125,7 @@ public class HotelBL implements HotelBLService{
 		try{
 			List<EvaluatePO>list= evaluate.getEvaluate(hotel_id);
 			for(int i=0;i<list.size();i++){
-				ret.add(list.get(i).tovo());
+				ret.add(new EvaluateVO(list.get(i)));
 			}
 			return ret;
 		}catch(RemoteException e){
@@ -294,6 +295,17 @@ public class HotelBL implements HotelBLService{
 		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
 		//List<Integer>id_li
 		return ret;
+	}
+
+	@Override
+	public ResultMessage createEvaluate(EvaluateVO vo) {
+		try {
+			return evaluate.createEvaluate(vo.topo());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

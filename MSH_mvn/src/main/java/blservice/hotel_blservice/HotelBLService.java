@@ -47,7 +47,8 @@ public interface HotelBLService {
 	public List<HotelInfoVO> sortByLowScore(List<HotelInfoVO> list);
 	//历史酒店
 	public List<HotelInfoVO> historyHotel(List<HotelInfoVO>list);
-
+	
+	public ResultMessage createEvaluate(EvaluateVO vo);
 	}
 		
 

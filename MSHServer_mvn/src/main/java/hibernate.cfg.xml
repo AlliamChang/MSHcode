@@ -23,5 +23,6 @@
 		<mapping class="po.strategyPO.StrategyPO"/>
 		<mapping class="po.CheckInPO"/>
 		<mapping class="po.RoomPO"/>
+		<mapping class="po.EvaluatePO"/>
 	</session-factory>
 </hibernate-configuration>

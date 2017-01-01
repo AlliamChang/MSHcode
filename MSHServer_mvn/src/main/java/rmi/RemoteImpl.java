@@ -9,10 +9,12 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
+import dao.hotel.EvaluateDAO;
 import dao.hotel.HotelDAO;
 import dao.order.OrderDAO;
 import dao.user.CreditRecordsDAO;
 import dao.user.UserDAO;
+import daoImpl.hotel.EvaluateDAOImpl;
 import daoImpl.hotel.HotelDAOImpl;
 import daoImpl.orderDaoImpl.OrderDAOImpl;
 import daoImpl.user.CreditRecordsDAOImpl;
@@ -23,7 +25,7 @@ import po.strategyPO.StrategyPO;
 import tools.OrderState;
 import tools.ResultMessage;
 
-public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO, CreditRecordsDAO, StrategyDAO {
+public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, HotelDAO, OrderDAO, CreditRecordsDAO, StrategyDAO,EvaluateDAO {
 	
 	/**
 	 * 
@@ -34,6 +36,7 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	private OrderDAO orderDAO;
 	private CreditRecordsDAO creditRecordsDAO;
 	private StrategyDAO strategyDAO;
+	private EvaluateDAO evaluateDAO;
 	
 	public RemoteImpl() throws RemoteException{
 		userDAO = new UserDAOImpl();
@@ -41,6 +44,7 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 		orderDAO = new OrderDAOImpl();
 		creditRecordsDAO = new CreditRecordsDAOImpl();
 		strategyDAO=new StrategyDAOImpl();
+		evaluateDAO=new EvaluateDAOImpl();
 	}
 
 	@Override
@@ -221,6 +225,16 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	@Override
 	public int getLvUpRequest() throws RemoteException {
 		return userDAO.getLvUpRequest();
+	}
+
+	@Override
+	public List<EvaluatePO> getEvaluate(int hotel_id) throws RemoteException {
+		return evaluateDAO.getEvaluate(hotel_id);
+	}
+
+	@Override
+	public ResultMessage createEvaluate(EvaluatePO po) throws RemoteException {
+		return evaluateDAO.createEvaluate(po);
 	}
 
 }

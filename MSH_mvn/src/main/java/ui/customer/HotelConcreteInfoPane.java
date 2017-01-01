@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import bl.hotel_bl.HotelBL;
 import bl_stub.HotelBLService_Stub;
+import blservice.hotel_blservice.HotelBLService;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.EvaluateVO;
@@ -73,8 +75,8 @@ public class HotelConcreteInfoPane extends Pane{
 		vb.setMinWidth(600);
 		vb.setPadding(new Insets(10, 10, 10, 10));
 		vb.setSpacing(10);
-		HotelBLService_Stub stub=new HotelBLService_Stub();
-		vb.getChildren().addAll(Evaluate.getEvaluate(stub.getEvaluate(1)));
+		HotelBLService stub=new HotelBL();
+		vb.getChildren().addAll(Evaluate.getEvaluate(stub.getEvaluate(vo.getHotel_id())));
 		evaluate=new ScrollPane(vb);
 		evaluate.setMinWidth(605);
 		evaluate.setPrefSize(600,400);
@@ -160,7 +162,7 @@ class Evaluate extends GridPane{
 		content.setEditable(false);
 		content.setMaxWidth(370);
 		content.setMaxHeight(50);
-		Text name=new Text(ev.getId()+"");
+		Text name=new Text(ev.getUsername()+"");
 		Text time=new Text(ev.getDate());
 		this.add(score, 0, 0);
 		this.add(content, 0, 1);

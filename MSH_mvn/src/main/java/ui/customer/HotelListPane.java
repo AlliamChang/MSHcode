@@ -241,45 +241,56 @@ public class HotelListPane extends Pane{
 		return sp;
 	}
 }
-	 class Cont extends GridPane{
-		Label name;
-		Label score;
-		Label lowest_price;
-		List<RoomVO> list;
-		Image image; 
-		Label star;
-		Button bn=new Button("查看");
-		HotelRoomTable table;
-		Cont(HotelInfoVO vo){
-			super();
-			 ColumnConstraints colInfo = new ColumnConstraints();
-		        colInfo.setPercentWidth(20);
-		        for(int i=0;i<6;i++){
-		        	this.getColumnConstraints().add(colInfo);
-		        }
-		        star=new Label(vo.getStar()+"");
-			name=new Label(vo.getHotel());
-			score=new Label(vo.getScore()+"");
-			lowest_price=new Label("¥"+vo.getLowest_price()+"起");
-			this.image=vo.getScul();
-			HotelBLService stub=new bl.hotel_bl.HotelBL();
-			this.list=stub.getRoom(vo.getHotel_id());
-			 table=new HotelRoomTable(list);
-			 ImageView im=new ImageView(image);
-			 im.setFitHeight(50);
-			 im.setFitWidth(50);
-			/* bn.setOnMouseClicked((MouseEvent me)->{
-				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane());
-			 });*/
-			this.add(im, 0, 0);
-			this.add(star, 5, 0);
-			this.add(name,1,0);
-			this.add(bn, 2, 0);
-			this.add(score,3,0);
-			this.add(lowest_price, 4, 0);
-			this.add(table,0,1,5,1);
-			
+class Cont extends GridPane{
+	Label name;
+	Label star;
+	Label score;
+	Label lowest_price;
+	List<RoomVO> list;
+	Image image; 
+	Button bn=new Button("查看");
+	HotelRoomTable table;
+	Cont(HotelInfoVO vo){
+		super();
+		 ColumnConstraints colInfo = new ColumnConstraints();
+	        colInfo.setPercentWidth(20);
+	        for(int i=0;i<6;i++){
+	        	this.getColumnConstraints().add(colInfo);
+	        }
+	        HotelBLService stub=new bl.hotel_bl.HotelBL();
+		name=new Label(vo.getHotel());
+		star=new Label(vo.getStar()+"星");
+		score=new Label(vo.getScore()+"");
+		double low=0;
+		this.list=stub.getRoom(vo.getHotel_id());
+		if(list!=null){
+		for(int i=0;i<list.size();i++){
+			if(low==0)
+				low=list.get(i).getPrice();
+			if(low>list.get(i).getPrice())
+				low=list.get(i).getPrice();
 		}
+		}
+		
+		lowest_price=new Label("¥"+low+"起");
+		this.image=vo.getScul();
+		
+		 table=new HotelRoomTable(list);
+		 ImageView im=new ImageView(image);
+		 im.setFitHeight(50);
+		 im.setFitWidth(50);
+		 bn.setOnMouseClicked((MouseEvent me)->{
+			 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(vo));
+		 });
+		this.add(im, 0, 0);
+		this.add(star,5,0);
+		this.add(name,1,0);
+		this.add(bn, 2, 0);
+		this.add(score,3,0);
+		this.add(lowest_price, 4, 0);
+		this.add(table,0,1,5,1);
+		
+	}
 		static List<Cont> makeList(List<HotelInfoVO> list2){
 			ArrayList<Cont> ret = new ArrayList<Cont>();
 			for(HotelInfoVO item:list2)

@@ -4,67 +4,76 @@ import po.EvaluatePO;
 
 public class EvaluateVO {
 	private String content;
-	private int user_id;
-	private String date,name;
+	private int hotel_id;
+	private String date;
 	private double score;
+	private String username;
 	
-	public EvaluateVO(String content,String name,int id,String date,double score){
+	public EvaluateVO(String content,String username,int hotel_id,String date,double score){
 		this.content=content;
-		this.user_id=id;
+		this.hotel_id=hotel_id;
 		this.date=date;
 		this.score=score;
-		this.name=name;
+		this.username=username;
 	}
 	
 	public EvaluateVO(EvaluatePO po){
 		this.content=po.getContent();
-		this.user_id=po.getUser_id();
-		this.name=po.getName();
-		this.date=po.getDate();
+		this.hotel_id=po.getHotel_id();
+		this.username=po.getUsername();
+		this.date=po.getTime();
 		this.score=po.getScore();
 	}
 	
 	public EvaluatePO topo(){
-		return new EvaluatePO(content,name,user_id,date,score);
+		EvaluatePO po=new EvaluatePO();
+		po.setContent(this.content);
+		po.setHotel_id(this.hotel_id);
+		po.setScore(this.score);
+		po.setTime(this.date);
+		po.setUsername(this.username);
+		return po;
 	}
-	
-	public String getContent(){
+
+	public String getContent() {
 		return content;
 	}
-	
-	public String getName() {
-		return name;
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public int getHotel_id() {
+		return hotel_id;
 	}
 
-	public String getDate(){
+	public void setHotel_id(int hotel_id) {
+		this.hotel_id = hotel_id;
+	}
+
+	public String getDate() {
 		return date;
 	}
-	
-	public int getId(){
-		return user_id;
+
+	public void setDate(String date) {
+		this.date = date;
 	}
-	
-	public void setContent(String content){
-		this.content=content;
-	}
-	
-	public void setId(int id){
-		this.user_id=id;
-	}
-	
-	public void setDate(String date){
-		this.date=date;
-	}
-	
-	public void setScore(double score){
-		this.score=score;
-	}
-	
-	public double getScore(){
+
+	public double getScore() {
 		return score;
 	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	
 }

@@ -27,7 +27,7 @@ public class MyOrderTable extends TableView{
 	private final ObservableList<OrderVO> data;
 	private static List<String> order_info;
 	private boolean isCanceled=false;
-	private  List<OrderVO> list;
+	private  static List<OrderVO> list;
 	private int width=80;
 	
 	public MyOrderTable(List<OrderVO> list){
@@ -133,6 +133,10 @@ public class MyOrderTable extends TableView{
 	
 	public static List<String> getList(){
 		return order_info;
+	}
+	
+	public static List<OrderVO>getrder(){
+		return list;
 	}
 }
 

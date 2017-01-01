@@ -1,8 +1,9 @@
 package rmi;
 
 import java.rmi.Remote;
-import dao.strategy_dao.*;
 
+import dao.strategy_dao.*;
+import dao.hotel.EvaluateDAO;
 import dao.hotel.HotelDAO;
 import dao.order.OrderDAO;
 import dao.user.CreditRecordsDAO;
@@ -39,5 +40,9 @@ public class RemoteHelper {
 	
 	public StrategyDAO getStrategyDAO(){
 		return (StrategyDAO)remote;
+	}
+	
+	public EvaluateDAO getEvaluateDAO(){
+		return (EvaluateDAO)remote;
 	}
 }
