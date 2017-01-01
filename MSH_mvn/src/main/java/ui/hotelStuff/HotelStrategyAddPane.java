@@ -2,20 +2,28 @@ package ui.hotelStuff;
 
 import java.time.LocalDate;
 
+import bl.strategy_bl.StrategyBL;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import tools.ResultMessage;
+import ui.hotelStuff.control.HotelPaneController;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyRetreatButton;
+import vo.StrategyVO;
 
 public class HotelStrategyAddPane extends GridPane{
 
@@ -35,7 +43,7 @@ public class HotelStrategyAddPane extends GridPane{
 		
 		MyRetreatButton retreat = new MyRetreatButton(lastPane);
 		GridPane.setConstraints(retreat, 0, 0);
-		GridPane.setMargin(retreat, new Insets(-115,0,0,-95));
+		GridPane.setMargin(retreat, new Insets(-65,0,0,-95));
 		
 		Label title = new Label("新的促销策略");
 		title.setFont(Font.font(30));
@@ -55,13 +63,19 @@ public class HotelStrategyAddPane extends GridPane{
 		
 		
 		GridPane text = new GridPane();
+        ColumnConstraints colinfo1 = new ColumnConstraints(100, 100, 100);
+        ColumnConstraints colinfo2 = new ColumnConstraints(130, 130, 130);
+        ColumnConstraints colinfo3 = new ColumnConstraints(15, 15, 15);
+        text.getColumnConstraints().addAll(colinfo1,colinfo2,colinfo3,colinfo2);
 		text.setStyle("-fx-border-color:black");
 		text.setPrefSize(400, 300);
+		text.setVgap(20);
+		text.setPadding(new Insets(20,5,20,5));
 		text.setMaxSize(GridPane.USE_PREF_SIZE, GridPane.USE_PREF_SIZE);
 		text.setMinSize(GridPane.USE_PREF_SIZE, GridPane.USE_PREF_SIZE);
 		GridPane.setConstraints(text, 0, 3, 2, 5);
 		
-		Label nameLabel = new Label("促销策略名称：");
+		Label nameLabel = new Label("策略名称：");
 		GridPane.setConstraints(nameLabel, 0, 0);
 		
 		Label timeLabel = new Label("时间：");
@@ -88,23 +102,23 @@ public class HotelStrategyAddPane extends GridPane{
 		TextField discount = new TextField();
 		GridPane.setConstraints(discount, 1, 2);
 		
-		ChoiceBox<String> discountType = new ChoiceBox<>();
-		discountType.getItems().addAll("元","百分比");
+		Label discountType = new Label("元");
 		GridPane.setConstraints(discountType, 3, 2);
 		
-		Label businessLabel = new Label("选择合作企业：");
+		Label businessLabel = new Label("合作企业：");
 		GridPane.setConstraints(businessLabel, 0, 3);
 		
 		TextField business = new TextField();
-		GridPane.setConstraints(business, 1, 3);
+		GridPane.setConstraints(business, 1, 3, 3, 1);
 		
-		Label roomStyleLabel = new Label("选择特惠房型：");
+		Label roomStyleLabel = new Label("特惠房型：");
 		GridPane.setConstraints(roomStyleLabel, 0, 3);
 		
-		Label roomNumLabel = new Label("特惠要求数量：");
+		Label roomNumLabel = new Label("要求数量：");
 		GridPane.setConstraints(roomNumLabel, 0, 4);
 		
 		ChoiceBox<String> roomStyle = new ChoiceBox<>();
+		roomStyle.getItems().addAll(HotelPaneController.getInstance().getRoomStyle());
 		GridPane.setConstraints(roomStyle, 1, 3);
 		
 		ChoiceBox<Integer> num = new ChoiceBox<>();
@@ -143,16 +157,26 @@ public class HotelStrategyAddPane extends GridPane{
 		Button add = new Button("添加");
 		add.setFont(Font.font(20));
 		add.setOnAction(e -> {
-			
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setContentText("请确认您的信息无误");
+			alert.getDialogPane().setHeaderText(null);
+			alert.showAndWait().ifPresent(ok -> {
+				if(ok.equals(ButtonType.OK)){
+					StrategyVO vo = new StrategyVO(null, null, null, null, null, null, 0, null);
+					if(ResultMessage.SUCCESS == new StrategyBL().addStrategy(null)){
+						HotelPaneController.getInstance().createHotelStrategyPane();
+					}
+				}
+			});
 		});
 		GridPane.setConstraints(add, 1, 8);
 		GridPane.setHalignment(add, HPos.RIGHT);
 		
-		this.setGridLinesVisible(false);
-		this.setPadding(new Insets(100,100,100,100));
+//		this.setGridLinesVisible(true);
+		this.setPadding(new Insets(50,100,50,100));
 		this.getChildren().addAll(retreat,title,typeLabel,typeBox,text,add);
 		this.setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
-		
+		this.setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		
 	}
 	

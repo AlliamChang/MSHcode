@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.util.Callback;
 import tools.Date;
+import tools.StrategyType;
 import vo.HotelStrategyVO;
 import vo.StrategyVO;
 
@@ -40,13 +41,35 @@ public class StrategyTable extends TableView{
 		name.setCellValueFactory(new PropertyValueFactory("name"));
 		name.setMinWidth(150);
 		
-		TableColumn type = new TableColumn("策略类型");
-		type.setCellValueFactory(new PropertyValueFactory("strategyType"));
+		TableColumn<StrategyVO,String> type = new TableColumn("策略类型");
+		type.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<StrategyVO, String>, ObservableValue<String>>() {
+
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<StrategyVO, String> param) {
+				SimpleStringProperty straName = new SimpleStringProperty();
+				switch(param.getValue().getStrategyType()){
+				case BIRTHDAY:
+					straName.set("生日特惠");
+					break;
+				case CO_OPERATION:
+					straName.set("合作企业特惠");
+					break;
+				case HOLIDAY:
+					straName.set("节假日特惠");
+					break;
+				case TRIPLEROOM:
+					straName.set("多房间优惠");
+					break;
+				}
+				return straName;
+			}
+			
+		});
 		type.setMinWidth(115);
 		type.setStyle("-fx-alignment:center");
 		
 		TableColumn discont = new TableColumn("折扣");
-		discont.setCellValueFactory(new PropertyValueFactory("discont"));
+		discont.setCellValueFactory(new PropertyValueFactory("cost"));
 		discont.setStyle("-fx-alignment:center");
 		discont.setMinWidth(80);
 		

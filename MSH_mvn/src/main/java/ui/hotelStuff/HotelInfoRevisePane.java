@@ -73,7 +73,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		sculView.setFitHeight(200);
 		sculView.setFitWidth(200);
 		sculView.setEffect(new DropShadow(BlurType.GAUSSIAN, Color.rgb(0, 0, 0, 0.5), 8, 0, 0, 2));
-		AnchorPane.setRightAnchor(sculView, LEFT_ANCHOR);
+		AnchorPane.setRightAnchor(sculView, LEFT_ANCHOR-20);
 		AnchorPane.setTopAnchor(sculView, 100.0);
 		
 		Button changeScul = new Button("上传图片");
@@ -82,6 +82,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 			Image newImage;
 			if((newImage = new MyFileChooser().showOpenDialog()) != null){
 				sculView.setImage(newImage);
+				System.out.println(	newImage.impl_getUrl());
 				hasntRevise.set(false);
 			}
 		});
@@ -203,8 +204,10 @@ public class HotelInfoRevisePane extends AnchorPane{
 							fac.append(temp.getContent()+"%");
 						}
 					}
-					ResultMessage result = new HotelBL().modify(new HotelInfoVO(hotelInfo.getHotel(),"adress","phone",fac.toString().trim().split("%"),"intro",hotelInfo.getProvince(),
-							hotelInfo.getTradingArea(),2015,"imagePath",4,hotelInfo.getScore(),hotelInfo.getHotel_id(),
+					String imagePath = sculView.getImage().impl_getUrl().startsWith("file:")?sculView.getImage().impl_getUrl().substring(5):null;
+					ResultMessage result = new HotelBL().modify(new HotelInfoVO(hotelInfo.getHotel(),adressText.getText(),
+							phoneText.getText(),fac.toString().trim().split("%"),introText.getText(),hotelInfo.getProvince(),
+							hotelInfo.getTradingArea(),2015,imagePath,4,hotelInfo.getScore(),hotelInfo.getHotel_id(),
 							hotelInfo.getStuff_id(),hotelInfo.getCity()));
 					if(result == ResultMessage.SUCCESS){
 						Alert a = new Alert(AlertType.CONFIRMATION);

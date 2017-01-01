@@ -22,7 +22,7 @@ public class HotelInfoPane extends AnchorPane{
 	private String hotel;
 	private long id;
 	private static final double LEFT_ANCHOR = 50;
-	private static final String[] STAR = {"经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华"};
+	private static final String[] STAR = {"待定","经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华"};
 	
 	public HotelInfoPane(String hotel, long id){
 		super();
@@ -98,7 +98,7 @@ public class HotelInfoPane extends AnchorPane{
 		Text tradAreaText = new Text(hotelInfo.getTradingArea());
 		infoPane.add(tradAreaText, 1, 3);
 		
-		Text starText = new Text(STAR[hotelInfo.getStar()-1]);
+		Text starText = new Text(STAR[hotelInfo.getStar()]);
 		infoPane.add(starText, 1, 4);
 		
 		Text openLabelText = new Text(hotelInfo.getYear()+"年开业");

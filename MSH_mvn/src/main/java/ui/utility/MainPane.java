@@ -60,6 +60,10 @@ public class MainPane extends StackPane{
 		this.id = id;
 	}
 	
+	public int getUserId(){
+		return id;
+	}
+	
 	public boolean isLogin(){
 		return isLogin;
 	}
