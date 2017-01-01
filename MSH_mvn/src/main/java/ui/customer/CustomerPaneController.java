@@ -47,7 +47,7 @@ public class CustomerPaneController {
 			 navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),naviInfo);
 		else
 			 navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name+"\n会员类型:"+type),naviInfo);
-		if(MainPane.getInstance().isLogin()==false){
+		if(MainPane.getInstance().isLogin()==true){
 		MainPane.getInstance().setNavigationBar(navi);
 		this.createHotelSearchPane();
 		
@@ -80,7 +80,7 @@ public class CustomerPaneController {
 	}
 	//个人信息界面
 	public void createPersonInfoPane(){
-		MainPane.getInstance().setRightPane(new PersonInfoPane(UserBL.get(MainPane.getInstance().getId())));
+		MainPane.getInstance().setRightPane(new PersonInfoPane(UserBL.get(MainPane.getInstance().getUserId())));
 	}
 	//我的订单界面
 	public void createMyOrderPane(){
