@@ -2,12 +2,15 @@ package ui.customer;
 
 import java.util.Arrays;
 
+import blservice.user_blservice.UserBLService;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.UserVO;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -30,8 +33,8 @@ public class PersonInfoPane extends Pane {
 	private UserType type;
 	private String sex;
 	private GridPane grid;
-	private static final int column=3;
-	private static final int row=2;
+	private static final int column=8;
+	private static final int row=1;
 	private Image scul;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
@@ -60,9 +63,9 @@ public class PersonInfoPane extends Pane {
 		grid.setVgap(20);
 		//grid.setGridLinesVisible(true);
 		
-		Label title=new Label("基本资料");
+		/*Label title=new Label("基本资料");
 		title.setFont(Font.font("Tahoma", FontWeight.MEDIUM, 30));
-		this.grid.add(title,1,1);
+		this.grid.add(title,1,1);*/
 		
 		ImageView iv1 = new ImageView(scul);
 		iv1.setFitWidth(150);
@@ -70,39 +73,39 @@ public class PersonInfoPane extends Pane {
 		this.grid.add(iv1,column,row);
 				
 		Text uncontent=new Text(this.user_name);
-		uncontent.setFont(f);
+		//uncontent.setFont(f);
 		this.grid.add(uncontent,column+1,row);
 		
 		Label n=new Label("姓名:");
-		n.setFont(f);
+		//n.setFont(f);
 		this.grid.add(n, column, row+1);
 		
 		Text namecontent=new Text(this.name);
-		namecontent.setFont(f);
+		//namecontent.setFont(f);
 		this.grid.add(namecontent,column+1, row+1);
 		
 		Label sextual=new Label("性别:");
-		sextual.setFont(f);
+		//sextual.setFont(f);
 		this.grid.add(sextual, column, row+2);
 		
 		Text sextualcontent=new Text(sex);
-		sextualcontent.setFont(f);
+		//sextualcontent.setFont(f);
 		this.grid.add(sextualcontent,column+1,row+2);
 		
 	    Label phone=new Label("联系方式:");
-	    phone.setFont(f);
+	   // phone.setFont(f);
 	    this.grid.add(phone, column, row+3);
 	    
 	    Text phonecontent=new Text(phone_number);
-	    phonecontent.setFont(f);
+	   // phonecontent.setFont(f);
 	    this.grid.add(phonecontent, column+1, row+3);
 	    
 	    Label credit=new Label("信用值:");
-	    credit.setFont(f);
+	    //credit.setFont(f);
 	    this.grid.add(credit, column, row+4);
 	    
 	    Text creditcontent=new Text(credit_value+"");
-	    creditcontent.setFont(f);
+	   // creditcontent.setFont(f);
 	    this.grid.add(creditcontent, column+1, row+4);
 	    
 	    Button browsecredit=new Button("查看");
@@ -118,13 +121,13 @@ public class PersonInfoPane extends Pane {
 	    Text membercontent;
 	    if(type == UserType.CUSTOMER ||type == UserType.COMPANY_CUSTOMER){
 	    	membercontent=new Text(type == UserType.CUSTOMER ? "普通会员" : "企业会员");
-	     	membercontent.setFont(f);
+	     	//membercontent.setFont(f);
 		    this.grid.add(membercontent, column+1, row+5);
 
 	    }
 	    else{
 	    	membercontent=new Text("非会员");
-	    	membercontent.setFont(f);
+	    	//membercontent.setFont(f);
 	    	this.grid.add(membercontent, column+1, row+5);
 	    	
 	    	Button register=new Button("注册");
@@ -133,43 +136,72 @@ public class PersonInfoPane extends Pane {
 	    }
 	    
 	    Label vip=new Label("vip等级:");
-	    vip.setFont(f);
+	  //  vip.setFont(f);
 	    this.grid.add(vip, column, row+6);
 	    
 	    Text vipcontent=new Text(vip_level+"");
-	    vipcontent.setFont(f);
+	   // vipcontent.setFont(f);
 	    this.grid.add(vipcontent, column+1, row+6);
 	    
 	    Label birth=new Label("生日:");
-	    birth.setFont(f);
+	    //birth.setFont(f);
 	    this.grid.add(birth, column, row+7);
 	    
 	    Text birthcontent=new Text(birthday);
-	    birthcontent.setFont(f);
+	    //birthcontent.setFont(f);
 	    this.grid.add(birthcontent,column+1, row+7);
 	    
 	    Button change=new Button("修改");
 	    change.setOnMouseClicked((MouseEvent me)->{
 	    	this.grid.getChildren().removeAll(birthcontent,namecontent,sextualcontent,phonecontent);
+	    	this.grid.getChildren().removeAll(browsecredit,change);
+	    	
+	    	Button save=new Button("保存");
+	    	this.grid.add(save, column+2, row+7);
+	    	
+	    	Button upload=new Button("上传");
+	    	this.grid.add(upload,column+2,row);
+	    	upload.setOnMouseClicked((e)->{
+	    		
+	    	});
 	    	TextField birth_content=new TextField();
-	    	birth_content.setPrefWidth(140);
-	    	birth_content.setFont(f);
+	    	birth_content.setText(birthcontent.getText());
+	    	birth_content.setPrefWidth(100);
+	    	//birth_content.setFont(f);
 	    	this.grid.add(birth_content, column+1, row+7);
 	    	
 	    	TextField name_content=new TextField();
-	    	name_content.setFont(f);
-	    	name_content.setPrefWidth(140);
+	    	//name_content.setFont(f);
+	    	name_content.setText(namecontent.getText());
+	    	name_content.setPrefWidth(100);
 	    	this.grid.add(name_content,column+1, row+1);
 	    	
-	    	TextField sextual_content=new TextField();
-	    	sextual_content.setFont(f);
-	    	sextual_content.setPrefWidth(100);
+	    	ChoiceBox<String> sextual_content=new ChoiceBox<String>(FXCollections.observableArrayList("男","女"));
+	    	//sextual_content.setFont(f);
+	    	if(sextualcontent.getText().equals("男"))
+	    		sextual_content.getSelectionModel().select(0);
+	    	else
+	    		sextual_content.getSelectionModel().select(1);
+	    	//sextual_content.setPrefWidth(100);
 	    	this.grid.add(sextual_content, column+1, row+2);
 	    	
 	    	TextField phone_content=new TextField();
-	    	phone_content.setFont(f);
+	    	//phone_content.setFont(f);
+	    	phone_content.setText(phonecontent.getText());
 	    	phone_content.setPrefWidth(140);
 	    	this.grid.add(phone_content,column+1,row+3);
+	    	
+	    	save.setOnMouseClicked((MouseEvent e)->{
+	    		UserBLService user=new bl.user_bl.UserBLServiceImpl();
+	    		this.user.setName(name_content.getText());
+	    		this.user.setGender(sextual_content.getValue());
+	    		this.user.setNumber(phone_content.getText());
+	    		this.user.setYear(Integer.parseInt(birth_content.getText().split("-")[0]));
+	    		//System.out.println(Integer.parseInt(birth_content.getText().split("-")[0]));
+	    		this.user.setMonth(Integer.parseInt(birth_content.getText().split("-")[1]));
+	    		this.user.setDay(Integer.parseInt(birth_content.getText().split("-")[2]));
+	    		user.update(this.user);
+	    	});
 	    	
 	    });
 	    this.grid.add(change, column+2, row+7);

@@ -22,5 +22,6 @@
 		<mapping class="po.hotelPO.HotelPO"/>
 		<mapping class="po.strategyPO.StrategyPO"/>
 		<mapping class="po.CheckInPO"/>
+		<mapping class="po.RoomPO"/>
 	</session-factory>
 </hibernate-configuration>
