@@ -128,7 +128,7 @@ public class MarketingPaneController {
 	}
 	
 	public void createCreditPane(){
-		MainPane.getInstance().setRightPane(new CreditPane(u1));
+		MainPane.getInstance().setRightPane(new CreditPane());
 	}
 	
 	public ResultMessage addStrategy(StrategyVO strategy){

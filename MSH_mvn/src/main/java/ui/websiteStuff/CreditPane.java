@@ -26,10 +26,8 @@ public class CreditPane extends GridPane{
 	private TextField nameField;
 	private TextField creditField;
 	private Button chargeButton;
-	private UserVO user;
 	
-	public CreditPane(UserVO user){
-		this.user=user;
+	public CreditPane(){
 		this.start();
 	}
 	
@@ -105,7 +103,7 @@ public class CreditPane extends GridPane{
 						LocalDate now=LocalDate.now();
 						String dateS=now.toString().replaceAll("-", "/");
 						Date date=new Date(dateS,false);
-						CreditVO credit=new CreditVO(date,ChangeReason.WITHDRAW_CREDIT,Integer.parseInt(creditField.getText()),user.getID());
+						CreditVO credit=new CreditVO(date,ChangeReason.WITHDRAW_CREDIT,Integer.parseInt(creditField.getText()),Integer.parseInt(creditField.getText()));
 						MarketingPaneController.getInstance().addCreditRecord(credit);
 					}
 				});
