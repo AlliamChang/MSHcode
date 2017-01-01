@@ -8,6 +8,7 @@ import vo.StrategyVO;
 public class StrategyPO implements Serializable{
 	private StrategyType strategyType;//策略类型
 	private String name;//策略名
+	private String province;//策略省份
 	private String city;//策略城市
 	private String area;//策略商圈
 	private String startTime;//策略开始时间
@@ -16,15 +17,17 @@ public class StrategyPO implements Serializable{
 	private PeopleType people;//策略面向人群
 	private int hotelId;//酒店ID
 	private int fuckId;//策略内部区分ID
+	private String roomStyle;//房间类型（酒店管理人员需要）
 	
     public StrategyPO(){
 		
 	}
 	
-	public StrategyPO(String name,StrategyType strategyType,String city,String area
+	public StrategyPO(String name,StrategyType strategyType,String province,String city,String area
     		,String startTime,String endTime,double cost,PeopleType people){
 		this.name=name;
     	this.strategyType=strategyType;
+    	this.province=province;
     	this.city=city;
     	this.area=area;
     	this.startTime=startTime;
@@ -33,12 +36,19 @@ public class StrategyPO implements Serializable{
     	this.people=people;
 	}
 	
-	public StrategyPO(String name,StrategyType staretgyType,String city,String area
+	public StrategyPO(String name,StrategyType staretgyType,String province,String city,String area
     		,String startTime,String endTime,double cost,PeopleType people,int hotelId){
-    	this(name,staretgyType,city,area
+    	this(name,staretgyType,province,city,area
     		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
     }
+	
+	public StrategyPO(String name,StrategyType staretgyType,String province,String city,String area
+    		,String startTime,String endTime,double cost,PeopleType people,int hotelId,String roomStyle){
+		this(name,staretgyType,province,city,area
+    		,startTime,endTime,cost,people,hotelId);
+		this.roomStyle=roomStyle;
+	}
 	
 	public StrategyType getStrategyType(){
 		return strategyType;
@@ -54,6 +64,10 @@ public class StrategyPO implements Serializable{
 	
 	public String getEndTime(){
 		return endTime;
+	}
+	
+	public String getProvince(){
+		return city;
 	}
 	
 	public String getCity(){
@@ -82,6 +96,10 @@ public class StrategyPO implements Serializable{
 	
 	public void setStrategyType(StrategyType strategyType){
 		this.strategyType=strategyType;
+	}
+	
+	public void setProvince(String province){
+		this.province=province;
 	}
 	
 	public void setCity(String city){
@@ -118,6 +136,14 @@ public class StrategyPO implements Serializable{
 	
 	public void setFuckId(int fuckId){
 		this.fuckId=fuckId;
+	}
+	
+	public String getRoomStyle(){
+		return roomStyle;
+	}
+	
+	public void setRoomStyle(String roomStyle){
+		this.roomStyle=roomStyle;
 	}
 	
 	/*public StrategyVO toVO(){

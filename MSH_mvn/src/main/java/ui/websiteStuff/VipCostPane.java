@@ -24,7 +24,7 @@ public class VipCostPane extends GridPane{
 	private Label vipCostLabel;
 	//private Label halfLabel;
 	private TextField levelUpField;
-	private RadioButton levelCostField;
+	private TextField vipCostField;
 	private Button sureButton;
 	private Button backButton;
 	private boolean isReturnAll;
@@ -48,15 +48,25 @@ public class VipCostPane extends GridPane{
         this.setHalignment(sureLabel, HPos.LEFT);
         this.setValignment(sureLabel, VPos.CENTER);*/
         
-        this.levelUpLabel=new Label("请填写升级所需的信用值数量");
+        this.levelUpLabel=new Label("升级所需的信用值数量");
         levelUpLabel.setFont(normalFont);
         this.setHalignment(levelUpLabel, HPos.LEFT);
         this.setValignment(levelUpLabel, VPos.CENTER);
         
-        this.vipCostLabel=new Label("请填写每一等级所享有的折扣");
+        this.vipCostLabel=new Label("每一等级所享有的折扣");
         vipCostLabel.setFont(normalFont);
         this.setHalignment(vipCostLabel, HPos.LEFT);
         this.setValignment(vipCostLabel, VPos.CENTER);
+        
+        this.levelUpField=new TextField();
+        levelUpField.setFont(normalFont);
+        this.setHalignment(levelUpField, HPos.LEFT);
+        this.setValignment(levelUpField, VPos.CENTER);
+        
+        this.vipCostField=new TextField();
+        vipCostField.setFont(normalFont);
+        this.setHalignment(vipCostField, HPos.LEFT);
+        this.setValignment(vipCostField, VPos.CENTER);
         
         /*group=new ToggleGroup();
         this.allButton=new RadioButton();
@@ -64,52 +74,58 @@ public class VipCostPane extends GridPane{
         
         this.halfButton=new RadioButton();
         halfButton.setToggleGroup(group);
-        
-        this.cancelButton=new Button("撤销");
-        cancelButton.setFont(normalFont);
+        */
+        this.sureButton=new Button("确定");
+        sureButton.setFont(normalFont);
         this.backButton=new Button("取消");
         backButton.setFont(normalFont);
-        this.setHalignment(backButton, HPos.RIGHT);*/
+        this.setHalignment(backButton, HPos.LEFT);
         
         this.add(startLabel, 1, 1,5,1);
         //this.add(Label, 2, 2,5,1);
-        this.add(allButton, 2, 3);
-        this.add(halfButton, 2, 4);
-        this.add(levelUpLabel, 3, 3);
-        this.add(vipCostLabel, 3, 4);
-        this.add(cancelButton, 2, 5);
-        this.add(backButton, 3, 5);
+        this.add(levelUpLabel, 2, 3,2,1);
+        this.add(vipCostLabel, 2, 4,2,1);
+        this.add(levelUpField, 4, 3);
+        this.add(vipCostField, 4, 4);
+        this.add(sureButton, 2, 5);
+        this.add(backButton, 4, 5);
+        
+        if(WebsitePaneController.getInstance().getLvUpRequest()!=0)
+        	levelUpField.setText(String.valueOf(WebsitePaneController.getInstance().getLvUpRequest()));
+        
+        
         
         this.getRowConstraints().add(new RowConstraints(20));
         this.getRowConstraints().add(new RowConstraints(100));
+        this.getRowConstraints().add(new RowConstraints(70));
         this.getRowConstraints().add(new RowConstraints(100));
-        this.getRowConstraints().add(new RowConstraints(100));
-        this.getRowConstraints().add(new RowConstraints(120));
+        this.getRowConstraints().add(new RowConstraints(150));
 		this.getColumnConstraints().add(new ColumnConstraints(20));
 		this.getColumnConstraints().add(new ColumnConstraints(120));
 		this.getColumnConstraints().add(new ColumnConstraints(100));
+		this.getColumnConstraints().add(new ColumnConstraints(150));
+		this.getColumnConstraints().add(new ColumnConstraints(120));
 		
-		group.selectedToggleProperty().addListener(
-				(ObservableValue<? extends Toggle> observable,Toggle oldValue,Toggle newValue)->{
-					if(group.getSelectedToggle()!=null){
-						cancelButton.setOnAction(e ->{
-							if(allButton.isSelected()){
-								isReturnAll=true;
-							}
-							else{
-								isReturnAll=false;
-							}
-							WebsitePaneController.getInstance().cancelAbnormity(order.getId(), isReturnAll);	
-						});
-					}
-				});
-		cancelButton.setOnAction(e ->{
-			if(group.getSelectedToggle()==null){
+		
+		sureButton.setOnAction(e ->{
+			if(levelUpField.getText().equals("")||vipCostField.getText().equals("")){
 				Alert alert=new Alert(AlertType.ERROR);
 				alert.initModality(Modality.APPLICATION_MODAL);
 				alert.setHeaderText(null);
-				alert.setContentText("请选择恢复的信用值数量！");
+				alert.setContentText("请填写完整的数值！");
 				alert.showAndWait();
+			}
+			else {
+				Alert alert=new Alert(AlertType.CONFIRMATION);
+				alert.initModality(Modality.APPLICATION_MODAL);
+				alert.setHeaderText(null);
+				alert.setContentText("确定更改吗？");
+				alert.showAndWait().ifPresent(response ->{
+					if(response==ButtonType.OK){
+						WebsitePaneController.getInstance().setLvUpRequest(Integer.parseInt(levelUpField.getText()));
+						
+					}
+				});
 			}
 		});
 		

@@ -40,6 +40,7 @@ public class ModifyStrategyPane extends GridPane{
     private MyDatePicker endDate;
     private Text nameText;
     private TextField costText;
+    private ChoiceBox<String> provinceBox;
     private ChoiceBox<String> cityBox;
     private ChoiceBox<String> areaBox;
     private Label costTypeLabel;
@@ -47,6 +48,7 @@ public class ModifyStrategyPane extends GridPane{
     private ChoiceBox strategyTypeBox;
 	
     private StrategyVO strategy;
+    private String province;
     private StrategyType strategyType;
 	private String name;
 	private String city;
@@ -124,6 +126,7 @@ public class ModifyStrategyPane extends GridPane{
 		ObservableList peopleList=FXCollections.observableArrayList(normalPeople,vipPeople);
 		ObservableList strategyTypeList=FXCollections.observableArrayList(holiday,vip);
 		
+		provinceBox=new ChoiceBox();
 		cityBox=new ChoiceBox();
 		//cityBox.setStyle(FONT_STYLE);
 		areaBox=new ChoiceBox();
@@ -166,7 +169,8 @@ public class ModifyStrategyPane extends GridPane{
 	    this.add(peopleLabel,2,6,2,1);
 	    this.add(strategyTypeLabel,2,7,2,1);
 	    this.add(nameText,3,2,4,1);
-	    this.add(cityBox, 3, 3,2,1);
+	    this.add(provinceBox, 3, 3,2,1);
+	    this.add(cityBox, 4, 3,2,1);
 	    this.add(areaBox, 5, 3,2,1);
 	    this.add(startDate, 3, 4);
 	    this.add(endDate, 5, 4);
@@ -190,7 +194,7 @@ public class ModifyStrategyPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(90));
 		this.getColumnConstraints().add(new ColumnConstraints(150));
 		
-		
+		provinceBox.getSelectionModel().select(strategy.getProvince());
 		cityBox.getSelectionModel().select(strategy.getCity());
 		areaBox.getSelectionModel().select(strategy.getArea());
 		System.out.println(strategy.getName());
@@ -213,6 +217,28 @@ public class ModifyStrategyPane extends GridPane{
 		costText.setText(String.valueOf(strategy.getCost()));
 		startDate.setValue(LocalDate.of(2016, 1, 1));//获得年月日，需要增加
 		endDate.setValue(LocalDate.of(2016, 5, 5));//需要增加
+		
+		provinceBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+			cityBox.getItems().clear();
+			List<String> cities = WebsitePaneController.getInstance().getCities((String)new_val);
+			if (cities != null){
+				cityBox.setDisable(false);;
+				cityBox.getItems().addAll(cities);
+			} else
+				cityBox.setDisable(true);
+			cityBox.getSelectionModel().selectFirst();
+		});
+		
+		cityBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+			areaBox.getItems().clear();
+			List<String> areas = WebsitePaneController.getInstance().getAreas(provinceBox.getValue().toString(), (String)new_val);
+			if (areas != null){
+				areaBox.setDisable(false);
+				areaBox.getItems().addAll(areas);
+			} else
+				areaBox.setDisable(true);	
+			areaBox.getSelectionModel().selectFirst();
+		});
 		
 		modifyButton.setOnAction(e ->{
 			//修改策略信息
@@ -248,7 +274,7 @@ public class ModifyStrategyPane extends GridPane{
 					    else
 					    	strategyType=StrategyType.VIP;
 					    int fuckId=strategy.getFuckId();
-					    StrategyVO newStrategy=new StrategyVO(strategy.getName(),strategyType,city,area,startTime,endTime,cost,people);
+					    StrategyVO newStrategy=new StrategyVO(strategy.getName(),strategyType,province,city,area,startTime,endTime,cost,people);
 					    newStrategy.setFuckId(fuckId);
 					    WebsitePaneController.getInstance().modifyStrategy(newStrategy);
 					    WebsitePaneController.getInstance().createStrategyListPane();

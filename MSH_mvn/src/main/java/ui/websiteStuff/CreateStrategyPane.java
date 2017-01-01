@@ -1,6 +1,7 @@
 package ui.websiteStuff;
 
 import javafx.scene.text.Font;
+import javafx.beans.value.ChangeListener;
 import javafx.stage.Modality;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
@@ -10,6 +11,7 @@ import java.util.List;
 import vo.*;
 import tools.*;
 import ui.utility.*;
+import ui.webAdmin.WebAdminController;
 import javafx.scene.image.*;
 import javafx.geometry.*;
 import javafx.scene.text.*;
@@ -25,6 +27,7 @@ public class CreateStrategyPane extends GridPane{
 	private static final String FONT_STYLE="-fx-font-size:20";
 	
 	private String name;
+	private String province;
 	private String city;
 	private String area;
 	private double cost;
@@ -45,6 +48,7 @@ public class CreateStrategyPane extends GridPane{
 	private TextField costText;
 	private ChoiceBox cityBox;
 	private ChoiceBox areaBox;
+	private ChoiceBox provinceBox;
 	private MyDatePicker startDate;
 	private MyDatePicker endDate;
 	private Label costTypeLabel;
@@ -106,16 +110,22 @@ public class CreateStrategyPane extends GridPane{
 	    costText.setFont(normalFont);
 	    this.setHalignment(costText, HPos.RIGHT);
 		this.setValignment(costText, VPos.CENTER);
+		
+		this.provinceBox=new ChoiceBox();
+	    ObservableList provinceList=FXCollections.observableList(WebsitePaneController.getInstance().getProvinces());
+	    provinceBox.setItems(provinceList);
+	    this.setHalignment(provinceBox, HPos.LEFT);
+		this.setValignment(provinceBox, VPos.CENTER);
 	    
 	    this.cityBox=new ChoiceBox();
-	    ObservableList cityList=FXCollections.observableArrayList("南京市","北京市");
-	    cityBox.setItems(cityList);
-	    this.setHalignment(cityBox, HPos.RIGHT);
+	    //ObservableList cityList=FXCollections.observableArrayList("南京市","北京市");
+	    //cityBox.setItems(cityList);
+	    this.setHalignment(cityBox, HPos.CENTER);
 		this.setValignment(cityBox, VPos.CENTER);
 	    
 	    this.areaBox=new ChoiceBox();
-	    ObservableList areaList=FXCollections.observableArrayList("栖霞区");
-	    areaBox.setItems(areaList);
+	    //ObservableList areaList=FXCollections.observableArrayList("栖霞区");
+	    //areaBox.setItems(areaList);
 	    this.setHalignment(areaBox, HPos.RIGHT);
 		this.setValignment(areaBox, VPos.CENTER);
 	    
@@ -162,8 +172,9 @@ public class CreateStrategyPane extends GridPane{
 	    this.add(peopleLabel,2,6,2,1);
 	    this.add(strategyTypeLabel,2,7,2,1);
 	    this.add(nameText,3,2,4,1);
-	    this.add(cityBox, 3, 3,2,1);
-	    this.add(areaBox, 5, 3,2,1);
+	    this.add(provinceBox, 3, 3,1,1);
+	    this.add(cityBox, 4, 3,1,1);
+	    this.add(areaBox, 5, 3,1,1);
 	    this.add(startDate, 3, 4);
 	    this.add(endDate, 5, 4);
 	    this.add(costText, 3, 5);
@@ -186,6 +197,28 @@ public class CreateStrategyPane extends GridPane{
 		this.getColumnConstraints().add(new ColumnConstraints(130));
 		this.getColumnConstraints().add(new ColumnConstraints(90));
 		this.getColumnConstraints().add(new ColumnConstraints(150));
+		
+		provinceBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+			cityBox.getItems().clear();
+			List<String> cities = WebsitePaneController.getInstance().getCities((String)new_val);
+			if (cities != null){
+				cityBox.setDisable(false);;
+				cityBox.getItems().addAll(cities);
+			} else
+				cityBox.setDisable(true);
+			cityBox.getSelectionModel().selectFirst();
+		});
+		
+		cityBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
+			areaBox.getItems().clear();
+			List<String> areas = WebsitePaneController.getInstance().getAreas(provinceBox.getValue().toString(), (String)new_val);
+			if (areas != null){
+				areaBox.setDisable(false);
+				areaBox.getItems().addAll(areas);
+			} else
+				areaBox.setDisable(true);	
+			areaBox.getSelectionModel().selectFirst();
+		});
 		
 		createButton.setOnAction(e ->{
 			//创建策略事件
@@ -223,6 +256,7 @@ public class CreateStrategyPane extends GridPane{
 					    System.out.println("create");
 					    name=nameText.getText();
 					    cost=Double.parseDouble(costText.getText());
+					    province=provinceBox.getSelectionModel().getSelectedItem().toString();
 					    city=cityBox.getSelectionModel().getSelectedItem().toString();
 					    area=areaBox.getSelectionModel().getSelectedItem().toString();
 					    startTime=startDate.getEditor().getText();
@@ -235,7 +269,7 @@ public class CreateStrategyPane extends GridPane{
 					    	strategyType=StrategyType.HOLIDAY;
 					    else
 					    	strategyType=StrategyType.VIP;
-					    StrategyVO strategy=new StrategyVO(name,strategyType,city,area,startTime,endTime,cost,people);
+					    StrategyVO strategy=new StrategyVO(name,strategyType,province,city,area,startTime,endTime,cost,people);
 					    WebsitePaneController.getInstance().addStrategy(strategy);
 					    //System.out.println(city);
 					    //System.out.println(name+"\n"+cost+"\n"+city+"\n"+area+"\n"+startTime+"\n"+endTime+"\n"+strategy.getArea());

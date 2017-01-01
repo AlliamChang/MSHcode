@@ -79,7 +79,10 @@ public class StrategyBL implements StrategyBLService{
 			List<StrategyPO> list=strategy.getStrategyInWeb();
 			System.out.println(list.size());
 			for(int i=0;i<list.size();i++){
-				ret.add(new StrategyVO(list.get(i)));
+				if(list.get(i).getName().equals("AdminVipCost"))
+					continue;
+				else
+					ret.add(new StrategyVO(list.get(i)));
 			}
 		} catch (RemoteException e){
 			e.printStackTrace();

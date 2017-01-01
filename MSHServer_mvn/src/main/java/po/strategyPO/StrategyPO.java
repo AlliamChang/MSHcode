@@ -14,6 +14,7 @@ import tools.*;
 public class StrategyPO implements Serializable{
 	private StrategyType strategyType;
 	private String name;//名称
+	private String province;//省份
 	private String city;//城市
 	private String area;//地区
 	private String startTime;//开始时间
@@ -22,15 +23,17 @@ public class StrategyPO implements Serializable{
 	private PeopleType people;//面向人群
 	private int hotelId;//酒店ID
 	private int fuckId;
+	private String roomStyle;//房间类型（酒店管理人员需要）
 	
 	public StrategyPO(){
 		
 	}
 	
-	public StrategyPO(String name,StrategyType strategyType,String city,String area
+	public StrategyPO(String name,StrategyType strategyType,String province,String city,String area
     		,String startTime,String endTime,double cost,PeopleType people){
 		this.name=name;
     	this.strategyType=strategyType;
+    	this.province=province;
     	this.city=city;
     	this.area=area;
     	this.startTime=startTime;
@@ -39,12 +42,19 @@ public class StrategyPO implements Serializable{
     	this.people=people;
 	}
 	
-	public StrategyPO(String name,StrategyType staretgyType,String city,String area
+	public StrategyPO(String name,StrategyType staretgyType,String province,String city,String area
     		,String startTime,String endTime,double cost,PeopleType people,int hotelId){
-    	this(name,staretgyType,city,area
+    	this(name,staretgyType,province,city,area
     		,startTime,endTime,cost,people);
     	this.hotelId=hotelId;
     }
+	
+	public StrategyPO(String name,StrategyType staretgyType,String province,String city,String area
+    		,String startTime,String endTime,double cost,PeopleType people,int hotelId,String roomStyle){
+		this(name,staretgyType,province,city,area
+    		,startTime,endTime,cost,people,hotelId);
+		this.roomStyle=roomStyle;
+	}
 
 @Column(name="strategyType")
 	public StrategyType getStrategyType(){
@@ -81,6 +91,15 @@ public class StrategyPO implements Serializable{
 
     public void setEndTime(String endTime){
 	    this.endTime=endTime;
+    }
+    
+@Column(name="province")
+    public String getProvince(){
+	    return this.province;
+    }
+
+    public void setProvince(String province){
+    	this.province=province;
     }
 	
 @Column(name="city")    
@@ -137,6 +156,15 @@ public class StrategyPO implements Serializable{
 	
 	public void setFuckId(int fuckId){
 		this.fuckId=fuckId;
+	}
+	
+@Column(name="roomStyle")	
+	public String getRoomStyle(){
+		return roomStyle;
+	}
+	
+	public void setRoomStyle(String roomStyle){
+		this.roomStyle=roomStyle;
 	}
 	
 	/*public StrategyVO toVO(){
