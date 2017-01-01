@@ -40,7 +40,7 @@ public class WebAdminRunner extends Application{
 	private void linkToServer() {
 		try {
 			remoteHelper = RemoteHelper.getInstance();
-			remoteHelper.setRemote(Naming.lookup("rmi://127.0.0.1:8888/RemoteImpl"));
+			remoteHelper.setRemote(Naming.lookup("rmi://172.26.91.91:8888/RemoteImpl"));
 			System.out.println("linked");
 		} catch (Exception e) {
 			e.printStackTrace();

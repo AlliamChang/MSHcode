@@ -16,13 +16,11 @@ public class RemoteHelper {
 		try {
 			remoteImpl = new RemoteImpl();
 			LocateRegistry.createRegistry(8888);
-			Naming.bind("rmi://localhost:8888/RemoteImpl",
+			Naming.rebind("rmi://localhost:8888/RemoteImpl",
 					remoteImpl);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (AlreadyBoundException e) {
 			e.printStackTrace();
 		}
 		
