@@ -14,8 +14,8 @@ public class StrategyDAOStub implements StrategyDAO{
 	
 	public StrategyDAOStub(){
 		database=new ArrayList<StrategyPO>();
-		database.add(new StrategyPO("double11",StrategyType.BIRTHDAY,"Nanjing","Qixia"
-				,new Date("2016/11/11",false),new Date("2016/11/12",false),99.00,PeopleType.VIP));
+		database.add(new StrategyPO("double11",StrategyType.BIRTHDAY,"江苏省","南京市","Qixia"
+				,"2016/11/11","2016/11/12",99.00,PeopleType.VIP));
 	}
 	
 	public StrategyPO findStrategy(String name) throws RemoteException{
@@ -43,9 +43,9 @@ public class StrategyDAOStub implements StrategyDAO{
     	}
     }
 	
-	public ResultMessage deleteStrategy(String name) throws RemoteException{
+	public ResultMessage deleteStrategy(StrategyPO po) throws RemoteException{
 		for(int i=0;i<database.size();i++){
-			if(database.get(i).getName().equals(name)){
+			if(database.get(i).getName().equals(po.getName())){
 				database.remove(i);
 			}
 		}
@@ -123,8 +123,8 @@ public class StrategyDAOStub implements StrategyDAO{
 		LocalDate now=LocalDate.now();
 		for(int i=0;i<database.size();i++){
 			if(database.get(i).getStrategyType()==StrategyType.HOLIDAY&&database.get(i).getHotelId()==hotelId){
-				String startTime=database.get(i).getStartTime().getDate();
-				String endTime=database.get(i).getEndTime().getDate();
+				String startTime=database.get(i).getStartTime();
+				String endTime=database.get(i).getEndTime();
 				String[] temp1=startTime.split("/");
 				String[] temp2=endTime.split("/");
 				int sYear=Integer.valueOf(temp1[0]);
