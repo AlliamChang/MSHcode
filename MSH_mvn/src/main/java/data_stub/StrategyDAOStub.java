@@ -6,7 +6,6 @@ import tools.*;
 import tools.Date;
 import java.rmi.*;
 import po.*;
-import po.hotelPO.RoomPO;
 import java.time.LocalDate;
 
 public class StrategyDAOStub implements StrategyDAO{
