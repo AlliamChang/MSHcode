@@ -65,7 +65,7 @@ public class HotelPaneController {
 	
 	public void hotelStuffLogin(int id, int userID, String hotel,Image scul){
 
-		this.roomStyle = Arrays.asList(new String[]{"温暖大床房","经济标准间","难民六人间"});
+//		this.roomStyle = Arrays.asList(new String[]{"温暖大床房","经济标准间","难民六人间"});
 		this.id = id;
 		this.hotel = hotel;
 		this.userID = userID;
@@ -109,11 +109,11 @@ public class HotelPaneController {
 	 * 跳转至酒店促销策略界面
 	 */
 	public HotelStrategyPane createHotelStrategyPane(){
-		return new HotelStrategyPane(Arrays.asList(
-				new StrategyVO("双十一促销", StrategyType.HOLIDAY,null,null,null, "2016/11/10","2016/11/12",10,PeopleType.NORMAL),
-				new StrategyVO("腾讯公司合作优惠", StrategyType.CO_OPERATION,null,null,null, "2016/11/10","2016/12/12",50, PeopleType.NORMAL)
-				));
-//		return new HotelStrategyPane(new StrategyBL().getStrategyInHotel(id));
+//		return new HotelStrategyPane(Arrays.asList(
+//				new StrategyVO("双十一促销", StrategyType.HOLIDAY,null,null,null, "2016/11/10","2016/11/12",10,PeopleType.NORMAL),
+//				new StrategyVO("腾讯公司合作优惠", StrategyType.CO_OPERATION,null,null,null, "2016/11/10","2016/12/12",50, PeopleType.NORMAL)
+//				));
+		return new HotelStrategyPane(new StrategyBL().getStrategyInHotel(id));
 	}
 	
 	/**
@@ -135,11 +135,11 @@ public class HotelPaneController {
 	}
 	
 	public Iterator<RoomVO> getRoomList(){
-		return Arrays.asList(
-				new RoomVO("温暖大床房", BedStyle.KING_SIZE_BED, 320.00, 2, 2,id),
-				new RoomVO("经济标准间",BedStyle.DOUBLE_BEDS,349.00,50,2,id),
-				new RoomVO("难民六人间", BedStyle.BUNK_BED, 99.00, 90, 6,id)).iterator();
-//		return this.hotelBL.getRoom(id).iterator();
+//		return Arrays.asList(
+//				new RoomVO("温暖大床房", BedStyle.KING_SIZE_BED, 320.00, 2, 2,id),
+//				new RoomVO("经济标准间",BedStyle.DOUBLE_BEDS,349.00,50,2,id),
+//				new RoomVO("难民六人间", BedStyle.BUNK_BED, 99.00, 90, 6,id)).iterator();
+		return this.hotelBL.getRoom(id).iterator();
 	}
 	
 	public HotelInfoVO getHotelInfo(){

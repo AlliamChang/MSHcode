@@ -110,6 +110,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public HotelInfoVO getHotel(int hotel_id) {
 		try{
+			System.out.println(hotel_id);
 		return new HotelInfoVO(hotel.find(hotel_id));
 		}catch (RemoteException e){
 			e.printStackTrace();

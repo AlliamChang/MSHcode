@@ -133,7 +133,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		phoneText.setMaxWidth(150);
 		infoPane.add(phoneText, 1, 1);
 		
-		Label cityText = new Label(hotelInfo.getProvince() + " " + hotelInfo.getCity()==null?"":hotelInfo.getCity());
+		Label cityText = new Label(hotelInfo.getProvince() + " " + (hotelInfo.getCity()==null? "" : hotelInfo.getCity()));
 		cityText.setMaxWidth(100);
 		infoPane.add(cityText, 1, 2);
 		

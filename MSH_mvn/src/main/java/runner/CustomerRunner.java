@@ -26,6 +26,7 @@ public class CustomerRunner extends Application{
 		//new PersonInfoPane();
 		//MainPane.getInstance().getChildren().add(new PersonInfoPane());
 		launch(args);
+		MainPane.getInstance().logout();
 	}
 	
 	private void linkToServer() {

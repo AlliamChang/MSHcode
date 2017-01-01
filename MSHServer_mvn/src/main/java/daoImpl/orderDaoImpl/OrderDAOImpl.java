@@ -26,7 +26,7 @@ public class OrderDAOImpl implements OrderDAO{
 	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	
 	public OrderDAOImpl(){
-		new OrderMonitor().start();;
+		new OrderMonitor().start();
 	}
 	
 	@Override

@@ -92,7 +92,7 @@ public class HotelInfoPane extends AnchorPane{
 		Text phoneText = new Text(hotelInfo.getPhone());
 		infoPane.add(phoneText, 1, 1);
 		
-		Text cityText = new Text(hotelInfo.getProvince());
+		Text cityText = new Text(hotelInfo.getProvince()+" "+ hotelInfo.getCity());
 		infoPane.add(cityText, 1, 2);
 		
 		Text tradAreaText = new Text(hotelInfo.getTradingArea());

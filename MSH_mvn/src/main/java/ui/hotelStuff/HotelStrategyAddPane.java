@@ -165,7 +165,8 @@ public class HotelStrategyAddPane extends GridPane{
 							end.getFormatValue(), Integer.valueOf(discount.getText()), 
 							PeopleType.NORMAL,HotelPaneController.getInstance().getHotelId(),rStyle);
 					if(ResultMessage.SUCCESS == new StrategyBL().addStrategy(vo)){
-						HotelPaneController.getInstance().createHotelStrategyPane();
+System.out.println(1);
+						MainPane.getInstance().setRightPane(HotelPaneController.getInstance().createHotelStrategyPane());
 					}
 				}
 			});
