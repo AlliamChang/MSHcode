@@ -29,7 +29,9 @@ public class InitialPane extends GridPane{
 		searchButton.setId("searchButton");
 		searchBox = new SearchBox(searchButton);
 		HBox hBox = new HBox();
-		imageView = new ImageView(new Image(getClass().getResource("/image/默认头像1.png").toExternalForm()));
+		imageView = new ImageView(new Image(getClass().getResource("/image/init.png").toExternalForm()));
+		imageView.setFitWidth(250);
+		imageView.setFitHeight(250);
 		hBox.getChildren().add(imageView);
 		hBox.setAlignment(Pos.CENTER);
 		
@@ -45,13 +47,9 @@ public class InitialPane extends GridPane{
 		add(searchBox, 0, 1);
 		add(searchButton, 1, 1);
 		
-		searchButton.setOnAction(e -> {
-			WebAdminController.getInstance().search(searchBox.getContent());
-//			LoginDialog ss = new LoginDialog();
-//			ss.showAndWait().ifPresent(info -> {
-//				System.out.println(info.getKey() + " " + info.getValue());
-//			});
-		});
+		searchButton.setOnAction(e -> 
+			WebAdminController.getInstance().search(searchBox.getContent())
+		);
 		
 		Platform.runLater(() -> searchBox.requestFocus());
 	}

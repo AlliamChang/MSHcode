@@ -38,7 +38,7 @@ public class WebAdminController {
 	}
 	
 	public void init(){
-		naviBar = new MyNavigationBar(new Image(getClass().getResource("/image/admin.png").toExternalForm(), 120, 120, false, false),
+		naviBar = new MyNavigationBar(new Image(getClass().getResource("/image/default.png").toExternalForm(), 120, 120, false, false),
 				Arrays.asList("Administrator"),
 				Arrays.asList("查询用户", "营销人员", "浏览酒店"));
 		MainPane.getInstance().setNavigationBar(naviBar);

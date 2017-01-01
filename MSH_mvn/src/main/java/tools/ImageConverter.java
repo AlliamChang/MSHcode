@@ -11,6 +11,7 @@ import java.io.IOException;
 public class ImageConverter {
 	public static byte[] fileToByte(String path){
 		File f = new File(path);
+System.out.println(path);
 		byte[] buffer = null;
 		try {
 			FileInputStream fis = new FileInputStream(f);
