@@ -45,7 +45,7 @@ public class HotelInfoVO {
 		this.hotel=po.getName();
 		this.adress=po.getAddress();
 		this.phone=po.getPhone();
-		this.facility=po.getFacility();
+		this.facility=po.getFacility().split("%");
 		this.introduction=po.getIntroduction();
 		this.province=po.getProvince();
 		this.tradingArea=po.getTrade_area();
@@ -70,7 +70,14 @@ public class HotelInfoVO {
 		po.setCity(city);
 		po.setTrade_area( tradingArea);
 		po.setAddress(adress);
-		po.setFacility(facility);
+		StringBuilder build = new StringBuilder("");
+		for(int i = 0; i < facility.length; i ++){
+			build.append(facility[i]);
+			if(facility.length - 1 != i){
+				build.append("%");
+			}
+		}
+		po.setFacility(build.toString());
 		po.setId(hotel_id);
 		po.setIntroduction(introduction);
 		po.setLowest_price(lowest_price);

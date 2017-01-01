@@ -14,7 +14,7 @@ public class HotelPO implements Serializable{
 		private String address,trade_area,city,name,phone,introduction,province,imageExtension;
 		private int id,lowest_price,star_level,stuff_id,year;
 		private double score;
-		private String[]facility;
+		private String facility;
 		private byte[] scul;
 		
 		public HotelPO(){
@@ -127,11 +127,11 @@ public class HotelPO implements Serializable{
 			this.score = score;
 		}
 		@Column(name="facility")
-		public String[] getFacility() {
+		public String getFacility() {
 			return facility;
 		}
 
-		public void setFacility(String[] facility) {
+		public void setFacility(String facility) {
 			this.facility = facility;
 		}
 		@Column(name="image")
