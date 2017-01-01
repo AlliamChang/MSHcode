@@ -46,7 +46,7 @@ public class CustomerPaneController {
 		if(!isRegistered)
 			 navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name),naviInfo);
 		else
-			 navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name+"\n会员类型:"+type),naviInfo);
+			 navi= new MyNavigationBar(scul,Arrays.asList("用户名："+user_name+"\n会员类型："+type),naviInfo);
 		if(MainPane.getInstance().isLogin()==true){
 		MainPane.getInstance().setNavigationBar(navi);
 		this.createHotelSearchPane();

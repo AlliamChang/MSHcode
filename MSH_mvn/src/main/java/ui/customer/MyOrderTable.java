@@ -99,7 +99,7 @@ public class MyOrderTable extends TableView{
 								list.add(this_row.getRoomNum()+"");
 								list.add(this_row.getPrice()+"");
 								MyOrderTable.this.setList(list);
-								MainPane.getInstance().setRightPane(new EvaluatePane());
+								MainPane.getInstance().setRightPane(new EvaluatePane(MyOrderTable.this.data.get(this.getTableRow().getIndex())));
 							});
 							setGraphic(bn);
 						}

@@ -11,11 +11,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -149,6 +151,7 @@ public class MyNavigationBar extends VBox {
 	public MyNavigationBar(Image scul,List<String> info,List<String> navi){
 		super(SPACE);
 		
+		userBL = new UserBLServiceImpl();
 		if(null == scul){
 			this.scul = DEFAULT_SCULPTURE;
 		}else{
@@ -209,16 +212,19 @@ public class MyNavigationBar extends VBox {
 		infoBox.setAlignment(Pos.BASELINE_CENTER);
 		infoBox.setPadding(new Insets(10,10,10,10));
 		
-		
 		sculView = new ImageView(scul);
 		sculView.setFitHeight(120);
 		sculView.setFitWidth(120);
 		infoBox.getChildren().add(sculView);
-
+		
+		ScrollPane text = new ScrollPane();
 		Text[] list = new Text[info.size()];
 		for(int i = 0; i < list.length; i ++){
+			if(info.get(i) == null || info.get(i).equals(""))
+				continue;
 			list[i] = new Text(info.get(i));
 			list[i].setWrappingWidth(MAX_WIDTH - 20);
+		System.out.println(info.get(i).length());
 			list[i].setTextAlignment(TextAlignment.CENTER);
 			infoBox.getChildren().add(list[i]);
 		}
@@ -237,8 +243,39 @@ public class MyNavigationBar extends VBox {
 		
 		Hyperlink modifyPassword = new Hyperlink("修改密码");
 		modifyPassword.setOnAction(e -> {
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.show();
+			PasswordModifyDialog modify = new PasswordModifyDialog();
+			modify.showAndWait().filter(r -> r != null).ifPresent(info -> {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.getDialogPane().setHeaderText(null);
+				if(info.getValue().length() < 6 || info.getValue().length() > 18){
+					if(info.getValue().length() < 6){
+						alert.setContentText("新的密码长度不能少于6位");
+						alert.show();
+					}else{
+						alert.setContentText("新的密码长度不能长于18位");
+						alert.show();
+					}
+				}else{
+					alert.setAlertType(AlertType.CONFIRMATION);
+					alert.setContentText("您的密码将修改为：\n"+info.getValue());
+					alert.showAndWait().ifPresent( ok -> {
+						if(ok.equals(ButtonType.OK)){
+							alert.setAlertType(AlertType.INFORMATION);
+							if(ResultMessage.SUCCESS == userBL.changePassword
+									(MainPane.getInstance().getUserId(), info.getKey(), info.getValue())){
+								alert.setContentText("修改成功");
+								alert.show();
+							}else{
+								alert.setContentText("密码错误");
+								alert.show();
+							}
+						}else{
+							modifyPassword.fire();
+						}
+					});	
+				}
+			});
+			
 		});
 		
 		infoBox.getChildren().addAll(logout,modifyPassword);

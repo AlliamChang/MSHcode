@@ -98,6 +98,9 @@ public class RegisterPane extends GridPane{
 				}else if( accountInput.getText().length() > 18){
 					tipType[0].setImage(ERROR);
 					tip[0].setText("账号不能多于18位");
+				}else if(accountInput.getText().matches("[0-9]*")){
+					tipType[0].setImage(ERROR);
+					tip[0].setText("账号不能为纯数字");
 				}else{
 					if(new UserBLServiceImpl().isUsed(accountInput.getText())){
 						tipType[0].setImage(ERROR);

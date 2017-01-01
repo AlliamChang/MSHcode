@@ -4,14 +4,13 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-
-
-
+import bl.order_bl.OrderBL;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.user_blservice.UserBLService;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 import vo.EvaluateVO;
+import vo.OrderVO;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -43,9 +42,11 @@ public class EvaluatePane extends Pane{
 	private MyNavigationBar navi;
 	private Image scul;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
+	private OrderVO vo;
 	
-	public EvaluatePane(){
+	public EvaluatePane(OrderVO vo){
 		super();
+		this.vo = vo;
 		this.initPane();
 	}
 	
@@ -125,15 +126,16 @@ public class EvaluatePane extends Pane{
 		upload.setOnMouseClicked((MouseEvent me)->{
 			HotelBLService hotel=new bl.hotel_bl.HotelBL();
 			UserBLService user=new bl.user_bl.UserBLServiceImpl();
-			hotel.createEvaluate(new EvaluateVO(evaluate.getText(),user.get(MainPane.getInstance().getUserId()).getAccount(),2,LocalDate.now().toString(),Integer.parseInt(grade.getValue())));
-			
+			hotel.createEvaluate(new EvaluateVO(evaluate.getText(),user.get(MainPane.getInstance().getUserId()).getAccount(),vo.getHotelId(),LocalDate.now().toString(),Integer.parseInt(grade.getValue())));
+			new OrderBL().evaluate(vo.getId());
+			CustomerPaneController.getInstance().createMyOrderPane();
 		});
 		pane.add(upload, column_index+5, row_index+6);
 		
 		Button cancel=new Button("取消");
 		cancel.setFont(f);
 		cancel.setOnMouseClicked((MouseEvent me)->{
-			
+			CustomerPaneController.getInstance().createMyOrderPane();
 		});
 		pane.add(cancel,column_index+5,row_index+7);
 		

@@ -98,4 +98,11 @@ public interface OrderBLService {
 	 * @return 执行结果
 	 */
 	public ResultMessage checkout(long orderID,Date checkoutTime);
+	
+	/**
+	 * 订单评价
+	 * @param orderID
+	 * @return 执行结果
+	 */
+	public ResultMessage evaluate(long orderID);
 }

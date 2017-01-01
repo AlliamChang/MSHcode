@@ -263,4 +263,17 @@ public class OrderBL implements OrderBLService{
 		}
 	}
 
+	@Override
+	public ResultMessage evaluate(long orderID) {
+		try{
+			OrderPO po = this.orderDataBase.find(orderID);
+			po.setEvaluated(true);
+			this.orderDataBase.update(po);
+			return ResultMessage.SUCCESS;
+		}catch(RemoteException e){
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+
 }
