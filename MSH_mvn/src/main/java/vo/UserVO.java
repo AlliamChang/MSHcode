@@ -24,7 +24,6 @@ public class UserVO{
 	static {
 		try {
 			LV_UP_REQUEST = RemoteHelper.getInstance().getUserDAO().getLvUpRequest();
-			System.out.println(LV_UP_REQUEST);
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
