@@ -103,7 +103,7 @@ public class CancelSurePane extends GridPane{
 							else{
 								isReturnAll=false;
 							}
-							WebsitePaneController.getInstance().cancelAbnormity(order.getId(), isReturnAll);	
+							MarketingPaneController.getInstance().cancelAbnormity(order.getId(), isReturnAll);	
 						});
 					}
 				});
@@ -125,7 +125,7 @@ public class CancelSurePane extends GridPane{
 			alert.showAndWait().ifPresent(response ->{
 				if(response==ButtonType.OK){
 					System.out.println("取消并返回");
-					WebsitePaneController.getInstance().createDealPane();
+					MarketingPaneController.getInstance().createDealPane();
 				}
 			});
 		});

@@ -24,7 +24,7 @@ public class WebStuffRunner extends Application{
 	
 	public void start(Stage primaryStage) throws Exception{
 		primaryStage.setScene(new Scene(MainPane.getInstance(),800,600));
-		WebsitePaneController.getInstance().init(123,"zhr");
+		MarketingPaneController.getInstance().init(123,"zhr");
 		primaryStage.show();
 	}
 	

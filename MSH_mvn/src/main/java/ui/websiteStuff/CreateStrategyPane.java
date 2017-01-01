@@ -112,7 +112,7 @@ public class CreateStrategyPane extends GridPane{
 		this.setValignment(costText, VPos.CENTER);
 		
 		this.provinceBox=new ChoiceBox();
-	    ObservableList provinceList=FXCollections.observableList(WebsitePaneController.getInstance().getProvinces());
+	    ObservableList provinceList=FXCollections.observableList(MarketingPaneController.getInstance().getProvinces());
 	    provinceBox.setItems(provinceList);
 	    this.setHalignment(provinceBox, HPos.LEFT);
 		this.setValignment(provinceBox, VPos.CENTER);
@@ -200,7 +200,7 @@ public class CreateStrategyPane extends GridPane{
 		
 		provinceBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
 			cityBox.getItems().clear();
-			List<String> cities = WebsitePaneController.getInstance().getCities((String)new_val);
+			List<String> cities = MarketingPaneController.getInstance().getCities((String)new_val);
 			if (cities != null){
 				cityBox.setDisable(false);;
 				cityBox.getItems().addAll(cities);
@@ -211,7 +211,7 @@ public class CreateStrategyPane extends GridPane{
 		
 		cityBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
 			areaBox.getItems().clear();
-			List<String> areas = WebsitePaneController.getInstance().getAreas(provinceBox.getValue().toString(), (String)new_val);
+			List<String> areas = MarketingPaneController.getInstance().getAreas(provinceBox.getValue().toString(), (String)new_val);
 			if (areas != null){
 				areaBox.setDisable(false);
 				areaBox.getItems().addAll(areas);
@@ -270,10 +270,10 @@ public class CreateStrategyPane extends GridPane{
 					    else
 					    	strategyType=StrategyType.VIP;
 					    StrategyVO strategy=new StrategyVO(name,strategyType,province,city,area,startTime,endTime,cost,people);
-					    WebsitePaneController.getInstance().addStrategy(strategy);
+					    MarketingPaneController.getInstance().addStrategy(strategy);
 					    //System.out.println(city);
 					    //System.out.println(name+"\n"+cost+"\n"+city+"\n"+area+"\n"+startTime+"\n"+endTime+"\n"+strategy.getArea());
-					    WebsitePaneController.getInstance().createStrategyListPane();
+					    MarketingPaneController.getInstance().createStrategyListPane();
 				    }
 			    });
 			}

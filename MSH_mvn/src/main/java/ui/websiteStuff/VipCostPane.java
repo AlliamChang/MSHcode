@@ -90,8 +90,8 @@ public class VipCostPane extends GridPane{
         this.add(sureButton, 2, 5);
         this.add(backButton, 4, 5);
         
-        if(WebsitePaneController.getInstance().getLvUpRequest()!=0)
-        	levelUpField.setText(String.valueOf(WebsitePaneController.getInstance().getLvUpRequest()));
+        if(MarketingPaneController.getInstance().getLvUpRequest()!=0)
+        	levelUpField.setText(String.valueOf(MarketingPaneController.getInstance().getLvUpRequest()));
         
         
         
@@ -122,7 +122,7 @@ public class VipCostPane extends GridPane{
 				alert.setContentText("确定更改吗？");
 				alert.showAndWait().ifPresent(response ->{
 					if(response==ButtonType.OK){
-						WebsitePaneController.getInstance().setLvUpRequest(Integer.parseInt(levelUpField.getText()));
+						MarketingPaneController.getInstance().setLvUpRequest(Integer.parseInt(levelUpField.getText()));
 						
 					}
 				});
@@ -137,7 +137,7 @@ public class VipCostPane extends GridPane{
 			alert.showAndWait().ifPresent(response ->{
 				if(response==ButtonType.OK){
 					System.out.println("取消并返回");
-					WebsitePaneController.getInstance().createDealPane();
+					MarketingPaneController.getInstance().createDealPane();
 				}
 			});
 		});

@@ -178,7 +178,7 @@ public class StrategyListPane extends GridPane{
 		}
 		
 		createButton.setOnAction((e) ->{
-			WebsitePaneController.getInstance().createCreateStrategyPane();
+			MarketingPaneController.getInstance().createCreateStrategyPane();
 		});
 		
 		group.selectedToggleProperty().addListener(
@@ -190,7 +190,7 @@ public class StrategyListPane extends GridPane{
 								i++;
 							}
 							System.out.print(i);
-							WebsitePaneController.getInstance().createModifyStrategyPane(strategy.get(i));
+							MarketingPaneController.getInstance().createModifyStrategyPane(strategy.get(i));
 						});
 						cancelButton.setOnAction(e ->{
 							Alert alert=new Alert(AlertType.CONFIRMATION);
@@ -205,8 +205,8 @@ public class StrategyListPane extends GridPane{
 									}
 									StrategyVO vo=strategy.get(i);
 									vo.setFuckId(strategy.get(i).getFuckId());
-									WebsitePaneController.getInstance().deteleStrategy(vo);
-									WebsitePaneController.getInstance().createStrategyListPane();
+									MarketingPaneController.getInstance().deteleStrategy(vo);
+									MarketingPaneController.getInstance().createStrategyListPane();
 								}
 							});
 						});

@@ -34,7 +34,7 @@ import tools.UserType;
 import ui.customer.CustomerPaneController;
 import ui.hotelStuff.control.HotelPaneController;
 import ui.webAdmin.WebAdminController;
-import ui.websiteStuff.WebsitePaneController;
+import ui.websiteStuff.MarketingPaneController;
 import vo.HotelInfoVO;
 import vo.UserVO;
 
@@ -107,7 +107,7 @@ public class MyNavigationBar extends VBox {
 							WebAdminController.getInstance().init();
 							break;
 						case MARKETER:
-							WebsitePaneController.getInstance().init(vo.getID(), vo.getName());
+							MarketingPaneController.getInstance().init(vo.getID(), vo.getName());
 							break;
 						}
 						alert.showAndWait();

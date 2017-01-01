@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import vo.*;
 
-public class WebsitePaneController {
-	private static WebsitePaneController controller;
+public class MarketingPaneController {
+	private static MarketingPaneController controller;
 	private StrategyBLService strategyBL;
 	private RemoteHelper helper;
 	private UserDAO userDAO;
@@ -52,7 +52,7 @@ public class WebsitePaneController {
 	public UserVO u1=new UserVO("zhr123","123","zhr","666","333","ASUS","imagePath",1,2,3,UserType.CUSTOMER);
 	private MyNavigationBar navi;
 	
-	private WebsitePaneController(){
+	private MarketingPaneController(){
 		strategyBL=new StrategyBL();
 		orderBL=new OrderBL();
 		helper=RemoteHelper.getInstance();
@@ -60,9 +60,9 @@ public class WebsitePaneController {
 		userBL=new UserBLServiceImpl();
 	}
 	
-	public static WebsitePaneController getInstance(){
+	public static MarketingPaneController getInstance(){
 		if(controller==null)
-			controller=new WebsitePaneController();
+			controller=new MarketingPaneController();
 		return controller;
 	}
 	

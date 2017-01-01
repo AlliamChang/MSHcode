@@ -220,7 +220,7 @@ public class ModifyStrategyPane extends GridPane{
 		
 		provinceBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
 			cityBox.getItems().clear();
-			List<String> cities = WebsitePaneController.getInstance().getCities((String)new_val);
+			List<String> cities = MarketingPaneController.getInstance().getCities((String)new_val);
 			if (cities != null){
 				cityBox.setDisable(false);;
 				cityBox.getItems().addAll(cities);
@@ -231,7 +231,7 @@ public class ModifyStrategyPane extends GridPane{
 		
 		cityBox.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
 			areaBox.getItems().clear();
-			List<String> areas = WebsitePaneController.getInstance().getAreas(provinceBox.getValue().toString(), (String)new_val);
+			List<String> areas = MarketingPaneController.getInstance().getAreas(provinceBox.getValue().toString(), (String)new_val);
 			if (areas != null){
 				areaBox.setDisable(false);
 				areaBox.getItems().addAll(areas);
@@ -276,8 +276,8 @@ public class ModifyStrategyPane extends GridPane{
 					    int fuckId=strategy.getFuckId();
 					    StrategyVO newStrategy=new StrategyVO(strategy.getName(),strategyType,province,city,area,startTime,endTime,cost,people);
 					    newStrategy.setFuckId(fuckId);
-					    WebsitePaneController.getInstance().modifyStrategy(newStrategy);
-					    WebsitePaneController.getInstance().createStrategyListPane();
+					    MarketingPaneController.getInstance().modifyStrategy(newStrategy);
+					    MarketingPaneController.getInstance().createStrategyListPane();
 					//服务器修改策略
 				}	    
 			    });

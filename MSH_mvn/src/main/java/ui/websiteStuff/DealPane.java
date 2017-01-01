@@ -183,7 +183,7 @@ public class DealPane extends GridPane{
 							while(!button[i].isSelected()){
 								i++;
 							}
-							WebsitePaneController.getInstance().createCancelSurePane(order.get(i),order.get(i).getUserID());
+							MarketingPaneController.getInstance().createCancelSurePane(order.get(i),order.get(i).getUserID());
 						});
 					}
 				});

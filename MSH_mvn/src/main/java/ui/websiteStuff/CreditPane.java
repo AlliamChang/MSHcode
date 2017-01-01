@@ -106,7 +106,7 @@ public class CreditPane extends GridPane{
 						String dateS=now.toString().replaceAll("-", "/");
 						Date date=new Date(dateS,false);
 						CreditVO credit=new CreditVO(date,ChangeReason.WITHDRAW_CREDIT,Integer.parseInt(creditField.getText()),user.getID());
-						WebsitePaneController.getInstance().addCreditRecord(credit);
+						MarketingPaneController.getInstance().addCreditRecord(credit);
 					}
 				});
 			}
