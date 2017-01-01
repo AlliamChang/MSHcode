@@ -96,10 +96,10 @@ public class StrategyBL implements StrategyBLService{
 		return finalPrice;
 	}//下完单后，最终综合折扣减少的价格
 	
-	public double getFinalPriceInWeb(UserVO user){
+	/*public double getFinalPriceInWeb(UserVO user){
 		double finalPrice=0.00;
 		return finalPrice;
-	}
+	}*/
 	
 	public double getLowestPrice(UserVO user,int hotelId){
 		double lowestPrice=0.00;

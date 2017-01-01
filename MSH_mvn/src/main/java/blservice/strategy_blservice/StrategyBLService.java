@@ -17,7 +17,7 @@ public interface StrategyBLService {
 	
 	public double getFinalPriceInHotel(UserVO user,OrderVO order,int hotelId);
 	
-	public double getFinalPriceInWeb(UserVO user);
+	//public double getFinalPriceInWeb(UserVO user);
 	
 	public double getLowestPrice(UserVO user,int hotelId);
 	
