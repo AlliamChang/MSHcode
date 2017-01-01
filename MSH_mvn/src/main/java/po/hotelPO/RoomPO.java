@@ -8,6 +8,7 @@ public class RoomPO {
 	private BedStyle bedStyle;
 	private double price;
 	private int num;
+	private int id;
 	private int hotel_id;
 	private int maxCustomer;
 	
@@ -50,6 +51,14 @@ public class RoomPO {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getHotel_id() {

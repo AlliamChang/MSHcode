@@ -14,10 +14,11 @@ public class RoomPO implements Serializable{
 	private BedStyle bedStyle;
 	private double price;
 	private int num;
+	private int id;
 	private int hotel_id;
 	private int maxCustomer;
 	
-	public RoomPO(String room_type,BedStyle bedStyle,double price,int num,int hotel_id,int maxCustomer){
+	public RoomPO(String room_type,BedStyle bedStyle,double price,int num,int id,int hotel_id,int maxCustomer){
 		this.room_type=room_type;
 		this.bedStyle=bedStyle;
 		this.price=price;
@@ -60,12 +61,19 @@ public class RoomPO implements Serializable{
 	}
 	
 @Id
-@Column(name="hotel_id")
-	public int getHotel_id() {
+@Column(name="id")
+	public int getId() {
 		return hotel_id;
 	}
 
-	public void setHotel_id(int hotel_id) {
+	public int getHotel_id() {
+	return hotel_id;
+}
+	@Column(name="hotel_id")
+public void setHotel_id(int hotel_id) {
+	this.hotel_id = hotel_id;
+}
+	public void setId(int hotel_id) {
 		this.hotel_id = hotel_id;
 	}
 	

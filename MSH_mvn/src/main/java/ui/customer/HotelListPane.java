@@ -100,7 +100,6 @@ public class HotelListPane extends Pane{
 		  P=new ChoiceBox<String>();
 		  P.setPrefWidth(100);
 	        P.getItems().addAll(CustomerPaneController.getInstance().getProvince());
-			P.getSelectionModel().selectFirst();
 			pane.add(P, column, row+1);
 			
 		 City.setFont(f);
@@ -108,7 +107,6 @@ public class HotelListPane extends Pane{
 		
 		 city=new ChoiceBox<String>();
 		 city.setPrefWidth(100);
-		city.getSelectionModel().selectFirst();
 		pane.add(city,column+1,row+1);
 		
 		trade_area.setFont(f);
@@ -116,7 +114,6 @@ public class HotelListPane extends Pane{
 		
 		 TradeArea=new ChoiceBox<String>();
 		 TradeArea.setPrefWidth(100);
-		TradeArea.getSelectionModel().selectFirst();
 		pane.add(TradeArea, column+2, row+1);
 		
 		P.getSelectionModel().selectedItemProperty().addListener((ov, old_val, new_val) -> {
@@ -140,6 +137,11 @@ public class HotelListPane extends Pane{
 				TradeArea.setDisable(true);	
 			TradeArea.getSelectionModel().selectFirst();
 		});
+		P.getSelectionModel().selectFirst();
+		city.getSelectionModel().selectFirst();
+		if (city.getItems().isEmpty())
+			TradeArea.getItems().addAll(CustomerPaneController.getInstance().getareas(P.getValue(),null));
+		TradeArea.getSelectionModel().selectFirst();
 		
 		enter_time.setFont(f);
 		pane.add(enter_time,column+3,row);
@@ -269,9 +271,9 @@ public class HotelListPane extends Pane{
 			 ImageView im=new ImageView(image);
 			 im.setFitHeight(50);
 			 im.setFitWidth(50);
-			 bn.setOnMouseClicked((MouseEvent me)->{
+			/* bn.setOnMouseClicked((MouseEvent me)->{
 				 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane());
-			 });
+			 });*/
 			this.add(im, 0, 0);
 			this.add(name,1,0);
 			this.add(bn, 2, 0);

@@ -91,7 +91,6 @@ public class HotelSearchPane extends Pane{
 	         P=new ChoiceBox<String>();
 	         P.setPrefWidth(100);
 	        P.getItems().addAll(CustomerPaneController.getInstance().getProvince());
-			P.getSelectionModel().selectFirst();
 			pane.add(P,column-1,row);
 			
 			Label City=new Label("城市:");
@@ -133,7 +132,11 @@ public class HotelSearchPane extends Pane{
 					TradeArea.setDisable(true);	
 				TradeArea.getSelectionModel().selectFirst();
 			});
-		
+			P.getSelectionModel().selectFirst();
+			city.getSelectionModel().selectFirst();
+			if (city.getItems().isEmpty())
+				TradeArea.getItems().addAll(CustomerPaneController.getInstance().getareas(P.getValue(),null));
+			TradeArea.getSelectionModel().selectFirst();
 		
 		
 		

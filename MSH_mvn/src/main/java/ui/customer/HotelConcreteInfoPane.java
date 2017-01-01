@@ -49,6 +49,8 @@ public class HotelConcreteInfoPane extends Pane{
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
 	public HotelConcreteInfoPane(HotelInfoVO VO){
 		super();
+		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		vo=VO;
 		initPane();
 	}
@@ -80,6 +82,8 @@ public class HotelConcreteInfoPane extends Pane{
 		
 		hotel=vo.getScul();
 		ImageView image=new ImageView(hotel);
+		image.setFitHeight(100);
+		image.setFitWidth(100);
 		pane.add(image, column, 0,1,2);
 		
 		

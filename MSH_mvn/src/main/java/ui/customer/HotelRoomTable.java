@@ -20,9 +20,11 @@ import javafx.util.Callback;
 
 public class HotelRoomTable extends TableView{
 	private final ObservableList<RoomVO> data;
+	private List<RoomVO>list;
 	private final int width=150;
 	public HotelRoomTable(List<RoomVO> list){
 		super();
+		this.list=list;
 		data = FXCollections.observableArrayList();
 		for(int i=0;i<list.size();i++){
 			data.add(list.get(i));
@@ -55,7 +57,7 @@ public class HotelRoomTable extends TableView{
 						if(!empty){
 							Button bn=new Button("预订");
 							bn.setOnMouseClicked((MouseEvent me)->{
-								MainPane.getInstance().setRightPane(new ReservePane(HotelListPane.getInstance()));
+								MainPane.getInstance().setRightPane(new ReservePane(HotelListPane.getInstance(), HotelRoomTable.this));
 							});
 							setGraphic(bn);
 						}
@@ -72,5 +74,8 @@ public class HotelRoomTable extends TableView{
 		this.getColumns().addAll(room_type,bed_type,price,operation);
 		
 		
+	}
+	public List<RoomVO> getData(){
+		return list;
 	}
 }
