@@ -22,6 +22,8 @@ public class CreditRecordPane extends Pane{
 	public CreditRecordPane(){
 		super();
 		initPane();
+		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
+		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 	}
 	
 	private void initPane(){

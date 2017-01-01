@@ -9,6 +9,7 @@ import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -53,6 +54,12 @@ public class MainPane extends StackPane{
 			mainPane.setStyle("-fx-background-color:white;");
 		}
 		return mainPane;
+	}
+	
+	public void update(Image image){
+		MyNavigationBar update = (MyNavigationBar)mainPane.bottomPane.getChildren().get(0);
+		update.resetScul(image);
+		mainPane.bottomPane.getChildren().set(0, update);
 	}
 	
 	public void login(int id){

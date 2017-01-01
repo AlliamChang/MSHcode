@@ -4,13 +4,17 @@ import java.util.Arrays;
 
 import blservice.user_blservice.UserBLService;
 import ui.utility.MainPane;
+import ui.utility.MyFileChooser;
 import ui.utility.MyNavigationBar;
 import ui.utility.MyRetreatButton;
 import vo.UserVO;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,6 +26,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import tools.ResultMessage;
 import tools.UserType;
 
 public class PersonInfoPane extends Pane {
@@ -34,10 +39,10 @@ public class PersonInfoPane extends Pane {
 	private UserType type;
 	private String sex;
 	private GridPane grid;
-	private static final int column=8;
-	private static final int row=1;
+	private static final int column=5;
+	private static final int row=2;
 	private Image scul;
-	private MyRetreatButton back;
+//	private MyRetreatButton back;
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
 	public PersonInfoPane(UserVO vo){
@@ -54,7 +59,7 @@ public class PersonInfoPane extends Pane {
 		sex=user.getGender();
 		scul=user.getImage();
 		type = user.getType();
-		back=new MyRetreatButton(HotelSearchPane.getInstance());
+//		back=new MyRetreatButton(HotelSearchPane.getInstance());
 		initgrid();
 	}
 	
@@ -70,15 +75,15 @@ public class PersonInfoPane extends Pane {
 		title.setFont(Font.font("Tahoma", FontWeight.MEDIUM, 30));
 		this.grid.add(title,1,1);*/
 		
-		this.grid.add(back, column-6, row-1);
+//		this.grid.add(back, 0, 0);
 		ImageView iv1 = new ImageView(scul);
 		iv1.setFitWidth(150);
 		iv1.setFitHeight(150);
-		this.grid.add(iv1,column,row);
+		this.grid.add(iv1,column,row-1,1,2);
 				
 		Text uncontent=new Text(this.user_name);
 		//uncontent.setFont(f);
-		this.grid.add(uncontent,column+1,row);
+		this.grid.add(uncontent,column+1,row-1);
 		
 		Label n=new Label("姓名:");
 		//n.setFont(f);
@@ -120,7 +125,7 @@ public class PersonInfoPane extends Pane {
 	    });
 	    
 	    Label member=new Label("会员类型:");
-	    member.setFont(f);
+//	    member.setFont(f);
 	    this.grid.add(member, column, row+5);
 	    Text membercontent;
 	    if(type == UserType.CUSTOMER ||type == UserType.COMPANY_CUSTOMER){
@@ -163,10 +168,27 @@ public class PersonInfoPane extends Pane {
 	    	Button save=new Button("保存");
 	    	this.grid.add(save, column+2, row+7);
 	    	
-	    	Button upload=new Button("上传");
-	    	this.grid.add(upload,column+2,row);
+	    	Button cancel = new Button("取消");
+	    	this.grid.add(cancel, column+3, row+7);
+	    	cancel.setOnAction(e -> {
+	    		Alert alert = new Alert(AlertType.CONFIRMATION);
+	    		alert.setContentText("确定要退出吗？");
+	    		alert.getDialogPane().setHeaderText(null);
+	    		alert.showAndWait().ifPresent(ok -> {
+	    			if(ok.equals(ButtonType.OK)){
+	    				CustomerPaneController.getInstance().createPersonInfoPane();
+	    			}
+	    		});
+	    	});
+	    	
+	    	Button upload=new Button("上传头像");
+	    	this.grid.add(upload,column+1,row);
 	    	upload.setOnMouseClicked((e)->{
-	    		
+	    		MyFileChooser fileChooser = new MyFileChooser();
+	    		Image newScul;
+	    		if((newScul = fileChooser.showOpenDialog()) != null){
+	    			iv1.setImage(newScul);
+	    		}
 	    	});
 	    	TextField birth_content=new TextField();
 	    	birth_content.setText(birthcontent.getText());
@@ -204,11 +226,17 @@ public class PersonInfoPane extends Pane {
 	    		//System.out.println(Integer.parseInt(birth_content.getText().split("-")[0]));
 	    		this.user.setMonth(Integer.parseInt(birth_content.getText().split("-")[1]));
 	    		this.user.setDay(Integer.parseInt(birth_content.getText().split("-")[2]));
-	    		user.update(this.user);
+	    		String imagePath = iv1.getImage().impl_getUrl().startsWith("file:")?iv1.getImage().impl_getUrl().substring(5).replace('/','\\'):null;
+	    		this.user.setImage(imagePath);
+	    		if(ResultMessage.SUCCESS == user.update(this.user)){
+	    			CustomerPaneController.getInstance().createPersonInfoPane();
+	    			MainPane.getInstance().update(iv1.getImage());
+	    		}
 	    	});
 	    	
 	    });
 	    this.grid.add(change, column+2, row+7);
 	    this.getChildren().add(grid);
+//	    this.grid.setGridLinesVisible(true);
 	}
 }

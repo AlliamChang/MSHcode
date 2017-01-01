@@ -82,7 +82,6 @@ public class HotelInfoRevisePane extends AnchorPane{
 			Image newImage;
 			if((newImage = new MyFileChooser().showOpenDialog()) != null){
 				sculView.setImage(newImage);
-				System.out.println(	newImage.impl_getUrl());
 				hasntRevise.set(false);
 			}
 		});
@@ -205,7 +204,8 @@ public class HotelInfoRevisePane extends AnchorPane{
 							fac.append(temp.getContent()+"%");
 						}
 					}
-					String imagePath = sculView.getImage().impl_getUrl().startsWith("file:")?sculView.getImage().impl_getUrl().substring(5):null;
+					String imagePath = sculView.getImage().impl_getUrl().startsWith("file:")?sculView.getImage().impl_getUrl().substring(5).replace('/','\\'):null;
+				
 					ResultMessage result = new HotelBL().modify(new HotelInfoVO(hotelInfo.getHotel(),adressText.getText(),
 							phoneText.getText(),fac.toString().trim().split("%"),introText.getText(),hotelInfo.getProvince(),
 							hotelInfo.getTradingArea(),Integer.valueOf(openLabelText.getText()),imagePath,starBox.getSelectionModel().getSelectedIndex(),hotelInfo.getScore(),hotelInfo.getHotel_id(),

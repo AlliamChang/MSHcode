@@ -171,7 +171,7 @@ public class AddRoomPane extends VBox{
 				alert.showAndWait().filter(response -> 
 					response == ButtonType.OK).ifPresent(response ->{
 						//HotelPaneController.getInstance()
-						System.out.println("保存");
+						
 					});
 		});
 		save.setStyle("-fx-font-size:20");

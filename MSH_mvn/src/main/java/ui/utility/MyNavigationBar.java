@@ -137,6 +137,10 @@ public class MyNavigationBar extends VBox {
 		
 	}
 	
+	public void resetScul(Image image){
+		sculView.setImage(image);
+	}
+	
 	/**
 	 * 已有登录状态下的导航栏构造方法
 	 * @param scul 用户的头像

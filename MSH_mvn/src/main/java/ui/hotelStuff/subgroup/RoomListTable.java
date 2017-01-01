@@ -2,6 +2,7 @@ package ui.hotelStuff.subgroup;
 
 import java.util.Iterator;
 
+import bl.hotel_bl.HotelBL;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -105,6 +106,7 @@ public class RoomListTable extends TableView{
 		        				alert.showAndWait().filter(response -> 
 		        					response == ButtonType.OK).ifPresent(response ->{
 		        						RoomListTable.this.getItems().remove(this.getTableRow().getIndex());
+//		        						new HotelBL().;
 		        					});
 		        			});
 		        		}else{
