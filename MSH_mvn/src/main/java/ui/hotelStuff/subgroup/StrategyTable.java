@@ -2,6 +2,7 @@ package ui.hotelStuff.subgroup;
 
 import java.util.Iterator;
 
+import bl.strategy_bl.StrategyBL;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,7 +21,6 @@ import javafx.stage.Modality;
 import javafx.util.Callback;
 import tools.Date;
 import tools.StrategyType;
-import vo.HotelStrategyVO;
 import vo.StrategyVO;
 
 public class StrategyTable extends TableView{
@@ -131,11 +131,11 @@ public class StrategyTable extends TableView{
 		end.setStyle("-fx-alignment:center");
 		end.setMinWidth(115);
 		
-		TableColumn<HotelStrategyVO,Button> remove = new TableColumn<>("");
-		remove.setCellFactory(new Callback<TableColumn<HotelStrategyVO, Button>, TableCell<HotelStrategyVO, Button>>() {
+		TableColumn<StrategyVO,Button> remove = new TableColumn<>("");
+		remove.setCellFactory(new Callback<TableColumn<StrategyVO, Button>, TableCell<StrategyVO, Button>>() {
 		      @Override 
-		      public TableCell<HotelStrategyVO, Button> call(TableColumn<HotelStrategyVO, Button> param) {
-		        return new TableCell<HotelStrategyVO,Button>(){
+		      public TableCell<StrategyVO, Button> call(TableColumn<StrategyVO, Button> param) {
+		        return new TableCell<StrategyVO,Button>(){
 		        	
 		        	protected void updateItem(Button item,boolean empty){
 		        		if(!empty){
@@ -148,6 +148,7 @@ public class StrategyTable extends TableView{
 		        				alert.getDialogPane().setContentText("确定要移除该策略吗？");
 		        				alert.showAndWait().filter(response -> 
 		        					response == ButtonType.OK).ifPresent(response ->{
+		        						new StrategyBL().deleteStrategy((StrategyVO)StrategyTable.this.getItems().get(this.getTableRow().getIndex()));
 		        						StrategyTable.this.getItems().remove(this.getTableRow().getIndex());
 		        					});
 		        			});

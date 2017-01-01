@@ -96,7 +96,7 @@ public class OrderVO {
 	 * @param hasChild
 	 */
 	public OrderVO(int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,
-			String[] booker, String[] bookerPhone, int days, Date preCheckin, int latestCheckin, boolean hasChild) {
+			String[] booker, String[] bookerPhone, int days, Date preCheckin, int latestCheckin, boolean hasChild,double price) {
 		super();
 		this.userID = userID;
 		this.userAccount = userAccount;
@@ -110,6 +110,7 @@ public class OrderVO {
 		this.preCheckin = preCheckin;
 		this.latestCheckin = latestCheckin;
 		this.hasChild = hasChild;
+		this.price = price;
 	}
 
 	public OrderVO(long id, int userID, String userAccount, int hotelId, String hotel, String roomStyle, int roomNum,

@@ -27,9 +27,11 @@ public class HotelStuffRunner extends Application{
 
 	public static void main(String[] args){
 		new HotelStuffRunner().linkToServer();
-		HotelPaneController.getInstance().hotelStuffLogin(1, "七天连锁", null);
+		HotelPaneController.getInstance().hotelStuffLogin(1,1, "七天连锁", null);
 		launch(args);
 //		Date d = new Date("2016/12/16",false);
+//		Date d2 = new Date("2016/12/18",false);
+//		System.out.println(d.getLocalDate().compareTo(d2.getLocalDate()));
 //		System.out.println(d.getLocalDate().equals(LocalDate.now()));
 	}
 	

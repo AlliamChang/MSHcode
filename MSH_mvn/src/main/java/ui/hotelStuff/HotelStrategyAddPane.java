@@ -105,52 +105,31 @@ public class HotelStrategyAddPane extends GridPane{
 		Label discountType = new Label("元");
 		GridPane.setConstraints(discountType, 3, 2);
 		
-		Label businessLabel = new Label("合作企业：");
-		GridPane.setConstraints(businessLabel, 0, 3);
+//		Label businessLabel = new Label("合作企业：");
+//		GridPane.setConstraints(businessLabel, 0, 3);
 		
-		TextField business = new TextField();
-		GridPane.setConstraints(business, 1, 3, 3, 1);
+//		TextField business = new TextField();
+//		GridPane.setConstraints(business, 1, 3, 3, 1);
 		
 		Label roomStyleLabel = new Label("特惠房型：");
 		GridPane.setConstraints(roomStyleLabel, 0, 3);
 		
-		Label roomNumLabel = new Label("要求数量：");
-		GridPane.setConstraints(roomNumLabel, 0, 4);
+//		Label roomNumLabel = new Label("要求数量：");
+//		GridPane.setConstraints(roomNumLabel, 0, 4);
 		
 		ChoiceBox<String> roomStyle = new ChoiceBox<>();
+		roomStyle.getItems().add("所有");
 		roomStyle.getItems().addAll(HotelPaneController.getInstance().getRoomStyle());
 		GridPane.setConstraints(roomStyle, 1, 3);
 		
-		ChoiceBox<Integer> num = new ChoiceBox<>();
-		num.getItems().addAll(NUM);
-		num.getSelectionModel().select(0);
-		GridPane.setConstraints(num, 1, 4);
+//		ChoiceBox<Integer> num = new ChoiceBox<>();
+//		num.getItems().addAll(NUM);
+//		num.getSelectionModel().select(0);
+//		GridPane.setConstraints(num, 1, 4);
 		
-		final Node[] birthOrFestival = {nameLabel,timeLabel,discountLabel,
-				name,begin,sep,end,discount,discountType};
-		final Node[] enterprise = {nameLabel,timeLabel,discountLabel,
-				name,begin,sep,end,discount,discountType,businessLabel,business};
 		final Node[] moreRooms = {nameLabel,timeLabel,discountLabel,
-				name,begin,sep,end,discount,discountType,roomStyleLabel,roomNumLabel,roomStyle,num};
-		
-		typeBox.setOnAction(e -> {
-			if(text.getChildren().size() > 0)
-				text.getChildren().remove(0, text.getChildren().size());
-			switch(typeBox.getValue()){
-			case "生日特惠":
-			case "节假日特惠":
-				text.getChildren().addAll(birthOrFestival);
-				break;
-				
-			case "多房间特惠":
-				text.getChildren().addAll(moreRooms);
-				break;
-				
-			case "合作企业特惠":
-				text.getChildren().addAll(enterprise);
-				break;
-			}
-		});
+				name,begin,sep,end,discount,discountType,roomStyleLabel,roomStyle};
+		text.getChildren().addAll(moreRooms);
 		typeBox.getSelectionModel().select(0);
 		
 		

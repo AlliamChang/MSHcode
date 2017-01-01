@@ -8,7 +8,6 @@ import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import tools.BedStyle;
 import tools.Date;
-import tools.HotelStrategyType;
 import tools.PeopleType;
 import tools.ResultMessage;
 import tools.StrategyType;
@@ -26,7 +25,6 @@ import vo.RoomVO;
 import vo.StrategyVO;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.*;
-import blservice.strategy_blservice.StrategyBLService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +34,7 @@ import java.util.List;
 import bl.hotel_bl.HotelBL;
 import bl.order_bl.OrderBL;
 import bl.strategy_bl.StrategyBL;
-import bl_stub.Order_Stub;
+import bl.strategy_bl.StrategyBL;
 
 public class HotelPaneController {
 	
@@ -115,8 +113,7 @@ public class HotelPaneController {
 				new StrategyVO("双十一促销", StrategyType.HOLIDAY,null,null, "2016/11/10","2016/11/12",10,PeopleType.NORMAL),
 				new StrategyVO("腾讯公司合作优惠", StrategyType.CO_OPERATION,null,null, "2016/11/10","2016/12/12",50, PeopleType.NORMAL)
 				));
-//		StrategyBLService strategy = new StrategyBL();
-//		return new HotelStrategyPane(strategy.getStrategyInHotel(id));
+//		return new HotelStrategyPane(new StrategyBL().getStrategyInHotel(id));
 	}
 	
 	/**

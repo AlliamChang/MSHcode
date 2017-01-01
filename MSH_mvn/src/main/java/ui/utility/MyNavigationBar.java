@@ -174,7 +174,7 @@ public class MyNavigationBar extends VBox {
 		group = new ToggleGroup();
 		naviBox = new VBox(0);
 		naviBox.setStyle(BACKGROUND_STYLE + BORDER_STYLE);
-		naviBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.61);
+		naviBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.555);
 		for(int i = 0; i < navi.size(); i ++){
 			naviButton[i] = new ToggleButton(navi.get(i));
 			naviButton[i].setMinSize(MAX_WIDTH-3,50);
@@ -200,8 +200,8 @@ public class MyNavigationBar extends VBox {
 	private void initInfo(){
 		infoBox = new VBox(SPACE);
 		infoBox.setStyle(BACKGROUND_STYLE + BORDER_STYLE);
-		infoBox.setMaxSize(MAX_WIDTH, MAX_HEIGHT * 0.4);
-		infoBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.4);
+		infoBox.setMaxSize(MAX_WIDTH, MAX_HEIGHT * 0.45);
+		infoBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.45);
 		infoBox.setAlignment(Pos.BASELINE_CENTER);
 		infoBox.setPadding(new Insets(10,10,10,10));
 		

@@ -40,7 +40,7 @@ import vo.HotelInfoVO;
 public class HotelInfoRevisePane extends AnchorPane{
 
 	private static final double LEFT_ANCHOR = 50;
-	private static final List<String> STAR = Arrays.asList("经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华");
+	private static final List<String> STAR = Arrays.asList("尚未设置","经济型","二星级","三星级/舒适","四星级/高级","五星级/豪华");
 	private SimpleBooleanProperty hasntRevise = new SimpleBooleanProperty(true);
 	private HotelInfoVO hotelInfo;
 	private HotelInfoPane lastPane;
@@ -133,7 +133,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		phoneText.setMaxWidth(150);
 		infoPane.add(phoneText, 1, 1);
 		
-		Label cityText = new Label(hotelInfo.getProvince() + " " + hotelInfo.getCity());
+		Label cityText = new Label(hotelInfo.getProvince() + " " + hotelInfo.getCity()==null?"":hotelInfo.getCity());
 		cityText.setMaxWidth(100);
 		infoPane.add(cityText, 1, 2);
 		
@@ -143,7 +143,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 		
 		ChoiceBox<String> starBox = new ChoiceBox<>();
 		starBox.getItems().addAll(STAR);
-		starBox.getSelectionModel().select(hotelInfo.getStar()-1);
+		starBox.getSelectionModel().select(hotelInfo.getStar());
 		starBox.valueProperty().addListener((l,o,n) -> hasntRevise.set(false));
 		infoPane.add(starBox, 1, 4);
 		
@@ -208,7 +208,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 					String imagePath = sculView.getImage().impl_getUrl().startsWith("file:")?sculView.getImage().impl_getUrl().substring(5):null;
 					ResultMessage result = new HotelBL().modify(new HotelInfoVO(hotelInfo.getHotel(),adressText.getText(),
 							phoneText.getText(),fac.toString().trim().split("%"),introText.getText(),hotelInfo.getProvince(),
-							hotelInfo.getTradingArea(),2015,imagePath,4,hotelInfo.getScore(),hotelInfo.getHotel_id(),
+							hotelInfo.getTradingArea(),Integer.valueOf(openLabelText.getText()),imagePath,starBox.getSelectionModel().getSelectedIndex(),hotelInfo.getScore(),hotelInfo.getHotel_id(),
 							hotelInfo.getStuff_id(),hotelInfo.getCity()));
 					if(result == ResultMessage.SUCCESS){
 						Alert a = new Alert(AlertType.CONFIRMATION);
