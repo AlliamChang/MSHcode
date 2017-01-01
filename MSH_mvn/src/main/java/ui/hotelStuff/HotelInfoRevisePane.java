@@ -205,6 +205,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 							fac.append(temp.getContent()+"%");
 						}
 					}
+					System.out.println(sculView.getImage().impl_getUrl());
 					String imagePath = sculView.getImage().impl_getUrl().startsWith("file:")?sculView.getImage().impl_getUrl().substring(5):null;
 					ResultMessage result = new HotelBL().modify(new HotelInfoVO(hotelInfo.getHotel(),adressText.getText(),
 							phoneText.getText(),fac.toString().trim().split("%"),introText.getText(),hotelInfo.getProvince(),
