@@ -116,7 +116,8 @@ public class StrategyBL implements StrategyBLService{
 			StrategyVO temp=list.get(i);
 			if(temp.getHotelId()==hotelId&&temp.getStrategyType()==StrategyType.BIRTHDAY){
 				if(now.getYear()==user.getYear()&&now.getMonthValue()==user.getMonth()&&now.getDayOfMonth()==user.getDay()){
-					birthPrice+=temp.getCost();
+					if(birthPrice<=temp.getCost())
+						birthPrice=temp.getCost();
 				}
 			}
 		}
@@ -143,18 +144,22 @@ public class StrategyBL implements StrategyBLService{
 				if(now.getYear()>=sYear&&now.getYear()<eYear){
 					if(now.getMonthValue()>=sMonth){
 						if(now.getDayOfMonth()>=sDay){
-							timePrice+=temp.getCost();
+							if(timePrice<=temp.getCost())
+								timePrice=temp.getCost();
 						}
 					}
 				}
 				else if(now.getYear()==sYear){
 					if(now.getMonthValue()>=sMonth){
 						if(now.getMonthValue()<eMonth){
-							timePrice+=temp.getCost();
+							if(timePrice<=temp.getCost())
+								timePrice=temp.getCost();
 						}
 						else if(now.getMonthValue()==eMonth){
 							if(now.getDayOfMonth()<=eDay){
-								timePrice+=temp.getCost();
+	
+								if(timePrice<=temp.getCost())
+									timePrice=temp.getCost();
 							}
 						}
 					}
@@ -170,7 +175,8 @@ public class StrategyBL implements StrategyBLService{
 		for(int i=0;i<list.size();i++){
 			StrategyVO temp=list.get(i);
 			if(order.getRoomNum()>=3&&temp.getStrategyType()==StrategyType.TRIPLEROOM&&temp.getHotelId()==hotelId)
-				roomPrice+=temp.getCost();
+				if(roomPrice<=temp.getCost())
+					roomPrice=temp.getCost();
 		}
 		return roomPrice;
 	}//酒店策略--三间房减少价
@@ -178,11 +184,20 @@ public class StrategyBL implements StrategyBLService{
 	public double getVipPrice(UserVO user){
 		double vipPrice=0.00;
 		List<StrategyVO> list=this.getStrategyInWeb();
+        double vc=0.00;
 		if(user.getLevel()>0){
 			for(int i=0;i<list.size();i++){
-				if(list.get(i).getStrategyType()==StrategyType.VIP)
-					vipPrice+=list.get(i).getCost();	
+				if(list.get(i).getStrategyType()==StrategyType.VIP){
+					if(!list.get(i).getName().equals("AdminVipCost")){
+						if(vipPrice<=list.get(i).getCost())
+							vipPrice=list.get(i).getCost();
+					}
+					else if(list.get(i).getName().equals("AdminVipCost"))
+						vc+=list.get(i).getCost();
+						
+				}		
 			}
+			
 		}
 		return vipPrice;
 	}//网站策略--vip折扣
@@ -193,7 +208,8 @@ public class StrategyBL implements StrategyBLService{
 		for(int i=0;i<list.size();i++){
 			StrategyVO temp=list.get(i);
 			if(temp.getStrategyType()==StrategyType.CO_OPERATION&&user.getType()==UserType.COMPANY_CUSTOMER&&temp.getHotelId()==hotelId)
-				cooperationPrice+=temp.getCost();
+				if(cooperationPrice<=temp.getCost())
+					cooperationPrice=temp.getCost();
 		}
 		return cooperationPrice;
 	}//酒店策略--合作企业折扣
