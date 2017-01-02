@@ -27,6 +27,12 @@ public interface UserDAO extends Remote {
 
 	public ResultMessage deleteUser(int ID) throws RemoteException;
 	
+	/**
+	 * 登录，用户不存在返回{@link tools.ResultMessage#NOT_EXIST}，密码错误返回{@link tools.ResultMessage#FAIL}，登录成功返回{@link tools.ResultMessage#SUCCESS}，已登录返回{@link tools.ResultMessage#LOGGED}。
+	 * @param account ID或账号
+	 * @param password 加密后的密码
+	 * @return
+	 */
 	public ResultMessage login(String account, String password) throws RemoteException;
 	
 	public ResultMessage logout(int id) throws RemoteException;

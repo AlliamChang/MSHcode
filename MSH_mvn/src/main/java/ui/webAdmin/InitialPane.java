@@ -1,8 +1,6 @@
 package ui.webAdmin;
 
-import java.util.Optional;
 
-import ui.utility.LoginDialog;
 import ui.utility.MainPane;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -12,7 +10,6 @@ import javafx.scene.control.Control;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.util.Pair;
 
 public class InitialPane extends GridPane{
 	private ImageView imageView;

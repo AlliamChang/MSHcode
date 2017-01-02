@@ -8,7 +8,6 @@ import dao.user.UserDAO;
 import po.UserPO;
 import tools.ResultMessage;
 import tools.UserType;
-import vo.UserVO;
 
 public class UserDAOStub implements UserDAO {
 

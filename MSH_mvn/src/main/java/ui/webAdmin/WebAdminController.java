@@ -17,7 +17,6 @@ import vo.HotelInfoVO;
 import vo.UserVO;
 import bl.hotel_bl.HotelBL;
 import bl.user_bl.UserBLServiceImpl;
-import bl_stub.HotelBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.user_blservice.UserBLService;
 
@@ -50,11 +49,9 @@ public class WebAdminController {
 				case "查询用户":
 					setInitialPane();
 					break;
-					
 				case "营销人员":
 					setBrowseMarketersPane();
 					break;
-					
 				case "浏览酒店":
 					setBrowseHotelPane();
 					break;

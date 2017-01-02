@@ -3,7 +3,6 @@ package ui.webAdmin;
 import java.util.List;
 
 import ui.utility.MainPane;
-import vo.HotelInfoVO;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
