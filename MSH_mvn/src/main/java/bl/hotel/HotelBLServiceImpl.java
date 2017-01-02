@@ -1,10 +1,11 @@
-package bl.hotel_bl;
+package bl.hotel;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import blservice.hotel.*;
 import po.CheckInPO;
 import po.EvaluatePO;
 import po.hotelPO.HotelPO;
@@ -12,17 +13,16 @@ import po.RoomPO;
 import rmi.RemoteHelper;
 import dao.hotel.EvaluateDAO;
 import dao.hotel.HotelDAO;
-import blservice.hotel_blservice.*;
 import tools.ResultMessage;
 import vo.CheckInVO;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.RoomVO;
-public class HotelBL implements HotelBLService{
+public class HotelBLServiceImpl implements HotelBLService{
 	private HotelDAO hotel;
 	private RemoteHelper help;
 	private EvaluateDAO evaluate;
-	public HotelBL(){
+	public HotelBLServiceImpl(){
 		help=RemoteHelper.getInstance();
 		hotel=help.getHotelDAO();
 		evaluate=help.getEvaluateDAO();

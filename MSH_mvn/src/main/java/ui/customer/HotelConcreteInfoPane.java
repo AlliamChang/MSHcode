@@ -3,8 +3,8 @@ package ui.customer;
 import java.util.ArrayList;
 import java.util.List;
 
-import bl.hotel_bl.HotelBL;
-import blservice.hotel_blservice.HotelBLService;
+import bl.hotel.HotelBLServiceImpl;
+import blservice.hotel.HotelBLService;
 import ui.utility.MainPane;
 import ui.utility.MyRetreatButton;
 import vo.EvaluateVO;
@@ -82,7 +82,7 @@ public class HotelConcreteInfoPane extends Pane{
 		vb.setMinWidth(600);
 		vb.setPadding(new Insets(10, 10, 10, 10));
 		vb.setSpacing(10);
-		HotelBLService stub=new HotelBL();
+		HotelBLService stub=new HotelBLServiceImpl();
 		vb.getChildren().addAll(Evaluate.getEvaluate(stub.getEvaluate(vo.getHotel_id())));
 		evaluate=new ScrollPane(vb);
 		evaluate.setMinWidth(605);

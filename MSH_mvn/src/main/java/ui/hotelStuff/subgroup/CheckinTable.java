@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import bl.hotel_bl.HotelBL;
+import bl.hotel.HotelBLServiceImpl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -114,7 +114,7 @@ public class CheckinTable extends TableView{
 		        						DateTimeFormatter.ofPattern("yyyy/MM/dd")),false));
 	        					Alert alert = new Alert(AlertType.INFORMATION);
 	        					alert.getDialogPane().setHeaderText(null);
-		        				if(ResultMessage.SUCCESS == new HotelBL().checkout(vo)){
+		        				if(ResultMessage.SUCCESS == new HotelBLServiceImpl().checkout(vo)){
 		        					alert.setContentText("退房成功");
 		        					alert.show();
 		        					MainPane.getInstance().setRightPane(HotelPaneController.getInstance().createCheckInPane());

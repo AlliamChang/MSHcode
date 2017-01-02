@@ -1,12 +1,8 @@
 package ui.websiteStuff;
 
 import ui.utility.*;
-import bl.hotel_bl.*;
 import rmi.RemoteHelper;
 import dao.user.*;
-import blservice.hotel_blservice.*;
-import blservice.user_blservice.*;
-import blservice.strategy_blservice.*;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Toggle;
 import tools.Date;
@@ -15,11 +11,16 @@ import tools.PeopleType;
 import tools.StrategyType;
 import tools.UserType;
 import tools.ResultMessage;
-import blservice.order_blservice.*;
+import blservice.hotel.*;
+import blservice.order.*;
+import blservice.strategy.*;
+import blservice.user.*;
 import bl_stub.*;
-import bl.order_bl.*;
-import bl.strategy_bl.*;
-import bl.user_bl.UserBLServiceImpl;
+import bl.hotel.*;
+import bl.order.*;
+import bl.strategy.*;
+import bl.user.UserBLServiceImpl;
+
 import java.util.Arrays;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -44,9 +45,9 @@ public class MarketingPaneController {
 	private MyNavigationBar navi;
 	
 	private MarketingPaneController(){
-		strategyBL=new StrategyBL();
-		orderBL=new OrderBL();
-		hotelBL=new HotelBL();
+		strategyBL=new StrategyBLServiceImpl();
+		orderBL=new OrderBLServiceImpl();
+		hotelBL=new HotelBLServiceImpl();
 		helper=RemoteHelper.getInstance();
 		userDAO=helper.getUserDAO();
 		userBL=new UserBLServiceImpl();

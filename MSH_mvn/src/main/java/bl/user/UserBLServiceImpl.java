@@ -1,10 +1,10 @@
-package bl.user_bl;
+package bl.user;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 
-import blservice.user_blservice.UserBLService;
+import blservice.user.UserBLService;
 import dao.user.*;
 import po.CreditPO;
 import po.UserPO;

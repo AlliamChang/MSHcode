@@ -1,7 +1,7 @@
 package ui.utility;
 
-import bl.user_bl.UserBLServiceImpl;
-import blservice.user_blservice.UserBLService;
+import bl.user.UserBLServiceImpl;
+import blservice.user.UserBLService;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;

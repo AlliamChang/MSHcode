@@ -2,7 +2,7 @@ package ui.hotelStuff.subgroup;
 
 import java.util.Iterator;
 
-import bl.strategy_bl.StrategyBL;
+import bl.strategy.StrategyBLServiceImpl;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -148,7 +148,7 @@ public class StrategyTable extends TableView{
 		        				alert.getDialogPane().setContentText("确定要移除该策略吗？");
 		        				alert.showAndWait().filter(response -> 
 		        					response == ButtonType.OK).ifPresent(response ->{
-		        						new StrategyBL().deleteStrategy((StrategyVO)StrategyTable.this.getItems().get(this.getTableRow().getIndex()));
+		        						new StrategyBLServiceImpl().deleteStrategy((StrategyVO)StrategyTable.this.getItems().get(this.getTableRow().getIndex()));
 		        						StrategyTable.this.getItems().remove(this.getTableRow().getIndex());
 		        					});
 		        			});

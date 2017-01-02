@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
-import blservice.order_blservice.OrderBLService;
+import blservice.order.OrderBLService;
 import tools.OrderState;
 import tools.ResultMessage;
 import ui.utility.MainPane;
@@ -115,7 +115,7 @@ public class MyOrderTable extends TableView{
 							Button bn=new Button("撤销");
 							
 							bn.setOnMouseClicked((MouseEvent me)->{
-								OrderBLService order=new bl.order_bl.OrderBL();
+								OrderBLService order=new bl.order.OrderBLServiceImpl();
 								OrderVO vo = MyOrderTable.this.data.get(this.getTableRow().getIndex());
 								isContinue = false;
 								Alert alert = new Alert(AlertType.CONFIRMATION);

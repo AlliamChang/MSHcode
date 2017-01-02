@@ -3,7 +3,7 @@ package bl_stub;
 import java.util.Arrays;
 import java.util.List;
 
-import blservice.strategy_blservice.*;
+import blservice.strategy.*;
 import vo.*;
 import tools.*;
 

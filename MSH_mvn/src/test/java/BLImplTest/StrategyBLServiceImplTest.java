@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.junit.*;
 
+import bl.strategy.*;
+import blservice.strategy.*;
 import tools.*;
 import vo.*;
-import bl.strategy_bl.*;
-import blservice.strategy_blservice.*;
 import rmi.RemoteHelper;
 
 public class StrategyBLServiceImplTest {
@@ -29,7 +29,7 @@ public class StrategyBLServiceImplTest {
 			e.printStackTrace();
 		}
 		
-		strategy=new StrategyBL();
+		strategy=new StrategyBLServiceImpl();
 		s1=new StrategyVO("s1",StrategyType.HOLIDAY,"江苏省","南京市","栖霞区","2017/01/01","2017/01/03",
 				10.00,PeopleType.VIP);
 		s2=new StrategyVO("s2",StrategyType.HOLIDAY,"江苏省","南京市","栖霞区","2017/01/01","2017/01/03",

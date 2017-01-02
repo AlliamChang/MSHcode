@@ -3,6 +3,7 @@ package ui.customer;
 import java.util.Arrays;
 import java.util.List;
 
+import bl.user.UserBLServiceImpl;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
@@ -11,10 +12,9 @@ import ui.utility.MyNavigationBar;
 import vo.CreditVO;
 import vo.OrderVO;
 import vo.RoomVO;
-import bl.user_bl.UserBLServiceImpl;
-import blservice.hotel_blservice.HotelBLService;
-import blservice.order_blservice.OrderBLService;
-import blservice.user_blservice.UserBLService;
+import blservice.hotel.HotelBLService;
+import blservice.order.OrderBLService;
+import blservice.user.UserBLService;
 
 public class CustomerPaneController {
 	private static CustomerPaneController controller;
@@ -26,7 +26,7 @@ public class CustomerPaneController {
 	private OrderBLService OrderBL;
 	private final List<String> naviInfo = Arrays.asList("搜索","个人信息","我的订单");
 	private CustomerPaneController(){
-		HotelBL=new bl.hotel_bl.HotelBL();
+		HotelBL=new bl.hotel.HotelBLServiceImpl();
 	}
 	
 	public static CustomerPaneController getInstance(){
@@ -93,7 +93,7 @@ public class CustomerPaneController {
 	}
 	//得到订单记录
 	public List<OrderVO> getOrder(){
-		OrderBL=new bl.order_bl.OrderBL();
+		OrderBL=new bl.order.OrderBLServiceImpl();
 		List<OrderVO> order_list=OrderBL.getUserOrder(MainPane.getInstance().getUserId(), null);
 		return order_list;
 	}

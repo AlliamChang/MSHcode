@@ -1,4 +1,4 @@
-package blservice.user_blservice;
+package blservice.user;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package blservice.order_blservice;
+package blservice.order;
 
 import vo.OrderVO;
 

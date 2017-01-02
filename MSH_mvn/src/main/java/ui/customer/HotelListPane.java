@@ -3,8 +3,8 @@ package ui.customer;
 import java.util.ArrayList;
 import java.util.List;
 
-import bl.hotel_bl.HotelBL;
-import blservice.hotel_blservice.HotelBLService;
+import bl.hotel.HotelBLServiceImpl;
+import blservice.hotel.HotelBLService;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
@@ -60,7 +60,7 @@ public class HotelListPane extends Pane{
 	private int column=0;
 	private int row=1;
 	private ScrollPane sp;
-	private HotelBLService hotel=new HotelBL();
+	private HotelBLService hotel=new HotelBLServiceImpl();
 	private List<HotelInfoVO> result;
 	public HotelListPane(String pro, String city, String area, String name){
 		super();
@@ -272,7 +272,7 @@ class Cont extends GridPane{
 	        for(int i=0;i<6;i++){
 	        	this.getColumnConstraints().add(colInfo);
 	        }
-	        HotelBLService stub=new bl.hotel_bl.HotelBL();
+	        HotelBLService stub=new bl.hotel.HotelBLServiceImpl();
 		name=new Label(vo.getHotel());
 		star=new Label(vo.getStar()+"星");
 		score=new Label(vo.getScore()+"");

@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.List;
 
-import blservice.hotel_blservice.HotelBLService;
+import blservice.hotel.HotelBLService;
 import dao.hotel.HotelDAO;
 import rmi.RemoteHelper;
 import tools.BedStyle;

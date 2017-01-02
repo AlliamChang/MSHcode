@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import bl.hotel_bl.HotelBL;
+import bl.hotel.HotelBLServiceImpl;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.geometry.Orientation;
@@ -206,7 +206,7 @@ public class HotelInfoRevisePane extends AnchorPane{
 					}
 					String imagePath = sculView.getImage().impl_getUrl().startsWith("file:")?sculView.getImage().impl_getUrl().substring(5).replace('/','\\'):null;
 				
-					ResultMessage result = new HotelBL().modify(new HotelInfoVO(hotelInfo.getHotel(),adressText.getText(),
+					ResultMessage result = new HotelBLServiceImpl().modify(new HotelInfoVO(hotelInfo.getHotel(),adressText.getText(),
 							phoneText.getText(),fac.toString().trim().split("%"),introText.getText(),hotelInfo.getProvince(),
 							hotelInfo.getTradingArea(),Integer.valueOf(openLabelText.getText()),imagePath,starBox.getSelectionModel().getSelectedIndex(),hotelInfo.getScore(),hotelInfo.getHotel_id(),
 							hotelInfo.getStuff_id(),hotelInfo.getCity()));

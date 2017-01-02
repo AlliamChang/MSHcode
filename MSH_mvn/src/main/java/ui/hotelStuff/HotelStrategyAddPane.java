@@ -2,7 +2,7 @@ package ui.hotelStuff;
 
 import java.time.LocalDate;
 
-import bl.strategy_bl.StrategyBL;
+import bl.strategy.StrategyBLServiceImpl;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -164,7 +164,7 @@ public class HotelStrategyAddPane extends GridPane{
 					StrategyVO vo = new StrategyVO(name.getText(), type, null, null, null,begin.getFormatValue(),
 							end.getFormatValue(), Integer.valueOf(discount.getText()), 
 							PeopleType.NORMAL,HotelPaneController.getInstance().getHotelId(),rStyle);
-					if(ResultMessage.SUCCESS == new StrategyBL().addStrategy(vo)){
+					if(ResultMessage.SUCCESS == new StrategyBLServiceImpl().addStrategy(vo)){
 System.out.println(1);
 						MainPane.getInstance().setRightPane(HotelPaneController.getInstance().createHotelStrategyPane());
 					}

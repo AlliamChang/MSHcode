@@ -1,4 +1,4 @@
-package blservice.hotel_blservice;
+package blservice.hotel;
 
 import java.util.List;
 

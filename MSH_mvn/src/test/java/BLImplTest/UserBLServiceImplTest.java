@@ -8,13 +8,13 @@ import java.util.List;
 
 import org.junit.*;
 
+import bl.user.UserBLServiceImpl;
+import blservice.user.UserBLService;
 import tools.ChangeReason;
 import tools.ResultMessage;
 import tools.UserType;
 import vo.CreditVO;
 import vo.UserVO;
-import bl.user_bl.UserBLServiceImpl;
-import blservice.user_blservice.UserBLService;
 import rmi.RemoteHelper;
 
 public class UserBLServiceImplTest {

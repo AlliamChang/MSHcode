@@ -18,17 +18,17 @@ import ui.utility.MyNavigationBar;
 import vo.HotelInfoVO;
 import vo.OrderVO;
 import vo.RoomVO;
-import blservice.hotel_blservice.HotelBLService;
-import blservice.order_blservice.*;
+import blservice.hotel.HotelBLService;
+import blservice.order.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import bl.hotel_bl.HotelBL;
-import bl.order_bl.OrderBL;
-import bl.strategy_bl.StrategyBL;
+import bl.hotel.HotelBLServiceImpl;
+import bl.order.OrderBLServiceImpl;
+import bl.strategy.StrategyBLServiceImpl;
 
 public class HotelPaneController {
 	
@@ -48,8 +48,8 @@ public class HotelPaneController {
 	private final List<String> naviInfo = Arrays.asList("订单列表","客房列表","入住信息","促销策略","基本信息");
 	
 	private HotelPaneController(){
-		orderBL = new OrderBL();
-		hotelBL = new HotelBL();
+		orderBL = new OrderBLServiceImpl();
+		hotelBL = new HotelBLServiceImpl();
 	}
 	
 	public static HotelPaneController getInstance(){
@@ -109,7 +109,7 @@ public class HotelPaneController {
 //				new StrategyVO("双十一促销", StrategyType.HOLIDAY,null,null,null, "2016/11/10","2016/11/12",10,PeopleType.NORMAL),
 //				new StrategyVO("腾讯公司合作优惠", StrategyType.CO_OPERATION,null,null,null, "2016/11/10","2016/12/12",50, PeopleType.NORMAL)
 //				));
-		return new HotelStrategyPane(new StrategyBL().getStrategyInHotel(id));
+		return new HotelStrategyPane(new StrategyBLServiceImpl().getStrategyInHotel(id));
 	}
 	
 	/**

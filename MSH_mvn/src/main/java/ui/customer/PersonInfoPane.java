@@ -1,9 +1,9 @@
 package ui.customer;
 
-import blservice.user_blservice.UserBLService;
 import ui.utility.MainPane;
 import ui.utility.MyFileChooser;
 import vo.UserVO;
+import blservice.user.UserBLService;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -212,7 +212,7 @@ public class PersonInfoPane extends Pane {
 	    	this.grid.add(phone_content,column+1,row+3);
 	    	
 	    	save.setOnMouseClicked((MouseEvent e)->{
-	    		UserBLService user=new bl.user_bl.UserBLServiceImpl();
+	    		UserBLService user=new bl.user.UserBLServiceImpl();
 	    		this.user.setName(name_content.getText());
 	    		this.user.setGender(sextual_content.getValue());
 	    		this.user.setNumber(phone_content.getText());

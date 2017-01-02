@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import tools.Date;
-import blservice.hotel_blservice.HotelBLService;
-import blservice.order_blservice.OrderBLService;
+import blservice.hotel.HotelBLService;
+import blservice.order.OrderBLService;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyRetreatButton;
@@ -161,8 +161,8 @@ public class ReservePane extends Pane {
 		
 		Button ensure=new Button("确定");
 		ensure.setOnMouseClicked(( e)->{
-			OrderBLService order=new bl.order_bl.OrderBL();
-			HotelBLService hotel=new bl.hotel_bl.HotelBL();
+			OrderBLService order=new bl.order.OrderBLServiceImpl();
+			HotelBLService hotel=new bl.hotel.HotelBLServiceImpl();
 			boolean hasChild;
 			if(child.getValue().equals("有")){
 				 hasChild=true;

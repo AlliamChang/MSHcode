@@ -1,4 +1,4 @@
-package blservice.strategy_blservice;
+package blservice.strategy;
 
 import tools.*;
 import vo.*;

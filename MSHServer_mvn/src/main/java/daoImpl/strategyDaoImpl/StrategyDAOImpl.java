@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.hibernate.*;
 
-import dao.strategy_dao.*;
+import dao.strategy.*;
 import daoImpl.HibernateUtil;
 import po.strategyPO.*;
 import tools.*;

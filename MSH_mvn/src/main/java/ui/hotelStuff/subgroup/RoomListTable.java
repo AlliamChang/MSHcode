@@ -2,7 +2,7 @@ package ui.hotelStuff.subgroup;
 
 import java.util.Iterator;
 
-import bl.hotel_bl.HotelBL;
+import bl.hotel.HotelBLServiceImpl;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.junit.*;
 
-import bl.order_bl.OrderBL;
-import blservice.order_blservice.OrderBLService;
+import bl.order.OrderBLServiceImpl;
+import blservice.order.OrderBLService;
 import dao.order.OrderDAO;
 import po.OrderPO;
 import tools.OrderState;
@@ -19,7 +19,7 @@ public class OrderBLServiceImplTest {
 	
 	@Before
 	public void setData(){
-		order = new OrderBL();
+		order = new OrderBLServiceImpl();
 		OrderPO po1 = new OrderPO(1	, "啊", 1, "大酒店", "标间", 1,
 				"郑", "123", 3, "2016/12/12", 18, null,
 				null, false, 200, OrderState.UNEXECUTED, false);

@@ -1,4 +1,4 @@
-package bl.order_bl;
+package bl.order;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
@@ -8,11 +8,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import bl.strategy_bl.StrategyBL;
-import bl.user_bl.UserBLServiceImpl;
-import blservice.order_blservice.OrderBLService;
-import blservice.strategy_blservice.StrategyBLService;
-import blservice.user_blservice.UserBLService;
+import bl.strategy.StrategyBLServiceImpl;
+import bl.user.UserBLServiceImpl;
+import blservice.order.OrderBLService;
+import blservice.strategy.StrategyBLService;
+import blservice.user.UserBLService;
 import dao.order.OrderDAO;
 import po.OrderPO;
 import rmi.RemoteHelper;
@@ -23,7 +23,7 @@ import tools.ResultMessage;
 import vo.CreditVO;
 import vo.OrderVO;
 
-public class OrderBL implements OrderBLService{
+public class OrderBLServiceImpl implements OrderBLService{
 	
 	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
 	private final DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -34,10 +34,10 @@ public class OrderBL implements OrderBLService{
 	private StrategyBLService strategy;
 	private RemoteHelper remoteHelper;
 	
-	public OrderBL(){
+	public OrderBLServiceImpl(){
 		remoteHelper = RemoteHelper.getInstance();
 		user = new UserBLServiceImpl();
-		strategy = new StrategyBL();
+		strategy = new StrategyBLServiceImpl();
 		orderDataBase = remoteHelper.getOrderDAO();
 	}
 

@@ -2,7 +2,7 @@ package runner;
 
 import java.rmi.Naming;
 
-import bl.user_bl.UserBLServiceImpl;
+import bl.user.UserBLServiceImpl;
 import rmi.RemoteHelper;
 import tools.ChangeReason;
 import tools.UserType;

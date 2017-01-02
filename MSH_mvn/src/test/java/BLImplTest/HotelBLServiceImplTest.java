@@ -19,9 +19,9 @@ import vo.HotelInfoVO;
 import vo.RoomVO;
 import vo.UserVO;
 import dao.hotel.HotelDAO;
-import bl.hotel_bl.HotelBL;
-import bl.user_bl.UserBLServiceImpl;
-import blservice.hotel_blservice.HotelBLService;
+import bl.hotel.HotelBLServiceImpl;
+import bl.user.UserBLServiceImpl;
+import blservice.hotel.HotelBLService;
 
 public class HotelBLServiceImplTest {
 	private HotelBLService hotel;
@@ -40,7 +40,7 @@ public class HotelBLServiceImplTest {
 				e.printStackTrace();
 			}
 			
-			hotel=new bl.hotel_bl.HotelBL();
+			hotel=new bl.hotel.HotelBLServiceImpl();
 			i1 = new HotelInfoVO("青年旅馆", "南京市中山北路10号", null, null, null, "江苏省", "鼓楼区", 0, null, 3, 3.5, 2, 0, "南京市");
 			i2 = new HotelInfoVO("天上人间", "南京市上海路10号", null, null, null, "江苏省", "鼓楼区", 0, null, 4, 4.0, 5, 4, "南京市");
 			i3 = new HotelInfoVO("渡口客栈", "南京市珠江路10号", null, null, null, "江苏省", "鼓楼区", 0, null, 2, 3.0, 4, 1, "南京市");

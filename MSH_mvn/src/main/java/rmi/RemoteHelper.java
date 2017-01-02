@@ -2,10 +2,10 @@ package rmi;
 
 import java.rmi.Remote;
 
-import dao.strategy_dao.*;
 import dao.hotel.EvaluateDAO;
 import dao.hotel.HotelDAO;
 import dao.order.OrderDAO;
+import dao.strategy.*;
 import dao.user.CreditRecordsDAO;
 import dao.user.UserDAO;
 

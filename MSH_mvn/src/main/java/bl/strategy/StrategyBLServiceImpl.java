@@ -1,25 +1,26 @@
-package bl.strategy_bl;
+package bl.strategy;
 
 //<<<<<<< HEAD
 import tools.*;
 import rmi.RemoteHelper;
-import dao.strategy_dao.*;
+
 import java.rmi.*;
 import java.time.LocalDate;
 import java.util.*;
+
+import blservice.strategy.StrategyBLService;
+import dao.strategy.*;
 import vo.*;
 import po.strategyPO.*;
-import blservice.strategy_blservice.StrategyBLService;
-//=======
 
 
 //>>>>>>> origin/master
 
-public class StrategyBL implements StrategyBLService{
+public class StrategyBLServiceImpl implements StrategyBLService{
 	private StrategyDAO strategy;
 	private RemoteHelper helper;
 	
-	public StrategyBL(){
+	public StrategyBLServiceImpl(){
 		helper=RemoteHelper.getInstance();
 		strategy=helper.getStrategyDAO();
 	}

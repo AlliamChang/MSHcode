@@ -7,7 +7,7 @@ import po.EvaluatePO;
 import tools.ResultMessage;
 import dao.hotel.EvaluateDAO;
 
-public class EvaluateDAO_Stub implements EvaluateDAO {
+public class EvaluateDAOStub implements EvaluateDAO {
 
 	@Override
 	public List<EvaluatePO> getEvaluate(int hotel_id) throws RemoteException {

@@ -2,7 +2,6 @@ package rmi;
 
 import java.rmi.Remote;
 
-import dao.strategy_dao.*;
 import daoImpl.strategyDaoImpl.*;
 
 import java.rmi.RemoteException;
@@ -12,6 +11,7 @@ import java.util.List;
 import dao.hotel.EvaluateDAO;
 import dao.hotel.HotelDAO;
 import dao.order.OrderDAO;
+import dao.strategy.*;
 import dao.user.CreditRecordsDAO;
 import dao.user.UserDAO;
 import daoImpl.hotel.EvaluateDAOImpl;

@@ -1,6 +1,7 @@
 package data_stub;
-import dao.strategy_dao.*;
 import java.util.*;
+
+import dao.strategy.*;
 import po.strategyPO.*;
 import tools.*;
 import java.rmi.*;

@@ -2,7 +2,7 @@ package ui.utility;
 
 import java.util.concurrent.ExecutionException;
 
-import bl.user_bl.UserBLServiceImpl;
+import bl.user.UserBLServiceImpl;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;

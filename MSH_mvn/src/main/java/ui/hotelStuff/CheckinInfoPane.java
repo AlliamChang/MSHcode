@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import bl.hotel_bl.HotelBL;
+import bl.hotel.HotelBLServiceImpl;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -156,7 +156,7 @@ public class CheckinInfoPane extends VBox{
 					}else{
 						checkin = null;
 					}
-					ResultMessage result = new HotelBL().checkin(
+					ResultMessage result = new HotelBLServiceImpl().checkin(
 							new CheckInVO(HotelPaneController.getInstance().getHotelId(),
 							roomStyleBox.getValue(),bookerField.getText(),checkin,
 							new Date(checkoutPick.getValue().format(f),false),null,

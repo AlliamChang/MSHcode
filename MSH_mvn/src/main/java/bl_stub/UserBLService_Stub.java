@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import blservice.user_blservice.UserBLService;
+import blservice.user.UserBLService;
 import tools.ChangeReason;
 import tools.Date;
 import tools.Encryption;

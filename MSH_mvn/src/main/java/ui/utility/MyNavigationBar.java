@@ -3,10 +3,10 @@ package ui.utility;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import bl.hotel_bl.HotelBL;
-import bl.user_bl.UserBLServiceImpl;
-import blservice.hotel_blservice.HotelBLService;
-import blservice.user_blservice.UserBLService;
+import bl.hotel.HotelBLServiceImpl;
+import bl.user.UserBLServiceImpl;
+import blservice.hotel.HotelBLService;
+import blservice.user.UserBLService;
 import javafx.scene.input.MouseEvent;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -69,7 +69,7 @@ public class MyNavigationBar extends VBox {
 	public MyNavigationBar(){
 		super(SPACE);
 		userBL = new UserBLServiceImpl();
-		hotelBL = new HotelBL();
+		hotelBL = new HotelBLServiceImpl();
 		
 		this.setPrefSize(MAX_WIDTH, MAX_HEIGHT);
 		this.setStyle(BACKGROUND_STYLE);

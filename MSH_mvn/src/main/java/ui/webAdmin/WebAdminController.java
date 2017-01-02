@@ -15,10 +15,10 @@ import ui.utility.MyNavigationBar;
 import vo.CreditVO;
 import vo.HotelInfoVO;
 import vo.UserVO;
-import bl.hotel_bl.HotelBL;
-import bl.user_bl.UserBLServiceImpl;
-import blservice.hotel_blservice.HotelBLService;
-import blservice.user_blservice.UserBLService;
+import bl.hotel.HotelBLServiceImpl;
+import bl.user.UserBLServiceImpl;
+import blservice.hotel.HotelBLService;
+import blservice.user.UserBLService;
 
 public class WebAdminController {
 	private static WebAdminController INSTANCE;
@@ -33,7 +33,7 @@ public class WebAdminController {
 	
 	private WebAdminController(){
 		userBLService = new UserBLServiceImpl();
-		hotelBLService = new HotelBL();
+		hotelBLService = new HotelBLServiceImpl();
 	}
 	
 	public void init(){
