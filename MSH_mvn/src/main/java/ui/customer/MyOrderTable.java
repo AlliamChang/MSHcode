@@ -3,6 +3,7 @@ package ui.customer;
 import java.util.LinkedList;
 import java.util.List;
 
+import blservice.order_blservice.OrderBLService;
 import tools.OrderState;
 import ui.utility.MainPane;
 import vo.OrderVO;
@@ -106,6 +107,8 @@ public class MyOrderTable extends TableView{
 						else if(item.equals("撤销")){
 							Button bn=new Button("撤销");
 							bn.setOnMouseClicked((MouseEvent me)->{
+								OrderBLService order=new bl.order_bl.OrderBL();
+								order.cancel(MyOrderTable.this.data.get(this.getTableRow().getIndex()).getId());
 								int row=this.getTableRow().getIndex();
 								MyOrderTable.this.list.get(row).setState(OrderState.CANCELED);
 								MyOrderTable.this.isCanceled=true;
