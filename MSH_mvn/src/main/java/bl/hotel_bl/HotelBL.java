@@ -115,7 +115,6 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public HotelInfoVO getHotel(int hotel_id) {
 		try{
-			System.out.println(hotel_id);
 		return new HotelInfoVO(hotel.find(hotel_id));
 		}catch (RemoteException e){
 			e.printStackTrace();
@@ -141,11 +140,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public ResultMessage add(HotelInfoVO hotel) {
 		try {
-			UserVO staff = user.get(hotel.getStuff_id());
-			hotel.setPhone(staff.getNumber());
-			int hotelID = this.hotel.add(hotel.toPO());
-			staff.setHotelID(hotelID);
-			user.update(staff);
+			this.hotel.add(hotel.toPO());
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();

@@ -14,6 +14,7 @@ import rmi.RemoteHelper;
 import tools.BedStyle;
 import tools.ResultMessage;
 import ui.customer.PersonInfoPane;
+import vo.CheckInVO;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.RoomVO;
@@ -139,6 +140,24 @@ public class HotelBLService_Stub implements HotelBLService {
 
 	@Override
 	public ResultMessage createEvaluate(EvaluateVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage checkin(CheckInVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage checkout(CheckInVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CheckInVO> getCheckinInfo(int hotelId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

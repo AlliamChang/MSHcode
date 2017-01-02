@@ -7,6 +7,7 @@ import java.util.List;
 
 import dao.hotel.HotelDAO;
 import javafx.scene.image.Image;
+import po.CheckInPO;
 import po.RoomPO;
 import po.hotelPO.*;
 import tools.BedStyle;
@@ -119,6 +120,17 @@ public class HotelDAOStub implements HotelDAO {
 	public List<HotelPO> getHotel(String province, String city, String area,
 			String name, String enter_time, String out_time, String price,
 			String score, int star) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ResultMessage updateCheckin(CheckInPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<CheckInPO> getHotelCheckinInfo(int hotelId)
+			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
