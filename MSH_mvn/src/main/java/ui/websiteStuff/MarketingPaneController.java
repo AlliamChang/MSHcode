@@ -1,6 +1,7 @@
 package ui.websiteStuff;
 
 import ui.utility.*;
+import bl.hotel_bl.*;
 import rmi.RemoteHelper;
 import dao.user.*;
 import blservice.hotel_blservice.*;
@@ -55,6 +56,7 @@ public class MarketingPaneController {
 	private MarketingPaneController(){
 		strategyBL=new StrategyBL();
 		orderBL=new OrderBL();
+		hotelBL=new HotelBL();
 		helper=RemoteHelper.getInstance();
 		userDAO=helper.getUserDAO();
 		userBL=new UserBLServiceImpl();
