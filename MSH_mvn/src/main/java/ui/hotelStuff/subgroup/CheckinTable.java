@@ -1,9 +1,12 @@
 package ui.hotelStuff.subgroup;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import bl.hotel_bl.HotelBL;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,7 +23,10 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.util.Callback;
+import tools.Date;
+import tools.ResultMessage;
 import ui.hotelStuff.control.HotelPaneController;
+import ui.utility.MainPane;
 import vo.CheckInVO;
 import vo.OrderVO;
 import vo.RoomVO;
@@ -68,16 +74,8 @@ public class CheckinTable extends TableView{
 			
 			@Override
 			public ObservableValue<String> call(CellDataFeatures<CheckInVO, String> param) {
-				// TODO Auto-generated method stub
-				String[] item = param.getValue().getRoomId();
-				StringBuilder temp = new StringBuilder();
-    			for(int i = 0; i < item.length; i ++){
-    				temp.append(item[i]);
-    				if(i < item.length - 1){
-    					temp.append("、");
-    				}
-    			}
-				return new SimpleStringProperty(temp.toString());
+				
+				return new SimpleStringProperty(param.getValue().getRoomId());
 			}
 
 			
@@ -110,7 +108,21 @@ public class CheckinTable extends TableView{
 		        	protected void updateItem(Button item,boolean empty){
 		        		if(!empty){
 		        			item = new Button("退房");
-		        			
+		        			item.setOnAction(e -> {
+		        				CheckInVO vo = data.get(this.getTableRow().getIndex());
+		        				vo.setCheckoutTime(new Date(LocalDate.now().format(
+		        						DateTimeFormatter.ofPattern("yyyy/MM/dd")),false));
+	        					Alert alert = new Alert(AlertType.INFORMATION);
+	        					alert.getDialogPane().setHeaderText(null);
+		        				if(ResultMessage.SUCCESS == new HotelBL().checkout(vo)){
+		        					alert.setContentText("退房成功");
+		        					alert.show();
+		        					MainPane.getInstance().setRightPane(HotelPaneController.getInstance().createCheckInPane());
+		        				}else{
+		        					alert.setContentText("退房失败");
+		        					alert.show();
+		        				}
+		        			});
 		        			this.setGraphic(item);
 		        		}else{
 		        			this.setGraphic(null);

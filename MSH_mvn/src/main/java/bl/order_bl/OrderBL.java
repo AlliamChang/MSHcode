@@ -27,7 +27,7 @@ import vo.OrderVO;
 public class OrderBL implements OrderBLService{
 	
 	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
-	private final DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yy/MM/dd");
+	private final DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 	
 	
 	private OrderDAO orderDataBase;
@@ -55,7 +55,7 @@ public class OrderBL implements OrderBLService{
 			order.setEvaluated(false);
 			//设置价格
 			double price = order.getPrice();
-		System.out.println(strategy.getFinalPriceInHotel(user.get(order.getUserID()), order, order.getHotelId()));
+//		System.out.println(strategy.getFinalPriceInHotel(user.get(order.getUserID()), order, order.getHotelId()));
 			price -= strategy.getFinalPriceInHotel(user.get(order.getUserID()), order, order.getHotelId());
 			if(price <= 0){
 				price = 1;
@@ -244,6 +244,7 @@ public class OrderBL implements OrderBLService{
 			while(itr.hasNext()){
 				list.add(new OrderVO(itr.next()));
 			}
+		System.out.println(list.get(0).getId());
 			return list;
 		}catch(RemoteException e){
 			e.printStackTrace();

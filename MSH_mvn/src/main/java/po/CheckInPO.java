@@ -7,7 +7,7 @@ public class CheckInPO implements Serializable{
 	private String roomStyle;
 	private String booker;
 	private String checkinTime;
-	private String precheckOutTime;
+	private String preCheckOutTime;
 	private String checkoutTime;
 	private long orderId;
 	private boolean belongOrder;
@@ -99,6 +99,10 @@ public class CheckInPO implements Serializable{
 		return id;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public int getHotelId() {
 		return hotelId;
 	}
@@ -108,11 +112,11 @@ public class CheckInPO implements Serializable{
 	}
 
 	public String getPrecheckOutTime() {
-		return precheckOutTime;
+		return preCheckOutTime;
 	}
 
 	public void setPrecheckOutTime(String precheckOutTime) {
-		this.precheckOutTime = precheckOutTime;
+		this.preCheckOutTime = precheckOutTime;
 	}
 	
 	

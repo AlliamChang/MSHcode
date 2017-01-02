@@ -1,6 +1,8 @@
 package ui.hotelStuff;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import bl.hotel_bl.HotelBL;
 import javafx.geometry.Insets;
@@ -8,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
@@ -17,11 +20,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
+import tools.Date;
+import tools.ResultMessage;
 import ui.hotelStuff.control.HotelPaneController;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
 import ui.utility.MyNumberField;
 import ui.utility.MyRetreatButton;
+import vo.CheckInVO;
 import vo.OrderVO;
 
 public class CheckinInfoPane extends VBox{
@@ -98,6 +104,17 @@ public class CheckinInfoPane extends VBox{
 		checkinPick.setValue(LocalDate.now());
 		GridPane.setConstraints(checkinPick, 1, 2);
 		
+		CheckBox isNow = new CheckBox("当前时间入住");
+		isNow.selectedProperty().addListener((l,o,n) -> {
+			if(n == true){
+				checkinPick.setDisable(true);
+			}else{
+				checkinPick.setDisable(false);
+			}
+		});
+		GridPane.setMargin(isNow, new Insets(0,0,0,10));
+		GridPane.setConstraints(isNow, 2, 2);
+		
 		this.checkoutPick = new MyDatePicker();
 		checkoutPick.setBeforeDisable(checkinPick);
 		GridPane.setConstraints(checkoutPick, 1, 3);
@@ -107,10 +124,11 @@ public class CheckinInfoPane extends VBox{
 		GridPane.setConstraints(orderField, 1, 4);
 		
 		this.roomField = new TextField();
+		roomField.setPromptText("（用“、”来分割房间号）");
 		GridPane.setConstraints(roomField, 1, 5);
 		
 		infoPane.getChildren().addAll(bookerLab,roomStyleLab,checkinLab,checkoutLab,orderLab,
-				roomNumLab,bookerField,roomStyleBox,checkinPick,checkoutPick,orderField,roomField);
+				roomNumLab,bookerField,roomStyleBox,checkinPick,isNow,checkoutPick,orderField,roomField);
 		
 		Separator sep2 = new Separator();
 		sep2.setMaxWidth(450);
@@ -123,14 +141,36 @@ public class CheckinInfoPane extends VBox{
 			alert.initModality(Modality.APPLICATION_MODAL);
 			alert.getDialogPane().setHeaderText(null);
 			alert.setContentText("是否确认信息无误？");
-			alert.showAndWait().ifPresent(response -> {
-				boolean isBelong = false;
-				if(orderField.getText() == null || orderField.getText().equals("")){
-					isBelong = false;
-				}else{
-					isBelong = true;
+			alert.showAndWait().ifPresent(re -> {
+				if(re.equals(ButtonType.OK)){
+					boolean isBelong = false;
+					DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+					if(orderField.getText() == null || orderField.getText().equals("")){
+						isBelong = false;
+					}else{
+						isBelong = true;
+					}
+					Date checkin;
+					if(isNow.isSelected()){
+						checkin = new Date(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")),true);
+					}else{
+						checkin = null;
+					}
+					ResultMessage result = new HotelBL().checkin(
+							new CheckInVO(HotelPaneController.getInstance().getHotelId(),
+							roomStyleBox.getValue(),bookerField.getText(),checkin,
+							new Date(checkoutPick.getValue().format(f),false),null,
+							isBelong?Long.valueOf(orderField.getText()):0,isBelong,
+									roomField.getText(),roomField.getText().split("、").length));
+					alert.setAlertType(AlertType.INFORMATION);
+					if(ResultMessage.SUCCESS == result){
+						alert.setContentText("已成功更新入住信息");
+						MainPane.getInstance().setRightPane(HotelPaneController.getInstance().createCheckInPane());
+					}else{
+						alert.setContentText("更新失败");
+						alert.show();
+					}
 				}
-				new HotelBL().checkin(new CheckInVO(HotelPaneController.getInstance().getHotelId(),roomStyleBox.getValue(),bookerField.getText(),));
 			});
 		});
 		VBox.setMargin(add, new Insets(0,0,0,400));

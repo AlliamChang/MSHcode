@@ -92,7 +92,7 @@ public class HotelDAOImpl implements HotelDAO{
 		transaction.commit();
 		int id = Integer.parseInt(session.createSQLQuery("select @@identity").list().get(0).toString());
 		session.close();
-		System.out.println("succeed");
+//		System.out.println("succeed");
 		return id;
 		
 	}
@@ -116,10 +116,10 @@ public class HotelDAOImpl implements HotelDAO{
 			session.delete(session.load(HotelPO.class, id));
 			transaction.commit();
 			session.close();
-			System.out.println("succeed");
+//			System.out.println("succeed");
 			return ResultMessage.SUCCESS;
 		} catch (ObjectNotFoundException e) {
-			System.out.println("fail");
+//			System.out.println("fail");
 			return ResultMessage.FAIL;
 		}
 	}
@@ -131,7 +131,7 @@ public class HotelDAOImpl implements HotelDAO{
 		session.update(po);
 		transaction.commit();
 		session.close();
-		System.out.println("succeed");
+//		System.out.println("succeed");
 		return ResultMessage.SUCCESS;
 	}
 
@@ -217,9 +217,20 @@ public class HotelDAOImpl implements HotelDAO{
 		Transaction transaction = session.beginTransaction();
 		Query query = session.createQuery("from CheckInPO where hotelId = '" + hotelId + "'");
 		List<CheckInPO> list = query.list();
+System.out.println(list.size());
 //		transaction.commit();
 		session.close();
 		return list;
+	}
+
+	@Override
+	public ResultMessage addCheckin(CheckInPO po) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.save(po);
+		transaction.commit();
+		session.close();
+		return ResultMessage.SUCCESS;
 	}
 
 

@@ -33,4 +33,6 @@ public interface HotelDAO extends Remote {
 	public ResultMessage updateCheckin(CheckInPO po)throws RemoteException;
 	
 	public List<CheckInPO> getHotelCheckinInfo(int hotelId)throws RemoteException;
+	
+	public ResultMessage addCheckin(CheckInPO po)throws RemoteException;
 }

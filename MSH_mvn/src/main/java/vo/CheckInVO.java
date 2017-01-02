@@ -50,13 +50,13 @@ public class CheckInVO {
 	
 	public CheckInPO toPO(){
 		CheckInPO po = new CheckInPO();
-		
+		po.setId(id);
 		po.setHotelId(hotelId);
 		po.setBelongOrder(this.belongOrder);
 		po.setBooker(booker);
-		po.setCheckinTime(checkinTime.getDate());
+		po.setCheckinTime(checkinTime.getDate());	
 		po.setPrecheckOutTime(this.preCheckOutTime.getDate());
-		po.setCheckoutTime(checkoutTime.getDate());
+		po.setCheckoutTime(checkoutTime==null?null:checkoutTime.getDate());
 		po.setOrderId(orderId);
 		po.setRoomId(this.roomId);
 		po.setRoomNum(roomNum);

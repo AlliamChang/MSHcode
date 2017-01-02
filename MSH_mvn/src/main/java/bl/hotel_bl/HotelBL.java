@@ -209,7 +209,7 @@ public class HotelBL implements HotelBLService{
 	@Override
 	public ResultMessage checkin(CheckInVO vo) {
 		try {
-			this.hotel.updateCheckin(vo.toPO());
+			this.hotel.addCheckin(vo.toPO());
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -234,7 +234,8 @@ public class HotelBL implements HotelBLService{
 			List<CheckInPO> po = this.hotel.getHotelCheckinInfo(hotelId);
 			List<CheckInVO> vo = new ArrayList<CheckInVO>();
 			for(CheckInPO p: po){
-				vo.add(new CheckInVO(p));
+				if(p.getCheckoutTime() == null)
+					vo.add(new CheckInVO(p));
 			}
 			return vo;
 		} catch (RemoteException e) {
