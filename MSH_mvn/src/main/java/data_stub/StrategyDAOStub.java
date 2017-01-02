@@ -26,7 +26,7 @@ public class StrategyDAOStub implements StrategyDAO{
 			}	
 		}
 		return ret;
-	}
+	}//查找策略
 
 	public ResultMessage addStrategy(StrategyPO po) throws RemoteException{
     	boolean isExist=false;
@@ -40,7 +40,7 @@ public class StrategyDAOStub implements StrategyDAO{
     		database.add(po);
     		return ResultMessage.SUCCESS;
     	}
-    }
+    }//增加策略
 	
 	public ResultMessage deleteStrategy(StrategyPO po) throws RemoteException{
 		for(int i=0;i<database.size();i++){
@@ -49,11 +49,7 @@ public class StrategyDAOStub implements StrategyDAO{
 			}
 		}
 		return ResultMessage.SUCCESS;
-	}
-	
-	public void updateStrategy(StrategyPO po) throws RemoteException{
-		System.out.println("Update Succeed!");
-	}
+	}//删除策略
 	
 	public ResultMessage modifyStrategy(StrategyPO po) throws RemoteException{
 		for(int i=0;i<database.size();i++){
@@ -62,11 +58,7 @@ public class StrategyDAOStub implements StrategyDAO{
 			}
 		}
 		return ResultMessage.SUCCESS;
-	}
-	
-	public void initStrategy() throws RemoteException{
-		System.out.println("Init Succeed!");
-	}
+	}//修改策略
 	
 	public ArrayList<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException{
 		ArrayList<StrategyPO> ret=new ArrayList<StrategyPO>();
@@ -76,7 +68,7 @@ public class StrategyDAOStub implements StrategyDAO{
 			}
 		}
 		return ret;
-	}
+	}//获得酒店策略表
 	
 	public ArrayList<StrategyPO> getStrategyInWeb() throws RemoteException{
 		ArrayList<StrategyPO> ret=new ArrayList<StrategyPO>();
@@ -86,18 +78,13 @@ public class StrategyDAOStub implements StrategyDAO{
 			}
 		}
 		return ret;
-	}
+	}//获得网站策略表
 	
 	public double getFinalPriceInHotel(UserPO user,OrderPO order,int hotelId) throws RemoteException{
 		double finalPrice=0.00;
 		finalPrice+=getLowestPrice(user,hotelId)+getRoomPrice(order,hotelId);
 		return finalPrice;
 	}//下完单后酒店中显示的最低价
-	
-	public double getFinalPriceInWeb(UserPO user) throws RemoteException{
-		double finalPrice=0.00;
-		return finalPrice;
-	}
 	
 	public double getLowestPrice(UserPO user,int hotelId) throws RemoteException{
 		double lowestPrice=0.00;
@@ -179,18 +166,7 @@ public class StrategyDAOStub implements StrategyDAO{
 		}
 		return cooperationPrice;
 	}//酒店--合作企业折扣
-	//public void setName(String name);
-	
-	//public StrategyType getStrategyType();
-	
-	//public void setStrategyType(StrategyType strategyType);
-	
-//<<<<<<< HEAD
-	//public String getCity();
-	
-	//public void setCity(String city);
-	
-	//public String getArea();
+
 	
 	
 

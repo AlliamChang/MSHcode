@@ -15,8 +15,6 @@ public interface StrategyDAO extends Remote{
     
     public ResultMessage deleteStrategy(StrategyPO po) throws RemoteException;
     /*删除一个策略*/
-
-	//public void updateStrategy(StrategyPO po) throws RemoteException;
 	
 	public ResultMessage modifyStrategy(StrategyPO po) throws RemoteException;
 	/*修改一个策略*/
@@ -29,16 +27,6 @@ public interface StrategyDAO extends Remote{
 	/*获得网站策略列表*/
 
 	
-//<<<<<<< HEAD
-	
-	//public void setCost(String cost) throws RemoteException;
-	
-	//public CostType getCostType() throws RemoteException;
-	
-	//public void setCostType(CostType costType) throws RemoteException;
-	
-	//public PeopleType getPeople() throws RemoteException;
-	
-	//public void setPeople(PeopleType people) throws RemoteException;
+
 
 }

@@ -9,69 +9,29 @@ import po.UserPO;
 
 public interface StrategyBLService {
 	
-	public ResultMessage addStrategy(StrategyVO strategy);
+	public ResultMessage addStrategy(StrategyVO strategy);//增加策略
 	
-	public ResultMessage deleteStrategy(StrategyVO vo);
+	public ResultMessage deleteStrategy(StrategyVO vo);//删除策略
 	
-	public ResultMessage modifyStrategy(StrategyVO vo);
+	public ResultMessage modifyStrategy(StrategyVO vo);//修改策略
 	
-	public double getFinalPriceInHotel(UserVO user,OrderVO order,int hotelId);
+	public double getFinalPriceInHotel(UserVO user,OrderVO order,int hotelId);//下完单后最终折扣
 	
-	//public double getFinalPriceInWeb(UserVO user);
+	public double getLowestPrice(UserVO user,int hotelId);//未下单时最大折扣
 	
-	public double getLowestPrice(UserVO user,int hotelId);
+	public List<StrategyVO> getStrategyInHotel(int hotelId);//获得酒店策略表
 	
-	public List<StrategyVO> getStrategyInHotel(int hotelId);
+	public List<StrategyVO> getStrategyInWeb();//获得网站策略表
 	
-	public List<StrategyVO> getStrategyInWeb();
+	public double getBirthPrice(UserVO user,int hotelId);//生日折扣
 	
-	public double getBirthPrice(UserVO user,int hotelId);
+	public double getTimePrice(int hotelId);//特定日期折扣
 	
-	public double getTimePrice(int hotelId);
+	public double getRoomPrice(OrderVO order,int hotelId);//三间房折扣
 	
-	public double getRoomPrice(OrderVO order,int hotelId);
+	public double getVipPrice(UserVO user);//vip折扣
 	
-	public double getVipPrice(UserVO user);
-	
-	public double getCooperationPrice(UserVO user,int hotelId);
-	/*public String getName();
-	
-	public void setName(String name);
-	
-	public StrategyType getStrategyType();
-	
-	public void setStrategyType(StrategyType strategyType);
-	
-//<<<<<<< HEAD
-	public String getCity();
-	
-	public void setCity(String city);
-	
-	public String getArea();
-	
-	public void setArea(String area);
-	
-	public Date getStartTime();
-	
-	public void setStartTime(Date startTime);
-	
-	public Date getEndTime();
-	
-	public void setEndTime(Date endTime);
-	
-	public String getCost();
-//=======
-	public ResultMessage setBirthDiscount(int cost);
-//>>>>>>> origin/master
-	
-	public void setCost(String cost);
-	
-	public CostType getCostType();
-	
-	public void setCostType(CostType costType);
-	
-	public PeopleType getPeople();
-	
-	public void setPeople(PeopleType people);*/
+	public double getCooperationPrice(UserVO user,int hotelId);//合作企业折扣
+
 
 }

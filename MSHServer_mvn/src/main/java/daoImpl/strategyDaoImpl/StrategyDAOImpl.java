@@ -24,7 +24,7 @@ public class StrategyDAOImpl implements StrategyDAO{
 			return null;
 		else
 			return list.get(0);
-	}
+	}//查找策略
 	
 	public ResultMessage addStrategy(StrategyPO strategy) throws RemoteException{
 		Session session=HibernateUtil.getSession();
@@ -34,7 +34,7 @@ public class StrategyDAOImpl implements StrategyDAO{
 		System.out.println("addSucceed");
 		session.close();
 		return ResultMessage.SUCCESS;
-	}
+	}//增加策略
 	
 	public ResultMessage deleteStrategy(StrategyPO po) throws RemoteException{
 		try{
@@ -51,7 +51,7 @@ public class StrategyDAOImpl implements StrategyDAO{
 			e.printStackTrace();
 			return ResultMessage.FAIL;
 		}
-	}
+	}//删除策略
 	
 	public ResultMessage modifyStrategy(StrategyPO strategy) throws RemoteException{
 		Session session=HibernateUtil.getSession();
@@ -60,7 +60,7 @@ public class StrategyDAOImpl implements StrategyDAO{
 		transaction.commit();
 		session.close();
 		return ResultMessage.SUCCESS;
-	}
+	}//修改策略
 	
 	public List<StrategyPO> getStrategyInHotel(int hotelId) throws RemoteException{
 		Session session=HibernateUtil.getSession();
@@ -70,7 +70,7 @@ public class StrategyDAOImpl implements StrategyDAO{
 		List<StrategyPO> list=query.list();
 		session.close();
 		return list;
-	}
+	}//获得酒店策略表
 	
 	public List<StrategyPO> getStrategyInWeb() throws RemoteException{
 		Session session=HibernateUtil.getSession();
@@ -83,7 +83,7 @@ public class StrategyDAOImpl implements StrategyDAO{
 		System.out.println(list.size());
 		session.close();
 		return list;
-	}
+	}//获得网站策略表
 	
 
 }

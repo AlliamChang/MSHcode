@@ -40,17 +40,7 @@ public class MarketingPaneController {
 			,"添加营销策略","处理异常订单","用户信用充值","制定等级折扣");
 	private final List<String> stuff=Arrays.asList("zhr","100");
 
-	//public final OrderVO o1=new OrderVO(100,12,"u",999,"rs","大床房",3,new String[]{"liuqin"},new String[]{"1"},3,new Date("2016/11/11",false),
-		    //2,new Date("2016/11/13",false),new Date("2016/11/13",false),false,500,OrderState.EXECUTED,false);
-	//private final OrderVO o2=new OrderVO(100,12,"u",999,"rs","大床房",3,new String[]{"liuqin"},new String[]{"1"},3,new Date("2016/11/11",false),
-		   // 2,new Date("2016/11/13",false),new Date("2016/11/13",false),false,500,OrderState.EXECUTED,false);
-	//private List<OrderVO> order=Arrays.asList(o1,o2);
-	//private final StrategyVO s1=new StrategyVO("11",StrategyType.VIP,"南京市","栖霞区","2016/11/11"
-			//,"2016/11/12",99.00,PeopleType.NORMAL);
-	//private final StrategyVO s2=new StrategyVO("11",StrategyType.CO_OPERATION,"南京市","栖霞区","2016/11/11",
-			//"2016/11/12",99.00,PeopleType.VIP);
-	//private List<StrategyVO> strategy=Arrays.asList(s1,s2);
-	//public UserVO u1=new UserVO("zhr123","123","zhr","666","333","ASUS","imagePath",1,2,3,UserType.CUSTOMER);
+	
 	private MyNavigationBar navi;
 	
 	private MarketingPaneController(){
@@ -93,7 +83,7 @@ public class MarketingPaneController {
 							createVipCostPane();break;
 						}
 					}
-				});	
+				});	//控制跳转
 		
 	}
 	
@@ -134,47 +124,47 @@ public class MarketingPaneController {
 	
 	public ResultMessage addStrategy(StrategyVO strategy){
 		return this.strategyBL.addStrategy(strategy);
-	}
+	}//增加策略
 	
 	public ResultMessage deteleStrategy(StrategyVO vo){
 		return this.strategyBL.deleteStrategy(vo);
-	}
+	}//删除策略
 	
 	public ResultMessage modifyStrategy(StrategyVO vo){
 		return this.strategyBL.modifyStrategy(vo);
-	}
+	}//修改策略
 	
 	public List<StrategyVO> getStrategyInWeb(){
 		return this.strategyBL.getStrategyInWeb();
-	}
+	}//获得网站策略列表
 	
 	public List<OrderVO> getAbnormityOrder(){
 		return this.orderBL.getAbnormityOrder();
-	}
+	}//获得异常订单列表
 	
 	public List<OrderVO> getTodayUnexecutedOrder(){
 		return this.orderBL.getTodayUnexecutedOrder();
-	}
+	}//获得未执行正常订单列表
 	
 	public ResultMessage cancelAbnormity(long orderID,boolean isReturnAll){
 		return this.orderBL.cancelAbnormity(orderID, isReturnAll);
-	}
+	}//撤销异常订单
 	
 	public ResultMessage addCreditRecord(CreditVO credit){
 		return this.userBL.addCreditRecord(credit);
-	}
+	}//信用充值
 	
 	public List<String> getProvinces(){
 		return hotelBL.getProvinces();
-	}
+	}//获得省份
 	
 	public List<String> getCities(String province){
 		return hotelBL.getCities(province);
-	}
+	}//获得城市
 	
 	public List<String> getAreas(String province,String city){
 		return hotelBL.getAreas(province, city);
-	}
+	}//获得地区
 	
 	public ResultMessage setLvUpRequest(int request){
 		try{
@@ -184,7 +174,7 @@ public class MarketingPaneController {
 			return ResultMessage.FAIL;
 		}
 		
-	}
+	}//制定升级信用值
 	
 	public int getLvUpRequest(){
 		try {
@@ -193,7 +183,7 @@ public class MarketingPaneController {
 			e.printStackTrace();
 			return 0;
 		}
-	}
+	}//获得升级信用值
 	
 	public double getVipCost(){
 		List<StrategyVO> list=this.getStrategyInWeb();
@@ -204,11 +194,11 @@ public class MarketingPaneController {
 			}
 		}
 		return result;
-	}
+	}//获得vip等级折扣
 	
 	public ResultMessage setVipCost(double cost){
 		StrategyVO vo=new StrategyVO("AdminVipCost",StrategyType.VIP,null,null,null,"2016/12/31","2060/01/01",cost,PeopleType.VIP);
 		return this.modifyStrategy(vo);
-	}
+	}//制定vip等级折扣
 
 }
