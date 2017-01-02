@@ -14,7 +14,6 @@ import vo.OrderVO;
 import vo.RoomVO;
 import bl.user_bl.UserBLServiceImpl;
 import bl_stub.HotelBLService_Stub;
-import bl_stub.Order_Stub;
 import bl_stub.UserBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.OrderBLService;

@@ -134,4 +134,9 @@ public class HotelDAOStub implements HotelDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public ResultMessage addCheckin(CheckInPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
