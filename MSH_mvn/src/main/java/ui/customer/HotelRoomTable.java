@@ -70,7 +70,7 @@ public class HotelRoomTable extends TableView{
 		});
 		this.setItems(data);
 		this.setMinWidth(605);
-		this.setMaxHeight(200);
+		this.setPrefHeight(150);
 		this.getColumns().addAll(room_type,bed_type,price,operation);
 		
 		

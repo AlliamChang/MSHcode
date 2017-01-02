@@ -35,19 +35,14 @@ public interface HotelBLService {
 	public List<EvaluateVO> getEvaluate(int hotel_id);
 	//按照价格由高到低排序
 	public List<HotelInfoVO> sortByHighPrice(List<HotelInfoVO> list);
-	//按照价格由低到高排序
-	public List<HotelInfoVO> sortByLowPrice(List<HotelInfoVO> list);
+	
 	//按照星级由高到低排序
 	public List<HotelInfoVO> sortByHighStar(List<HotelInfoVO>list);
-	//按照星级由低到高排序
-	public List<HotelInfoVO> sortByLowStar(List<HotelInfoVO> list);
+	
 	//按照评分由高到低排序
 	public List<HotelInfoVO> sortByHighScore(List<HotelInfoVO>list);
-	//按照评分由低到高排序
-	public List<HotelInfoVO> sortByLowScore(List<HotelInfoVO> list);
-	//历史酒店
-	public List<HotelInfoVO> historyHotel(List<HotelInfoVO>list);
 	
+	//评价
 	public ResultMessage createEvaluate(EvaluateVO vo);
 	}
 		

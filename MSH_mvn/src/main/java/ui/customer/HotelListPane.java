@@ -178,13 +178,7 @@ public class HotelListPane extends Pane{
 		 search=new Button("搜索");
 		pane.add(search,column+4,row+2);
 		
-		search.setOnMouseClicked((MouseEvent e)->{
-			
-			result=hotel.search(P.getValue(), city.getValue(),TradeArea.getValue(), key.getText(), null, null,price.getValue().equals("无")? null:price.getValue(), score.getValue().equals("无")?null:score.getValue(), star_level.getValue().equals("无")?-1:Integer.parseInt(star_level.getValue()));
-			pane.getChildren().remove(sp);
-			sp=HotelListPane.this.getSPane(result);
-			pane.add(sp, column, row+5);
-		});
+		
 		
 		pane.setHalignment(City, HPos.CENTER);
 		pane.setHalignment(trade_area, HPos.CENTER);
@@ -202,13 +196,13 @@ public class HotelListPane extends Pane{
 		ToggleButton tb1 = new ToggleButton("评分");
 		ToggleButton tb2 = new ToggleButton("价格");
 		ToggleButton tb3= new ToggleButton("星级");
-		ToggleButton tb4= new ToggleButton("历史酒店");
+		//ToggleButton tb4= new ToggleButton("历史酒店");
 		
 		ToggleGroup group = new ToggleGroup();
 		tb1.setToggleGroup(group);
 		tb2.setToggleGroup(group);
 		tb3.setToggleGroup(group);
-		tb4.setToggleGroup(group);
+		//tb4.setToggleGroup(group);
 		group.selectedToggleProperty().addListener(
 				(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) -> {
 					if (newValue == null) {
@@ -218,13 +212,21 @@ public class HotelListPane extends Pane{
 							pane.getChildren().remove(sp);
 						if (newValue.equals(tb3))
 							sp = getSPane(hotel.sortByHighStar(result));
+						else if(newValue.equals(tb1))
+							sp=getSPane(hotel.sortByHighScore(result));
+						else if(newValue.equals(tb2))
+							sp=getSPane(hotel.sortByHighPrice(result));
 						pane.add(sp, column, row+6);
 					}
 		});
 		group.selectToggle(tb3);
-		hb.getChildren().addAll(tb1,tb2,tb3,tb4);
+		hb.getChildren().addAll(tb1,tb2,tb3);
 		pane.add(hb, column, row+5, 4, 1);
-		
+		search.setOnAction( e->{
+			
+			result=hotel.search(P.getValue(), city.getValue(),TradeArea.getValue(), key.getText(), null, null,price.getValue().equals("无")? null:price.getValue(), score.getValue().equals("无")?null:score.getValue(), star_level.getValue().equals("无")?-1:Integer.parseInt(star_level.getValue()));
+			tb3.fire();
+		});
 	}
 	
 	private ScrollPane getSPane(List<HotelInfoVO> list2){
@@ -247,6 +249,10 @@ public class HotelListPane extends Pane{
 				list2));
 		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		return sp;
+	}
+	
+	public Pane getPane(){
+		return pane;
 	}
 }
 class Cont extends GridPane{
@@ -279,7 +285,8 @@ class Cont extends GridPane{
 				low=list.get(i).getPrice();
 		}
 		}
-		
+		vo.setLowest_price((int)low);
+		stub.modify(vo);
 		lowest_price=new Label("¥"+low+"起");
 		this.image=vo.getScul();
 		
@@ -288,7 +295,7 @@ class Cont extends GridPane{
 		 im.setFitHeight(50);
 		 im.setFitWidth(50);
 		 bn.setOnMouseClicked((MouseEvent me)->{
-			 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(vo));
+			 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(HotelSearchPane.getInstance(),vo));
 		 });
 		this.add(im, 0, 0);
 		this.add(star,5,0);

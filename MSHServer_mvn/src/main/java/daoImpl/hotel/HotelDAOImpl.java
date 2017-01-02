@@ -163,6 +163,8 @@ public class HotelDAOImpl implements HotelDAO{
 	public List<HotelPO> getHotel(String province, String city, String area,
 			String name, String enter_time, String out_time, String price,
 			String score,int star) throws RemoteException {
+//		System.out.println(province+city+area+name+price+score+star);
+		
 		Session session = HibernateUtil.getSession();
 		Transaction transaction =session.beginTransaction();
 		StringBuilder find = new StringBuilder();

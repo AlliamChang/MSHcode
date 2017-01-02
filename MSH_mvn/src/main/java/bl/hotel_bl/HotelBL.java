@@ -154,7 +154,6 @@ public class HotelBL implements HotelBLService{
 	public List<HotelInfoVO> search(String province,String city,String area,String name,String enter_time,String out_time,String price,String score,int star) {
 		List<HotelInfoVO>ret=new ArrayList<HotelInfoVO>();
 		try{
-			System.out.print(1);
 			List<HotelPO>po=this.hotel.getHotel(province, city, area, name, enter_time, out_time, price, score, star);
 			for(HotelPO item:po){
 				ret.add(new HotelInfoVO(item));
@@ -168,26 +167,16 @@ public class HotelBL implements HotelBLService{
 //由高到低
 	@Override
 	public List<HotelInfoVO> sortByHighPrice(List<HotelInfoVO> list) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		int temp;
-		int count=list.size();
-		int max=0;
-		for(int j=1;j<count;j++){
-			temp=0;
-			for(int i=0;i<list.size();i++){
-				if(list.get(i).getLowest_price()>temp){
-				temp=list.get(i).getLowest_price();
-				max=i;
-			}
-				ret.add(list.get(max));
-				list.remove(max);
-		}
-	}
-		ret.add(list.get(0));
-		return ret;
+		Collections.sort(list, new Comparator(){
+			@Override
+			public int compare(Object arg0, Object arg1) {
+				return ((HotelInfoVO)arg1).getLowest_price() - ((HotelInfoVO)arg0).getLowest_price();
+			}});
+		return list;
 	}
 
-	@SuppressWarnings("unchecked")
+
+	
 	@Override
 	public List<HotelInfoVO> sortByHighStar(List<HotelInfoVO> list) {
 		Collections.sort(list, new Comparator(){
@@ -200,94 +189,14 @@ public class HotelBL implements HotelBLService{
 
 	@Override
 	public List<HotelInfoVO> sortByHighScore(List<HotelInfoVO> list) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		double temp;
-		int count=list.size();
-		int max=0;
-		for(int j=1;j<count;j++){
-			temp=0;
-			for(int i=0;i<list.size();i++){
-				if(list.get(i).getScore()>temp){
-				temp=list.get(i).getScore();
-				max=i;
-			}
-				ret.add(list.get(max));
-				list.remove(max);
-		}
+		Collections.sort(list, new Comparator(){
+			@Override
+			public int compare(Object arg0, Object arg1) {
+				return (int)(((HotelInfoVO)arg1).getScore()*10 - ((HotelInfoVO)arg0).getScore()*10);
+			}});
+		return list;
 	}
-		ret.add(list.get(0));
-		return ret;
-	}
-
-	@Override
-	public List<HotelInfoVO> sortByLowPrice(List<HotelInfoVO> list) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		int temp;
-		int count=list.size();
-		int min=0;
-		for(int j=1;j<count;j++){
-			temp=10000;
-			for(int i=0;i<list.size();i++){
-				if(list.get(i).getLowest_price()<temp){
-				temp=list.get(i).getLowest_price();
-				min=i;
-			}
-				ret.add(list.get(min));
-				list.remove(min);
-		}
-	}
-		ret.add(list.get(0));
-		return ret;
-	}
-
-	@Override
-	public List<HotelInfoVO> sortByLowStar(List<HotelInfoVO> list) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		int temp;
-		int count=list.size();
-		int min=0;
-		for(int j=1;j<count;j++){
-			temp=10000;
-			for(int i=0;i<list.size();i++){
-				if(list.get(i).getStar()<temp){
-				temp=list.get(i).getStar();
-				min=i;
-			}
-				ret.add(list.get(min));
-				list.remove(min);
-		}
-	}
-		ret.add(list.get(0));
-		return ret;
-	}
-
-	@Override
-	public List<HotelInfoVO> sortByLowScore(List<HotelInfoVO> list) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		double temp;
-		int count=list.size();
-		int min=0;
-		for(int j=1;j<count;j++){
-			temp=10000;
-			for(int i=0;i<list.size();i++){
-				if(list.get(i).getScore()<temp){
-				temp=list.get(i).getScore();
-				min=i;
-			}
-				ret.add(list.get(min));
-				list.remove(min);
-		}
-	}
-		ret.add(list.get(0));
-		return ret;
-	}
-
-	@Override
-	public List<HotelInfoVO> historyHotel(List<HotelInfoVO> list) {
-		ArrayList<HotelInfoVO> ret=new ArrayList<HotelInfoVO>();
-		//List<Integer>id_li
-		return ret;
-	}
+	
 
 	@Override
 	public ResultMessage createEvaluate(EvaluateVO vo) {

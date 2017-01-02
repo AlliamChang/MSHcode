@@ -9,12 +9,14 @@ import bl_stub.HotelBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import ui.utility.MyRetreatButton;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.OrderVO;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
@@ -45,32 +47,37 @@ public class HotelConcreteInfoPane extends Pane{
 	private int row=0;
 	private GridPane pane;
 	private List<OrderVO> list;
+	private MyRetreatButton back;
 	//private ScrollPane sp;
 	private ScrollPane evaluate;
 	private static final String user_name="angel"; 
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
-	public HotelConcreteInfoPane(HotelInfoVO VO){
+	public HotelConcreteInfoPane(Parent p,HotelInfoVO VO){
 		super();
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		vo=VO;
+		back=new MyRetreatButton(p);
 		initPane();
 	}
 	
 	private void initPane(){
 		pane=new GridPane();
-		pane.setPadding(new Insets(10, 10, 10, 20));
+		pane.setPadding(new Insets(10, 10, 10, 32));
 		pane.setPrefWidth(600);
 		pane.setHgap(20);
 		pane.setVgap(10);
 		pane.setAlignment(Pos.CENTER);
+		
 		 ColumnConstraints col=new ColumnConstraints(50);
 		 ColumnConstraints col0 = new ColumnConstraints(100);
 		 ColumnConstraints col1 = new ColumnConstraints(100);
 		 ColumnConstraints col2 = new ColumnConstraints(130);
 		 ColumnConstraints col3 = new ColumnConstraints(130);
+		// ColumnConstraints col4=new ColumnConstraints(50);
 		 this.pane.getColumnConstraints().addAll(col,col0,col1,col2,col3);
 		//pane.setGridLinesVisible(true);
+		 pane.add(back, 0, 0);
 		VBox vb=new VBox();
 		vb.setMinWidth(600);
 		vb.setPadding(new Insets(10, 10, 10, 10));
@@ -86,7 +93,7 @@ public class HotelConcreteInfoPane extends Pane{
 		ImageView image=new ImageView(hotel);
 		image.setFitHeight(100);
 		image.setFitWidth(100);
-		pane.add(image, column, 0,1,2);
+		pane.add(image, column, 1,1,1);
 		
 		
 		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom(vo.getHotel_id()));
@@ -138,7 +145,7 @@ public class HotelConcreteInfoPane extends Pane{
 		pane.setHalignment(star_level,HPos.RIGHT);
 		pane.setHalignment(score,HPos.RIGHT);
 		pane.setHalignment(hotel_name,HPos.RIGHT);
-		//pane.setHalignment(lowest_price,HPos.RIGHT);
+		pane.setHalignment(lowest_price,HPos.RIGHT);
 		this.getChildren().add(pane);
 
 	}
