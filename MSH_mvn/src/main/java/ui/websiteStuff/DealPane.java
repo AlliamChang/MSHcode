@@ -137,7 +137,7 @@ public class DealPane extends GridPane{
 			    nameText.setFont(normalFont);
 			    this.setHalignment(nameText, HPos.CENTER);
 			    this.setValignment(nameText, VPos.CENTER);
-			    nameText.setText("用户姓名");
+			    nameText.setText(order.get(i).getFirstBooker());
 			    this.add(nameText, 3, i+3);
 			    Text startTimeText=new Text();
 			    startTimeText.setFont(normalFont);

@@ -168,13 +168,13 @@ public class WebStuffStartPane extends GridPane{
 			idText.setFont(normalFont);
 			this.setHalignment(idText, HPos.CENTER);
 			this.setValignment(idText, VPos.CENTER);
-			idText.setText(String.valueOf("用户ID"));
+			idText.setText(String.valueOf(order.get(i).getUserID()));
 			this.add(idText, 2, i+3);
 			Text nameText=new Text();
 			nameText.setFont(normalFont);
 			this.setHalignment(nameText, HPos.CENTER);
 			this.setValignment(nameText, VPos.CENTER);
-			nameText.setText(String.valueOf("用户姓名"));
+			nameText.setText(String.valueOf(order.get(i).getFirstBooker()));
 			this.add(nameText, 3, i+3);
 			Text startTimeText=new Text();
 			startTimeText.setFont(normalFont);
