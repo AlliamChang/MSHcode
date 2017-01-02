@@ -1,10 +1,13 @@
 package ui.customer;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.List;
 
 import blservice.order_blservice.OrderBLService;
 import tools.OrderState;
+import tools.ResultMessage;
 import ui.utility.MainPane;
 import vo.OrderVO;
 import javafx.beans.value.ObservableValue;
@@ -86,6 +89,8 @@ public class MyOrderTable extends TableView{
 			public TableCell<OrderVO, String> call(
 					TableColumn<OrderVO, String> arg0) {
 				return new TableCell<OrderVO, String>(){
+					private boolean isContinue = false;
+					
 					protected void updateItem(String item,boolean empty){
 						if(item!=null){
 						if(item.equals("评价")){
@@ -106,12 +111,35 @@ public class MyOrderTable extends TableView{
 						}
 						else if(item.equals("撤销")){
 							Button bn=new Button("撤销");
+							
 							bn.setOnMouseClicked((MouseEvent me)->{
 								OrderBLService order=new bl.order_bl.OrderBL();
-								order.cancel(MyOrderTable.this.data.get(this.getTableRow().getIndex()).getId());
-								int row=this.getTableRow().getIndex();
-								MyOrderTable.this.list.get(row).setState(OrderState.CANCELED);
-								MyOrderTable.this.isCanceled=true;
+								OrderVO vo = MyOrderTable.this.data.get(this.getTableRow().getIndex());
+								isContinue = false;
+								Alert alert = new Alert(AlertType.CONFIRMATION);
+								alert.getDialogPane().setHeaderText(null);
+								if(vo.getPreCheckin().getLocalDate().equals(LocalDate.now()) && vo.getLatestCheckin() - LocalTime.now().getHour() <= 6){
+									alert.setContentText("距离最晚入住时间不足6个小时，撤销订单将会扣除您一半的信用。\n是否还需要继续撤销订单");
+									alert.showAndWait().ifPresent(ok -> {
+										if(ok.equals(ButtonType.OK))
+											isContinue = true;
+									});
+								}else{
+									alert.setContentText("您是否继续撤销该订单");
+									alert.showAndWait().ifPresent(ok -> {
+										isContinue = true;
+									});
+								}
+								if(isContinue)
+									if(ResultMessage.SUCCESS == order.cancel(vo.getId())){
+										int row=this.getTableRow().getIndex();
+										MyOrderTable.this.list.get(row).setState(OrderState.CANCELED);
+										MyOrderTable.this.isCanceled=true;
+										CustomerPaneController.getInstance().createMyOrderPane();
+										alert.setAlertType(AlertType.INFORMATION);
+										alert.setContentText("撤销成功");
+										alert.show();
+									}
 							});
 							if(isCanceled)
 								bn=null;

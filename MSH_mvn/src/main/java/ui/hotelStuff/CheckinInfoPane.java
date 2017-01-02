@@ -2,6 +2,7 @@ package ui.hotelStuff;
 
 import java.time.LocalDate;
 
+import bl.hotel_bl.HotelBL;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -19,6 +20,7 @@ import javafx.stage.Modality;
 import ui.hotelStuff.control.HotelPaneController;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
+import ui.utility.MyNumberField;
 import ui.utility.MyRetreatButton;
 import vo.OrderVO;
 
@@ -100,7 +102,7 @@ public class CheckinInfoPane extends VBox{
 		checkoutPick.setBeforeDisable(checkinPick);
 		GridPane.setConstraints(checkoutPick, 1, 3);
 		
-		this.orderField = new TextField();
+		this.orderField = new MyNumberField();
 		orderField.setPromptText("（没有则不用填）");
 		GridPane.setConstraints(orderField, 1, 4);
 		
@@ -122,7 +124,13 @@ public class CheckinInfoPane extends VBox{
 			alert.getDialogPane().setHeaderText(null);
 			alert.setContentText("是否确认信息无误？");
 			alert.showAndWait().ifPresent(response -> {
-				
+				boolean isBelong = false;
+				if(orderField.getText() == null || orderField.getText().equals("")){
+					isBelong = false;
+				}else{
+					isBelong = true;
+				}
+				new HotelBL().checkin(new CheckInVO(HotelPaneController.getInstance().getHotelId(),roomStyleBox.getValue(),bookerField.getText(),));
 			});
 		});
 		VBox.setMargin(add, new Insets(0,0,0,400));

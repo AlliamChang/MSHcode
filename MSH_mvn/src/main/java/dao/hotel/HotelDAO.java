@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
+import po.CheckInPO;
 import po.RoomPO;
 import po.hotelPO.*;
 import tools.ResultMessage;
@@ -28,4 +29,8 @@ public interface HotelDAO extends Remote {
 	public List<String> getAreas(String province,String city)throws RemoteException;
 	
 	public List<RoomPO> getRoom(int hotel_id)throws RemoteException;
+	
+	public ResultMessage updateCheckin(CheckInPO po)throws RemoteException;
+	
+	public List<CheckInPO> getHotelCheckinInfo(int hotelId)throws RemoteException;
 }

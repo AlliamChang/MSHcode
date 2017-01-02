@@ -22,6 +22,7 @@ import org.hibernate.Transaction;
 
 import dao.hotel.HotelDAO;
 import daoImpl.HibernateUtil;
+import po.CheckInPO;
 import po.OrderPO;
 import po.RoomPO;
 import po.UserPO;
@@ -103,7 +104,7 @@ public class HotelDAOImpl implements HotelDAO{
 		session.save(po);
 		transaction.commit();
 		session.close();
-		System.out.println("succeed");
+//		System.out.println("succeed");
 		return ResultMessage.SUCCESS;
 	}
 
@@ -199,4 +200,28 @@ public class HotelDAOImpl implements HotelDAO{
 		session.close();
 		return list;
 	}
+
+	@Override
+	public ResultMessage updateCheckin(CheckInPO po) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.update(po);
+		transaction.commit();
+		session.close();
+		return ResultMessage.SUCCESS;
+	}
+
+	@Override
+	public List<CheckInPO> getHotelCheckinInfo(int hotelId) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		Query query = session.createQuery("from CheckInPO where hotelId = '" + hotelId + "'");
+		List<CheckInPO> list = query.list();
+//		transaction.commit();
+		session.close();
+		return list;
+	}
+
+
+	
 }

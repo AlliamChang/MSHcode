@@ -5,6 +5,8 @@ import java.util.List;
 
 import blservice.strategy_blservice.StrategyBLService;
 import javafx.scene.image.Image;
+import po.CheckInPO;
+import vo.CheckInVO;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.RoomVO;
@@ -44,6 +46,12 @@ public interface HotelBLService {
 	
 	//评价
 	public ResultMessage createEvaluate(EvaluateVO vo);
+	
+	public ResultMessage checkin(CheckInVO vo);
+	
+	public ResultMessage checkout(CheckInVO vo);
+	
+	public List<CheckInVO> getCheckinInfo(int hotelId);
 	}
 		
 

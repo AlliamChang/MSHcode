@@ -96,7 +96,7 @@ public class HotelConcreteInfoPane extends Pane{
 		pane.add(image, column, 1,1,1);
 		
 		
-		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom(vo.getHotel_id()));
+		room_info=new HotelRoomTable(CustomerPaneController.getInstance().getRoom(vo.getHotel_id()),HotelConcreteInfoPane.this);
 		pane.add(room_info, column, 4);
 		
 		hotel_name.setFont(f);

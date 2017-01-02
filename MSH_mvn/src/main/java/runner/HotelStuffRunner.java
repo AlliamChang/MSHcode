@@ -27,7 +27,7 @@ public class HotelStuffRunner extends Application{
 
 	public static void main(String[] args){
 		new HotelStuffRunner().linkToServer();
-		HotelPaneController.getInstance().hotelStuffLogin(1,1, "七天连锁手动阀", null);
+		HotelPaneController.getInstance().hotelStuffLogin(1,1, "七天连锁手动阀sss ", null);
 		launch(args);
 //		Date d = new Date("2016/12/16",false);
 //		Date d2 = new Date("2016/12/18",false);

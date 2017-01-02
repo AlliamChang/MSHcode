@@ -7,13 +7,29 @@ public class CheckInPO implements Serializable{
 	private String roomStyle;
 	private String booker;
 	private String checkinTime;
+	private String precheckOutTime;
 	private String checkoutTime;
 	private long orderId;
 	private boolean belongOrder;
-	private String[] roomId;
+	private String roomId;
 	private int roomNum;
+	private int hotelId;
+	private int id;
 	
 	public CheckInPO(){}
+	
+	public CheckInPO(String roomStyle, String booker, String checkinTime, String checkoutTime, long orderId,
+			boolean belongOrder, String roomId, int roomNum) {
+		super();
+		this.roomStyle = roomStyle;
+		this.booker = booker;
+		this.checkinTime = checkinTime;
+		this.checkoutTime = checkoutTime;
+		this.orderId = orderId;
+		this.belongOrder = belongOrder;
+		this.roomId = roomId;
+		this.roomNum = roomNum;
+	}
 
 	public String getRoomStyle() {
 		return roomStyle;
@@ -63,11 +79,11 @@ public class CheckInPO implements Serializable{
 		this.belongOrder = belongOrder;
 	}
 
-	public String[] getRoomId() {
+	public String getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(String[] roomId) {
+	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
 
@@ -77,6 +93,26 @@ public class CheckInPO implements Serializable{
 
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public int getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	public String getPrecheckOutTime() {
+		return precheckOutTime;
+	}
+
+	public void setPrecheckOutTime(String precheckOutTime) {
+		this.precheckOutTime = precheckOutTime;
 	}
 	
 	

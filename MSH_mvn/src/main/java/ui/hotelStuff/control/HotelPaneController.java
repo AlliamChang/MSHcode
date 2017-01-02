@@ -120,18 +120,23 @@ public class HotelPaneController {
 	 * 跳转至酒店入住信息界面
 	 */
 	public CheckInListPane createCheckInPane(){
-		String[] roomStyle = {"温暖大床房","经济标准间","难民六人间"};
-		List<CheckInVO> stub = Arrays.asList(
-				new CheckInVO("温暖大床房","丁二玉",new Date("2016/12/05 11:11:11",true),
-						new Date("2016/12/06",false)
-						,1000000001,true,new String[]{"501","503"},2),
-				new CheckInVO("经济标准间","丁二玉",new Date("2016/12/05 11:11:11",true),
-						new Date("2016/12/06",false),0,false,new String[]{"502"},1),
-				new CheckInVO("难民六人间","丁二玉",new Date("2016/12/05 11:11:11",true),
-						new Date("2016/12/06",false)
-						,1000000001,true,new String[]{"503"},1));
-		return new CheckInListPane(roomStyle,stub.iterator());
-//		return new CheckInListPane(this.getRoomStyle(),this.hotelBL.);
+//		String[] roomStyle = {"温暖大床房","经济标准间","难民六人间"};
+//		List<CheckInVO> stub = Arrays.asList(
+//				new CheckInVO("温暖大床房","丁二玉",new Date("2016/12/05 11:11:11",true),
+//						new Date("2016/12/06",false)
+//						,1000000001,true,new String[]{"501","503"},2),
+//				new CheckInVO("经济标准间","丁二玉",new Date("2016/12/05 11:11:11",true),
+//						new Date("2016/12/06",false),0,false,new String[]{"502"},1),
+//				new CheckInVO("难民六人间","丁二玉",new Date("2016/12/05 11:11:11",true),
+//						new Date("2016/12/06",false)
+//						,1000000001,true,new String[]{"503"},1));
+//		return new CheckInListPane(roomStyle,stub.iterator());
+		List<String> temp= this.getRoomStyle();
+		String[] rS = new String[temp.size()];
+		for(int i = 0; i < temp.size(); i ++){
+			rS[i] = temp.get(i);
+		}
+		return new CheckInListPane(rS,this.hotelBL.getCheckinInfo(id).iterator());
 	}
 	
 	public Iterator<RoomVO> getRoomList(){
@@ -174,11 +179,10 @@ public class HotelPaneController {
 	}
 	
 	public List<String> getRoomStyle(){
-		if(this.roomStyle == null){
-			roomStyle = new ArrayList<String>();
-			for(RoomVO vo:this.hotelBL.getRoom(id)){
-				roomStyle.add(vo.getRoomStyle());
-			}
+		
+		roomStyle = new ArrayList<String>();
+		for(RoomVO vo:this.hotelBL.getRoom(id)){
+			roomStyle.add(vo.getRoomStyle());
 		}
 		return this.roomStyle;
 	}

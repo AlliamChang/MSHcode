@@ -241,6 +241,16 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	public ResultMessage createEvaluate(EvaluatePO po) throws RemoteException {
 		return evaluateDAO.createEvaluate(po);
 	}
+	
+	@Override
+	public ResultMessage updateCheckin(CheckInPO po) throws RemoteException {
+		return hotelDAO.updateCheckin(po);
+	}
+
+	@Override
+	public List<CheckInPO> getHotelCheckinInfo(int hotelId) throws RemoteException {
+		return hotelDAO.getHotelCheckinInfo(hotelId);
+	}
 
 
 }

@@ -121,7 +121,7 @@ public class PersonInfoPane extends Pane {
 	    this.grid.add(browsecredit, column+2, row+4);
 	    
 	    browsecredit.setOnMouseClicked((MouseEvent me)->{
-	    	MainPane.getInstance().setRightPane(new CreditRecordPane());
+	    	MainPane.getInstance().setRightPane(new CreditRecordPane(PersonInfoPane.this));
 	    });
 	    
 	    Label member=new Label("会员类型:");

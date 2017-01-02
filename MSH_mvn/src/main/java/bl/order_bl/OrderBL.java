@@ -27,6 +27,8 @@ import vo.OrderVO;
 public class OrderBL implements OrderBLService{
 	
 	private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm:ss");
+	private final DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yy/MM/dd");
+	
 	
 	private OrderDAO orderDataBase;
 	private UserBLService user;
@@ -53,9 +55,10 @@ public class OrderBL implements OrderBLService{
 			order.setEvaluated(false);
 			//设置价格
 			double price = order.getPrice();
+		System.out.println(strategy.getFinalPriceInHotel(user.get(order.getUserID()), order, order.getHotelId()));
 			price -= strategy.getFinalPriceInHotel(user.get(order.getUserID()), order, order.getHotelId());
-			if(price < 0){
-				price = 0;
+			if(price <= 0){
+				price = 1;
 			}
 			order.setPrice(price);
 			
@@ -179,9 +182,9 @@ public class OrderBL implements OrderBLService{
 			
 			if(ResultMessage.SUCCESS == this.orderDataBase.update(po)){
 				//撤销时间距最晚执行时间不足6小时，扣除一半信用
-				if(LocalDateTime.now().getHour() + 6 <= po.getLatestCheckin() && preCheckin.getLocalDate().equals(LocalDate.now())){
+				if(LocalDateTime.now().getHour() + 6 >= po.getLatestCheckin() && preCheckin.getLocalDate().equals(LocalDate.now())){
 					int temp = (int)po.getPrice() / 2;
-					user.addCreditRecord(new CreditVO(new Date(Date.now(),false),ChangeReason.WITHDRAW_CREDIT, -temp, po.getUserID()));
+					user.addCreditRecord(new CreditVO(new Date(Date.now(),false),ChangeReason.ABNORMAL_ORDER, -temp, po.getUserID()));
 				}
 			}else{
 				return ResultMessage.FAIL;
@@ -251,7 +254,7 @@ public class OrderBL implements OrderBLService{
 	@Override
 	public List<OrderVO> getTodayUnexecutedOrder() {
 		try{
-			Iterator<OrderPO> itr = this.orderDataBase.orderStateShow(OrderState.UNEXECUTED, LocalDate.now().format(format)).iterator();
+			Iterator<OrderPO> itr = this.orderDataBase.orderStateShow(OrderState.UNEXECUTED, LocalDate.now().format(format2)).iterator();
 			List<OrderVO> list = new ArrayList<OrderVO>();
 			while(itr.hasNext()){
 				list.add(new OrderVO(itr.next()));

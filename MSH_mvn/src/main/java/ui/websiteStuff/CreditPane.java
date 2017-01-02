@@ -103,7 +103,7 @@ public class CreditPane extends GridPane{
 						LocalDate now=LocalDate.now();
 						String dateS=now.toString().replaceAll("-", "/");
 						Date date=new Date(dateS,false);
-						CreditVO credit=new CreditVO(date,ChangeReason.WITHDRAW_CREDIT,Integer.parseInt(creditField.getText()),Integer.parseInt(creditField.getText()));
+						CreditVO credit=new CreditVO(date,ChangeReason.OFFLINE_RECHARGE,Integer.parseInt(creditField.getText()),Integer.parseInt(this.nameField.getText()));
 						MarketingPaneController.getInstance().addCreditRecord(credit);
 					}
 				});

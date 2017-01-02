@@ -246,7 +246,7 @@ public class HotelListPane extends Pane{
 				HotelSearchPane.this.TradeArea.getValue(), HotelSearchPane.this.keyword.getText(),
 				null, null, null, null, -1));*/
 		vb.getChildren().addAll(Cont.makeList(
-				list2));
+				list2,HotelListPane.this));
 		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		return sp;
 	}
@@ -254,7 +254,13 @@ public class HotelListPane extends Pane{
 	public Pane getPane(){
 		return pane;
 	}
+	
+	
+	
+	
+	
 }
+
 class Cont extends GridPane{
 	Label name;
 	Label star;
@@ -264,7 +270,8 @@ class Cont extends GridPane{
 	Image image; 
 	Button bn=new Button("查看");
 	HotelRoomTable table;
-	Cont(HotelInfoVO vo){
+	
+	public Cont(HotelInfoVO vo,Parent last){
 		super();
 		 ColumnConstraints colInfo = new ColumnConstraints();
 	        colInfo.setPercentWidth(20);
@@ -290,12 +297,12 @@ class Cont extends GridPane{
 		lowest_price=new Label("¥"+low+"起");
 		this.image=vo.getScul();
 		
-		 table=new HotelRoomTable(list);
+		 table=new HotelRoomTable(list,last);
 		 ImageView im=new ImageView(image);
 		 im.setFitHeight(50);
 		 im.setFitWidth(50);
 		 bn.setOnMouseClicked((MouseEvent me)->{
-			 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(HotelSearchPane.getInstance(),vo));
+			 MainPane.getInstance().setRightPane(new HotelConcreteInfoPane(last,vo));
 		 });
 		this.add(im, 0, 0);
 		this.add(star,5,0);
@@ -306,12 +313,15 @@ class Cont extends GridPane{
 		this.add(table,0,1,5,1);
 		
 	}
-		static List<Cont> makeList(List<HotelInfoVO> list2){
-			ArrayList<Cont> ret = new ArrayList<Cont>();
-			for(HotelInfoVO item:list2)
-				ret.add(new Cont(item));
-			return ret;
-		}
+		
+	public static List<Cont> makeList(List<HotelInfoVO> list2,Parent last){
+		ArrayList<Cont> ret = new ArrayList<Cont>();
+		for(HotelInfoVO item:list2)
+			ret.add(new Cont(item,last));
+		return ret;
+	}
+	
 	
 
 }
+

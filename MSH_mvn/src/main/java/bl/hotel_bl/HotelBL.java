@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import po.CheckInPO;
 import po.EvaluatePO;
 import po.UserPO;
 import po.hotelPO.HotelPO;
@@ -18,6 +19,7 @@ import bl.user_bl.UserBLServiceImpl;
 import blservice.hotel_blservice.*;
 import blservice.strategy_blservice.StrategyBLService;
 import tools.ResultMessage;
+import vo.CheckInVO;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.RoomVO;
@@ -204,6 +206,44 @@ public class HotelBL implements HotelBLService{
 			return evaluate.createEvaluate(vo.topo());
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public ResultMessage checkin(CheckInVO vo) {
+		try {
+			this.hotel.updateCheckin(vo.toPO());
+			return ResultMessage.SUCCESS;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+
+	@Override
+	public ResultMessage checkout(CheckInVO vo) {
+		try {
+			this.hotel.updateCheckin(vo.toPO());
+			return ResultMessage.SUCCESS;
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+
+	@Override
+	public List<CheckInVO> getCheckinInfo(int hotelId) {
+		try {
+			List<CheckInPO> po = this.hotel.getHotelCheckinInfo(hotelId);
+			List<CheckInVO> vo = new ArrayList<CheckInVO>();
+			for(CheckInPO p: po){
+				vo.add(new CheckInVO(p));
+			}
+			return vo;
+		} catch (RemoteException e) {
+			
 			e.printStackTrace();
 			return null;
 		}

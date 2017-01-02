@@ -12,11 +12,13 @@ public class CheckInPO implements Serializable {
 	private String roomStyle;
 	private String booker;
 	private String checkinTime;
+	private String preCheckOutTime;
 	private String checkoutTime;
 	private long orderId;
 	private boolean belongOrder;
-	private String[] roomId;
+	private String roomId;
 	private int roomNum;
+	private int hotelId;
 	private int id;
 	@Id
 	@Column(name="id")
@@ -76,11 +78,11 @@ public class CheckInPO implements Serializable {
 		this.belongOrder = belongOrder;
 	}
 @Column(name="roomId")
-	public String[] getRoomId() {
+	public String getRoomId() {
 		return roomId;
 	}
 
-	public void setRoomId(String[] roomId) {
+	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
 @Column(name="roomNum")
@@ -90,6 +92,20 @@ public class CheckInPO implements Serializable {
 
 	public void setRoomNum(int roomNum) {
 		this.roomNum = roomNum;
+	}
+@Column(name="hotelId")
+	public int getHotelId() {
+		return hotelId;
+	}
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
+	}
+@Column(name="preCheckOutTime")
+	public String getPreCheckOutTime() {
+		return preCheckOutTime;
+	}
+	public void setPreCheckOutTime(String preCheckOutTime) {
+		this.preCheckOutTime = preCheckOutTime;
 	}
 	
 	

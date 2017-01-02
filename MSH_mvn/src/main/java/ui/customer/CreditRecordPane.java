@@ -5,6 +5,7 @@ import java.util.List;
 
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
+import ui.webAdmin.BackButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
@@ -18,9 +19,11 @@ public class CreditRecordPane extends Pane{
 	
 	private GridPane pane;
 	private CreditTable credit;
+	private BackButton back;
 	
-	public CreditRecordPane(){
+	public CreditRecordPane(Pane lastPane){
 		super();
+		back = new BackButton(lastPane);
 		initPane();
 		setMinSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
 		setMaxSize(MainPane.MINWIDTH, MainPane.MINHEIGHT);
@@ -35,7 +38,8 @@ public class CreditRecordPane extends Pane{
 		//pane.setGridLinesVisible(true);
 		credit=new CreditTable(CustomerPaneController.getInstance().getcredit());
 		
-		pane.add(credit,4,5);
+		pane.add(back, 0, 0);
+		pane.add(credit,2,5);
 		this.getChildren().add(pane);
 	}
 }

@@ -21,11 +21,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -98,7 +100,7 @@ public class MyNavigationBar extends VBox {
 						switch (vo.getType()) {
 						case CUSTOMER:
 						case COMPANY_CUSTOMER:
-							CustomerPaneController.getInstance().CustomerLogin(vo.getName(), vo.getImage());
+							CustomerPaneController.getInstance().CustomerLogin(vo.getAccount(), vo.getImage());
 							break;
 						case HOTEL_STAFF:
 							HotelInfoVO hotel =  hotelBL.getHotel(vo.getHotelID());
@@ -181,7 +183,7 @@ public class MyNavigationBar extends VBox {
 		group = new ToggleGroup();
 		naviBox = new VBox(0);
 		naviBox.setStyle(BACKGROUND_STYLE + BORDER_STYLE);
-		naviBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.555);
+		naviBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.61);
 		for(int i = 0; i < navi.size(); i ++){
 			naviButton[i] = new ToggleButton(navi.get(i));
 			naviButton[i].setMinSize(MAX_WIDTH-3,50);
@@ -207,8 +209,8 @@ public class MyNavigationBar extends VBox {
 	private void initInfo(){
 		infoBox = new VBox(SPACE);
 		infoBox.setStyle(BACKGROUND_STYLE + BORDER_STYLE);
-		infoBox.setMaxSize(MAX_WIDTH, MAX_HEIGHT * 0.45);
-		infoBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.45);
+		infoBox.setMaxSize(MAX_WIDTH, MAX_HEIGHT * 0.40);
+		infoBox.setMinSize(MAX_WIDTH, MAX_HEIGHT * 0.40);
 		infoBox.setAlignment(Pos.BASELINE_CENTER);
 		infoBox.setPadding(new Insets(10,10,10,10));
 		
@@ -218,14 +220,19 @@ public class MyNavigationBar extends VBox {
 		infoBox.getChildren().add(sculView);
 		
 		ScrollPane text = new ScrollPane();
-		Text[] list = new Text[info.size()];
+		Label[] list = new Label[info.size()];
 		for(int i = 0; i < list.length; i ++){
 			if(info.get(i) == null || info.get(i).equals(""))
 				continue;
-			list[i] = new Text(info.get(i));
-			list[i].setWrappingWidth(MAX_WIDTH - 20);
-		System.out.println(info.get(i).length());
-			list[i].setTextAlignment(TextAlignment.CENTER);
+			list[i] = new Label(info.get(i));
+			list[i].setMaxWidth(MAX_WIDTH-10);
+//			list[i].setWrappingWidth(MAX_WIDTH - 20);
+//		System.out.println(info.get(i).toCharArray()[0]);
+//			list[i].setTextAlignment(TextAlignment.CENTER);
+			list[i].setAlignment(Pos.CENTER);
+			list[i].setTooltip(new Tooltip(info.get(i)){{
+				this.setFont(Font.font(13));
+			}});
 			infoBox.getChildren().add(list[i]);
 		}
 		

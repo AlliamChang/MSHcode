@@ -9,10 +9,13 @@ import vo.RoomVO;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -22,9 +25,12 @@ public class HotelRoomTable extends TableView{
 	private final ObservableList<RoomVO> data;
 	private List<RoomVO>list;
 	private final int width=150;
-	public HotelRoomTable(List<RoomVO> list){
+	private Parent last;
+	
+	public HotelRoomTable(List<RoomVO> list,Parent last){
 		super();
 		this.list=list;
+		this.last = last;
 		data = FXCollections.observableArrayList();
 		for(int i=0;i<list.size();i++){
 			data.add(list.get(i));
@@ -57,7 +63,15 @@ public class HotelRoomTable extends TableView{
 						if(!empty){
 							Button bn=new Button("预订");
 							bn.setOnMouseClicked((MouseEvent me)->{
-								MainPane.getInstance().setRightPane(new ReservePane(HotelSearchPane.getInstance(), HotelRoomTable.this));
+								if(MainPane.getInstance().isLogin()){
+									MainPane.getInstance().setRightPane(new ReservePane(last, HotelRoomTable.this));
+								}else{
+									Alert alert = new Alert(AlertType.INFORMATION);
+									alert.getDialogPane().setHeaderText(null);
+									alert.setContentText("尚未登录，不能预订酒店");
+									alert.show();
+								}
+								
 							});
 							setGraphic(bn);
 						}
