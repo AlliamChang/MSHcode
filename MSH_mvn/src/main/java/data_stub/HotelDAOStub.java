@@ -7,6 +7,7 @@ import java.util.List;
 
 import dao.hotel.HotelDAO;
 import javafx.scene.image.Image;
+import po.RoomPO;
 import po.hotelPO.*;
 import tools.BedStyle;
 import tools.ResultMessage;
@@ -21,7 +22,7 @@ public class HotelDAOStub implements HotelDAO {
 			100,100,false,false);
 	public HotelDAOStub(){
 		dataBase=new ArrayList<HotelPO>();
-		dataBase.add(new HotelPO("南京市中山北路10号","鼓楼区","南京市","江苏省","渡口客栈","8008208820",null,100,4,101,10,4.2,image,null));
+		dataBase.add(new HotelPO());
 		room_data=new ArrayList<RoomPO>();
 		room_data.add(new RoomPO("大床房", BedStyle.DOUBLE_BEDS, 486, 30, 3, 1));
 		
@@ -29,30 +30,22 @@ public class HotelDAOStub implements HotelDAO {
 	public HotelPO find(int id) throws RemoteException {
 		HotelPO ret=null;
 		for(int i=0;i<dataBase.size();i++)
-			if(dataBase.get(i).getid()==id){
+			if(dataBase.get(i).getId()==id){
 				ret=dataBase.get(i);
 				break;
 			}
 		return ret;
 	}
 
-	public ResultMessage add(HotelPO po) throws RemoteException {
-		boolean isExist=false;
-		for(int i=0;i<dataBase.size();i++){
-			if(dataBase.get(i).getid()==po.getid())
-				isExist=true;
-		}
-		if(isExist)
-			return ResultMessage.EXIST;
-		else{
-			dataBase.add(po);
-			return ResultMessage.SUCCESS;
-	}
+	public int add(HotelPO po) throws RemoteException {
+		
+			return 0;
+	
 	}
 
 	public ResultMessage delete(int id) throws RemoteException {
 		for(int i=0;i<dataBase.size();i++)
-			if(dataBase.get(i).getid()==id)
+			if(dataBase.get(i).getId()==id)
 				dataBase.remove(i);
 			return ResultMessage.SUCCESS;
 		
@@ -61,7 +54,7 @@ public class HotelDAOStub implements HotelDAO {
 
 	public ResultMessage modify(HotelPO po) throws RemoteException {
 		for (int i = 0; i < dataBase.size(); i++)
-			if (dataBase.get(i).getid() == po.getid()){
+			if (dataBase.get(i).getId() == po.getId()){
 				dataBase.set(i, po);
 			}
 		return ResultMessage.SUCCESS;
@@ -72,24 +65,8 @@ public class HotelDAOStub implements HotelDAO {
 		// TODO Auto-generated method stub
 		System.out.println("init Succeed");
 	}
-	@Override
-	public List<HotelPO> get(String province, String city, String tradeArea,
-			String name)throws RemoteException {
-		ArrayList<HotelPO> ret=new ArrayList<HotelPO>();
-		if(name!=null){
-			for(int i=0;i<dataBase.size();i++){
-				if(dataBase.get(i).getProvince().equals(province)&&dataBase.get(i).getcity().equals(city)&&dataBase.get(i).gettrade_area().equals(tradeArea)&&dataBase.get(i).getname().equals(name))
-					ret.add(dataBase.get(i));
-			}
-		}
-		else{
-			for(int i=0;i<dataBase.size();i++){
-				if(dataBase.get(i).getProvince().equals(province)&&dataBase.get(i).getcity().equals(city)&&dataBase.get(i).gettrade_area().equals(tradeArea))
-					ret.add(dataBase.get(i));
-		}
-	}
-		return ret;
-}
+	
+
 	
 	public List<String> getProvinces()throws RemoteException{
 		ArrayList<String> ret=new ArrayList<String>();
@@ -102,7 +79,7 @@ public class HotelDAOStub implements HotelDAO {
 		ArrayList<String> ret=new ArrayList<String>();
 		for(int i=0;i<dataBase.size();i++){
 			if(dataBase.get(i).getProvince().equals(province))
-				ret.add(dataBase.get(i).getcity());
+				ret.add(dataBase.get(i).getCity());
 		}
 		return ret;
 	}
@@ -110,8 +87,8 @@ public class HotelDAOStub implements HotelDAO {
 	public List<String>getAreas(String province,String city)throws RemoteException{
 		ArrayList<String> ret=new ArrayList<String>();
 		for(int i=0;i<dataBase.size();i++){
-			if(dataBase.get(i).getProvince().equals(province)&&dataBase.get(i).getcity().equals(city))
-				ret.add(dataBase.get(i).gettrade_area());
+			if(dataBase.get(i).getProvince().equals(province)&&dataBase.get(i).getCity().equals(city))
+				ret.add(dataBase.get(i).getTrade_area());
 		}
 		return ret;
 	}
@@ -132,5 +109,17 @@ public class HotelDAOStub implements HotelDAO {
 		return ResultMessage.SUCCESS;
 		}else
 			return ResultMessage.FAIL;
+	}
+	@Override
+	public ResultMessage update(HotelPO po) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<HotelPO> getHotel(String province, String city, String area,
+			String name, String enter_time, String out_time, String price,
+			String score, int star) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

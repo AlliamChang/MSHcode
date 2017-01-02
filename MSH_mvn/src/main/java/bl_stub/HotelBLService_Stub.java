@@ -72,20 +72,6 @@ public class HotelBLService_Stub implements HotelBLService {
 	}
 
 
-	/*public HotelInfoVO getHotel(String hotel_id) {
-		// TODO Auto-generated method stub
-		Image image=new Image(PersonInfoPane.class.getResource("/image/hotel.jpg").toExternalForm(),
-				100,100,false,false);
-		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2,"南京市");
-	}*/
-
-	@Override
-	public List<HotelInfoVO> search(String province, String city, String tradeArea,
-			String name) {
-		return Arrays.asList(new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2,"南京市"),
-				new HotelInfoVO("如家快捷酒店", "南京市中山南路10号", "123456789", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1, 1,"南京市"));
-	}
-
 	@Override
 	public List<EvaluateVO> getEvaluate(int hotel_id) {
 		// TODO Auto-generated method stub
@@ -119,62 +105,40 @@ public class HotelBLService_Stub implements HotelBLService {
 
 	@Override
 	public HotelInfoVO getHotel(int hotel_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2,"南京市");
 	}
-
-
-	@Override
-	public List<Integer> search(String province, String city, String tradeArea) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public List<HotelInfoVO> sortByHighPrice(List<HotelInfoVO> list) {
 		// TODO Auto-generated method stub
-		return null;
+		return list;
 	}
 
 
 	@Override
 	public List<HotelInfoVO> sortByHighStar(List<HotelInfoVO> list) {
 		// TODO Auto-generated method stub
-		return null;
+		return list;
 	}
 
 
 	@Override
 	public List<HotelInfoVO> sortByHighScore(List<HotelInfoVO> list) {
 		// TODO Auto-generated method stub
-		return null;
+		return list;
 	}
 
 
 	@Override
-	public List<HotelInfoVO> sortByLowPrice(List<HotelInfoVO> list) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<HotelInfoVO> search(String province, String city, String area,
+			String name, String enter_time, String out_time, String price,
+			String score, int star) {
+		return Arrays.asList(new HotelInfoVO("青年旅馆", "南京市中山南路10号", "8008208820", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1,2,"南京市"),
+				new HotelInfoVO("如家快捷酒店", "南京市中山南路10号", "123456789", null, "简介", "江苏省", "鼓楼区", 0,null,4,4.5,1, 1,"南京市"));
 	}
 
-
 	@Override
-	public List<HotelInfoVO> sortByLowStar(List<HotelInfoVO> list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public List<HotelInfoVO> sortByLowScore(List<HotelInfoVO> list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public List<HotelInfoVO> historyHotel(List<HotelInfoVO> list) {
+	public ResultMessage createEvaluate(EvaluateVO vo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
