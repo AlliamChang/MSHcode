@@ -33,7 +33,7 @@ public class WebStuffStartPane extends GridPane{
 	private Text nameText;
 	private Text startTimeText;
 	private Text endTimeText;*/
-	private List<String> stuff;
+	//private List<String> stuff;
 	
 	private List<OrderVO> order;
 
@@ -45,10 +45,10 @@ public class WebStuffStartPane extends GridPane{
 	
 	public WebStuffStartPane(/*List<String> stuffName,List<String> stuffId,long orderNumber,long userId,
 			String userName,String startTime,String endTime,Image scul*/
-			List<String> stuff,List<OrderVO> order){
+			List<OrderVO> order){
 		super();
 		this.order=order;
-		this.stuff=stuff;
+		
 		/*this.stuffName=stuffName;
 		this.stuffId=stuffId;
 		this.orderNumber=orderNumber;

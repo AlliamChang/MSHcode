@@ -98,7 +98,8 @@ public class MarketingPaneController {
 	}
 	
 	public void createWebStuffStartPane(){
-		MainPane.getInstance().setRightPane(new WebStuffStartPane(stuff,order));
+		List<OrderVO> orderList=this.orderBL.getTodayUnexecutedOrder();
+		MainPane.getInstance().setRightPane(new WebStuffStartPane(orderList));
 	}
 	
 	public void createStrategyListPane(){
@@ -114,11 +115,9 @@ public class MarketingPaneController {
 	}
 	
 	public void createDealPane(){
-		if(this.getAbnormityOrder()!=null){
-		    MainPane.getInstance().setRightPane(new DealPane(this.orderBL.getAbnormityOrder()));
-		}
-		else
-			MainPane.getInstance().setRightPane(new DealPane(order));
+		
+	     MainPane.getInstance().setRightPane(new DealPane(this.getAbnormityOrder()));
+		
 	}
 	
 	public void createCancelSurePane(OrderVO order,int userId){
