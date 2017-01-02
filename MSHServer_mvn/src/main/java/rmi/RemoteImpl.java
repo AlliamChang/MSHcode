@@ -179,6 +179,11 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 		return creditRecordsDAO.createRecord(po);
 	}
     	
+	@Override
+	public ResultMessage deleteRecords(int userID) throws RemoteException {
+		return creditRecordsDAO.deleteRecords(userID);
+	}
+	
 	//strategy↓↓
 	@Override
 	public StrategyPO findStrategy(String name) throws RemoteException{
@@ -236,5 +241,6 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 	public ResultMessage createEvaluate(EvaluatePO po) throws RemoteException {
 		return evaluateDAO.createEvaluate(po);
 	}
+
 
 }

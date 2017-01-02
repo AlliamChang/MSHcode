@@ -57,14 +57,14 @@ public interface UserBLService {
 	public ResultMessage delete(int ID);
 	
 	/**
-	 * 通过该ID获得该用户的信用记录
+	 * 通过该ID获得该用户的信用记录。
 	 * @param ID
 	 * @return
 	 */
 	public List<CreditVO> getCreditRecords(int ID);
 	
 	/**
-	 * 增加信用记录，系统自动更新用户信用值和会员等级
+	 * 增加信用记录，系统自动更新用户信用值。
 	 * @param ID
 	 * @param creditVO
 	 * @return

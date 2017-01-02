@@ -1,6 +1,5 @@
 package daoImpl.user;
 
-import java.awt.SystemTray;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -68,36 +67,58 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public int addUser(UserPO userPO) throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		Transaction transaction = session.beginTransaction();
-		session.save(userPO);
-		transaction.commit();
-		int id = Integer.parseInt(session.createSQLQuery("select @@identity").list().get(0).toString());
-		session.close();
+		Transaction transaction = null;
+		int id = -1;
+		try {
+			transaction = session.beginTransaction();
+			session.save(userPO);
+			transaction.commit();
+			id = Integer.parseInt(session.createSQLQuery("select @@identity").list().get(0).toString());
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+		} finally {
+			session.close();
+		}
 		return id;
 	}
 
 	@Override
 	public ResultMessage updateUser(UserPO userPO) throws RemoteException {
 		Session session = HibernateUtil.getSession();
-		Transaction transaction = session.beginTransaction();
-		session.update(userPO);
-		transaction.commit();
-		session.close();
-		return ResultMessage.SUCCESS;
+		Transaction transaction = null;
+		ResultMessage message = ResultMessage.SUCCESS;
+		try {
+			transaction = session.beginTransaction();
+			session.update(userPO);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			message = ResultMessage.FAIL;
+		} finally {
+			session.close();
+		}
+		return message;
 	}
 
 	@Override
 	public ResultMessage deleteUser(int ID) throws RemoteException {
-		try{
-			Session session = HibernateUtil.getSession();
-			Transaction transaction = session.beginTransaction();
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = null;
+		ResultMessage message = ResultMessage.SUCCESS;
+		try {
+			transaction = session.beginTransaction();
 			session.delete(session.load(UserPO.class, ID));
 			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null)
+				transaction.rollback();
+			message = ResultMessage.FAIL;
+		} finally {
 			session.close();
-			return ResultMessage.SUCCESS;
-		} catch (ObjectNotFoundException e) {
-			return ResultMessage.FAIL;
 		}
+		return message;
 	}
 
 	@Override

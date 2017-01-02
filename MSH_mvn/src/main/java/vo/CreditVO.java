@@ -7,63 +7,63 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class CreditVO {
-	private Date change_date;
-	private ChangeReason change_reason;
-	private int changeValue, user_id;
+	private Date changeDate;
+	private ChangeReason changeReason;
+	private int changeValue, userID;
 	private StringProperty date;
 	private StringProperty reason;
 	private StringProperty change;
-	public CreditVO(Date date,ChangeReason reason,int changeValue, int user_id){
-		this.change_date=date;
-		this.change_reason=reason;
+	public CreditVO(Date date,ChangeReason reason,int changeValue, int userID){
+		this.changeDate=date;
+		this.changeReason=reason;
 		this.changeValue = changeValue;
-		this.user_id=user_id;
+		this.userID=userID;
 		//this.date=new SimpleStringProperty(date.getDate());
 	}
 	
 	public CreditVO(CreditPO po){
-		this.change_date=new Date(po.getChange_date(), true);
-		this.change_reason=po.getChange_reason();
+		this.changeDate=new Date(po.getChangeDate(), true);
+		this.changeReason=po.getChangeReason();
 		this.changeValue = po.getchangeValue();
-		this.user_id=po.getUser_id();
+		this.userID=po.getUserID();
 	}
 	
 	public CreditPO toPO(){
 		CreditPO po = new CreditPO();
-		po.setChange_date(this.change_date.getDate());
-		po.setChange_reason(change_reason);
+		po.setChangeDate(this.changeDate == null ? null : this.changeDate.getDate());
+		po.setChangeReason(changeReason);
 		po.setchangeValue(changeValue);
-		po.setUser_id(user_id);
+		po.setUserID(userID);
 		return po;
 	}
 	
-	public int getUser_id() {
-		return user_id;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
 	public Date getdate(){
-		return this.change_date;
+		return this.changeDate;
 	}
 	
 	public StringProperty dateProperty(){
-		date= new SimpleStringProperty(change_date.getDate());
+		date= new SimpleStringProperty(changeDate.getDate());
 		return date;
 	}
 	
 	public ChangeReason getreason(){
-		return this.change_reason;
+		return this.changeReason;
 	}
 	
 	public StringProperty reasonProperty(){
-		if(change_reason==ChangeReason.OFFLINE_RECHARGE)
+		if(changeReason==ChangeReason.OFFLINE_RECHARGE)
 			reason= new SimpleStringProperty("线下充值");
-		else if(change_reason==ChangeReason.NORMAL_EXE)
+		else if(changeReason==ChangeReason.NORMAL_EXE)
 			reason= new SimpleStringProperty("正常执行订单");
-		else if(change_reason==ChangeReason.ABNORMAL_ORDER)
+		else if(changeReason==ChangeReason.ABNORMAL_ORDER)
 			reason= new SimpleStringProperty("有订单未正常执行");
 		else reason=new SimpleStringProperty("返还信用值");
 		return reason;
@@ -75,11 +75,11 @@ public class CreditVO {
 	}
 	
 	public void setdate(Date date){
-		this.change_date=date;
+		this.changeDate=date;
 	}
 	
 	public void setreason(ChangeReason reason){
-		this.change_reason=reason;
+		this.changeReason=reason;
 	}
 
 	public int getChangeValue() {

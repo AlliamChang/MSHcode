@@ -8,8 +8,10 @@ import java.util.List;
 
 import org.junit.*;
 
+import tools.ChangeReason;
 import tools.ResultMessage;
 import tools.UserType;
+import vo.CreditVO;
 import vo.UserVO;
 import bl.user_bl.UserBLServiceImpl;
 import blservice.user_blservice.UserBLService;
@@ -114,6 +116,17 @@ public class UserBLServiceImplTest {
 		UserVO vo = u.get(u1.getID());
 		u.delete(u1.getID());
 		assertEquals(vo.getPassword(), u1.getPassword());
+	}
+	
+	@Test
+	public void testAddAndGetCreditRecords() {
+		u1.setID(u.add(u1));
+		CreditVO c1 = new CreditVO(null, ChangeReason.ABNORMAL_ORDER, -1000, u1.getID());
+		u.addCreditRecord(c1);
+		CreditVO c2 = u.getCreditRecords(u1.getID()).get(0);
+		u.delete(u1.getID());
+		assertEquals(c1.getChangeValue(), c2.getChangeValue());
+		assertEquals(c1.getUserID(), c2.getUserID());
 	}
 	
 	private static boolean comp(UserVO vo1, UserVO vo2) {

@@ -9,9 +9,9 @@ public class CreditPO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -2750505292836257473L;
-	private String change_date;
-	private ChangeReason change_reason;
-	private int changeValue, user_id, Id;
+	private String changeDate;
+	private ChangeReason changeReason;
+	private int changeValue, userID, Id;
 
 	public CreditPO(){}
 	
@@ -23,28 +23,28 @@ public class CreditPO implements Serializable{
 		Id = id;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserID() {
+		return userID;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 
-	public String getChange_date() {
-		return change_date;
+	public String getChangeDate() {
+		return changeDate;
 	}
 
-	public void setChange_date(String change_date) {
-		this.change_date = change_date;
+	public void setChangeDate(String changeDate) {
+		this.changeDate = changeDate;
 	}
 
-	public ChangeReason getChange_reason() {
-		return change_reason;
+	public ChangeReason getChangeReason() {
+		return changeReason;
 	}
 
-	public void setChange_reason(ChangeReason change_reason) {
-		this.change_reason = change_reason;
+	public void setChangeReason(ChangeReason changeReason) {
+		this.changeReason = changeReason;
 	}
 
 	public int getchangeValue() {

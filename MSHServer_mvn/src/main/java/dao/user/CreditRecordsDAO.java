@@ -13,4 +13,5 @@ public interface CreditRecordsDAO extends Remote {
 	
 	public ResultMessage createRecord(CreditPO po) throws RemoteException;
 	
+	public ResultMessage deleteRecords(int userID) throws RemoteException;
 }

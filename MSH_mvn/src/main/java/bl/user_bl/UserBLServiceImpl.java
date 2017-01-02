@@ -84,6 +84,7 @@ public class UserBLServiceImpl implements UserBLService{
 	@Override
 	public ResultMessage delete(int ID) {
 		try {
+			crd.deleteRecords(ID);
 			return ud.deleteUser(ID);
 		} catch (RemoteException e) {
 			e.printStackTrace();
@@ -109,7 +110,7 @@ public class UserBLServiceImpl implements UserBLService{
 	public ResultMessage addCreditRecord(CreditVO creditVO) {
 		try {
 			crd.createRecord(creditVO.toPO());
-			UserPO userPO = ud.getUser(creditVO.getUser_id());
+			UserPO userPO = ud.getUser(creditVO.getUserID());
 			userPO.setCredit(userPO.getCredit() + creditVO.getChangeValue());
 			ud.updateUser(userPO);
 			return ResultMessage.SUCCESS;
