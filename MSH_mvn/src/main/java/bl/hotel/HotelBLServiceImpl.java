@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import bl.user.UserBLServiceImpl;
 import blservice.hotel.*;
+import blservice.user.UserBLService;
 import po.CheckInPO;
 import po.EvaluatePO;
 import po.hotelPO.HotelPO;
@@ -18,15 +20,17 @@ import vo.CheckInVO;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.RoomVO;
+import vo.UserVO;
 public class HotelBLServiceImpl implements HotelBLService{
 	private HotelDAO hotel;
+	private UserBLService user;
 	private RemoteHelper help;
 	private EvaluateDAO evaluate;
 	public HotelBLServiceImpl(){
 		help=RemoteHelper.getInstance();
 		hotel=help.getHotelDAO();
 		evaluate=help.getEvaluateDAO();
-		
+		user = new UserBLServiceImpl();
 	}
 
 	@Override
@@ -132,7 +136,11 @@ public class HotelBLServiceImpl implements HotelBLService{
 	@Override
 	public ResultMessage add(HotelInfoVO hotel) {
 		try {
-			this.hotel.add(hotel.toPO());
+			UserVO staff = user.get(hotel.getStuff_id());
+			hotel.setPhone(staff.getNumber());
+			int hotelID = this.hotel.add(hotel.toPO());
+			staff.setHotelID(hotelID);
+			user.update(staff);
 			return ResultMessage.SUCCESS;
 		} catch (RemoteException e) {
 			e.printStackTrace();
