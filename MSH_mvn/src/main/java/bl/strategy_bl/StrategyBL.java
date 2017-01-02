@@ -193,7 +193,7 @@ public class StrategyBL implements StrategyBLService{
 							vipPrice=list.get(i).getCost();
 					}
 					else if(list.get(i).getName().equals("AdminVipCost"))
-						vc+=list.get(i).getCost();
+						vc+=list.get(i).getCost()*user.getLevel();
 						
 				}		
 			}
