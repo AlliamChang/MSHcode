@@ -42,7 +42,6 @@ public class StrategyDAOImpl implements StrategyDAO{
 			Transaction transaction=session.beginTransaction();
 			//StrategyPO po=this.findStrategy(name);
 			int fuckId=po.getFuckId();
-			System.out.println(fuckId);
 			session.delete(session.load(StrategyPO.class, fuckId));
 			transaction.commit();
 			session.close();
@@ -77,10 +76,8 @@ public class StrategyDAOImpl implements StrategyDAO{
 		//Transaction transaction=session.beginTransaction();
 		session.beginTransaction();
 		int hotelId=0;
-		System.out.println(1);
 		Query query=session.createQuery("from StrategyPO where hotelId = '"+hotelId+"'");
 		List<StrategyPO> list=query.list();
-		System.out.println(list.size());
 		session.close();
 		return list;
 	}//获得网站策略表
