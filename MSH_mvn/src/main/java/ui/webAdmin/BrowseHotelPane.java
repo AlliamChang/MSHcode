@@ -100,7 +100,7 @@ public class BrowseHotelPane extends VBox{
 		name.setPrefWidth(210);
 		TableColumn<HotelInfoVO, String> number = new TableColumn<HotelInfoVO, String>("联系电话");
 		number.setCellValueFactory(new PropertyValueFactory<HotelInfoVO, String>("phone"));
-		number.setPrefWidth(100);
+		number.setPrefWidth(120);
 		number.setSortable(false);
 		TableColumn<HotelInfoVO, String> staff = new TableColumn<HotelInfoVO, String>("工作人员ID");
 		staff.setCellValueFactory(new PropertyValueFactory<HotelInfoVO, String>("stuff_id"){

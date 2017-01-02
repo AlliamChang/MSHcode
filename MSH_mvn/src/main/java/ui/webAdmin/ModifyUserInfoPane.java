@@ -132,7 +132,8 @@ public class ModifyUserInfoPane extends AnchorPane{
 					user.setName(nameField.getText());
 					user.setGender(genderBox.getValue());
 					user.setNumber(numberField.getText());
-					user.setType(group.getSelectedToggle().equals(customerButton) ? UserType.CUSTOMER : UserType.COMPANY_CUSTOMER);
+					if (group != null)
+						user.setType(group.getSelectedToggle().equals(customerButton) ? UserType.CUSTOMER : UserType.COMPANY_CUSTOMER);
 					user.setCompany(user.getType() == UserType.COMPANY_CUSTOMER ? companyField.getText() : null);
 					WebAdminController.getInstance().modifyUser(user);
 					WebAdminController.getInstance().go(lastPane, user);
