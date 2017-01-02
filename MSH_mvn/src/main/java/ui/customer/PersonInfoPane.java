@@ -1,12 +1,8 @@
 package ui.customer;
 
-import java.util.Arrays;
-
 import blservice.user_blservice.UserBLService;
 import ui.utility.MainPane;
 import ui.utility.MyFileChooser;
-import ui.utility.MyNavigationBar;
-import ui.utility.MyRetreatButton;
 import vo.UserVO;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -23,8 +19,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import tools.ResultMessage;
 import tools.UserType;
@@ -43,7 +37,6 @@ public class PersonInfoPane extends Pane {
 	private static final int row=2;
 	private Image scul;
 //	private MyRetreatButton back;
-	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 20);
 	
 	public PersonInfoPane(UserVO vo){
 		super();
@@ -63,6 +56,7 @@ public class PersonInfoPane extends Pane {
 		initgrid();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void initgrid(){
 		this.grid=new GridPane();
 		grid.setAlignment(Pos.TOP_CENTER);

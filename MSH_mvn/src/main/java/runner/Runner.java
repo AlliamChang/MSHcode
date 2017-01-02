@@ -6,11 +6,8 @@ import javafx.application.*;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import rmi.RemoteHelper;
-import ui.*;
 import ui.customer.HotelSearchPane;
-import ui.hotelStuff.OrderListPane;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
 public class Runner extends Application {

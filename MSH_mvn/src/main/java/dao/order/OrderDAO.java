@@ -4,7 +4,6 @@ import java.util.*;
 import java.rmi.*;
 
 import po.*;
-import po.hotelPO.HotelPO;
 import tools.OrderState;
 import tools.ResultMessage;
 

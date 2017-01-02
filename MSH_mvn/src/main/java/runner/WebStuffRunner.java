@@ -2,22 +2,14 @@ package runner;
 
 import java.rmi.Naming;
 import ui.utility.MainPane;
-import ui.webAdmin.*;
 
-import java.rmi.Naming;
-import java.rmi.RemoteException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import rmi.RemoteHelper;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import rmi.RemoteHelper;
 import ui.websiteStuff.*;
-import ui.utility.MainPane;
 
 public class WebStuffRunner extends Application{
 	private static RemoteHelper remoteHelper;

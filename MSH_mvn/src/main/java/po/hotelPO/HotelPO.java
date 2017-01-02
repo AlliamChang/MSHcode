@@ -2,7 +2,6 @@ package po.hotelPO;
 
 import java.io.Serializable;
 
-import javafx.scene.image.Image;
 
 public class HotelPO implements Serializable{
 	

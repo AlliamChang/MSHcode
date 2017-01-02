@@ -1,19 +1,14 @@
 package bl_stub;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import blservice.hotel_blservice.HotelBLService;
-import blservice.strategy_blservice.StrategyBLService;
 import dao.hotel.HotelDAO;
-import javafx.scene.image.Image;
 import rmi.RemoteHelper;
 import tools.BedStyle;
 import tools.ResultMessage;
-import ui.customer.PersonInfoPane;
 import vo.CheckInVO;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;

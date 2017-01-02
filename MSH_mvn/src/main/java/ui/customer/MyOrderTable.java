@@ -23,10 +23,9 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
 import javafx.util.Callback;
 
+@SuppressWarnings("rawtypes")
 public class MyOrderTable extends TableView{
 	private final ObservableList<OrderVO> data;
 	private static List<String> order_info;
@@ -34,6 +33,7 @@ public class MyOrderTable extends TableView{
 	private  static List<OrderVO> list;
 	private int width=80;
 	
+	@SuppressWarnings("static-access")
 	public MyOrderTable(List<OrderVO> list){
 		super();
 		data = FXCollections.observableArrayList();
@@ -45,6 +45,7 @@ public class MyOrderTable extends TableView{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void init(){
 		TableColumn start_time=new TableColumn("开始时间");
 		start_time.setMinWidth(width-10);
@@ -91,6 +92,7 @@ public class MyOrderTable extends TableView{
 				return new TableCell<OrderVO, String>(){
 					private boolean isContinue = false;
 					
+					@SuppressWarnings("static-access")
 					protected void updateItem(String item,boolean empty){
 						if(item!=null){
 						if(item.equals("评价")){
@@ -158,6 +160,7 @@ public class MyOrderTable extends TableView{
 		this.setPrefHeight(520);
 	}
 	
+	@SuppressWarnings("static-access")
 	public void setList(List<String> list){
 		this.order_info=list;
 	}

@@ -13,8 +13,6 @@ import po.hotelPO.*;
 import tools.BedStyle;
 import tools.ResultMessage;
 import ui.customer.PersonInfoPane;
-import vo.HotelInfoVO;
-import vo.RoomVO;
 
 public class HotelDAOStub implements HotelDAO {
 	private ArrayList<HotelPO> dataBase;

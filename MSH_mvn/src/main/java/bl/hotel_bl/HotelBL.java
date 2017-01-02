@@ -7,32 +7,24 @@ import java.util.List;
 
 import po.CheckInPO;
 import po.EvaluatePO;
-import po.UserPO;
 import po.hotelPO.HotelPO;
 import po.RoomPO;
 import rmi.RemoteHelper;
 import dao.hotel.EvaluateDAO;
 import dao.hotel.HotelDAO;
-import data_stub.EvaluateDAO_Stub;
-import data_stub.HotelDAOStub;
-import bl.user_bl.UserBLServiceImpl;
 import blservice.hotel_blservice.*;
-import blservice.strategy_blservice.StrategyBLService;
 import tools.ResultMessage;
 import vo.CheckInVO;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
 import vo.RoomVO;
-import vo.UserVO;
 public class HotelBL implements HotelBLService{
 	private HotelDAO hotel;
-	private UserBLServiceImpl user;
 	private RemoteHelper help;
 	private EvaluateDAO evaluate;
 	public HotelBL(){
 		help=RemoteHelper.getInstance();
 		hotel=help.getHotelDAO();
-		user=new UserBLServiceImpl();
 		evaluate=help.getEvaluateDAO();
 		
 	}
@@ -164,10 +156,10 @@ public class HotelBL implements HotelBLService{
 //由高到低
 	@Override
 	public List<HotelInfoVO> sortByHighPrice(List<HotelInfoVO> list) {
-		Collections.sort(list, new Comparator(){
+		Collections.sort(list, new Comparator<HotelInfoVO>(){
 			@Override
-			public int compare(Object arg0, Object arg1) {
-				return ((HotelInfoVO)arg1).getLowest_price() - ((HotelInfoVO)arg0).getLowest_price();
+			public int compare(HotelInfoVO arg0, HotelInfoVO arg1) {
+				return arg1.getLowest_price() - arg0.getLowest_price();
 			}});
 		return list;
 	}
@@ -176,20 +168,20 @@ public class HotelBL implements HotelBLService{
 	
 	@Override
 	public List<HotelInfoVO> sortByHighStar(List<HotelInfoVO> list) {
-		Collections.sort(list, new Comparator(){
+		Collections.sort(list, new Comparator<HotelInfoVO>(){
 			@Override
-			public int compare(Object arg0, Object arg1) {
-				return ((HotelInfoVO)arg1).getStar() - ((HotelInfoVO)arg0).getStar();
+			public int compare(HotelInfoVO arg0, HotelInfoVO arg1) {
+				return arg1.getStar() - arg0.getStar();
 			}});
 		return list;
 	}
 
 	@Override
 	public List<HotelInfoVO> sortByHighScore(List<HotelInfoVO> list) {
-		Collections.sort(list, new Comparator(){
+		Collections.sort(list, new Comparator<HotelInfoVO>(){
 			@Override
-			public int compare(Object arg0, Object arg1) {
-				return (int)(((HotelInfoVO)arg1).getScore()*10 - ((HotelInfoVO)arg0).getScore()*10);
+			public int compare(HotelInfoVO arg0, HotelInfoVO arg1) {
+				return (int)(arg1.getScore()*10 - arg0.getScore()*10);
 			}});
 		return list;
 	}

@@ -3,14 +3,11 @@ package bl.strategy_bl;
 //<<<<<<< HEAD
 import tools.*;
 import rmi.RemoteHelper;
-import data_stub.*;
 import dao.strategy_dao.*;
 import java.rmi.*;
 import java.time.LocalDate;
 import java.util.*;
 import vo.*;
-import po.OrderPO;
-import po.UserPO;
 import po.strategyPO.*;
 import blservice.strategy_blservice.StrategyBLService;
 //=======
@@ -199,7 +196,7 @@ public class StrategyBL implements StrategyBLService{
 			}
 			
 		}
-		return vipPrice;
+		return vipPrice + vc;
 	}//网站策略--vip折扣
 	
 	public double getCooperationPrice(UserVO user,int hotelId){

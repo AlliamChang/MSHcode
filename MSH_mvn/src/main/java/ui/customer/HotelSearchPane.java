@@ -1,40 +1,17 @@
 package ui.customer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import bl.hotel_bl.HotelBL;
-import bl_stub.HotelBLService_Stub;
-import blservice.hotel_blservice.HotelBLService;
-import javafx.collections.FXCollections;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import ui.utility.MainPane;
-import ui.utility.MyDatePicker;
-import ui.utility.MyNavigationBar;
-import ui.webAdmin.WebAdminController;
-import vo.HotelInfoVO;
-import vo.RoomVO;
 
 public class HotelSearchPane extends GridPane{
 	private static HotelSearchPane instance;

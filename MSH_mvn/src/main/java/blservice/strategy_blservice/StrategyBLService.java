@@ -4,8 +4,6 @@ import tools.*;
 import vo.*;
 import java.util.*;
 
-import po.OrderPO;
-import po.UserPO;
 
 public interface StrategyBLService {
 	

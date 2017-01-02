@@ -1,7 +1,6 @@
 package ui.customer;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 import bl.order_bl.OrderBL;
@@ -18,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -26,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+@SuppressWarnings("unused")
 public class EvaluatePane extends Pane{
 	private GridPane pane;
 	private List<String> order_info=MyOrderTable.getList();
@@ -108,6 +107,7 @@ public class EvaluatePane extends Pane{
 		score.setFont(f);
 		pane.add(score, column_index, row_index+4);
 		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		ChoiceBox<String> grade=new ChoiceBox(FXCollections.observableArrayList("1","2","3","4","5"));
 		grade.getSelectionModel().selectFirst();
 		pane.add(grade,column_index+1,row_index+4);

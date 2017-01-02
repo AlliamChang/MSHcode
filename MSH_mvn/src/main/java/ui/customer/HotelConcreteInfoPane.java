@@ -1,14 +1,11 @@
 package ui.customer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import bl.hotel_bl.HotelBL;
-import bl_stub.HotelBLService_Stub;
 import blservice.hotel_blservice.HotelBLService;
 import ui.utility.MainPane;
-import ui.utility.MyNavigationBar;
 import ui.utility.MyRetreatButton;
 import vo.EvaluateVO;
 import vo.HotelInfoVO;
@@ -19,7 +16,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -32,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+@SuppressWarnings("rawtypes")
 public class HotelConcreteInfoPane extends Pane{
 	private HotelInfoVO vo;
 	private Image hotel;
@@ -46,10 +43,12 @@ public class HotelConcreteInfoPane extends Pane{
 	private int column=0;
 	private int row=0;
 	private GridPane pane;
+	@SuppressWarnings("unused")
 	private List<OrderVO> list;
 	private MyRetreatButton back;
 	//private ScrollPane sp;
 	private ScrollPane evaluate;
+	@SuppressWarnings("unused")
 	private static final String user_name="angel"; 
 	private static final Font f=Font.font("Tahoma", FontWeight.MEDIUM, 14);
 	public HotelConcreteInfoPane(Parent p,HotelInfoVO VO){
@@ -61,6 +60,7 @@ public class HotelConcreteInfoPane extends Pane{
 		initPane();
 	}
 	
+	@SuppressWarnings("static-access")
 	private void initPane(){
 		pane=new GridPane();
 		pane.setPadding(new Insets(10, 10, 10, 32));

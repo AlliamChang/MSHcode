@@ -2,24 +2,28 @@ package po.strategyPO;
 
 import java.io.Serializable;
 
+
 import tools.*;
-import vo.StrategyVO;
 
 public class StrategyPO implements Serializable{
-	private StrategyType strategyType;//策略类型
-	private String name;//策略名
-	private String province;//策略省份
-	private String city;//策略城市
-	private String area;//策略商圈
-	private String startTime;//策略开始时间
-	private String endTime;//策略到期时间
-	private double cost;//策略折扣
-	private PeopleType people;//策略面向人群
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1643142476017846119L;
+	private StrategyType strategyType;
+	private String name;//名称
+	private String province;//省份
+	private String city;//城市
+	private String area;//地区
+	private String startTime;//开始时间
+	private String endTime;//结束时间
+	private double cost;//折扣量
+	private PeopleType people;//面向人群
 	private int hotelId;//酒店ID
-	private int fuckId;//策略内部区分ID
+	private int fuckId;
 	private String roomStyle;//房间类型（酒店管理人员需要）
 	
-    public StrategyPO(){
+	public StrategyPO(){
 		
 	}
 	
@@ -49,86 +53,88 @@ public class StrategyPO implements Serializable{
     		,startTime,endTime,cost,people,hotelId);
 		this.roomStyle=roomStyle;
 	}
-	
+
 	public StrategyType getStrategyType(){
 		return strategyType;
 	}
-	
+
+    public void setStrategyType(StrategyType strategyType){
+	    this.strategyType=strategyType;
+    }
+
+
 	public String getName(){
 		return name;
 	}
-	
+
+    public void setName(String name){
+	    this.name=name;
+    }
+    
 	public String getStartTime(){
 		return startTime;
 	}
-	
+
+    public void setStartTime(String startTime){
+	    this.startTime=startTime;
+    }
+    
 	public String getEndTime(){
 		return endTime;
 	}
-	
-	public String getProvince(){
-		return city;
-	}
-	
+
+    public void setEndTime(String endTime){
+	    this.endTime=endTime;
+    }
+    
+    public String getProvince(){
+	    return this.province;
+    }
+
+    public void setProvince(String province){
+    	this.province=province;
+    }
+	 
 	public String getCity(){
 		return city;
 	}
+
+    public void setCity(String city){
+	    this.city=city;
+    }
 	
 	public String getArea(){
 		return area;
-	}
-	
-	public double getCost(){
-		return cost;
-	}
-	
-	public PeopleType getPeople(){
-		return people;
-	}
-	
-	public int getHotelId(){
-		return hotelId;
-	}
-	
-	public void setName(String name){
-		this.name=name;
-	}
-	
-	public void setStrategyType(StrategyType strategyType){
-		this.strategyType=strategyType;
-	}
-	
-	public void setProvince(String province){
-		this.province=province;
-	}
-	
-	public void setCity(String city){
-		this.city=city;
 	}
 	
 	public void setArea(String area){
 		this.area=area;
 	}
 	
-	public void setStartTime(String startTime){
-		this.startTime=startTime;
-	}
-	
-	public void setEndTime(String endTime){
-		this.endTime=endTime;
+	public double getCost(){
+		return cost;
 	}
 	
 	public void setCost(double cost){
 		this.cost=cost;
 	}
 	
+	public PeopleType getPeople(){
+		return people;
+	}
+	
 	public void setPeople(PeopleType people){
 		this.people=people;
+	}
+
+	public int getHotelId(){
+		return hotelId;
 	}
 	
 	public void setHotelId(int hotelId){
 		this.hotelId=hotelId;
 	}
+	
 	
 	public int getFuckId(){
 		return fuckId;

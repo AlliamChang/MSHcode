@@ -12,6 +12,10 @@ import tools.*;
 @Entity
 @Table(name = "strategy2")
 public class StrategyPO implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1643142476017846119L;
 	private StrategyType strategyType;
 	private String name;//名称
 	private String province;//省份

@@ -1,19 +1,15 @@
 package ui.customer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import tools.Date;
-import tools.ResultMessage;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.OrderBLService;
 import ui.utility.MainPane;
 import ui.utility.MyDatePicker;
-import ui.utility.MyNavigationBar;
 import ui.utility.MyRetreatButton;
 import vo.OrderVO;
-import vo.RoomVO;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,12 +18,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
@@ -51,6 +44,7 @@ public class ReservePane extends Pane {
 		initPane();
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initPane(){
 		pane=new GridPane();
 		pane.setPadding(new Insets(10, 10, 10, 10));

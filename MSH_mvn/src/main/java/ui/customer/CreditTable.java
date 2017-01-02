@@ -9,8 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.StringConverter;
 
+@SuppressWarnings("rawtypes")
 public class CreditTable extends TableView{
 	private final ObservableList<CreditVO> data;
 	private int width=150;
@@ -23,6 +23,7 @@ public class CreditTable extends TableView{
 		this.init();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void init(){
 		TableColumn time=new TableColumn("时间");
 		time.setMinWidth(width);

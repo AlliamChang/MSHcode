@@ -4,7 +4,6 @@ import ui.utility.MainPane;
 import ui.webAdmin.*;
 
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 
 import javafx.application.Application;
 import javafx.scene.Scene;

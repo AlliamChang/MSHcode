@@ -6,11 +6,8 @@ import javafx.concurrent.Task;
 import javafx.scene.Parent;
 import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
-import tools.BedStyle;
 import tools.Date;
-import tools.PeopleType;
 import tools.ResultMessage;
-import tools.StrategyType;
 import ui.hotelStuff.AddRoomPane;
 import ui.hotelStuff.CheckInListPane;
 import ui.hotelStuff.HotelInfoPane;
@@ -18,11 +15,9 @@ import ui.hotelStuff.HotelStrategyPane;
 import ui.hotelStuff.OrderListPane;
 import ui.utility.MainPane;
 import ui.utility.MyNavigationBar;
-import vo.CheckInVO;
 import vo.HotelInfoVO;
 import vo.OrderVO;
 import vo.RoomVO;
-import vo.StrategyVO;
 import blservice.hotel_blservice.HotelBLService;
 import blservice.order_blservice.*;
 
@@ -34,7 +29,6 @@ import java.util.List;
 import bl.hotel_bl.HotelBL;
 import bl.order_bl.OrderBL;
 import bl.strategy_bl.StrategyBL;
-import bl.strategy_bl.StrategyBL;
 
 public class HotelPaneController {
 	
@@ -42,9 +36,11 @@ public class HotelPaneController {
 	private HotelBLService hotelBL;
 	private OrderBLService orderBL;
 	
+	@SuppressWarnings("unused")
 	private List<OrderVO> orderList;
 	private List<String> roomStyle;
 	
+	@SuppressWarnings("unused")
 	private int id, userID;
 	private String hotel;
 	
