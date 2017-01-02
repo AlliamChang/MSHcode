@@ -174,7 +174,7 @@ public class WebStuffStartPane extends GridPane{
 			nameText.setFont(normalFont);
 			this.setHalignment(nameText, HPos.CENTER);
 			this.setValignment(nameText, VPos.CENTER);
-			nameText.setText(String.valueOf(order.get(i).getFirstBooker()));
+			nameText.setText(order.get(i).getUserAccount());
 			this.add(nameText, 3, i+3);
 			Text startTimeText=new Text();
 			startTimeText.setFont(normalFont);
