@@ -103,7 +103,8 @@ public class CancelSurePane extends GridPane{
 							else{
 								isReturnAll=false;
 							}
-							MarketingPaneController.getInstance().cancelAbnormity(order.getId(), isReturnAll);	
+							MarketingPaneController.getInstance().cancelAbnormity(order.getId(), isReturnAll);
+							MarketingPaneController.getInstance().createDealPane();
 						});
 					}
 				});
