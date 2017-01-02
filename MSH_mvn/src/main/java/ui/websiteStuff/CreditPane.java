@@ -105,6 +105,11 @@ public class CreditPane extends GridPane{
 						Date date=new Date(dateS,false);
 						CreditVO credit=new CreditVO(date,ChangeReason.OFFLINE_RECHARGE,Integer.parseInt(creditField.getText()),Integer.parseInt(this.nameField.getText()));
 						MarketingPaneController.getInstance().addCreditRecord(credit);
+						nameField.setText("");
+						creditField.setText("");
+						alert.setAlertType(AlertType.INFORMATION);
+						alert.setContentText("修改成功");
+						alert.show();
 					}
 				});
 			}

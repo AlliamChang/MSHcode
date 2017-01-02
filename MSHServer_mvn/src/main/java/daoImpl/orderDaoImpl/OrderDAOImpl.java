@@ -99,13 +99,11 @@ public class OrderDAOImpl implements OrderDAO{
 		Query query;
 		if(date == null){
 			query = session.createQuery("from OrderPO where state = '" + state.ordinal() + "'");
-		System.out.println(state.ordinal());
 		}else{
 			date = date.trim();
 			query = session.createQuery("from OrderPO where state = '" + state + "' and preCheckin = '" + date + "'");
 		}
 		List<OrderPO> list = query.list();
-	System.out.println(list.get(0).getId());
 		transaction.commit();
 		session.close();
 		return list;

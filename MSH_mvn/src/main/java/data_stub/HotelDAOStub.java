@@ -137,4 +137,9 @@ public class HotelDAOStub implements HotelDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public ResultMessage removeRoom(int roomId) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -105,8 +105,9 @@ public class RoomListTable extends TableView{
 		        				alert.getDialogPane().setContentText("确认删除？");
 		        				alert.showAndWait().filter(response -> 
 		        					response == ButtonType.OK).ifPresent(response ->{
+		        						RoomVO vo = (RoomVO)RoomListTable.this.getItems().get(this.getTableRow().getIndex());
 		        						RoomListTable.this.getItems().remove(this.getTableRow().getIndex());
-//		        						new HotelBL().;
+		        						new HotelBLServiceImpl().removeRoom(vo.getid());
 		        					});
 		        			});
 		        		}else{

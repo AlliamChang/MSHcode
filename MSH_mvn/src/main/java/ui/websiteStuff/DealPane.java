@@ -125,7 +125,7 @@ public class DealPane extends GridPane{
 		this.add(endTimeLabel, 5, 2);
 		this.add(cancelButton, 3, 13);
         
-		if(order.get(0)!=null){
+		if(order != null && order.size() > 0 && order.get(0)!=null){
 		    for(int i=0;i<order.size();i++){
 			    Text numberText=new Text();
 			    numberText.setFont(normalFont);

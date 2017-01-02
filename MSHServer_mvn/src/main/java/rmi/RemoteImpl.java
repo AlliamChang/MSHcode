@@ -257,5 +257,10 @@ public class RemoteImpl extends UnicastRemoteObject implements Remote, UserDAO, 
 		return hotelDAO.addCheckin(po);
 	}
 
+	@Override
+	public ResultMessage removeRoom(int roomId) throws RemoteException {
+		return hotelDAO.removeRoom(roomId);
+	}
+
 
 }

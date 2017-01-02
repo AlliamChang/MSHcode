@@ -233,6 +233,16 @@ System.out.println(list.size());
 		return ResultMessage.SUCCESS;
 	}
 
+	@Override
+	public ResultMessage removeRoom(int roomId) throws RemoteException {
+		Session session = HibernateUtil.getSession();
+		Transaction transaction = session.beginTransaction();
+		session.delete(session.load(RoomPO.class, roomId));
+		transaction.commit();
+		session.close();
+		return ResultMessage.SUCCESS;
+	}
+
 
 	
 }

@@ -157,4 +157,10 @@ public class HotelBLService_Stub implements HotelBLService {
 		return null;
 	}
 
+	@Override
+	public ResultMessage removeRoom(int roomId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

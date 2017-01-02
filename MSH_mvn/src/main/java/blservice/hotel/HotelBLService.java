@@ -48,6 +48,8 @@ public interface HotelBLService {
 	public ResultMessage checkout(CheckInVO vo);
 	
 	public List<CheckInVO> getCheckinInfo(int hotelId);
+	
+	public ResultMessage removeRoom(int roomId);
 	}
 		
 

@@ -243,7 +243,7 @@ public class OrderBLServiceImpl implements OrderBLService{
 			while(itr.hasNext()){
 				list.add(new OrderVO(itr.next()));
 			}
-		System.out.println(list.get(0).getId());
+
 			return list;
 		}catch(RemoteException e){
 			e.printStackTrace();

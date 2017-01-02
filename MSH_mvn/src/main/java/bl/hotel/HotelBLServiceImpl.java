@@ -245,4 +245,14 @@ public class HotelBLServiceImpl implements HotelBLService{
 		}
 	}
 
+	@Override
+	public ResultMessage removeRoom(int roomId) {
+		try {
+			return this.hotel.removeRoom(roomId);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return ResultMessage.FAIL;
+		}
+	}
+
 }
